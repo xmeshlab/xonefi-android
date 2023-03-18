@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { StyleSheet, Text, View, NativeModules, TextInput, ScrollView } from 'react-native';
+import {StyleSheet, Text, View, NativeModules, TextInput, ScrollView, PermissionsAndroid} from 'react-native';
 import { PrimaryBtn } from '../../utils/components/PrimaryBtn';
 import { colors } from '../../constants/colors';
 import WifiLevelIcon from '../icons/WifiLevelIcon';
@@ -13,6 +13,7 @@ import { Circle } from 'react-native-svg';
 import { OneFiStorage } from '../../api/storage/OneFiStorage';
 
 const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
+    console.log("XLOG: Pay and Connect Component Activated");
     const {SSID, BSSID, signalLevel} = props.route.params;
     const [password, setPassword] = useState('seitlab123!@');
     const {
@@ -24,6 +25,60 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
         return currentConnectedSSID === SSID
     }, [currentConnectedSSID]);
     const payAndConnect = useCallback(async () => {
+        console.log("XLOG: Pay and Connect Callback Activated");
+
+
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+                title: 'Location permission is required for WiFi connections',
+                message:
+                    'This app needs location permission as this is required  ' +
+                    'to scan for wifi networks.',
+                buttonNegative: 'DENY',
+                buttonPositive: 'ALLOW',
+            },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // You can now use react-native-wifi-reborn
+            console.log("XLOG: You can now use react-native-wifi-reborn")
+
+
+            WifiManager.getCurrentWifiSSID().then(
+                ssid => {
+                    console.log("XLOG: Your current connected wifi SSID is " + ssid);
+                    console.log("XLOG: The SSID we want to connect to is: " + SSID);
+                    if(ssid === SSID) {
+                        console.log("XLOG: The device is already connected to: " + SSID);
+                    } else {
+                        console.log("XLOG: Before using XOneFi, the device must connect to: " + SSID);
+                    }
+                },
+                () => {
+                    console.log("XLOG: Cannot get current SSID!");
+                }
+            );
+
+
+
+        } else {
+            // Permission denied
+            console.log("XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)")
+
+
+            //
+            //
+            // let status = await WifiManager.connectionStatus();
+            //
+            // console.log("XLOG: current WiFi conntection status: " + status)
+
+
+        }
+
+
+
+
+
         // if (isConnected) {
         //     try {
         //        await WifiManager.disconnect();
@@ -34,19 +89,28 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
         //     }
         //     return;
         // }
-        try {
-            // await NativeModules.XOneFiWiFiModule.connectWifi(SSID, 'QwerTyuioP');
-            // 'QwerTyuioP'
-            await NativeModules.XOneFiWiFiModule.initialConnect(SSID, // replace with your Wi-Fi pwd
-                password);
-            await OneFiStorage.setItem('client_on', true);
-            setCurrentConnectSSID(SSID,);
-        } catch (e) {
-            console.warn('connect error', '#051e2a');
-            console.error(e)
-        } finally {
-        }
+
+
+        // <<<<<<< previous code >>>>>>>>>>>>
+        // try {
+        //     // await NativeModules.XOneFiWiFiModule.connectWifi(SSID, 'QwerTyuioP');
+        //     // 'QwerTyuioP'
+        //     await NativeModules.XOneFiWiFiModule.initialConnect(SSID, // replace with your Wi-Fi pwd
+        //         password);
+        //     await OneFiStorage.setItem('client_on', true);
+        //     setCurrentConnectSSID(SSID,);
+        // } catch (e) {
+        //     console.warn('connect error', '#051e2a');
+        //     console.error(e)
+        // } finally {
+        // }
+        // <<<<<< end-of-previous code >>>>>>>>>
+
+
+
     }, [isConnected, setCurrentConnectSSID, password])
+
+
 
     return (<ScrollView className="flex-1 flex-col">
         <View style={[globalStyle.row, {marginLeft: 37, marginTop: 23}]}>

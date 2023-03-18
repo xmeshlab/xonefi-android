@@ -52,6 +52,14 @@ const ConnectScreen:RouteComponent<'Connect'> = () => {
             // const configs = await NativeModules.XOneFiWiFiModule.getWiFiConfiguration();
             // const connectInfo = await NativeModules.XOneFiWiFiModule.getConnectionInfo();
             const ret = await WifiManager.loadWifiList();
+            console.log("XLOG: Got list of WiFi networks as follows...");
+
+            for(let x of ret.values()) {
+                console.log("XLOG Entry: " + x.SSID);
+            }
+
+            console.log("XLOG: >>>")
+
             const wifiList = ret
                 .filter(item => is_onefi_ssid(item.SSID))
                 .map<WifiWithSignalLevel>((item) => {
