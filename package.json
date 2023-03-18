@@ -48,6 +48,7 @@
     "react-native-udp": "4.1.5",
     "react-native-vector-icons": "^9.2.0",
     "react-native-wifi-reborn": "^4.7.0",
+    "react-native-background-timer": "2.4.1",
     "tailwind-rn": "^4.2.0",
     "typescript": "^4.6.3",
     "uuid": "^9.0.0",

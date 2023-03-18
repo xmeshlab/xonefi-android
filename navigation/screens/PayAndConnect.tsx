@@ -7,6 +7,8 @@ import { globalStyle } from '../../constants/globalStyle';
 import { RouteComponent } from '../../types/global';
 import WifiManager from 'react-native-wifi-reborn';
 import { useAsync } from '../../utils/hooks/useAsync';
+import BackgroundTimer from 'react-native-background-timer';
+
 
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Circle } from 'react-native-svg';
@@ -52,6 +54,16 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
                         console.log("XLOG: The device is already connected to: " + SSID);
                     } else {
                         console.log("XLOG: Before using XOneFi, the device must connect to: " + SSID);
+
+
+                        console.log("XLOG: Background timer will start in here.")
+
+                        BackgroundTimer.runBackgroundTimer(() => {
+                                console.log("XLOG: ping");
+                            },
+                            3000);
+
+                        console.log("XLOG: Confirming that the background timer doesn't block the main thread.");
                     }
                 },
                 () => {
@@ -74,6 +86,7 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
 
         }
+
 
 
 
