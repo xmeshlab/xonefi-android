@@ -51,8 +51,10 @@ const ConnectScreen:RouteComponent<'Connect'> = () => {
             await getPermission();
             // const configs = await NativeModules.XOneFiWiFiModule.getWiFiConfiguration();
             // const connectInfo = await NativeModules.XOneFiWiFiModule.getConnectionInfo();
-            const ret = await WifiManager.loadWifiList();
+            //const ret = await WifiManager.loadWifiList();
+            const ret = await WifiManager.reScanAndLoadWifiList();
             console.log("XLOG: Got list of WiFi networks as follows...");
+
 
             for(let x of ret.values()) {
                 console.log("XLOG Entry: " + x.SSID);
@@ -66,6 +68,10 @@ const ConnectScreen:RouteComponent<'Connect'> = () => {
                 return {...item, signalLevel: Math.round((5 - Math.abs(item.level / 20)) ) as WiFiLevel};
             });
             setWifiList(wifiList);
+
+            for(let x of wifiList) {
+                console.log(`XLOG wifilist item: ${x.SSID}`)
+            }
         } finally {
             setIsLoading(false);
         }
