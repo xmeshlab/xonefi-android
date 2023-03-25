@@ -22,14 +22,17 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
     console.log("XLOG: Pay and Connect Component Activated");
     const {SSID, BSSID, signalLevel} = props.route.params;
     const [password, setPassword] = useState('seitlab123!@');
+
     const {
         value: currentConnectedSSID,
         execute: getCurrentWifiSSID,
         setValue: setCurrentConnectSSID
     } = useAsync(WifiManager.getCurrentWifiSSID, true);
+
     const isConnected = useMemo(() => {
         return currentConnectedSSID === SSID
     }, [currentConnectedSSID]);
+
     const payAndConnect = useCallback(async () => {
         console.log("XLOG: Pay and Connect Callback Activated");
 
@@ -49,59 +52,17 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
             // You can now use react-native-wifi-reborn
             console.log("XLOG: You can now use react-native-wifi-reborn")
 
+            let ssid_json = deserialize_ssid(SSID);
 
-            WifiManager.getCurrentWifiSSID().then(
-                async ssid => {
-                    console.log("XLOG: Your current connected wifi SSID is " + ssid);
-                    console.log("XLOG: The SSID we want to connect to is: " + SSID);
-                    if (ssid === SSID) {
-                        console.log("XLOG: The device is already connected to: " + SSID);
-                    } else {
-                        console.log("XLOG: Before using XOneFi, the device must connect to: " + SSID);
+            console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
 
-
-                        console.log("XLOG: Background timer will start in here.")
-
-
-                        // let ssid_json = deserialize_ssid(SSID);
-                        //
-                        // console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
-                        //
-                        // try {
-                        //     // Enable Wi-Fi (Android only)
-                        //     //WifiManager.setEnabled(true);
-                        //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
-                        //
-                        //     WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
-                        //         console.log('Connected successfully!')
-                        //     }, () => {
-                        //         console.log('Connection failed!')
-                        //     })
-                        // } catch (error) {
-                        //     console.log('Error connecting to Wi-Fi:', error.message);
-                        // }
-
-
-                        await WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false);
-
-
-                        // BackgroundTimer.runBackgroundTimer(async () => {
-                        //         let config_json = await read_default_config();
-                        //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-                        //         config_json["port"]++;
-                        //         await write_default_config(config_json);
-                        //     },
-                        //     3000);
-
-                        console.log("XLOG: Confirming that the background timer doesn't block the main thread.");
-                    }
-                },
+            WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
                 () => {
-                    console.log("XLOG: Cannot get current SSID!");
+                    console.log("XLOG: Connected successfully!");
+                },  () => {
+                    console.log("XLOG: Connection failed!");
                 }
-            );
-
-
+            )
 
         } else {
             // Permission denied
@@ -118,10 +79,6 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
         }
 
 
-
-        let ssid_json = deserialize_ssid(SSID);
-
-        console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
         //
         // try {
         //     // Enable Wi-Fi (Android only)
@@ -173,6 +130,78 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
 
     }, [isConnected, setCurrentConnectSSID, password])
+
+
+
+    WifiManager.getCurrentWifiSSID().then(
+        async ssid => {
+            console.log("XLOG: Your current connected wifi SSID is " + ssid);
+            console.log("XLOG: The SSID we want to connect to is: " + SSID);
+            if (ssid === SSID) {
+                console.log("XLOG: The device is already connected to: " + SSID);
+
+                console.log("XLOG: Background timer will start in here.")
+
+                // BackgroundTimer.runBackgroundTimer(async () => {
+                //         let config_json = await read_default_config();
+                //         console.log("XLOG: ping: " + JSON.stringify(config_json));
+                //         config_json["port"]++;
+                //         await write_default_config(config_json);
+                //     },
+                //     3000);
+
+
+
+            } else {
+                console.log("XLOG: Before using XOneFi, the device must connect to: " + SSID);
+
+
+                console.log("XLOG: Background timer will start in here.")
+
+
+
+
+                // let ssid_json = deserialize_ssid(SSID);
+                //
+                // console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
+                //
+                // try {
+                //     // Enable Wi-Fi (Android only)
+                //     //WifiManager.setEnabled(true);
+                //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
+                //
+                //     WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
+                //         console.log('Connected successfully!')
+                //     }, () => {
+                //         console.log('Connection failed!')
+                //     })
+                // } catch (error) {
+                //     console.log('Error connecting to Wi-Fi:', error.message);
+                // }
+
+
+                //await WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false);
+
+
+
+
+                //console.log("XLOG: Connected successfully!");
+
+                // BackgroundTimer.runBackgroundTimer(async () => {
+                //         let config_json = await read_default_config();
+                //         console.log("XLOG: ping: " + JSON.stringify(config_json));
+                //         config_json["port"]++;
+                //         await write_default_config(config_json);
+                //     },
+                //     3000);
+
+                console.log("XLOG: Confirming that the background timer doesn't block the main thread.");
+            }
+        },
+        () => {
+            console.log("XLOG: Cannot get current SSID!");
+        }
+    );
 
 
 
