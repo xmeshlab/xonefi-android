@@ -18,6 +18,8 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+const dgram = require("react-native-udp");
+
 /**
  * Send UDP message without reading the response.
  * @param {string} ip - IPv4 address of the UDP server.
@@ -75,4 +77,51 @@ function send_udp2(ip, port, msg, callback) {
     });
 }
 
-module.exports = { send_udp, send_udp2 };
+
+
+function send_udp3(ip, port, msg, callback) {
+    const dgram = require("react-native-udp");
+    //const socket = dgram.createSocket("udp4");
+
+    // socket.bind();
+    // socket.on("listening", () => {
+    //     socket.setBroadcast(true);
+    //
+    //     socket.send(msg, port, ip, err => {
+    //         console.log(err ? err : "Sent");
+    //     });
+    //
+    //     socket.on("message", (buffer, sender) => {
+    //         const message = buffer.toString();
+    //         socket.close();
+    //         return callback(message);
+    //     });
+    //
+    //     socket.on("error", (error) => {
+    //         return callback(error);
+    //     });
+    // });
+
+
+
+
+
+    const socket = dgram.createSocket('udp4')
+    socket.bind()
+    socket.once('listening', function() {
+        socket.send(msg, 0, msg.length, port, ip, function(err) {
+            if (err) throw err
+            console.log('DEBUG: Message sent!')
+            return callback(true);
+        })
+    })
+
+
+}
+
+
+
+
+
+
+module.exports = { send_udp, send_udp2, send_udp3 };

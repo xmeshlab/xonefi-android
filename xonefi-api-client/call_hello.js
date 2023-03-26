@@ -44,7 +44,8 @@ function call_hello(ip, port, web3, prk, session, callback) {
     message.command.session = session;
     message.command.re = "";
     message.command.arguments = new Object();
-    
+
+
     var signature_json = web3.eth.accounts.sign(
         JSON.stringify(message.command),
         prk
@@ -52,8 +53,10 @@ function call_hello(ip, port, web3, prk, session, callback) {
 
     message.signature = signature_json.signature;
 
+    console.log("XLOG: call_hello() message: " + JSON.stringify(message));
+
     const send_udp = require('./send_udp');
-    send_udp.send_udp2(ip, port, JSON.stringify(message), (result) => {
+    send_udp.send_udp3(ip, port, JSON.stringify(message), (result) => {
         return callback(result);
     });
 }

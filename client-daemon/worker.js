@@ -17,8 +17,10 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+const ssid = require("../xonefiapi/ssid");
+
 function client_worker(config_json, user_password, private_key, callback) {
-    //const ssid = require("../api/ssid");
+    const ssid = require("../xonefiapi/ssid");
     //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
     const client_session = require("../xonefi-api-client/client_session");
     const session_status = require("../xonefi-api-client/session-status");
@@ -27,7 +29,7 @@ function client_worker(config_json, user_password, private_key, callback) {
     // const uuid = require("../xonefi-api-client/uuid");
     // const hotspot_type = require("../xonefi-api-client/hotspot-type");
     const scan_counter = require("../xonefi-api-client/scan_counter");
-    const config = require("../xonefiapi/config");
+    const config = require("../xonefi-api-client/config");
     // const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
     // const wifi_connect = require("../xonefi-api-client/wifi-connect");
     // const call_hello = require("../xonefi-api-client/call_hello");
@@ -83,6 +85,10 @@ function client_worker(config_json, user_password, private_key, callback) {
         //     console.log("Session declared closed");
         // }
 
+    let deserealized_ssid = ssid.deserialize_ssid(config_json.client_session.ssid);
+    let chosen_ssid = config_json.client_session.ssid;
+
+
         if(config_json.client_session.status === session_status.status.ACTIVE) {
             // if(deserealized_ssid.prefix === config_json.client_session.prefix) {
             //     initiate_handover(deserealized_ssid, chosen_ssid);
@@ -102,6 +108,9 @@ function client_worker(config_json, user_password, private_key, callback) {
             //
             //     }
             // }
+
+
+
 
             if(config_json.client_session.pft) {
 
@@ -141,6 +150,13 @@ function client_worker(config_json, user_password, private_key, callback) {
         } else {
             console.log("INFO: The session is neither active, nor in the handshake mode.");
             if(config_json.client_session.scan_counter === 0) {
+                console.log("INFO: Calling Connection Initiator");
+                console.log("DEBUG: Deserialized SSID:", deserealized_ssid);
+                console.log("DEBUG: Chosen SSID:", chosen_ssid);
+                console.log("DEBUG: User password:", user_password);
+                console.log("DEBUG: Private key:", private_key);
+                console.log("DEBUG: Config JSON:", JSON.stringify(config_json));
+
                 connection.initiate_connection(deserealized_ssid, chosen_ssid, user_password, private_key, config_json);
             } else if(config_json.client_session.scan_counter >= 15) {
                 console.log("Trying to scan again");

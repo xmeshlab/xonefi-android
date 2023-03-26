@@ -102,7 +102,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //  }
 
 
-function starter_config() {
+export function starter_config() {
     return {
         "version": "0.2",
         "account_set": false,
@@ -341,5 +341,6 @@ export async function write_default_config(config_json) {
 
 module.exports = {
     read_default_config,
-    write_default_config
+    write_default_config,
+    starter_config
 };

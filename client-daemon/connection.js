@@ -27,7 +27,7 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
     const uuid = require("../xonefi-api-client/uuid");
     const hotspot_type = require("../xonefi-api-client/hotspot-type");
     //const scan_counter = require("../xonefi-api-client/scan_counter");
-    const config = require("../xonefiapi/config");
+    const config = require("../xonefi-api-client/config");
     const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
     //const wifi_connect = require("../xonefi-api-client/wifi-connect");
     const call_hello = require("../xonefi-api-client/call_hello");
@@ -168,6 +168,11 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
     console.log("Setting a timeout...");
     setTimeout(() => {
         console.log("Timeout is over.");
+
+        console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
+        console.log("DEBUG: deserealized_ssid.port: " + deserealized_ssid.port);
+        console.log("DEBUG: " + private_key);
+
         call_hello.call_hello(
             deserealized_ssid.ip,
             deserealized_ssid.port,
