@@ -4,23 +4,26 @@ import MainContainer from './navigation/MainContainer'
 import BackgroundTimer from 'react-native-background-timer';
 import { bar } from './xonefiapi/foo';
 import { read_default_config, write_default_config } from './xonefiapi/config'
-import {clientFoo} from "./client-daemon/client-foo";
+import {startClientDaemon} from "./client-daemon/start-client-daemon";
 
 
 function App() {
     console.log("XLOG: App.tsx");
 
-    clientFoo();
+    var SQLite = require('react-native-sqlite-storage');
 
 
-    // BackgroundTimer.runBackgroundTimer(async () => {
-    //         let config_json = await read_default_config();
-    //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-    //         config_json["port"]++;
-    //         await write_default_config(config_json);
-    //     },
-    //     3000);
+    var db = SQLite.openDatabase("test.db", "1.0", "Test Database", 200000, () => {
+        console.log("XLOG: Database opened");
+    }, (err) => {
+        console.log("XLOG: Error opening database");
+    });
 
+
+
+    startClientDaemon().then(() => {
+        console.log("XLOG: Client Daemon Started");
+    });
 
     return (<RootSiblingParent>
             <MainContainer/>

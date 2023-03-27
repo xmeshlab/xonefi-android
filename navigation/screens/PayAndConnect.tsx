@@ -9,7 +9,7 @@ import WifiManager from 'react-native-wifi-reborn';
 import { useAsync } from '../../utils/hooks/useAsync';
 import BackgroundTimer from 'react-native-background-timer';
 import { bar } from '../../xonefiapi/foo';
-import { read_default_config, write_default_config } from '../../xonefiapi/config'
+import { read_default_config, write_default_config } from '../../xonefi-api-client/config'
 
 import {deserialize_ssid} from "../../xonefiapi/ssid";
 
@@ -54,6 +54,11 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
             let ssid_json = deserialize_ssid(SSID);
 
+            // let config_json = await read_default_config();
+            // config_json.client_session.ssid = SSID;
+            // config_json.client_on = true;
+            // await write_default_config(config_json);
+
             console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
 
             WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
@@ -68,7 +73,9 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
             // Permission denied
             console.log("XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)")
 
-
+            // let config_json = await read_default_config();
+            // config_json.client_on = false;
+            // await write_default_config(config_json);
             //
             //
             // let status = await WifiManager.connectionStatus();
@@ -141,6 +148,11 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
                 console.log("XLOG: The device is already connected to: " + SSID);
 
                 console.log("XLOG: Background timer will start in here.")
+
+                // let config_json = await read_default_config();
+                // config_json.client_session.ssid = SSID;
+                // config_json.client_on = true;
+                // await write_default_config(config_json);
 
                 // BackgroundTimer.runBackgroundTimer(async () => {
                 //         let config_json = await read_default_config();

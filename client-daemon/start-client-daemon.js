@@ -5,19 +5,19 @@ import { read_default_config, write_default_config, starter_config } from '../xo
 
 const worker = require("./worker");
 
-
-
-export async function clientFoo() {
+export async function startClientDaemon() {
     let global_counter = 0;
     const user_password = "seitlab123!@";
     const decrypted_private_key = "c6c6e65b7a45f281c2a93a9e1bf6d7e705e79dd5aa5df32b122e95fb4d122e28";
 
     let config_json = starter_config();
-    config_json.client_on = true;
+    config_json.client_on = false;
     config_json.client_session.ssid = "OFAKgKCQoDjQEMRQAAABkAZNH+uNB0";
+    config_json.account_set = true;
+    config_json.account.address = "0x0221B57Cc38C0360f1CAf638e1671243870C0424";
 
 
-    await write_default_config(config_json);
+    //await write_default_config(config_json);
 
     BackgroundTimer.runBackgroundTimer(async () => {
             //config_json = await read_default_config();
@@ -25,19 +25,17 @@ export async function clientFoo() {
             console.log(`config_json: ${JSON.stringify(config_json)}`);
 
             if(config_json.client_on === true) {
+                console.log("XLOG: config_json.client_session.status pre: " + config_json.client_session.status);
                 worker.client_worker(config_json, user_password, decrypted_private_key, () => {
                     console.log(`${global_counter}: Client is on`);
                 });
+                console.log("XLOG: config_json.client_session.status post: " + config_json.client_session.status);
+
             } else {
                 console.log(`${global_counter}: Client is off`);
             }
 
             global_counter++;
-
-            //console.log("XLOG: ping: " + JSON.stringify(config_json));
-
-
-            //config_json["client_on"] = true;
         },
         5000);
 
@@ -45,4 +43,4 @@ export async function clientFoo() {
 
 }
 
-module.exports = { clientFoo };
+module.exports = { startClientDaemon };

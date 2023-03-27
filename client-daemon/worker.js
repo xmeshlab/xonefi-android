@@ -124,7 +124,7 @@ function client_worker(config_json, user_password, private_key, callback) {
 
                         if (config_json.client_session.initiated_sack_number === config_json.client_session.sack_number) {
                             sack_number.set_initiated_sack_number(initiated_sack_number + 1);
-                            config_json = config.read_default_config();
+                            //config_json = config.read_default_config();
                             if (config_json.client_session.initiated_sack_number !== initiated_sack_number + 1) {
                                 console.log(`@DEB5: catch ya`);
                             }
@@ -138,15 +138,17 @@ function client_worker(config_json, user_password, private_key, callback) {
             console.log(`Continuie session`);
             //}
         } else if(config_json.client_session.status === session_status.status.HANDSHAKE) {
-            if(timestamp.get_current_timestamp() > config_json.client_session.expiration_timestamp) {
-                let session = config_json.client_session;
-                session.status = session_status.status.EXPIRED;
-                client_session.set_client_session(session);
-                console.log("Session declared as expired");
-                return callback();
-            } else {
-                console.log(`Continue handshake`);
-            }
+            // if(timestamp.get_current_timestamp() > config_json.client_session.expiration_timestamp) {
+            //     let session = config_json.client_session;
+            //     session.status = session_status.status.EXPIRED;
+            //     client_session.set_client_session(session);
+            //     console.log("Session declared as expired");
+            //     return callback();
+            // } else {
+            //     console.log(`Continue handshake`);
+            // }
+            console.log(`Continue handshake`);
+
         } else {
             console.log("INFO: The session is neither active, nor in the handshake mode.");
             if(config_json.client_session.scan_counter === 0) {
@@ -157,6 +159,7 @@ function client_worker(config_json, user_password, private_key, callback) {
                 console.log("DEBUG: Private key:", private_key);
                 console.log("DEBUG: Config JSON:", JSON.stringify(config_json));
 
+                config_json.client_session.status = session_status.status.HANDSHAKE;
                 connection.initiate_connection(deserealized_ssid, chosen_ssid, user_password, private_key, config_json);
             } else if(config_json.client_session.scan_counter >= 15) {
                 console.log("Trying to scan again");

@@ -111,12 +111,14 @@ function send_udp3(ip, port, msg, callback) {
     socket.once('listening', function() {
         socket.send(msg, 0, msg.length, port, ip, function(err) {
             if (err) throw err
-            console.log('DEBUG: Message sent!')
-            return callback(true);
-        })
-    })
-
-
+            //console.log('DEBUG: Message sent!');
+            socket.on('message', function(msg, rinfo) {
+                //console.log('Message received', msg)
+                socket.close();
+                return callback(msg);
+            });
+        });
+    });
 }
 
 

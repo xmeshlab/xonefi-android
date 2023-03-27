@@ -19,6 +19,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import storage from 'react-native-sync-storage'
 
 
 //import * as os from "react-native-os";
@@ -184,6 +185,7 @@ export function starter_config() {
 export async function read_default_config() {
     try {
         const jsonValue = await AsyncStorage.getItem('config');
+        //const jsonValue = await storage.get('config');
         return jsonValue != null ? JSON.parse(jsonValue) : starter_config();
     } catch(e) {
         return {"error": true};
@@ -195,6 +197,7 @@ export async function write_default_config(config_json) {
     try {
         const jsonValue = JSON.stringify(config_json)
         await AsyncStorage.setItem('config', jsonValue)
+        //await storage.set('config', jsonValue);
         return true;
     } catch (e) {
         return false;

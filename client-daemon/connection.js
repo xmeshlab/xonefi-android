@@ -156,7 +156,7 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
         }
     );
 
-    config_json = config.read_default_config();
+    //config_json = config.read_default_config();
 
     console.log(`CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`);
     console.log(`Handshake stage initiated.`);
@@ -211,8 +211,8 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                     console.log(`current_timestamp: ${current_timestamp}`);
                     console.log(`config_json.account.address: ${config_json.account.address}`);
                     console.log(`response_json.command.from: ${response_json.command.from}`);
-                    console.log(`private_key: ${private_key}`);
                     console.log(`)DEB=`);
+
 
                     call_pafren.call_pafren(
                         deserealized_ssid.ip,
