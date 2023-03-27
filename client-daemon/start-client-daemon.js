@@ -7,18 +7,20 @@ const worker = require("./worker");
 
 
 
-export function clientFoo() {
-    console.log("XLOG: clientFoo() speaking...");
+export async function clientFoo() {
     let global_counter = 0;
     const user_password = "seitlab123!@";
     const decrypted_private_key = "c6c6e65b7a45f281c2a93a9e1bf6d7e705e79dd5aa5df32b122e95fb4d122e28";
 
+    let config_json = starter_config();
+    config_json.client_on = true;
+    config_json.client_session.ssid = "OFAKgKCQoDjQEMRQAAABkAZNH+uNB0";
+
+
+    await write_default_config(config_json);
+
     BackgroundTimer.runBackgroundTimer(async () => {
             //config_json = await read_default_config();
-            let config_json = starter_config();
-            config_json.client_on = true;
-            config_json.client_session.ssid = "OFAKgKCQoDjQEMRQAAABkAZNH+uNB0";
-            await write_default_config(config_json);
 
             console.log(`config_json: ${JSON.stringify(config_json)}`);
 
@@ -38,6 +40,9 @@ export function clientFoo() {
             //config_json["client_on"] = true;
         },
         5000);
+
+
+
 }
 
 module.exports = { clientFoo };
