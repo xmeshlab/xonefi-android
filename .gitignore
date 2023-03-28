@@ -68,6 +68,9 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
+# Added by Nick
+android/local.properties
+
 # Expo
 .expo/
 web-build/
