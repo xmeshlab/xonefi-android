@@ -37,6 +37,8 @@ import PurchaseSell from './screens/PurchaseSell';
 import { WifiWithSignalLevel } from '../types/global';
 import { OneFiStorage } from '../api/storage/OneFiStorage';
 import AccountAddCrptoPaymentCard from './screens/Account_AddCryptoPaymentCard';
+import GenerateAccountDialog from './screens/GenerateAccountDialog';
+import ImportAccountDialog from './screens/ImportAccountDialog';
 
 //APIs
 //import {LoggingApi} from './ApiCalls.js'
@@ -67,7 +69,9 @@ export type GlobalRoute = {
     Logout: undefined,
     PayAndConnect: Partial<WifiWithSignalLevel>
     ConnectStatus: undefined,
-    ['Create New Account']: undefined
+    ['Create New Account']: undefined,
+    ['Generating New Account']: undefined,
+    ['Importing New Account']: undefined,
 } & RootStackParamList;
 const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createStackNavigator<GlobalRoute>();
@@ -199,6 +203,10 @@ export default function MainContainer() {
                                   component={AccountInformationScreen}/>
                     <Stack.Screen name="Create New Account" options={{...stackNavigatorScreenOptions,title: 'Create New Account'}}
                                   component={CreateNewAccountScreen}/>
+                    <Stack.Screen name="Generating New Account" options={{...stackNavigatorScreenOptions,title: 'Generating New Account '}}
+                                  component={GenerateAccountDialog}/>
+                    <Stack.Screen name="Importing New Account" options={{...stackNavigatorScreenOptions,title: 'Importing New Account'}}
+                                  component={ImportAccountDialog}/>
                     <Stack.Screen name="Logout" component={AccountAddCrptoPaymentCard}/>
 
                 </Stack.Navigator>

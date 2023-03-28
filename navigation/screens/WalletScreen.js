@@ -12,6 +12,8 @@ import {BitcoinLogoSVG} from '../icons/crypto_icons'
 import { CashLogoSVG } from '../icons/crypto_icons';
 import { BianaceLogoSVG } from '../icons/crypto_icons';
 import { NeoLogoSVG } from '../icons/crypto_icons';
+import { SolanaLogoSVG } from '../icons/crypto_icons';
+import { MaticLogoSVG } from '../icons/crypto_icons';
 
 default_json = {
   "binancecoin": {

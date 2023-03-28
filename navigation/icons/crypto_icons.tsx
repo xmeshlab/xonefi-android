@@ -247,3 +247,86 @@ export function OneFiLogoSVG(props) {
       </Svg>
     );
   }
+
+export function SolanaLogoSVG(props) {
+    return (
+      <Svg
+      width={39}
+      height={39}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <G clipPath="url(#prefix__clip0_3887_1687)">
+        <Path
+          d="M6.335 29.766c.235-.3.559-.475.902-.475h31.126c.568 0 .853.875.45 1.389l-6.148 7.845c-.235.3-.559.475-.902.475H.637c-.568 0-.853-.876-.45-1.389l6.148-7.845z"
+          fill="url(#prefix__paint0_linear_3887_1687)"
+        />
+        <Path
+          d="M6.335.475C6.58.175 6.904 0 7.237 0h31.126c.568 0 .853.876.45 1.389l-6.148 7.845c-.235.3-.559.475-.902.475H.637c-.568 0-.853-.876-.45-1.389L6.334.475z"
+          fill="url(#prefix__paint1_linear_3887_1687)"
+        />
+        <Path
+          d="M32.665 15.027c-.235-.3-.559-.475-.902-.475H.637c-.568 0-.853.875-.45 1.388l6.148 7.845c.235.3.559.476.902.476h31.126c.568 0 .853-.876.45-1.389l-6.148-7.845z"
+          fill="url(#prefix__paint2_linear_3887_1687)"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="prefix__paint0_linear_3887_1687"
+          x1={35.389}
+          y1={-4.686}
+          x2={4.479}
+          y2={41.717}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#00FFA3" />
+          <Stop offset={1} stopColor="#DC1FFF" />
+        </LinearGradient>
+        <LinearGradient
+          id="prefix__paint1_linear_3887_1687"
+          x1={25.97}
+          y1={-10.961}
+          x2={-4.94}
+          y2={35.442}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#00FFA3" />
+          <Stop offset={1} stopColor="#DC1FFF" />
+        </LinearGradient>
+        <LinearGradient
+          id="prefix__paint2_linear_3887_1687"
+          x1={30.65}
+          y1={-7.844}
+          x2={-0.261}
+          y2={38.56}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#00FFA3" />
+          <Stop offset={1} stopColor="#DC1FFF" />
+        </LinearGradient>
+        <ClipPath id="prefix__clip0_3887_1687">
+          <Path fill="#fff" d="M0 0h39v39H0z" />
+        </ClipPath>
+      </Defs>
+    </Svg>
+    );
+  }
+
+  export function MaticLogoSVG(props) {
+    return (
+      <Svg
+      width={39}
+      height={39}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M29.53 11.92c-.713-.463-1.63-.463-2.444 0l-5.702 3.819-3.87 2.43-5.6 3.82c-.713.462-1.63.462-2.444 0l-4.379-3.01c-.712-.463-1.222-1.389-1.222-2.43v-5.786c0-.926.408-1.852 1.222-2.43L9.47 5.438c.713-.463 1.63-.463 2.444 0l4.378 3.01c.713.462 1.222 1.388 1.222 2.43v3.818l3.87-2.546V8.217c0-.926-.407-1.852-1.222-2.43L12.016.346c-.713-.463-1.63-.463-2.444 0l-8.35 5.555C.407 6.365 0 7.291 0 8.217v10.878c0 .926.407 1.852 1.222 2.43l8.248 5.44c.713.462 1.63.462 2.444 0l5.6-3.704 3.87-2.546 5.6-3.703c.713-.463 1.63-.463 2.444 0l4.379 2.893c.713.463 1.222 1.389 1.222 2.43v5.787c0 .925-.408 1.851-1.222 2.43l-4.277 2.893c-.713.463-1.63.463-2.444 0l-4.378-2.893c-.713-.463-1.222-1.389-1.222-2.43v-3.704l-3.87 2.546v3.82c0 .925.407 1.851 1.222 2.43l8.248 5.439c.713.463 1.63.463 2.444 0l8.248-5.44c.713-.462 1.222-1.388 1.222-2.43V19.79c0-.926-.407-1.851-1.222-2.43l-8.248-5.44z"
+        fill="#8247E5"
+      />
+    </Svg>
+    );
+  }
+
