@@ -21,6 +21,8 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import storage from 'react-native-sync-storage'
 
+var SQLite = require('react-native-sqlite-storage');
+
 
 //import * as os from "react-native-os";
 
@@ -183,13 +185,21 @@ export function starter_config() {
 }
 
 export async function read_default_config() {
-    try {
-        const jsonValue = await AsyncStorage.getItem('config');
-        //const jsonValue = await storage.get('config');
-        return jsonValue != null ? JSON.parse(jsonValue) : starter_config();
-    } catch(e) {
-        return {"error": true};
-    }
+
+    var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+        console.log("XLOG: Database opened");
+    }, (err) => {
+        console.log("XLOG: Error opening database");
+    });
+
+
+    // try {
+    //     const jsonValue = await AsyncStorage.getItem('config');
+    //     //const jsonValue = await storage.get('config');
+    //     return jsonValue != null ? JSON.parse(jsonValue) : starter_config();
+    // } catch(e) {
+    //     return {"error": true};
+    // }
 }
 
 
@@ -280,20 +290,32 @@ export async function write_default_config(config_json) {
 //     return true;
 // }
 //
-// /**
-//  * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
-//  * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
-//  * taken from onefi-sample-config.json
-//  * @returns {boolean} true: success; false: failure.
-//  */
-// function config_init_if_absent() {
-//     if(!config_exists()) {
-//         config_init();
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
+/**
+ * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
+ * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
+ * taken from onefi-sample-config.json
+ * @returns {boolean} true: success; false: failure.
+ */
+function config_init_if_absent() {
+    var db = SQLite.openDatabase("test.db", "1.0", "Test Database", 200000, () => {
+        console.log("XLOG: Database opened");
+        db.transaction((tx) => {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)', [], (tx, results) => {
+                console.log("XLOG: Results", results);
+            });
+        });
+
+    }, (err) => {
+        console.log("XLOG: Error opening database");
+    });
+
+    // if(!config_exists()) {
+    //     config_init();
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+}
 //
 //
 // /**
@@ -345,5 +367,6 @@ export async function write_default_config(config_json) {
 module.exports = {
     read_default_config,
     write_default_config,
-    starter_config
+    starter_config,
+    config_init_if_absent
 };

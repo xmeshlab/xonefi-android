@@ -10,14 +10,14 @@ import {startClientDaemon} from "./client-daemon/start-client-daemon";
 function App() {
     console.log("XLOG: App.tsx");
 
-    var SQLite = require('react-native-sqlite-storage');
-
-
-    var db = SQLite.openDatabase("test.db", "1.0", "Test Database", 200000, () => {
-        console.log("XLOG: Database opened");
-    }, (err) => {
-        console.log("XLOG: Error opening database");
-    });
+    // var SQLite = require('react-native-sqlite-storage');
+    //
+    //
+    // var db = SQLite.openDatabase("test.db", "1.0", "Test Database", 200000, () => {
+    //     console.log("XLOG: Database opened");
+    // }, (err) => {
+    //     console.log("XLOG: Error opening database");
+    // });
 
 
 
