@@ -290,24 +290,62 @@ export async function write_default_config(config_json) {
 //     return true;
 // }
 //
+
+
+
 /**
  * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
  * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
  * taken from onefi-sample-config.json
  * @returns {boolean} true: success; false: failure.
  */
-function config_init_if_absent() {
-    var db = SQLite.openDatabase("test.db", "1.0", "Test Database", 200000, () => {
+export async function config_init_if_absent(callback) {
+    var db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
         console.log("XLOG: Database opened");
         db.transaction((tx) => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)', [], (tx, results) => {
                 console.log("XLOG: Results", results);
-            });
-        });
+                tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
+                    console.log("Query completed");
 
-    }, (err) => {
-        console.log("XLOG: Error opening database");
-    });
+                    // Get rows with Web SQL Database spec compliance.
+
+                    var len = results.rows.length;
+
+                    if(len === 0) {
+                        console.log("XLOG: The table is empty.")
+                        tx.executeSql(`INSERT INTO Config (id, json) VALUES (0, '${JSON.stringify(starter_config())}')`, [], (tx, results) => {
+                            console.log("XLOG: Initialized config with a starter code.")
+
+                            tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
+                               console.log("XLOG: Checking the contents of the table.")
+                                var len = results.rows.length;
+                                console.log(`XLOG: Found ${len} rows.`);
+                                for (let i = 0; i < len; i++) {
+                                    let row = results.rows.item(i);
+                                    console.log(`ID: ${row.id}, JSON: ${row.json}`);
+                                }
+                                return callback(true);
+                            });
+
+                        });
+                    } else {
+                        console.log("XLOG: The table is already populated.")
+                        return callback(true);
+                    }
+
+                    // for (let i = 0; i < len; i++) {
+                    //     let row = results.rows.item(i);
+                    //     console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
+                    // }
+
+                    return callback(true);
+                });
+            });
+        }, (err) => {
+            console.log("XLOG: Error opening database 1");
+            return callback(false);
+        });
 
     // if(!config_exists()) {
     //     config_init();
@@ -315,7 +353,14 @@ function config_init_if_absent() {
     // } else {
     //     return false;
     // }
+    //}
+    },  () => {
+            console.log("XLOG: Error opening database");
+        }
+    );
 }
+
+
 //
 //
 // /**
