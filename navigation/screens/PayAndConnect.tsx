@@ -54,6 +54,15 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
             let ssid_json = deserialize_ssid(SSID);
 
+            read_default_config((config_json) => {
+                //console.log(`config_json: ${JSON.stringify(config_json)}`);
+                config_json.version = "0.45";
+                write_default_config(config_json, () => {
+                    console.log("XLOG: Config update successful.")
+                });
+            });
+
+
             // let config_json = await read_default_config();
             // config_json.client_session.ssid = SSID;
             // config_json.client_on = true;

@@ -16,11 +16,22 @@ export async function startClientDaemon() {
     config_json.account_set = true;
     config_json.account.address = "0x0221B57Cc38C0360f1CAf638e1671243870C0424";
 
+    read_default_config(() => {
+        //console.log(`config_json: ${JSON.stringify(config_json)}`);
+        config_json.version = "0.35";
+        write_default_config(config_json, () => {
+            console.log("XLOG: Config update successful.")
+        });
+    });
+
+
 
     //await write_default_config(config_json);
 
     BackgroundTimer.runBackgroundTimer(async () => {
-            //config_json = await read_default_config();
+            // read_default_config(() => {
+            //     console.log(`config_json: ${JSON.stringify(config_json)}`);
+            // });
 
             console.log(`config_json: ${JSON.stringify(config_json)}`);
 

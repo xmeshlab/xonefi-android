@@ -184,13 +184,34 @@ export function starter_config() {
     }
 }
 
-export async function read_default_config() {
-
+export function read_default_config(callback) {
     var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
-        console.log("XLOG: Database opened");
+        db.transaction((tx) => {
+            tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
+                console.log("XLOG: Checking the contents of the table.")
+                var len = results.rows.length;
+                console.log(`XLOG: Found ${len} rows.`);
+
+                if (len > 0) {
+                    return callback(JSON.parse(results.rows.item(0).json));
+                } else {
+                    console.log("XLOG: ERROR: Table Config has no rows.");
+                    return callback(null);
+                }
+
+            });
+        });
     }, (err) => {
-        console.log("XLOG: Error opening database");
+        console.log("XLOG: Error opening database 1");
+        return callback(false);
     });
+
+
+    // var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+    //     console.log("XLOG: Database opened");
+    // }, (err) => {
+    //     console.log("XLOG: Error opening database");
+    // });
 
 
     // try {
@@ -203,15 +224,28 @@ export async function read_default_config() {
 }
 
 
-export async function write_default_config(config_json) {
-    try {
-        const jsonValue = JSON.stringify(config_json)
-        await AsyncStorage.setItem('config', jsonValue)
-        //await storage.set('config', jsonValue);
-        return true;
-    } catch (e) {
-        return false;
-    }
+export function write_default_config(config_json, callback) {
+    var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+        db.transaction((tx) => {
+            tx.executeSql(`UPDATE Config SET json = '${JSON.stringify(config_json)}' WHERE id = 0`, [], (tx, results) => {
+                console.log("XLOG: Successfully updated config.")
+                return callback(true);
+            });
+        });
+    }, (err) => {
+        console.log("XLOG: Error opening database 1");
+        return callback(false);
+    });
+
+
+    // try {
+    //     const jsonValue = JSON.stringify(config_json)
+    //     await AsyncStorage.setItem('config', jsonValue)
+    //     //await storage.set('config', jsonValue);
+    //     return true;
+    // } catch (e) {
+    //     return false;
+    // }
 
     //
     //
