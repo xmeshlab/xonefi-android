@@ -16,13 +16,13 @@ export async function startClientDaemon() {
     config_json.account_set = true;
     config_json.account.address = "0x0221B57Cc38C0360f1CAf638e1671243870C0424";
 
-    read_default_config(() => {
-        //console.log(`config_json: ${JSON.stringify(config_json)}`);
-        config_json.version = "0.35";
-        write_default_config(config_json, () => {
-            console.log("XLOG: Config update successful.")
-        });
-    });
+    // read_default_config(() => {
+    //     //console.log(`config_json: ${JSON.stringify(config_json)}`);
+    //     config_json.version = "0.35";
+    //     write_default_config(config_json, () => {
+    //         console.log("XLOG: Config update successful.")
+    //     });
+    // });
 
 
 
@@ -33,7 +33,12 @@ export async function startClientDaemon() {
             //     console.log(`config_json: ${JSON.stringify(config_json)}`);
             // });
 
-            console.log(`config_json: ${JSON.stringify(config_json)}`);
+            read_default_config((config_json1) => {
+                //console.log(`config_json: ${JSON.stringify(config_json)}`);
+                console.log(`config_json: ${JSON.stringify(config_json1)}`);
+            });
+
+
 
             if(config_json.client_on === true) {
                 console.log("XLOG: config_json.client_session.status pre: " + config_json.client_session.status);

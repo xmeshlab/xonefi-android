@@ -33,6 +33,14 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
         return currentConnectedSSID === SSID
     }, [currentConnectedSSID]);
 
+    read_default_config((config_json) => {
+        //console.log(`config_json: ${JSON.stringify(config_json)}`);
+        config_json.version = "0.55";
+        write_default_config(config_json, () => {
+            console.log("XLOG: Config update successful (1).")
+        });
+    });
+
     const payAndConnect = useCallback(async () => {
         console.log("XLOG: Pay and Connect Callback Activated");
 
@@ -53,14 +61,6 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
             console.log("XLOG: You can now use react-native-wifi-reborn")
 
             let ssid_json = deserialize_ssid(SSID);
-
-            read_default_config((config_json) => {
-                //console.log(`config_json: ${JSON.stringify(config_json)}`);
-                config_json.version = "0.45";
-                write_default_config(config_json, () => {
-                    console.log("XLOG: Config update successful.")
-                });
-            });
 
 
             // let config_json = await read_default_config();

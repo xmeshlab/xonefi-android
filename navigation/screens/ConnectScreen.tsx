@@ -18,6 +18,9 @@ import LockICon from '../icons/LockIcon';
 import { globalStyle } from '../../constants/globalStyle';
 import { is_onefi_ssid } from '../../api/client';
 
+import { read_default_config, write_default_config } from '../../xonefi-api-client/config'
+
+
 async function getPermission() {
     if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
@@ -53,6 +56,8 @@ const ConnectScreen:RouteComponent<'Connect'> = () => {
             // const connectInfo = await NativeModules.XOneFiWiFiModule.getConnectionInfo();
             //const ret = await WifiManager.loadWifiList();
             const ret = await WifiManager.reScanAndLoadWifiList();
+
+
             console.log("XLOG: Got list of WiFi networks as follows...");
 
 
