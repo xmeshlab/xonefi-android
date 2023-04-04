@@ -18,8 +18,8 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import storage from 'react-native-sync-storage'
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+//import storage from 'react-native-sync-storage'
 
 var SQLite = require('react-native-sqlite-storage');
 

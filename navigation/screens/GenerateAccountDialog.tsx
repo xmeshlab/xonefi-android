@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FunctionComponent } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import Toast from 'react-native-root-toast';
 import Modal from 'react-native-modal';
 import { PrimaryBtn } from '../../utils/components/PrimaryBtn';
@@ -45,7 +45,7 @@ const GenerateAccountDialog: RouteComponent<'Create New Account'> = (props) => {
 
    return(
             <>
-            <View className="flex-1 flex-col">
+            <ScrollView className="flex-1 flex-col">
                 <Text className="text-white text-3xl mt-6 mb-2 mx-6">Generating a new crypto account.</Text>
                 <Text className="text-white text-l mb-2 mx-6 mt-2">To make account secure, we need a good random seed. For that, please type random letters, numbers or punctuation in the field below. You can type as many random symbols as you want, but not less than 16. </Text>
                 <GreyTextInputBar placeholder_text={"Enter Random Seed"} state_function={setAccountName}/>
@@ -64,7 +64,7 @@ const GenerateAccountDialog: RouteComponent<'Create New Account'> = (props) => {
         </BlurModal>
         {/***Navigate to account tab on cancel */}
                 <BigBlueButton text={"Cancel"} onPressFunction={()=>{navigation.navigate("Account")}}/>
-            </View>
+            </ScrollView>
             </>
         )
     
