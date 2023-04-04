@@ -105,16 +105,23 @@ function client_worker(config_json, user_password, private_key, callback) {
                     let current_sack_number = sack_number.get_sack_number();
 
                     if (config_json.client_session.initiated_sack_number === config_json.client_session.sack_number) {
-                        sack_number.set_initiated_sack_number(initiated_sack_number + 1);
-                        //config_json = config.read_default_config();
-                        if (config_json.client_session.initiated_sack_number !== initiated_sack_number + 1) {
-                            console.log(`@DEB5: catch ya`);
-                        }
-                        next_sack.send_next_sack(config_json, user_password, private_key);
+                        sack_number.set_initiated_sack_number(initiated_sack_number + 1, (res) => {
+                            if(res) {
+                                console.log("XLOG: Successfully set initiated sack number.");
+                                if (config_json.client_session.initiated_sack_number !== initiated_sack_number + 1) {
+                                    console.log(`@DEB5: catch ya`);
+                                }
+                                next_sack.send_next_sack(config_json, user_password, private_key);
+                            } else {
+                                console.log("XLOG: Failure setting initiated sack number.");
+                            }
+                        });
+
+                        // sack_number.set_initiated_sack_number(initiated_sack_number + 1);
+                        // //config_json = config.read_default_config();
                     }
                 }
             }
-
         }
 
         console.log(`Continuie session`);
@@ -123,9 +130,12 @@ function client_worker(config_json, user_password, private_key, callback) {
         if(timestamp.get_current_timestamp() > config_json.client_session.expiration_timestamp) {
             let session = config_json.client_session;
             session.status = session_status.status.EXPIRED;
-            client_session.set_client_session(session);
-            console.log("Session declared as expired");
-            return callback();
+            //client_session.set_client_session(session);
+
+            client_session.set_client_session(session, (res) => {
+                console.log("XLOG: Session declared as expired");
+                return callback();
+            });
         } else {
             console.log(`Continue handshake`);
         }
@@ -135,10 +145,15 @@ function client_worker(config_json, user_password, private_key, callback) {
             connection.initiate_connection(deserealized_ssid, chosen_ssid, user_password, private_key, config_json);
         } else if(config_json.client_session.scan_counter >= 15) {
             console.log("Trying to scan again");
-            scan_counter.set_scan_counter(0);
+            scan_counter.set_scan_counter(0, () => {
+                console.log("XLOG: Scan counter set to 0.")
+            });
         } else {
             console.log("Wait for previous scan to complete");
-            scan_counter.set_scan_counter(config_json.client_session.scan_counter + 1);
+            //scan_counter.set_scan_counter(config_json.client_session.scan_counter + 1);
+            scan_counter.set_scan_counter(config_json.client_session.scan_counter + 1, () => {
+                console.log("XLOG: Scan counter incremented")
+            });
         }
     }
 

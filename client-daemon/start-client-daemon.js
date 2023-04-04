@@ -12,6 +12,8 @@ export async function startClientDaemon() {
 
     let config_json = starter_config();
     config_json.client_on = false;
+    config_json.pft = true;
+    config_json.cft = true;
     config_json.client_session.ssid = "OFAKgKCQoDjQEMRQAAABkAZNH+uNB0";
     config_json.account_set = true;
     config_json.account.address = "0x0221B57Cc38C0360f1CAf638e1671243870C0424";

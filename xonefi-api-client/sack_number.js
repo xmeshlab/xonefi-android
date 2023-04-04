@@ -61,12 +61,19 @@ function get_initiated_sack_number() {
  * @param {int} number - Serial number of the initiated SACK
  * @returns {boolean} true: success; false: failure.
  */
-function set_initiated_sack_number(number) {
+function set_initiated_sack_number(number, callback) {
     const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session.initiated_sack_number = number;
-    config.write_default_config(config_json);
-    return true;
+    // let config_json = config.read_default_config();
+    // config_json.client_session.initiated_sack_number = number;
+    // config.write_default_config(config_json);
+    // return true;
+
+    config.read_default_config((config_json) => {
+        config_json.client_session.initiated_sack_number = number;
+        config.write_default_config(config_json, (res) => {
+            return callback(res);
+        });
+    });
 }
 
 module.exports = {

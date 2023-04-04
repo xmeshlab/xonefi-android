@@ -29,17 +29,25 @@ function get_last_sack_timestamp() {
 }
 
 
-/**
- * Save in the client session state the timestamp (UNIX timestamp in seconds) of the last SACK sent to the provider.
- * @param {int} stamp - timestamp of the last SACK (satisfaction acknowledgement).
- * @returns {boolean} true: success; false: failure.
- */
-function set_last_sack_timestamp(stamp) {
+// /**
+//  * Save in the client session state the timestamp (UNIX timestamp in seconds) of the last SACK sent to the provider.
+//  * @param {int} stamp - timestamp of the last SACK (satisfaction acknowledgement).
+//  * @returns {boolean} true: success; false: failure.
+//  */
+function set_last_sack_timestamp(stamp, callback) {
     const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session.last_sack_timestamp = stamp;
-    config.write_default_config(config_json);
-    return true;
+    // let config_json = config.read_default_config();
+    // config_json.client_session.last_sack_timestamp = stamp;
+    // config.write_default_config(config_json);
+    // return true;
+
+    config.read_default_config((config_json) => {
+        config_json.client_session.last_sack_timestamp = stamp;
+        config.write_default_config(config_json, (res) => {
+            return callback(res);
+        });
+    });
+
 }
 
 module.exports = { get_last_sack_timestamp, set_last_sack_timestamp };

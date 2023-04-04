@@ -18,28 +18,36 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-/**
- * Read (from configuration) the current client session JSON object.
- * @returns {Object} Client session JSON object.
- */
-function get_client_session() {
+// /**
+//  * Read (from configuration) the current client session JSON object.
+//  * @returns {Object} Client session JSON object.
+//  */
+function get_client_session(callback) {
     const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session;
+    config.read_default_config((config_json) => {
+        return callback(config_json.client_session);
+    });
 }
 
 
-/**
- * Set (save in configuration) the current client session multi-field object.
- * @param {Object} session - client session JSON object.
- * @returns {boolean} true - success, false - failure.
- */
-function set_client_session(session) {
+// /**
+//  * Set (save in configuration) the current client session multi-field object.
+//  * @param {Object} session - client session JSON object.
+//  * @returns {boolean} true - success, false - failure.
+//  */
+function set_client_session(session, callback) {
     const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session = session;
-    config.write_default_config(config_json);
-    return true;
+    // let config_json = config.read_default_config();
+    // config_json.client_session = session;
+    // config.write_default_config(config_json);
+    // return true;
+
+    config.read_default_config((config_json) => {
+        config_json.client_session = session;
+        config.write_default_config(config_json, (res) => {
+            return callback(res);
+        });
+    });
 }
 
 module.exports = { get_client_session, set_client_session };

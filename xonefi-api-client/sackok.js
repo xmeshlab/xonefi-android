@@ -30,17 +30,24 @@ function get_sackok() {
 }
 
 
-/**
- * Store in the client session state the most recent SACK-OK messge retrieved from the provider.
- * @param {Object} sackok - JSON object comprising the entire SACK-OK message from the provider.
- * @returns {boolean} true: success, false: failure.
- */
-function set_sackok(sackok) {
+// /**
+//  * Store in the client session state the most recent SACK-OK messge retrieved from the provider.
+//  * @param {Object} sackok - JSON object comprising the entire SACK-OK message from the provider.
+//  * @returns {boolean} true: success, false: failure.
+//  */
+function set_sackok(sackok, callback) {
     const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session.sackok = sackok;
-    config.write_default_config(config_json);
-    return true;
+    //let config_json = config.read_default_config();
+    // config_json.client_session.sackok = sackok;
+    // config.write_default_config(config_json);
+    // return true;
+
+    config.read_default_config((config_json) => {
+        config_json.client_session.sackok = sackok;
+        config.write_default_config(config_json, (res) => {
+            return callback(res);
+        });
+    });
 }
 
 module.exports = { get_sackok, set_sackok };

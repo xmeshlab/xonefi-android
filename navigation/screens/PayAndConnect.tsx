@@ -35,10 +35,26 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
     read_default_config((config_json) => {
         //console.log(`config_json: ${JSON.stringify(config_json)}`);
-        config_json.version = "0.55";
+        config_json.client_on = true;
         write_default_config(config_json, () => {
             console.log("XLOG: Config update successful (1).")
         });
+    });
+
+    //const sack_number = require("../../xonefi-api-client/sack_number");
+
+    // sack_number.set_initiated_sack_number(2048, (res) => {
+    //     if(res) {
+    //         console.log("XLOG: Successfully set initiated sack number.");
+    //     } else {
+    //         console.log("XLOG: Failure setting initiated sack number.");
+    //     }
+    // });
+
+    const client_session = require("../../xonefi-api-client/client_session");
+
+    client_session.get_client_session((res) => {
+        console.log("XLOG: CLIENT SESSION: " + JSON.stringify(res));
     });
 
     const payAndConnect = useCallback(async () => {
