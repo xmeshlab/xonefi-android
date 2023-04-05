@@ -284,11 +284,11 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
             <View className="flex flex-row justify-between">
                 <Text className="text-white text-base mt-1">Conversion</Text>
             </View>
-            <View className="flex flex-row justify-between" style={{alignItems: 'center'}}>
-                <Text className="text-white text-base mt-1">Password</Text>
-                <TextInput secureTextEntry={true} style={style.input} textContentType={'password'} value={password}
-                           onChangeText={setPassword}/>
-            </View>
+            {/*<View className="flex flex-row justify-between" style={{alignItems: 'center'}}>*/}
+            {/*    <Text className="text-white text-base mt-1">Password</Text>*/}
+            {/*    <TextInput secureTextEntry={true} style={style.input} textContentType={'password'} value={password}*/}
+            {/*               onChangeText={setPassword}/>*/}
+            {/*</View>*/}
             <View
                 style={{flexDirection: 'row'}}>
                 <Text className="text-white text-base mt-1">Total</Text>
