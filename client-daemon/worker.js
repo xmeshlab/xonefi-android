@@ -101,17 +101,27 @@ function client_worker(config_json, user_password, private_key, callback) {
                 if (config_json.client_session.sack_number === config_json.client_session.number_of_sacks) {
                     console.log("*** The session is over ***");
                 } else {
-                    let initiated_sack_number = sack_number.get_initiated_sack_number();
-                    let current_sack_number = sack_number.get_sack_number();
+                    console.log(`XLOG: The session is not over yet on this side.`);
+                    let initiated_sack_number = config_json.client_session.initiated_sack_number;
+                    //let current_sack_number = sack_number.get_sack_number();
+
+                    console.log(`XLOG: config_json.client_session.initiated_sack_number=${config_json.client_session.initiated_sack_number}`);
+                    console.log(`XLOG: config_json.client_session.sack_number=${config_json.client_session.sack_number}`);
 
                     if (config_json.client_session.initiated_sack_number === config_json.client_session.sack_number) {
+                        console.log(`XLOG: @worker.js: Passed the first hurdle.`);
                         sack_number.set_initiated_sack_number(initiated_sack_number + 1, (res) => {
+                            console.log(`XLOG: @worker.js: Passed the second hurdle.`);
                             if(res) {
-                                console.log("XLOG: Successfully set initiated sack number.");
-                                if (config_json.client_session.initiated_sack_number !== initiated_sack_number + 1) {
-                                    console.log(`@DEB5: catch ya`);
-                                }
-                                next_sack.send_next_sack(config_json, user_password, private_key);
+                                console.log(`XLOG: @worker.js: Passed the third hurdle.`);
+                                config.read_default_config((config_json) => {
+                                    console.log(`XLOG: @worker.js: Passed the fourth hurdle.`);
+                                    console.log("XLOG: Successfully set initiated sack number.");
+                                    if (config_json.client_session.initiated_sack_number !== initiated_sack_number + 1) {
+                                        console.log(`@DEB5: catch ya`);
+                                    }
+                                    next_sack.send_next_sack(config_json, user_password, private_key);
+                                });
                             } else {
                                 console.log("XLOG: Failure setting initiated sack number.");
                             }

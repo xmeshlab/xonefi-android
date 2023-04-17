@@ -157,163 +157,182 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
             // console.log(`CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`);
             console.log(`Handshake stage initiated.`);
 
-
-            console.log(`Saying HELLO to provider...`);
-
-
-            console.log("Setting a timeout...");
-            setTimeout(() => {
-                console.log("Timeout is over.");
-
-                console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
-                console.log("DEBUG: deserealized_ssid.port: " + deserealized_ssid.port);
-                console.log("DEBUG: " + private_key);
-
-                call_hello.call_hello(
-                    deserealized_ssid.ip,
-                    deserealized_ssid.port,
-                    new Web3(),
-                    private_key,
-                    uuid.generate_unique_id(),
-                    (response) => {
-                        console.log(`PROVIDER'S RESPONSE: ${response}`);
-
-                        let response_json = {};
-
-                        try {
-                            response_json = JSON.parse(response);
-                        } catch (error) {
-                            console.log(`ERROR: Unable to parse JSON: ${error}`);
-                        }
-
-                        if(response_json.command.arguments.answer === "HELLO-OK") {
+            config.read_default_config((config_json) => {
+                console.log(`Saying HELLO to provider...`);
 
 
-                            let response_json = JSON.parse(response);
-                            //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
+                console.log("Setting a timeout...");
+                setTimeout(() => {
+                    console.log("Timeout is over.");
 
-                            let current_amount = calculated_pafren_amount * Math.pow(10, 12);
-                            console.log(`CALCULATED current_amount: ${current_amount}`);
+                    console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
+                    console.log("DEBUG: deserealized_ssid.port: " + deserealized_ssid.port);
+                    console.log("DEBUG: " + private_key);
 
-                            let current_timestamp = timestamp.get_current_timestamp();
+                    call_hello.call_hello(
+                        deserealized_ssid.ip,
+                        deserealized_ssid.port,
+                        new Web3(),
+                        private_key,
+                        uuid.generate_unique_id(),
+                        (response) => {
+                            console.log(`PROVIDER'S RESPONSE: ${response}`);
 
-                            console.log(`=DEB(`);
-                            console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
-                            console.log(`deserealized_ssid.port: ${deserealized_ssid.port}`);
-                            console.log(`private_key: ${private_key}`);
-                            console.log(`response_json.command.session: ${response_json.command.session}`);
-                            console.log(`response_json.command.uuid: ${response_json.command.uuid}`);
-                            console.log(`current_amount: ${current_amount}`);
-                            console.log(`current_timestamp: ${current_timestamp}`);
-                            console.log(`config_json.account.address: ${config_json.account.address}`);
-                            console.log(`response_json.command.from: ${response_json.command.from}`);
-                            console.log(`)DEB=`);
+                            let response_json = {};
+
+                            try {
+                                response_json = JSON.parse(response);
+                            } catch (error) {
+                                console.log(`ERROR: Unable to parse JSON: ${error}`);
+                            }
+
+                            if (response_json.command.arguments.answer === "HELLO-OK") {
 
 
-                            call_pafren.call_pafren(
-                                deserealized_ssid.ip,
-                                deserealized_ssid.port,
-                                new Web3(),
-                                private_key,
-                                response_json.command.session,
-                                response_json.command.uuid,
-                                current_amount,
-                                current_timestamp + pafren_length,
-                                encode_pafren.encode_pafren(
-                                    config_json.account.address,
-                                    response_json.command.from,
+                                let response_json = JSON.parse(response);
+                                //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
+
+                                let current_amount = calculated_pafren_amount * Math.pow(10, 12);
+                                console.log(`CALCULATED current_amount: ${current_amount}`);
+
+                                let current_timestamp = timestamp.get_current_timestamp();
+
+                                console.log(`=DEB(`);
+                                console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
+                                console.log(`deserealized_ssid.port: ${deserealized_ssid.port}`);
+                                console.log(`private_key: ${private_key}`);
+                                console.log(`response_json.command.session: ${response_json.command.session}`);
+                                console.log(`response_json.command.uuid: ${response_json.command.uuid}`);
+                                console.log(`current_amount: ${current_amount}`);
+                                console.log(`current_timestamp: ${current_timestamp}`);
+                                console.log(`config_json.account.address: ${config_json.account.address}`);
+                                console.log(`response_json.command.from: ${response_json.command.from}`);
+                                console.log(`)DEB=`);
+
+
+                                call_pafren.call_pafren(
+                                    deserealized_ssid.ip,
+                                    deserealized_ssid.port,
+                                    new Web3(),
+                                    private_key,
+                                    response_json.command.session,
+                                    response_json.command.uuid,
                                     current_amount,
                                     current_timestamp + pafren_length,
-                                    private_key
-                                ),
-                                (response1) => {
-                                    console.log(`PAFREN sent. RESPONSE1: ${response1}`);
-                                    let response1_json = {};
-                                    try {
-                                        response1_json = JSON.parse(response1);
-                                    } catch (e) {
-                                        console.log(`Failure to parse JSON: ${e}`);
-                                    }
+                                    encode_pafren.encode_pafren(
+                                        config_json.account.address,
+                                        response_json.command.from,
+                                        current_amount,
+                                        current_timestamp + pafren_length,
+                                        private_key
+                                    ),
+                                    (response1) => {
+                                        console.log(`PAFREN sent. RESPONSE1: ${response1}`);
+                                        let response1_json = {};
+                                        try {
+                                            response1_json = JSON.parse(response1);
+                                        } catch (e) {
+                                            console.log(`Failure to parse JSON: ${e}`);
+                                        }
 
-                                    if(response1_json.command.arguments.answer === "PAFREN-OK") {
-                                        console.log("Initiating sack sequence");
-                                        let session = config_json.client_session;
-                                        session.initiated_sack_number = 1;
-                                        session.pafren_timestamp = current_timestamp + pafren_length;
-                                        session.provider_address = response1_json.command.from;
-                                        session.session_id = response1_json.command.session;
-                                        session.status = session_status.status.ACTIVE;
-                                        client_session.set_client_session(session, () => {
-                                            console.log("Calling the first sack");
+                                        if (response1_json.command.arguments.answer === "PAFREN-OK") {
+                                            console.log("Initiating sack sequence");
+                                            let session = config_json.client_session;
+                                            session.initiated_sack_number = 1;
+                                            session.pafren_timestamp = current_timestamp + pafren_length;
+                                            session.provider_address = response1_json.command.from;
+                                            session.session_id = response1_json.command.session;
+                                            session.status = session_status.status.ACTIVE;
+                                            client_session.set_client_session(session, () => {
+                                                config_json.client_session = session;
+                                                console.log("Calling the first sack");
 
-                                            console.log(`config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`);
-                                            console.log(`config_json.client_session.sack_number: ${config_json.client_session.sack_number}`);
+                                                console.log(`config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`);
+                                                console.log(`config_json.client_session.sack_number: ${config_json.client_session.sack_number}`);
 
-                                            let current_sack_amount = config_json.client_session.sack_amount * (config_json.client_session.sack_number + 1) * Math.pow(10, 12);
-                                            console.log(`CALCULATED current_sack_amount: ${current_sack_amount}`);
+                                                let current_sack_amount = config_json.client_session.sack_amount * (config_json.client_session.sack_number + 1) * Math.pow(10, 12);
+                                                console.log(`XLOG: config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`);
+                                                console.log(`XLOG: config_json.client_session.sack_number: ${config_json.client_session.sack_number}`);
+                                                console.log(`CALCULATED current_sack_amount: ${current_sack_amount}`);
 
-                                            if(hotspot_type_json.access_method === "pft") {
-                                                call_sack.call_sack(
-                                                    deserealized_ssid.ip,
-                                                    deserealized_ssid.port,
-                                                    new Web3(),
-                                                    private_key,
-                                                    response1_json.command.session,
-                                                    response1_json.command.uuid,
-                                                    current_sack_amount,
-                                                    current_timestamp,
-                                                    encode_sack.encode_sack(
-                                                        config_json.account.address,
-                                                        response_json.command.from,
+                                                if (hotspot_type_json.access_method === "pft") {
+                                                    console.log(`XLOG: The access method is detected as PFT.`);
+                                                    console.log(`XLOG: deserealized_ssid.ip: ${deserealized_ssid.ip}`);
+                                                    console.log(`XLOG: deserealized_ssid.port: ${deserealized_ssid.port}`);
+                                                    console.log(`XLOG: response1_json.command.session: ${response1_json.command.session}`);
+                                                    console.log(`XLOG: response1_json.command.uuid: ${response1_json.command.uuid}`);
+                                                    console.log(`XLOG: current_sack_amount: ${current_sack_amount}`);
+                                                    console.log(`XLOG: current_timestamp: ${current_timestamp}`);
+
+                                                    call_sack.call_sack(
+                                                        deserealized_ssid.ip,
+                                                        deserealized_ssid.port,
+                                                        new Web3(),
+                                                        private_key,
+                                                        response1_json.command.session,
+                                                        response1_json.command.uuid,
                                                         current_sack_amount,
                                                         current_timestamp,
-                                                        private_key
-                                                    ),
-                                                    (response2) => {
-                                                        console.log(`SACK SENT. RESPONSE2: ${response2}`);
+                                                        encode_sack.encode_sack(
+                                                            config_json.account.address,
+                                                            response_json.command.from,
+                                                            current_sack_amount,
+                                                            current_timestamp,
+                                                            private_key
+                                                        ),
+                                                        (response2) => {
+                                                            console.log(`SACK SENT. RESPONSE2: ${response2}`);
 
-                                                        let response2_json = {};
+                                                            let response2_json = {};
 
-                                                        try {
-                                                            response2_json = JSON.parse(response2);
+                                                            try {
+                                                                response2_json = JSON.parse(response2);
 
-                                                            if (response2_json.command.arguments.answer === "SACK-OK") {
-                                                                console.log("SACK is accepted by provider! Session is active.");
-                                                                let session = config_json.client_session;
-                                                                session.status = session_status.status.ACTIVE;
-                                                                session.expiration_timestamp = current_timestamp + pafren_length;
-                                                                session.sack_number = 1;
-                                                                client_session.set_client_session(session);
-                                                                sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp);
-                                                                sackok.set_sackok(response2_json);
+                                                                if (response2_json.command.arguments.answer === "SACK-OK") {
+                                                                    console.log("SACK is accepted by provider! Session is active.");
+                                                                    let session = config_json.client_session;
+                                                                    session.status = session_status.status.ACTIVE;
+                                                                    session.expiration_timestamp = current_timestamp + pafren_length;
+                                                                    session.sack_number = 1;
+                                                                    client_session.set_client_session(session, () => {
+                                                                        config_json.client_session = session;
+                                                                        sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp, () => {
+                                                                            sackok.set_sackok(response2_json, () => {
+                                                                                console.log("XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete.")
+                                                                            });
+                                                                        });
+
+                                                                    });
+
+                                                                }
+                                                            } catch (e) {
+                                                                console.log(`ERROR[3971f3907d]: unable to parsej JSON: ${e}`);
                                                             }
-                                                        } catch (e) {
-                                                            console.log(`ERROR[3971f3907d]: unable to parsej JSON: ${e}`);
-                                                        }
-                                                    });
-                                            }
-                                        });
+                                                        });
+                                                }
+                                            });
 
-                                    } else if(response1_json.command.arguments.answer === "PAFREN-UNLIMITED") {
-                                        console.log("UNLIMITED SESSION ACTIVATED BY THE PROVIDER.");
-                                        let session = config_json.client_session;
-                                        session.status = session_status.status.ACTIVE;
-                                        session.expiration_timestamp = current_timestamp + 3600 * 24 * 365;
-                                        session.sack_number = 1;
-                                        client_session.set_client_session(session, () => {
-                                            sack_timestamp.set_last_sack_timestamp(current_timestamp + 3600 * 24 * 365);
-                                        });
-                                    } else {
-                                        console.log("ERROR: UNKNOWN RESPONSE TO PAFREN.");
+                                        } else if (response1_json.command.arguments.answer === "PAFREN-UNLIMITED") {
+                                            console.log("UNLIMITED SESSION ACTIVATED BY THE PROVIDER.");
+                                            let session = config_json.client_session;
+                                            session.status = session_status.status.ACTIVE;
+                                            session.expiration_timestamp = current_timestamp + 3600 * 24 * 365;
+                                            session.sack_number = 1;
+                                            client_session.set_client_session(session, () => {
+                                                sack_timestamp.set_last_sack_timestamp(current_timestamp + 3600 * 24 * 365);
+                                            });
+                                        } else {
+                                            console.log("ERROR: UNKNOWN RESPONSE TO PAFREN.");
+                                        }
                                     }
-                                }
-                            );
-                        } else {
-                            console.log(`The provider is not ready to serve. Continue connecting.`);
+                                );
+                            } else {
+                                console.log(`The provider is not ready to serve. Continue connecting.`);
+                            }
                         }
-                    }
-                );
-            }, 5000);
+                    );
+                }, 5000);
+            });
         });
 
     //config_json = config.read_default_config();

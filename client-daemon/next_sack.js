@@ -30,7 +30,7 @@ function send_next_sack(config_json, user_password, private_key) {
     // const uuid = require("../xonefi-api-client/uuid");
     // const hotspot_type = require("../xonefi-api-client/hotspot-type");
     // const scan_counter = require("../xonefi-api-client/scan_counter");
-    // const config = require("../xonefiapi/config");
+    const config = require("../xonefi-api-client/config");
     const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
     // const wifi_connect = require("../xonefi-api-client/wifi-connect");
     // const call_hello = require("../xonefi-api-client/call_hello");
@@ -55,55 +55,56 @@ function send_next_sack(config_json, user_password, private_key) {
     session.sack_number = session.sack_number + 1;
     client_session.set_client_session(session, () => {
         console.log("XLOG: Client session updated.");
+            sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
+                config.read_default_config((config_json) => {
+                console.log("XLOG: Last sack timestamp set to the current timestamp.");
+                call_sack.call_sack(
+                    config_json.client_session.ip,
+                    config_json.client_session.port,
+                    new Web3(),
+                    private_key,
+                    config_json.client_session.session_id,
+                    "",
+                    current_sack_amount,
+                    current_timestamp,
+                    encode_sack.encode_sack(
+                        config_json.account.address,
+                        config_json.client_session.provider_address,
+                        current_sack_amount,
+                        current_timestamp,
+                        private_key
+                    ),
+                    (response2) => {
+                        console.log(`SACK SENT. RESPONSE2: ${response2}`);
+
+                        let response2_json = {};
+
+                        try {
+                            response2_json = JSON.parse(response2);
+
+                            if (response2_json.command.arguments.answer === "SACK-OK") {
+                                console.log("SACK is accepted by provider! Active session continues.");
+                                sackok.set_sackok(response2_json, () => {
+                                    console.log("XLOG: SACK-OK object saved.");
+                                });
+                                // let session = config_json.client_session;
+                                // session.status = session_status.status.ACTIVE;
+                                // session.expiration_timestamp = config_json.client_session.pafren_timestamp;
+                                // session.sack_number = session.sack_number + 1;
+                                // client_session.set_client_session(session);
+                                // sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp);
+                            }
+                        } catch (e) {
+                            console.log(`ERROR[be6da098a5]: unable to parsej JSON: ${e}`);
+                        }
+                    });
+            });
+        });
     });
 
     let current_timestamp = timestamp.get_current_timestamp();
 
 
-
-    sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
-        console.log("XLOG: Last sack timestamp set to the current timestamp.");
-        call_sack.call_sack(
-            config_json.client_session.ip,
-            config_json.client_session.port,
-            new Web3(),
-            private_key,
-            config_json.client_session.session_id,
-            "",
-            current_sack_amount,
-            current_timestamp,
-            encode_sack.encode_sack(
-                config_json.account.address,
-                config_json.client_session.provider_address,
-                current_sack_amount,
-                current_timestamp,
-                private_key
-            ),
-            (response2) => {
-                console.log(`SACK SENT. RESPONSE2: ${response2}`);
-
-                let response2_json = {};
-
-                try {
-                    response2_json = JSON.parse(response2);
-
-                    if(response2_json.command.arguments.answer === "SACK-OK") {
-                        console.log("SACK is accepted by provider! Active session continues.");
-                        sackok.set_sackok(response2_json, () => {
-                            console.log("XLOG: SACK-OK object saved.");
-                        });
-                        // let session = config_json.client_session;
-                        // session.status = session_status.status.ACTIVE;
-                        // session.expiration_timestamp = config_json.client_session.pafren_timestamp;
-                        // session.sack_number = session.sack_number + 1;
-                        // client_session.set_client_session(session);
-                        // sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp);
-                    }
-                } catch(e) {
-                    console.log(`ERROR[be6da098a5]: unable to parsej JSON: ${e}`);
-                }
-            });
-    });
 }
 
 module.exports = { send_next_sack };
