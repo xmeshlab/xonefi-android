@@ -32,11 +32,12 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {function} callback - Return status: true - success, false - failure.
  */
 function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, sack, callback) {
+    console.log("XLOG: @call_sack: entering the function.");
     const uuid = require('uuid');
     const send_udp = require('./send_udp');
 
     var message = {};
-    pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+    let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
     message.command = {};
     message.command.op = "SACK";
@@ -49,7 +50,7 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
     message.command.arguments = {};
     message.command.arguments.sack = {
         client: pubaddress,
-        amount: amount,
+        amount: Math.ceil(Number(amount)).toString(),
         timestamp: current_timestamp,
         proof: sack
     };

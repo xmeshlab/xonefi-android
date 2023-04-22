@@ -108,14 +108,24 @@ function send_udp3(ip, port, msg, callback) {
 
     const socket = dgram.createSocket('udp4')
     socket.bind()
+    console.log("XLOG: @send_udp: socket is bound.")
     socket.once('listening', function() {
+        console.log("XLOG: @send_udp: socket is listening...")
         socket.send(msg, 0, msg.length, port, ip, function(err) {
+            console.log("XLOG: @send_udp3: socket.send() invoked.")
             if (err) throw err
-            //console.log('DEBUG: Message sent!');
-            socket.on('message', function(msg, rinfo) {
-                //console.log('Message received', msg)
-                socket.close();
-                return callback(msg);
+            console.log('XLOG: @send_udp3: Message sent!');
+            socket.on('message', function(rmsg, rinfo) {
+                console.log('XLOG: @send_udp3: Message received: ', rmsg)
+                socket.close(() => {
+                    console.log("XLOG: @send_udp3: the socket successfully closed.");
+                    return callback(rmsg);
+                });
+            });
+
+            socket.on("error", (error) => {
+                console.log("XLOG: @send_udp3: error occurred.");
+                return callback(error);
             });
         });
     });

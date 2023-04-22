@@ -264,6 +264,15 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                                                     console.log(`XLOG: current_sack_amount: ${current_sack_amount}`);
                                                     console.log(`XLOG: current_timestamp: ${current_timestamp}`);
 
+
+                                                    console.log("XLOG: Encode sack parameters:");
+                                                    console.log(`XLOG: config_json.account.address: ${config_json.account.address}`);
+                                                    console.log(`XLOG: response_json.command.from: ${response_json.command.from}`);
+                                                    console.log(`XLOG: current_sack_amount: ${current_sack_amount}`);
+                                                    console.log(`XLOG: current_timestamp: ${current_timestamp}`);
+                                                    console.log(`XLOG: private_key: ${private_key}`);
+
+                                                    console.log("XLOG: Calling call_sack...");
                                                     call_sack.call_sack(
                                                         deserealized_ssid.ip,
                                                         deserealized_ssid.port,
@@ -331,7 +340,7 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                             }
                         }
                     );
-                }, 5000);
+                }, 3000);
             });
         });
 

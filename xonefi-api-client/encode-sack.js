@@ -28,8 +28,10 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * EVM/Solidity ABI encoding for more information about the serialization.
  */
 function encode_sack(client, hotspot, amount, timestamp, prk) {
+    console.log("XLOG: @encode_sack Encoding sack...");
     var Web3 = require("web3");
     var web3 = new Web3();
+    console.log("XLOG: @encode_sack Web3 initialized...");
 
     let f0 = "S";
     let f1 = client.toLowerCase().substr(2);
@@ -39,18 +41,24 @@ function encode_sack(client, hotspot, amount, timestamp, prk) {
 
     let msg = f0 + f1 + f2 + f3 + f4;
 
+    console.log("XLOG: @encode_sack: hashing SACK...")
+
     var hash = web3.utils.soliditySha3(
         {t: 'bytes', v: '0x53'},
         {t: 'address', v: client},
         {t: 'address', v: hotspot},
-        {t: 'uint256', v: amount.toString()},
+        {t: 'uint256', v: Math.ceil(Number(amount)).toString()},
         {t: 'uint32', v: timestamp}
     );
+
+    console.log("XLOG: @encode_sack hash: ", hash);
 
     var signature = web3.eth.accounts.sign(
         hash,
         prk
     );
+
+    console.log("XLOG: @encode_sack Produced signature: ", signature.signature);
 
     return signature.signature;
 }
