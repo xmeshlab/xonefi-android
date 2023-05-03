@@ -32,6 +32,8 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
     const isConnected = useMemo(() => {
         return currentConnectedSSID === SSID
     }, [currentConnectedSSID]);
+    //debug code
+    console.log("XLOG: Current value of isConnected : " + isConnected);
 
     read_default_config((config_json) => {
         //console.log(`config_json: ${JSON.stringify(config_json)}`);
@@ -161,6 +163,38 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
 
 
+    }, [isConnected, setCurrentConnectSSID, password])
+
+    //discconect function
+    const disconnectFromOnefi = useCallback(async () => {
+        console.log("XLOG: DisconnectFromOnefi Callback Activated");
+
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+                title: 'Location permission is required to disconnect from WiFi connections',
+                message:
+                    'This app needs location permission as this is required  ' +
+                    'to scan for wifi networks.',
+                buttonNegative: 'DENY',
+                buttonPositive: 'ALLOW',
+            },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // You can now use react-native-wifi-reborn
+            console.log("XLOG: You can now use react-native-wifi-reborn")
+
+            let ssid_json = deserialize_ssid(SSID);
+
+            console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
+
+            WifiManager.isRemoveWifiNetwork(SSID)
+
+        } else {
+            // Permission denied
+            console.log("XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)")
+
+        }
     }, [isConnected, setCurrentConnectSSID, password])
 
 
@@ -297,7 +331,7 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
         </View>
 
-        <PrimaryBtn onPress={payAndConnect} style={style.connectBtn}>
+        <PrimaryBtn onPress={isConnected ? disconnectFromOnefi : payAndConnect} style={style.connectBtn}>
             {isConnected ? 'Disconnect' : 'Pay and Connect'}
 
         </PrimaryBtn>
