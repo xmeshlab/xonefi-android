@@ -22,6 +22,7 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
     console.log("XLOG: Pay and Connect Component Activated");
     const {SSID, BSSID, signalLevel} = props.route.params;
     const [password, setPassword] = useState('seitlab123!@');
+    //const [buttonText, setButtonText] = useState('')
 
     const {
         value: currentConnectedSSID,
@@ -95,6 +96,11 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
                     console.log("XLOG: Connection failed!");
                 }
             )
+            /*.then(()=>{
+                setButtonText('Disconnect')
+            })*/
+            //setButtonText('Disconnect')
+            //Set the text for the button. Will cause React to rerender the component
 
         } else {
             // Permission denied
@@ -189,6 +195,10 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
             console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
 
             WifiManager.isRemoveWifiNetwork(SSID)
+            /*.then(()=>{
+                setButtonText('Pay and Connect')
+            })*/
+            //setButtonText('Pay and Connect')
 
         } else {
             // Permission denied
@@ -275,7 +285,7 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
     );
 
 
-
+    //isConnected ? setButtonText('Disconnect') : setButtonText('Pay and Connect')
     return (<ScrollView className="flex-1 flex-col">
         <View style={[globalStyle.row, {marginLeft: 37, marginTop: 23}]}>
             <Text style={[style.statusText, globalStyle.light]}>Status:</Text>
@@ -333,7 +343,6 @@ const PayAndConnect: RouteComponent<'PayAndConnect'> = (props) => {
 
         <PrimaryBtn onPress={isConnected ? disconnectFromOnefi : payAndConnect} style={style.connectBtn}>
             {isConnected ? 'Disconnect' : 'Pay and Connect'}
-
         </PrimaryBtn>
 
     </ScrollView>)
