@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { G, Rect, Defs } from "react-native-svg";
-import { View, Text} from 'react-native';
+import { View, Text } from "react-native";
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
 function ButtonBackground(props) {
@@ -35,25 +35,25 @@ function ButtonBackground(props) {
   );
 }
 
-function ButtonBackgroundSVG({ButtonText}) {
-    return (
-        <View
-            style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-            }}
-            >
-            <ButtonBackground/>
-            <Text
-            style={{
-                position: 'absolute',
-                color: 'white'
-            }}
-            >
-                {ButtonText}
-            </Text>
-        </View>
-        )
+function ButtonBackgroundSVG({ ButtonText }) {
+  return (
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <ButtonBackground />
+      <Text
+        style={{
+          position: "absolute",
+          color: "white",
+        }}
+      >
+        {ButtonText}
+      </Text>
+    </View>
+  );
 }
 
 export default ButtonBackgroundSVG;
