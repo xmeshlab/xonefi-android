@@ -75,6 +75,9 @@ buck-out/
 # Added by Nick
 android/local.properties
 
+# Ignore config for app center - added by Sungyu
+android/app/src/main/assets/appcenter-config.json
+
 # Expo
 .expo/
 web-build/
