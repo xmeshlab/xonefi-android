@@ -14,6 +14,7 @@ function GreyTextInputBar({ placeholder_text, state_function }) {
         onChangeText={onTextInputChangeText}
         placeholderTextColor="#FFF"
         placeholder={placeholder_text}
+        testID="Text Input"
       />
     </View>
   );
