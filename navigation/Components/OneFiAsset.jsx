@@ -8,8 +8,8 @@ import AssetGain from "../../assets/AssetGainLogo.png";
 export default function OneFiAsset({ AssetAmount, AssetPrice, AssetChange }) {
   return (
     <View className="flex flex-col bg-gray-600 m-2 rounded-lg p-2">
-      <Text className="text-white">Onefi</Text>
-      <Text className="text-white">OFI</Text>
+      <Text className="text-white">XOneFi</Text>
+      <Text className="text-white">XFI</Text>
       <View className="flex flex-row justify-center">
         <Text className="text-white text-4xl mb-2 mt-2">{AssetAmount}</Text>
       </View>
