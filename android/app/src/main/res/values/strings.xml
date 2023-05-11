@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">XOneFiApp</string>
+  <string name="app_name">XOneFi</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">cover</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
   <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
