@@ -100,7 +100,7 @@ export default function WalletScreen({ navigation }) {
             AssetAmount="$0.00"
             AssetPrice="$1"
             AssetLogo={() => <CashLogoSVG />}
-            AssetChange="0%"
+            AssetChange={0}
           />
           <Asset
             AssetName="Binance Wallet"
@@ -116,7 +116,7 @@ export default function WalletScreen({ navigation }) {
             AssetAmount="0 NEO"
             AssetPrice="$38.91"
             AssetLogo={() => <NeoLogoSVG />}
-            AssetChange="0%"
+            AssetChange={7.0}
           />
           <Asset
             AssetName="Solana Wallet"

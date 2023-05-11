@@ -32,8 +32,11 @@ export default function Asset({
             <Text className="ml-3 text-white">{AssetPrice}</Text>
           </View>
           <View className="flex flex-row justify-end">
-            <Image className="mr-1" source={AssetGain} />
-            <Text className="text-green-400 mr-3 pt-1">{AssetChange}</Text>
+            {AssetChange >= 0 ? (
+              <Text className="text-green-400 mr-3 pt-1">{AssetChange}%</Text>
+            ) : (
+              <Text className="text-red-400 mr-3 pt-1">{AssetChange}%</Text>
+            )}
           </View>
         </View>
       </View>
