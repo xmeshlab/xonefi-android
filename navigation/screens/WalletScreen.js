@@ -76,50 +76,50 @@ export default function WalletScreen({ navigation }) {
         />
         <ScrollView style={{ backgroundColor: "transparent" }}>
           <Asset
-            AssetName="Eth Wallet"
-            AssetAmount="1.23 Eth"
+            AssetName="ETH Wallet"
+            AssetAmount="0 ETH"
             AssetPrice={"$" + priceJson.ethereum.usd}
             AssetLogo={() => <EthLogoSVG />}
             AssetChange="4.06%"
           />
           <Asset
             AssetName="BTC Wallet"
-            AssetAmount={"0.32 BTC"}
+            AssetAmount={"0 BTC"}
             AssetPrice={"$" + priceJson.bitcoin.usd}
             AssetLogo={() => <BitcoinLogoSVG />}
             AssetChange="4.06%"
           />
           <Asset
             AssetName="Cash (USD)"
-            AssetAmount="$1,722.2"
-            AssetPrice="$1,722.2"
+            AssetAmount="$0.00"
+            AssetPrice="$1"
             AssetLogo={() => <CashLogoSVG />}
             AssetChange="4.06%"
           />
           <Asset
             AssetName="Binance Wallet"
-            AssetAmount="0.4188 BNB"
+            AssetAmount="0 BNB"
             AssetPrice={"$" + priceJson.binancecoin.usd}
             AssetLogo={() => <BianaceLogoSVG />}
             AssetChange="3.38%"
           />
           <Asset
             AssetName="Neo Wallet"
-            AssetAmount="28.9371 NEO"
+            AssetAmount="0 NEO"
             AssetPrice="$38.91"
             AssetLogo={() => <NeoLogoSVG />}
             AssetChange="0.56%"
           />
           <Asset
             AssetName="Solana Wallet"
-            AssetAmount="4.5 SOL"
+            AssetAmount="0 SOL"
             AssetPrice={"$" + priceJson.solana.usd}
             AssetLogo={() => <SolanaLogoSVG />}
             AssetChange="0.56%"
           />
           <Asset
             AssetName="Matic Wallet"
-            AssetAmount="3.6 MATIC"
+            AssetAmount="0 MATIC"
             AssetPrice={"$" + priceJson["matic-network"].usd}
             AssetLogo={() => <MaticLogoSVG />}
             AssetChange="0.56%"
