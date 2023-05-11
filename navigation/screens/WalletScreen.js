@@ -27,19 +27,24 @@ import { MaticLogoSVG } from "../icons/crypto_icons";
 
 default_json = {
   binancecoin: {
-    usd: 283.15,
+    usd: 306.36,
+    usd_24h_change: -3.1936254367349934,
   },
   bitcoin: {
-    usd: 20960,
+    usd: 26885,
+    usd_24h_change: -3.6496973439437213,
   },
   ethereum: {
-    usd: 1502.01,
+    usd: 1790.7,
+    usd_24h_change: -3.7306858661681077,
   },
   "matic-network": {
-    usd: 1.035,
+    usd: 0.842185,
+    usd_24h_change: -4.64440223078995,
   },
   solana: {
-    usd: 17.78,
+    usd: 20.04,
+    usd_24h_change: -5.5707787222889635,
   },
 };
 
@@ -48,10 +53,11 @@ export default function WalletScreen({ navigation }) {
 
   //API call to coingecko to get prices of eth and bitcoin and binance coin
   //bitcoin,ethereum,binancecoin,solana,matic-network,
+  //        //"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Csolana%2Cmatic-network&vs_currencies=usd" - just prices
   useEffect(() => {
     let interval = setInterval(() => {
       fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Csolana%2Cmatic-network&vs_currencies=usd"
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Csolana%2Cmatic-network&vs_currencies=usd&include_24hr_change=true"
       )
         //the res.json() seems to be doing all of the parsing for us
         .then((res) => res.json())
@@ -80,49 +86,53 @@ export default function WalletScreen({ navigation }) {
             AssetAmount="0 ETH"
             AssetPrice={"$" + priceJson.ethereum.usd}
             AssetLogo={() => <EthLogoSVG />}
-            AssetChange="4.06%"
+            AssetChange={Number(priceJson.ethereum.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="BTC Wallet"
             AssetAmount={"0 BTC"}
             AssetPrice={"$" + priceJson.bitcoin.usd}
             AssetLogo={() => <BitcoinLogoSVG />}
-            AssetChange="4.06%"
+            AssetChange={Number(priceJson.bitcoin.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="Cash (USD)"
             AssetAmount="$0.00"
             AssetPrice="$1"
             AssetLogo={() => <CashLogoSVG />}
-            AssetChange="4.06%"
+            AssetChange="0%"
           />
           <Asset
             AssetName="Binance Wallet"
             AssetAmount="0 BNB"
             AssetPrice={"$" + priceJson.binancecoin.usd}
             AssetLogo={() => <BianaceLogoSVG />}
-            AssetChange="3.38%"
+            AssetChange={Number(priceJson.binancecoin.usd_24h_change).toFixed(
+              2
+            )}
           />
           <Asset
             AssetName="Neo Wallet"
             AssetAmount="0 NEO"
             AssetPrice="$38.91"
             AssetLogo={() => <NeoLogoSVG />}
-            AssetChange="0.56%"
+            AssetChange="0%"
           />
           <Asset
             AssetName="Solana Wallet"
             AssetAmount="0 SOL"
             AssetPrice={"$" + priceJson.solana.usd}
             AssetLogo={() => <SolanaLogoSVG />}
-            AssetChange="0.56%"
+            AssetChange={Number(priceJson.solana.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="Matic Wallet"
             AssetAmount="0 MATIC"
             AssetPrice={"$" + priceJson["matic-network"].usd}
             AssetLogo={() => <MaticLogoSVG />}
-            AssetChange="0.56%"
+            AssetChange={Number(
+              priceJson["matic-network"].usd_24h_change
+            ).toFixed(2)}
           />
         </ScrollView>
       </React.Fragment>
