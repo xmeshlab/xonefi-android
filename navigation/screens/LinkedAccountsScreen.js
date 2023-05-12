@@ -33,7 +33,7 @@ const web3auth = new Web3Auth(WebBrowser, {
 export default function LinkedAccountScreen({ navigation }) {
   const [key, setKey] = useState("");
   const [userInfo, setUserInfo] = useState("");
-  const [console, setConsole] = useState("");
+  //const [console, setConsole] = useState("");
 
   const onTouchableOpacityPress = useCallback(
     () => navigation.navigate("Account Information"),
@@ -41,22 +41,26 @@ export default function LinkedAccountScreen({ navigation }) {
   );
 
   const loginWithWeb3Auth = async () => {
+    console.log("Loggin in with Web3Auth");
     try {
-      setConsole("Logging in");
+      console.log("Loggin in with Web3Auth");
+      //setConsole("Logging in");
       const web3auth = new Web3Auth(WebBrowser, {
         clientId,
         network: OPENLOGIN_NETWORK.TESTNET, // or other networks
       });
+      console.log("web3auth object");
+      console.log(web3auth);
       const info = await web3auth.login({
         loginProvider: LOGIN_PROVIDER.GOOGLE,
         redirectUrl: resolvedRedirectUrl,
-        mfaLevel: "default",
-        curve: "secp256k1",
       });
+      console.log("info returned from web3 Auth");
+      console.log(info);
 
       setUserInfo(info);
       setKey(info.privKey);
-      uiConsole("Logged In");
+      //uiConsole("Logged In");
     } catch (e) {
       console.error(e);
     }
@@ -92,6 +96,13 @@ export default function LinkedAccountScreen({ navigation }) {
         imageSource={LogoutIcon}
         textInput={"Login Using Web3Auth"}
         onPressFunction={loginWithWeb3Auth}
+      />
+      <GreyButton
+        imageSource={LogoutIcon}
+        textInput={"Web3Auth - Show Private Key"}
+        onPressFunction={() => {
+          alert(key);
+        }}
       />
     </View>
   );

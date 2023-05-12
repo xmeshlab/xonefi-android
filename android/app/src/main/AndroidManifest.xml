@@ -35,7 +35,6 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -48,6 +47,12 @@
 <!--                                <data android:scheme="com.vidy.XOneFiApp" />-->
                 <data android:scheme="exp+xonefiapp" />
             </intent-filter>
+            <intent-filter>
+     <action android:name="android.intent.action.VIEW"/>
+     <category android:name="android.intent.category.DEFAULT"/>
+     <category android:name="android.intent.category.BROWSABLE"/>
+     <data android:host="*" android:scheme="web3authrnexample"/>
+</intent-filter>
         </activity>
         <activity
             android:name="com.facebook.react.devsupport.DevSettingsActivity"
