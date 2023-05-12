@@ -9,8 +9,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/XSplash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#000000"
+      "resizeMode": "cover"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
