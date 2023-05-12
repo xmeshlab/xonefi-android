@@ -29,7 +29,9 @@ export default function Asset({
 
         <View className="flex flex-row justify-between pb-1">
           <View className="flex flex-row justify-start">
-            <Text className="ml-3 text-white">{AssetPrice}</Text>
+            <Text className="ml-3 text-white">
+              {"$" + Number(AssetPrice).toLocaleString()}
+            </Text>
           </View>
           <View className="flex flex-row justify-end">
             {AssetChange >= 0 ? (

@@ -84,28 +84,28 @@ export default function WalletScreen({ navigation }) {
           <Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"
-            AssetPrice={"$" + priceJson.ethereum.usd}
+            AssetPrice={priceJson.ethereum.usd}
             AssetLogo={() => <EthLogoSVG />}
             AssetChange={Number(priceJson.ethereum.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="BTC Wallet"
             AssetAmount={"0 BTC"}
-            AssetPrice={"$" + priceJson.bitcoin.usd}
+            AssetPrice={priceJson.bitcoin.usd}
             AssetLogo={() => <BitcoinLogoSVG />}
             AssetChange={Number(priceJson.bitcoin.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="Cash (USD)"
-            AssetAmount="$0.00"
-            AssetPrice="$1"
+            AssetAmount={0.0}
+            AssetPrice={1}
             AssetLogo={() => <CashLogoSVG />}
             AssetChange={0}
           />
           <Asset
             AssetName="Binance Wallet"
             AssetAmount="0 BNB"
-            AssetPrice={"$" + priceJson.binancecoin.usd}
+            AssetPrice={priceJson.binancecoin.usd}
             AssetLogo={() => <BianaceLogoSVG />}
             AssetChange={Number(priceJson.binancecoin.usd_24h_change).toFixed(
               2
@@ -114,21 +114,21 @@ export default function WalletScreen({ navigation }) {
           <Asset
             AssetName="Neo Wallet"
             AssetAmount="0 NEO"
-            AssetPrice="$38.91"
+            AssetPrice={38.91}
             AssetLogo={() => <NeoLogoSVG />}
             AssetChange={7.0}
           />
           <Asset
             AssetName="Solana Wallet"
             AssetAmount="0 SOL"
-            AssetPrice={"$" + priceJson.solana.usd}
+            AssetPrice={priceJson.solana.usd}
             AssetLogo={() => <SolanaLogoSVG />}
             AssetChange={Number(priceJson.solana.usd_24h_change).toFixed(2)}
           />
           <Asset
             AssetName="Matic Wallet"
             AssetAmount="0 MATIC"
-            AssetPrice={"$" + priceJson["matic-network"].usd}
+            AssetPrice={priceJson["matic-network"].usd}
             AssetLogo={() => <MaticLogoSVG />}
             AssetChange={Number(
               priceJson["matic-network"].usd_24h_change
