@@ -10,6 +10,7 @@ import {
 
 import backgroundImage from "../../assets/background.png";
 import buttonBackground from "../../assets/CreateNewUserButtonBackground.png";
+import BigBlueButton from "../Components/BigBlueButton";
 
 export default function LinkedPaymentCardScreen({ navigation }) {
   return (
@@ -78,20 +79,12 @@ export default function LinkedPaymentCardScreen({ navigation }) {
           </View>
         </View>
       </View>
-
-      <ImageBackground
-        className="mt-8 p-1 flex flex-row justify-center"
-        source={buttonBackground}
-        resizeMode="contain"
-      >
-        <TouchableOpacity
-          onPress={() => {
-            alert("Button Pressed");
-          }}
-        >
-          <Text className="text-white text-sm m-1">Add Payment Card</Text>
-        </TouchableOpacity>
-      </ImageBackground>
+      <BigBlueButton
+        text={"Add Payment Card"}
+        onPressFunction={() => {
+          alert("Button Pressed");
+        }}
+      />
     </ImageBackground>
   );
 }
