@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --dev-client -c --dev-client",
-    "android": "expo run:android ",
-    "ios": "expo run:ios",
+    "android": "npx expo run:android ",
+    "ios": "npx expo run:ios",
     "test": "jest",
     "web": "expo start --web",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
