@@ -16,13 +16,12 @@ import { RouteComponent } from "../../types/global";
 import WifiManager from "react-native-wifi-reborn";
 import { useAsync } from "../../utils/hooks/useAsync";
 import BackgroundTimer from "react-native-background-timer";
-import { bar } from "../../xonefiapi/foo";
 import {
   read_default_config,
   write_default_config,
 } from "../../xonefi-api-client/config";
 
-import { deserialize_ssid } from "../../xonefiapi/ssid";
+import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";

@@ -1,5 +1,4 @@
 import BackgroundTimer from "react-native-background-timer";
-import { bar } from '../xonefiapi/foo';
 import { read_default_config, write_default_config, starter_config } from '../xonefi-api-client/config'
 
 

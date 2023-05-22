@@ -18,8 +18,6 @@ import { globalStyle } from "../../constants/globalStyle";
 import BigBlueButton from "../Components/BigBlueButton";
 import GreyTextInputBar from "../Components/GreyTextInputBar";
 
-//Importing accoun.js api
-//import {test_prk, import_account} from '../../xonefiapi/account';
 
 import { ScrollView } from "react-native-gesture-handler";
 

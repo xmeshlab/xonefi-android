@@ -2,7 +2,7 @@ import * as React from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
 import MainContainer from "./navigation/MainContainer";
 import BackgroundTimer from "react-native-background-timer";
-import { bar } from "./xonefiapi/foo";
+
 import {
   read_default_config,
   write_default_config,
