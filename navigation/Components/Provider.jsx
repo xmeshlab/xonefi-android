@@ -37,15 +37,3 @@ export default function Provider({
   );
 }
 
-/*<View>
-            <ImageBackground source={ProviderBackground} resizeMode="cover">
-                <View className="flex flew-col">
-                    <View className="flex flex-row ">
-                        <Image source={Bars}/>
-                        <Text className="text-white">Provider Names</Text>
-                        <Image source={WifiGreen}/>
-                    </View>
-                </View>
-            </ImageBackground>
-        </View>
-    );*/
