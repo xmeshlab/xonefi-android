@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684863973578" clover="3.2.0">
-  <project timestamp="1684863973578" name="All files">
-    <metrics statements="69" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="42" coveredmethods="3" elements="113" coveredelements="9" complexity="0" loc="69" ncloc="69" packages="2" files="17" classes="17"/>
+<coverage generated="1684865241593" clover="3.2.0">
+  <project timestamp="1684865241593" name="All files">
+    <metrics statements="69" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="42" coveredmethods="4" elements="113" coveredelements="11" complexity="0" loc="69" ncloc="69" packages="2" files="17" classes="17"/>
     <package name="Components">
-      <metrics statements="12" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="3"/>
+      <metrics statements="12" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="4"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Asset.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="16" count="1" type="stmt"/>
@@ -33,8 +33,8 @@
         <line num="10" count="1" type="stmt"/>
       </file>
       <file name="OneFiAsset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/OneFiAsset.jsx">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="9" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
       <file name="Provider.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Provider.jsx">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>

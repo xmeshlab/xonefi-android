@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, Text, Image, ImageBackground } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import ethLogo from "../../assets/EthLogo.png";
 import AssetGain from "../../assets/AssetGainLogo.png";
 
 export default function OneFiAsset({ AssetAmount, AssetPrice, AssetChange }) {
