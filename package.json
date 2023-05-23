@@ -89,6 +89,11 @@
   },
   "jest": {
     "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "navigation/Components/*.{js,jsx, ts, tsx}", 
+      "navigation/screens/*.{js,jsx, ts, tsx}"
+    ],
     "globals": {
       "ts-jest": {
         "tsconfig": {
