@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684952096212" clover="3.2.0">
-  <project timestamp="1684952096212" name="All files">
-    <metrics statements="69" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="42" coveredmethods="6" elements="113" coveredelements="16" complexity="0" loc="69" ncloc="69" packages="2" files="16" classes="16"/>
+<coverage generated="1684955044061" clover="3.2.0">
+  <project timestamp="1684955044061" name="All files">
+    <metrics statements="67" coveredstatements="39" conditionals="2" coveredconditionals="2" methods="40" coveredmethods="24" elements="109" coveredelements="65" complexity="0" loc="67" ncloc="67" packages="2" files="15" classes="15"/>
     <package name="Components">
-      <metrics statements="12" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="6"/>
+      <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="6"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Asset.jsx">
-        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
       </file>
       <file name="BigBlueButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/BigBlueButton.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="ButtonBackgroundSVG.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/ButtonBackgroundSVG.jsx">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
       </file>
       <file name="GreyButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/GreyButton.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="7" type="stmt"/>
       </file>
       <file name="GreyTextInputBar.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/GreyTextInputBar.jsx">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -31,36 +26,36 @@
       </file>
       <file name="OneFiAsset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/OneFiAsset.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
       <file name="Provider.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Provider.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="17" count="1" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
       </file>
     </package>
     <package name="screens">
-      <metrics statements="57" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="33" coveredmethods="0"/>
+      <metrics statements="57" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="33" coveredmethods="18"/>
       <file name="AccountInformationScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/AccountInformationScreen.js">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
       <file name="AddNewPaymentCard.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/AddNewPaymentCard.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
       <file name="LinkedAccountsScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/LinkedAccountsScreen.js">
-        <metrics statements="26" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
+        <metrics statements="26" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
@@ -73,15 +68,15 @@
         <line num="61" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
         <line num="104" count="0" type="stmt"/>
       </file>
       <file name="LinkedPaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/LinkedPaymentCardScreen.js">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
       </file>
       <file name="LogoutScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/LogoutScreen.js">
@@ -89,40 +84,40 @@
         <line num="7" count="0" type="stmt"/>
       </file>
       <file name="PaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/PaymentCardScreen.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
       <file name="ProviderDetailScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/ProviderDetailScreen.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="13" count="0" type="stmt"/>
       </file>
       <file name="ProviderScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/ProviderScreen.js">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="11" count="0" type="stmt"/>
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
       </file>
       <file name="WalletScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/screens/WalletScreen.js">
-        <metrics statements="18" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="0"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
+        <metrics statements="18" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="10"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="132" count="1" type="stmt"/>
       </file>
     </package>
   </project>

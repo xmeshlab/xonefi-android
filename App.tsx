@@ -2,6 +2,7 @@ import * as React from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
 import MainContainer from "./navigation/MainContainer";
 import BackgroundTimer from "react-native-background-timer";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import {
   read_default_config,
@@ -11,23 +12,6 @@ import {
 } from "./xonefi-api-client/config";
 import { startClientDaemon } from "./client-daemon/start-client-daemon";
 
-//web3Auth Code
-import * as WebBrowser from "@toruslabs/react-native-web-browser";
-import Web3Auth, {
-  LOGIN_PROVIDER,
-  OPENLOGIN_NETWORK,
-} from "@web3auth/react-native-sdk";
-
-const scheme = "web3authrnbareauth0example"; // Or your desired app redirection scheme
-const resolvedRedirectUrl = `${scheme}://openlogin`;
-
-const clientId =
-  "BHU5wO49Ul-c13pLy6HT84KINj4fcQ20W_3H7dZWj5AP3LRWIE69ZjVVWZ3B0u_TkJx8TbPK6iFeK0gzf5is5Oo";
-
-const web3auth = new Web3Auth(WebBrowser, {
-  clientId,
-  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-});
 
 function App() {
   console.log("XLOG: App.tsx");
@@ -54,9 +38,11 @@ function App() {
   });
 
   return (
-    <RootSiblingParent>
-      <MainContainer />
-    </RootSiblingParent>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootSiblingParent>
+        <MainContainer />
+      </RootSiblingParent>
+    </GestureHandlerRootView>
   );
 }
 
