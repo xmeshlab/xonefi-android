@@ -11,7 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 import Svg, { Path, Defs, G, Pattern, Use, Image } from "react-native-svg";
-import ButtonBackgroundSVG from "../Components/ButtonBackgroundSVG";
+import BigBlueButton from "../Components/BigBlueButton";
 import { CashLogoSVG } from "../icons/crypto_icons";
 import { OneFiLogoSVG } from "../icons/crypto_icons";
 
@@ -133,9 +133,7 @@ const PurchaseSell: FunctionComponent<Props & RouteProp<any>> = (props) => {
       <InputBar IconComponent={OneFiLogoSVG} TokenName="OFI" />
       <InputBar IconComponent={CashLogoSVG} TokenName="USD" />
       <View className="mt-4">
-        <ButtonBackgroundSVG
-          className="mx-4"
-          ButtonText={"Complete Purchase"}
+        <BigBlueButton text={"Complete Purchase"} onPressFunction={()=>{alert("Button Pressed")}}
         />
       </View>
     </ImageBackground>

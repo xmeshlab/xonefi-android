@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684865497490" clover="3.2.0">
-  <project timestamp="1684865497490" name="All files">
-    <metrics statements="69" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="42" coveredmethods="5" elements="113" coveredelements="14" complexity="0" loc="69" ncloc="69" packages="2" files="17" classes="17"/>
+<coverage generated="1684952096212" clover="3.2.0">
+  <project timestamp="1684952096212" name="All files">
+    <metrics statements="69" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="42" coveredmethods="6" elements="113" coveredelements="16" complexity="0" loc="69" ncloc="69" packages="2" files="16" classes="16"/>
     <package name="Components">
-      <metrics statements="12" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="5"/>
+      <metrics statements="12" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="6"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Asset.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-      </file>
-      <file name="BackgroundImageSVG.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/BackgroundImageSVG.jsx">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="BigBlueButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/BigBlueButton.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -37,8 +34,8 @@
         <line num="8" count="1" type="stmt"/>
       </file>
       <file name="Provider.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js-expo-yarn/navigation/Components/Provider.jsx">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="17" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="17" count="1" type="stmt"/>
       </file>
     </package>
     <package name="screens">

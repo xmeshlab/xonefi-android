@@ -11,7 +11,7 @@ import {
 import { SearchIcon } from "../icons/search_icon";
 //componets
 import TextInputEntry from "../Components/TextInputEntry";
-import ButtonBackgroundSVG from "../Components/ButtonBackgroundSVG";
+import BigBlueButton from "../Components/BigBlueButton";
 
 interface OwnProps {}
 
@@ -32,7 +32,7 @@ const AccountAddCrptoPaymentCard: FunctionComponent<Props & RouteProp<any>> = (
           <TextInputEntry input_text={"Password"} />
           <TextInputEntry input_text={""} />
         </View>
-        <ButtonBackgroundSVG ButtonText={"Add Payment Card"} />
+        <BigBlueButton text={"Add Payment Card"} onPressFunction={()=>{alert("Button Pressed")}}/>
       </View>
     </ScrollView>
   );
