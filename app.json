@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.vidy.XOneFiApp"
+      "bundleIdentifier": "com.xonefi.alexander"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,14 +25,14 @@
         "backgroundColor": "#0E60FF"
       },
       "permissions": ["android.permission.ACCESS_FINE_LOCATION"],
-      "package": "com.vidy.XOneFiApp"
+      "package": "com.xonefi.alexander"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "57ac14ea-7bf3-4dda-8147-f73df457a822"
+        "projectId": ""
       }
     }
   }
