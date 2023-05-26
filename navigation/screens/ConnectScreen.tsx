@@ -60,6 +60,7 @@ async function getPermission() {
 //bg-gradient-to-br from-blue via-black to-red"
 const tabBtnList = ["Hourly", "Data Usage", "Private"];
 console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
+
 const ConnectScreen: RouteComponent<"Connect"> = () => {
   const navigation = useNavigation<NavigationProp<GlobalRoute>>();
   // navigation.navigate
