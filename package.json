@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --dev-client -c --dev-client",
-    "android": "expo run:android ",
+    "android": "expo run:android",
     "ios": "expo run:ios",
     "test": "jest",
     "web": "expo start --web",
