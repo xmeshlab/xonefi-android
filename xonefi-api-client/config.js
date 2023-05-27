@@ -21,7 +21,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 //import storage from 'react-native-sync-storage'
 
-var SQLite = require('react-native-sqlite-storage');
+let SQLite = require('react-native-sqlite-storage');
 
 
 //import * as os from "react-native-os";
@@ -185,11 +185,11 @@ export function starter_config() {
 }
 
 export function read_default_config(callback) {
-    var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
         db.transaction((tx) => {
             tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
                 console.log("XLOG: Checking the contents of the table.")
-                var len = results.rows.length;
+                let len = results.rows.length;
                 console.log(`XLOG: Found ${len} rows.`);
 
                 if (len > 0) {
@@ -225,7 +225,7 @@ export function read_default_config(callback) {
 
 
 export function write_default_config(config_json, callback) {
-    var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
         db.transaction((tx) => {
             tx.executeSql(`UPDATE Config SET json = '${JSON.stringify(config_json)}' WHERE id = 0`, [], (tx, results) => {
                 console.log("XLOG: Successfully updated config.");
@@ -334,8 +334,8 @@ export function write_default_config(config_json, callback) {
  * @returns {boolean} true: success; false: failure.
  */
 export async function config_init_if_absent(callback) {
-    var db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
-        console.log("XLOG: Database opened");
+    let db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+        console.log("XLOG: config_init_if_absent: Database opened");
         db.transaction((tx) => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)', [], (tx, results) => {
                 console.log("XLOG: Results", results);
@@ -344,7 +344,7 @@ export async function config_init_if_absent(callback) {
 
                     // Get rows with Web SQL Database spec compliance.
 
-                    var len = results.rows.length;
+                    let len = results.rows.length;
 
                     if(len === 0) {
                         console.log("XLOG: The table is empty.")
@@ -353,7 +353,7 @@ export async function config_init_if_absent(callback) {
 
                             tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
                                console.log("XLOG: Checking the contents of the table.")
-                                var len = results.rows.length;
+                                let len = results.rows.length;
                                 console.log(`XLOG: Found ${len} rows.`);
                                 for (let i = 0; i < len; i++) {
                                     let row = results.rows.item(i);
