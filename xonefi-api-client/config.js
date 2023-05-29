@@ -22,6 +22,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 //import storage from 'react-native-sync-storage'
 
 let SQLite = require('react-native-sqlite-storage');
+SQLite.enablePromise(true);
 
 
 //import * as os from "react-native-os";
@@ -334,9 +335,9 @@ export function write_default_config(config_json, callback) {
  * @returns {boolean} true: success; false: failure.
  */
 export async function config_init_if_absent(callback) {
-    let db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+    let db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, async () => {
         console.log("XLOG: config_init_if_absent: Database opened");
-        db.transaction((tx) => {
+        await db.transaction((tx) => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)', [], (tx, results) => {
                 console.log("XLOG: Results", results);
                 tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
