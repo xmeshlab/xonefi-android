@@ -5,7 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "plugins": ["react-native-wifi-reborn", "expo-community-flipper"],
+    "plugins": [
+      "react-native-wifi-reborn",
+      "expo-community-flipper"
+    ],
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/XSplash.png",
@@ -14,7 +17,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.xonefi.alexander"
@@ -24,7 +29,9 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#0E60FF"
       },
-      "permissions": ["android.permission.ACCESS_FINE_LOCATION"],
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
       "package": "com.xonefi.alexander"
     },
     "web": {
@@ -32,7 +39,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
+        "projectId": "9225131a-524b-478d-9817-1b465494aa91"
       }
     }
   }
