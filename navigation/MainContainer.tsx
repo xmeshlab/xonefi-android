@@ -46,10 +46,25 @@ import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 import GenerateAccountDialog from "./screens/GenerateAccountDialog";
 import ImportAccountDialog from "./screens/ImportAccountDialog";
 
-//APIs
-//import {LoggingApi} from './ApiCalls.js'
+//web3 auth code
+import * as WebBrowser from "@toruslabs/react-native-web-browser";
+import Web3Auth, {
+  LOGIN_PROVIDER,
+  OPENLOGIN_NETWORK,
+} from "@web3auth/react-native-sdk";
+import BigBlueButton from "./Components/BigBlueButton";
 
-//onPress={LoggingApi("Provider Screen")}
+//web3Auth Code
+const scheme = "web3authrnexample"; // Or your desired app redirection scheme
+const resolvedRedirectUrl = `${scheme}://openlogin`;
+
+const clientId =
+  "BHU5wO49Ul-c13pLy6HT84KINj4fcQ20W_3H7dZWj5AP3LRWIE69ZjVVWZ3B0u_TkJx8TbPK6iFeK0gzf5is5Oo";
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+});
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -221,9 +236,48 @@ export default function MainContainer() {
       console.log("get client session", clientSession);
     })();
   }, []);
+
+  const [key, setKey] = useState("");
+  const [userInfo, setUserInfo] = useState("");
+  //const [console, setConsole] = useState("");
+
+  const loginWithWeb3Auth = async () => {
+    console.log("Loggin in with Web3Auth");
+    try {
+      console.log("Loggin in with Web3Auth");
+      //setConsole("Logging in");
+      const web3auth = new Web3Auth(WebBrowser, {
+        clientId,
+        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+      });
+      console.log("web3auth object");
+      console.log(web3auth);
+      const info = await web3auth.login({
+        loginProvider: LOGIN_PROVIDER.GOOGLE,
+        redirectUrl: resolvedRedirectUrl,
+      });
+      console.log("info returned from web3 Auth");
+      console.log(info);
+
+      setUserInfo(info);
+      setKey(info.privKey);
+      //uiConsole("Logged In");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const unloggedInView = (
+    <View>
+      <Text>Not Logged In</Text>
+      <BigBlueButton text={"Log In"} onPressFunction={loginWithWeb3Auth}/>
+    </View>
+  )
+
   return (
     <WithMainBg style={{ flex: 1 }}>
       <StatusBar style="light" />
+      {key ? 
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator initialRouteName={"HomeTab"}>
           <Stack.Screen
@@ -302,6 +356,7 @@ export default function MainContainer() {
           <Stack.Screen name="Logout" component={AccountAddCrptoPaymentCard} />
         </Stack.Navigator>
       </NavigationContainer>
+       : unloggedInView}
     </WithMainBg>
   );
 }

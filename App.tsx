@@ -21,6 +21,7 @@ import Web3Auth, {
   LOGIN_PROVIDER,
   OPENLOGIN_NETWORK,
 } from "@web3auth/react-native-sdk";
+import BigBlueButton from "./navigation/Components/BigBlueButton";
 
 //web3Auth Code
 const scheme = "web3authrnexample"; // Or your desired app redirection scheme
@@ -91,13 +92,16 @@ function App() {
   const unloggedInView = (
     <View>
       <Text>Not Logged In</Text>
+      <BigBlueButton text={"Log In"} onPressFunction={loginWithWeb3Auth}/>
     </View>
   )
 
   return (
-    <View>
-    {key ? loggedInView : unloggedInView}
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootSiblingParent>
+        <MainContainer />
+      </RootSiblingParent>
+    </GestureHandlerRootView>
   );
 }
 
