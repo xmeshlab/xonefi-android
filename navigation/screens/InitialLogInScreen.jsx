@@ -5,10 +5,15 @@ import XOneFi_Logo_Big from '../icons/XOneFi'
 
 const InitialLogInScreen = ({logInFunction}) => {
   return (
-    <View>
-      <Text>Not Logged In</Text>
-      <XOneFi_Logo_Big/>
-      <BigBlueButton text={"Log In"} onPressFunction={logInFunction}/>
+    <View className="h-screen">
+        <View className="flex flex-row w-screen justify-center absolute top-1/4">
+            <XOneFi_Logo_Big/>
+        </View>
+
+        <View className="absolute top-1/2 w-screen">
+            <BigBlueButton text={"Log In"} onPressFunction={logInFunction}/>
+            <BigBlueButton text={"Sign Up"} onPressFunction={()=>{alert("Sign Up Button Clicked")}}/>
+        </View>
     </View>
   )
 }
