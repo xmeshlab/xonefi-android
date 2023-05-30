@@ -46,6 +46,7 @@ import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 import GenerateAccountDialog from "./screens/GenerateAccountDialog";
 import ImportAccountDialog from "./screens/ImportAccountDialog";
 
+import InitialLogInScreen from "./screens/InitialLogInScreen";
 //web3 auth code
 import * as WebBrowser from "@toruslabs/react-native-web-browser";
 import Web3Auth, {
@@ -356,7 +357,7 @@ export default function MainContainer() {
           <Stack.Screen name="Logout" component={AccountAddCrptoPaymentCard} />
         </Stack.Navigator>
       </NavigationContainer>
-       : unloggedInView}
+       : <InitialLogInScreen logInFunction={loginWithWeb3Auth}/>}
     </WithMainBg>
   );
 }
