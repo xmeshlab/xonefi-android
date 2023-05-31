@@ -9,10 +9,14 @@ import LogoutIcon from "../../assets/LogoutIcon.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 //This Screen Should just be an option under accounts
 import GreyButton from "../Components/GreyButton";
+import { useContext } from "react";
+import { userContext } from "../MainContainer";
 
 import { useCallback } from "react";
 
 export default function LinkedAccountScreen({ navigation }) {
+  const userContext_array = useContext(userContext)
+
   const onTouchableOpacityPress = useCallback(
     () => navigation.navigate("Account Information"),
     []
@@ -42,7 +46,7 @@ export default function LinkedAccountScreen({ navigation }) {
       <GreyButton
         imageSource={LogoutIcon}
         textInput={"Logout"}
-        onPressFunction={() => navigation.navigate("Logout")}
+        onPressFunction={() => {userContext_array[1]('')}}
       />
     </View>
   );

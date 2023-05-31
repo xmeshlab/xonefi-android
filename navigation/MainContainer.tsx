@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useContext} from "react";
 import { View, Text, Image, NativeModules } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -228,6 +228,16 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   // cardShadowEnabled: true,
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
+
+
+
+
+
+
+
+
+export const userContext = React.createContext(['', (value: string)=>{}]);
+
 export default function MainContainer() {
   useEffect(() => {
     (async () => {
@@ -268,21 +278,15 @@ export default function MainContainer() {
     }
   };
 
-  const unloggedInView = (
-    <View>
-      <Text>Not Logged In</Text>
-      <BigBlueButton text={"Log In"} onPressFunction={loginWithWeb3Auth}/>
-    </View>
-  )
-
   return (
     <WithMainBg style={{ flex: 1 }}>
       <StatusBar style="light" />
       {key ? 
+      <userContext.Provider value={[key, setKey]}>
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator initialRouteName={"HomeTab"}>
           <Stack.Screen
-            options={{ header: () => null }}
+            options={{ header: () => null}}
             name={"HomeTab"}
             component={HomeTab}
           />
@@ -310,7 +314,7 @@ export default function MainContainer() {
             component={ProviderDetailScreen}
           />
           <Stack.Screen
-            options={{ ...stackNavigatorScreenOptions, title: "Account" }}
+            options={{ ...stackNavigatorScreenOptions, title: "Account"}}
             name="Account"
             component={LinkedAccountScreen}
           />
@@ -354,9 +358,12 @@ export default function MainContainer() {
             }}
             component={ImportAccountDialog}
           />
-          <Stack.Screen name="Logout" component={AccountAddCrptoPaymentCard} />
+          <Stack.Screen name="Logout" 
+          options={{ ...stackNavigatorScreenOptions, title: "Logout",}}
+          component={AccountAddCrptoPaymentCard} />
         </Stack.Navigator>
       </NavigationContainer>
+      </userContext.Provider>
        : <InitialLogInScreen logInFunction={loginWithWeb3Auth}/>}
     </WithMainBg>
   );
