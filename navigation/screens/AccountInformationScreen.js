@@ -15,17 +15,6 @@ import { useContext } from "react";
 import { userContext } from "../MainContainer";
 import { ScrollView } from "react-native-gesture-handler";
 
-const modalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 
 function ViewButton({ OnPressFunction }) {
   return (
@@ -118,16 +107,7 @@ export default function AccountInformationScreen({ navigation }) {
           LeftText={"Private Key"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}} />}
         />
-        <Modal
-        isVisible={modalIsOpen}
-      >
-        <View className="flex flex-row bg-white justify-between h-16 p-5">
-          <Text>{userContext_array[0]}</Text>
-          <TouchableOpacity onPress={closeModal}>
-            <Text>x</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+        <ModalWithCustomText inputText={userContext_array[0]} modalIsOpen={modalIsOpen} closeModal={closeModal}/>
         <GreyBackgroundBar
           LeftText={"Privacy Policy"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}}/>}
@@ -135,4 +115,21 @@ export default function AccountInformationScreen({ navigation }) {
       </View>
       </ScrollView>
   );
+}
+
+
+
+function ModalWithCustomText({inputText, modalIsOpen, closeModal}){
+  return(
+    <Modal
+    isVisible={modalIsOpen}
+  >
+    <View className="flex flex-col bg-white h-24 p-5">
+      <TouchableOpacity onPress={closeModal} className="absolute top-1 right-2">
+        <Text className="text-red-400">X</Text>
+      </TouchableOpacity>
+      <Text className="mt-1">{inputText}</Text>
+    </View>
+  </Modal>
+  )
 }
