@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -8,11 +8,28 @@ import {
 } from "react-native";
 
 import backgroundImage from "../../assets/background.png";
-import buttonBackground from "../../assets/CreateNewUserButtonBackground.png";
+import Modal from 'react-native-modal';
+import ReactDOM from 'react-dom';
+
+import { useContext } from "react";
+import { userContext } from "../MainContainer";
+import { ScrollView } from "react-native-gesture-handler";
+
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 
 function ViewButton({ OnPressFunction }) {
   return (
-    <TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
+    <TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1" onPress={OnPressFunction}>
       <Text className="text-white">View</Text>
     </TouchableOpacity>
   );
@@ -28,12 +45,23 @@ function GreyBackgroundBar({ RightSideComponent, LeftText }) {
 }
 
 export default function AccountInformationScreen({ navigation }) {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
-    <ImageBackground
-      source={backgroundImage}
-      resizeMode="cover"
-      className="flex-1 flex-col"
-    >
+    <ScrollView>
       <Text className="text-white text-3xl mt-6 mb-8 mx-6">
         Account Informtion
       </Text>
@@ -64,13 +92,45 @@ export default function AccountInformationScreen({ navigation }) {
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <GreyBackgroundBar
           LeftText={"Terms"}
-          RightSideComponent={<ViewButton />}
+          RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}} />}
         />
+        <Modal
+        isVisible={modalIsOpen}
+      >
+        <View className="flex flex-row bg-white justify-between h-16 p-5">
+          <Text>I am a modal</Text>
+          <TouchableOpacity onPress={closeModal}>
+            <Text>x</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
         <GreyBackgroundBar
           LeftText={"Privacy Policy"}
-          RightSideComponent={<ViewButton />}
+          RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}}/>}
         />
       </View>
-    </ImageBackground>
+
+      <Text className="text-white text-3xl mt-6 mb-8 mx-6">Wallet Address</Text>
+      <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
+        <GreyBackgroundBar
+          LeftText={"Terms"}
+          RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}} />}
+        />
+        <Modal
+        isVisible={modalIsOpen}
+      >
+        <View className="flex flex-row bg-white justify-between h-16 p-5">
+          <Text>I am a modal</Text>
+          <TouchableOpacity onPress={closeModal}>
+            <Text>x</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+        <GreyBackgroundBar
+          LeftText={"Privacy Policy"}
+          RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}}/>}
+        />
+      </View>
+      </ScrollView>
   );
 }

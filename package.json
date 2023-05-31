@@ -36,6 +36,8 @@
     "nativewind": "^2.0.11",
     "node-libs-browser": "^2.2.1",
     "react": "18.1.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-native": "0.70.5",
     "react-native-background-timer": "2.4.1",
     "react-native-charts-wrapper": "^0.5.11",
