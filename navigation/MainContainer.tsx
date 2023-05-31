@@ -236,7 +236,7 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
 
 
 
-export const userContext = React.createContext(['', (value: string)=>{}]);
+export const userContext = React.createContext(['', (value: string)=>{},'', (value: string)=>{}]);
 
 export default function MainContainer() {
   useEffect(() => {
@@ -249,7 +249,7 @@ export default function MainContainer() {
   }, []);
 
   const [key, setKey] = useState("");
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState({});
   //const [console, setConsole] = useState("");
 
   const loginWithWeb3Auth = async () => {
@@ -282,7 +282,7 @@ export default function MainContainer() {
     <WithMainBg style={{ flex: 1 }}>
       <StatusBar style="light" />
       {key ? 
-      <userContext.Provider value={[key, setKey]}>
+      <userContext.Provider value={[key, setKey, userInfo, setUserInfo]}>
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator initialRouteName={"HomeTab"}>
           <Stack.Screen

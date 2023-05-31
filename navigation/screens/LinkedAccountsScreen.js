@@ -46,7 +46,7 @@ export default function LinkedAccountScreen({ navigation }) {
       <GreyButton
         imageSource={LogoutIcon}
         textInput={"Logout"}
-        onPressFunction={() => {userContext_array[1]('')}}
+        onPressFunction={() => {userContext_array[1](''); userContext_array[3]({});}}
       />
     </View>
   );
