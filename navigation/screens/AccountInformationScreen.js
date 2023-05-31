@@ -45,9 +45,11 @@ function GreyBackgroundBar({ RightSideComponent, LeftText }) {
 }
 
 export default function AccountInformationScreen({ navigation }) {
+  const userContext_array = useContext(userContext)
+
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  function openModal() {
+  function openModal(inputText) {
     setIsOpen(true);
   }
 
@@ -113,14 +115,14 @@ export default function AccountInformationScreen({ navigation }) {
       <Text className="text-white text-3xl mt-6 mb-8 mx-6">Wallet Address</Text>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <GreyBackgroundBar
-          LeftText={"Terms"}
+          LeftText={"Private Key"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal()}} />}
         />
         <Modal
         isVisible={modalIsOpen}
       >
         <View className="flex flex-row bg-white justify-between h-16 p-5">
-          <Text>I am a modal</Text>
+          <Text>{userContext_array[0]}</Text>
           <TouchableOpacity onPress={closeModal}>
             <Text>x</Text>
           </TouchableOpacity>
