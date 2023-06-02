@@ -10,6 +10,10 @@ npm-debug.*
 *.orig.*
 web-build/
 
+#ignore apk and aab files
+.apk
+.aab
+
 # macOS
 .DS_Store
 
