@@ -19,6 +19,13 @@ import com.thanosfisherman.wifiutils.WifiUtils;
 
 import expo.modules.ReactActivityDelegateWrapper;
 
+//spalsh screen imports
+import android.os.Bundle; // here
+// react-native-splash-screen >= 0.3.1
+import org.devio.rn.splashscreen.SplashScreen; // here
+// react-native-splash-screen < 0.3.1
+//import com.cboy.rn.splashscreen.SplashScreen; // here
+
 public class  MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +41,10 @@ public class  MainActivity extends ReactActivity {
       startListen();
     }
 
+    SplashScreen.show(this);  // splashScreen code
 
 
-
-    super.onCreate(null);
+    super.onCreate(savedInstanceState);
   }
 
   @Override

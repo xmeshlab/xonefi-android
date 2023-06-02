@@ -10,6 +10,10 @@ npm-debug.*
 *.orig.*
 web-build/
 
+#ignore apk and aab files
+.apk
+.aab
+
 # macOS
 .DS_Store
 
@@ -84,3 +88,10 @@ web-build/
 dist/
 
 # @end expo-cli
+apk.apks
+.gitignore
+build-1685581786540.aab
+build-1685377508929.aab
+.gitignore
+apk/universal.apk
+apk/toc.pb
