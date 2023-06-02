@@ -5,6 +5,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 
+//splash screen imports
+// react-native-splash-screen >= 0.3.1
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+// react-native-splash-screen < 0.3.1
+//import com.cboy.rn.splashscreen.SplashScreenReactPackage;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -38,6 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
       packages.add(new XOneFiWiFiPackage());
+      //splash screen code
+      //packages.add(new SplashScreenReactPackage());
 
       return packages;
     }

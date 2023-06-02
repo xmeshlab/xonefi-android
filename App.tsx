@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from 'react';
 import { RootSiblingParent } from "react-native-root-siblings";
 import MainContainer from "./navigation/MainContainer";
 import BackgroundTimer from "react-native-background-timer";
@@ -10,6 +10,8 @@ import {
   config_init_if_absent,
 } from "./xonefi-api-client/config";
 import { startClientDaemon } from "./client-daemon/start-client-daemon";
+
+import SplashScreen from 'react-native-splash-screen'
 
 function App() {
   console.log("XLOG: App.tsx");
@@ -25,6 +27,10 @@ function App() {
       console.log("XLOG: Database initialization error.");
     }
   });
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, [])
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
