@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
-import GreyTextInputBar from "../../navigation/Components/GreyTextInputBar";
+import GreyTextInputBar from "../../src/Components/GreyTextInputBar";
 
 //function GreyTextInputBar component
 test("Rendering the GreyTextInputBar Component", () => {

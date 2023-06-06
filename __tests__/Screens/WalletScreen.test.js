@@ -2,7 +2,7 @@ import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
 
-import WalletScreen from "../../navigation/screens/WalletScreen";
+import WalletScreen from "../../src/screens/WalletScreen";
 
 it("renders", ()=>{
     const {getByText} = render(<WalletScreen/>)

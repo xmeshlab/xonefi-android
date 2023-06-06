@@ -4,7 +4,7 @@ import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from 
 import * as React from 'react';
 import { useCallback } from 'react';
 import { globalStyle } from '../../constants/globalStyle';
-import SuccessIcon from '../../navigation/icons/SuccessIcon';
+import SuccessIcon from '../../src/icons/SuccessIcon';
 
 export type BlurModalProps = Partial<ModalProps> & {
     onContentPress?: (event: GestureResponderEvent) => void

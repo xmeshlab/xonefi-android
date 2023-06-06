@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
-import Asset from "../../navigation/Components/Asset.jsx";
+import Asset from "../../src/Components/Asset.jsx";
 
 import Svg, {
   G,
