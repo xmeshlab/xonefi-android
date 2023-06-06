@@ -263,8 +263,8 @@ export function read_default_config(callback) {
 
 
 export function write_default_config(config_json, callback) {
-    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, async () => {
-        await db.transaction((tx) => {
+    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+         db.transaction((tx) => {
             tx.executeSql(`UPDATE Config SET json = '${JSON.stringify(config_json)}' WHERE id = 0`, [], (tx, results) => {
                 console.log("XLOG: Successfully updated config.");
                 return callback(true);
