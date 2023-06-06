@@ -22,7 +22,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 //import storage from 'react-native-sync-storage'
 
 let SQLite = require('react-native-sqlite-storage');
-SQLite.enablePromise(true);
+//SQLite.enablePromise(true);
 
 
 //import * as os from "react-native-os";
@@ -185,17 +185,69 @@ export function starter_config() {
     }
 }
 
+// export function read_default_config(callback) {
+//     let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, async () => {
+//         console.log("XLOG: read_default_config 1");
+//         await db.transaction((tx) => {
+//             console.log("XLOG: read_default_config 2");
+//             tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
+//                 console.log("XLOG: read_default_config 3");
+//                 console.log("XLOG: Checking the contents of the table.")
+//                 let len = results.rows.length;
+//                 console.log(`XLOG: Found ${len} rows.`);
+//
+//                 if (len > 0) {
+//                     console.log("XLOG: read_default_config 4");
+//                     return callback(JSON.parse(results.rows.item(0).json));
+//                 } else {
+//                     console.log("XLOG: read_default_config 5");
+//                     console.log("XLOG: ERROR: Table Config has no rows.");
+//                     return callback(null);
+//                 }
+//
+//             });
+//         });
+//     }, (err) => {
+//         console.log("XLOG: Error opening database 1");
+//         console.log("XLOG: read_default_config 6");
+//         return callback(false);
+//     });
+//
+//
+//     // var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+//     //     console.log("XLOG: Database opened");
+//     // }, (err) => {
+//     //     console.log("XLOG: Error opening database");
+//     // });
+//
+//
+//     // try {
+//     //     const jsonValue = await AsyncStorage.getItem('config');
+//     //     //const jsonValue = await storage.get('config');
+//     //     return jsonValue != null ? JSON.parse(jsonValue) : starter_config();
+//     // } catch(e) {
+//     //     return {"error": true};
+//     // }
+// }
+
+
 export function read_default_config(callback) {
-    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, async () => {
-        await db.transaction((tx) => {
+    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
+        console.log("XLOG: read_default_config 1");
+        console.log(`XLOG: db ${JSON.stringify(db)}`);
+        db.transaction((tx) => {
+            console.log("XLOG: read_default_config 2");
             tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
+                console.log("XLOG: read_default_config 3");
                 console.log("XLOG: Checking the contents of the table.")
                 let len = results.rows.length;
                 console.log(`XLOG: Found ${len} rows.`);
 
                 if (len > 0) {
+                    console.log("XLOG: read_default_config 4");
                     return callback(JSON.parse(results.rows.item(0).json));
                 } else {
+                    console.log("XLOG: read_default_config 5");
                     console.log("XLOG: ERROR: Table Config has no rows.");
                     return callback(null);
                 }
@@ -204,24 +256,9 @@ export function read_default_config(callback) {
         });
     }, (err) => {
         console.log("XLOG: Error opening database 1");
+        console.log("XLOG: read_default_config 6");
         return callback(false);
     });
-
-
-    // var db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
-    //     console.log("XLOG: Database opened");
-    // }, (err) => {
-    //     console.log("XLOG: Error opening database");
-    // });
-
-
-    // try {
-    //     const jsonValue = await AsyncStorage.getItem('config');
-    //     //const jsonValue = await storage.get('config');
-    //     return jsonValue != null ? JSON.parse(jsonValue) : starter_config();
-    // } catch(e) {
-    //     return {"error": true};
-    // }
 }
 
 
