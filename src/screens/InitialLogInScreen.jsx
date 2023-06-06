@@ -6,7 +6,7 @@ import XOneFi_Logo_Big from '../icons/XOneFi'
 const InitialLogInScreen = ({logInFunction}) => {
   return (
     <View className="h-screen">
-        <View className="flex flex-row w-screen justify-center absolute top-1/4">
+        <View className="flex flex-row justify-center w-screen absolute top-1/4">
             <XOneFi_Logo_Big/>
         </View>
 
