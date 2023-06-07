@@ -4,7 +4,7 @@ import BigBlueButton from '../Components/BigBlueButton'
 import XOneFi_Logo_Big from '../icons/XOneFi'
 import { GoogleIcon, FacebookIcon, FacebookIcon2, FacebookLogo3 } from '../icons/sign_in_icon'
 
-const InitialLogInScreen = ({logInFunction}) => {
+const InitialLogInScreen = ({logInFunction, loginFacebook}) => {
   return (
     <View className="h-screen">
         <View className="flex flex-row justify-center w-screen absolute top-1/4">
@@ -18,11 +18,10 @@ const InitialLogInScreen = ({logInFunction}) => {
                   <GoogleIcon/>
               </TouchableOpacity>
 
-                  <TouchableOpacity onPress={logInFunction}>
+                  <TouchableOpacity onPress={loginFacebook}>
                     <FacebookLogo3/>
                   </TouchableOpacity>
             </View>
-            <BigBlueButton text={"Log In"} onPressFunction={logInFunction}/>
         </View>
     </View>
   )
