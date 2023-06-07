@@ -48,6 +48,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   read_default_config((config_json) => {
     //console.log(`config_json: ${JSON.stringify(config_json)}`);
     config_json.client_on = true;
+    config_json.client_session.ssid = SSID;
+
     write_default_config(config_json, () => {
       console.log("XLOG: Config update successful (1).");
     });
