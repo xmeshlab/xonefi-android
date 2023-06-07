@@ -54,6 +54,8 @@ import Web3Auth, {
   OPENLOGIN_NETWORK,
 } from "@web3auth/react-native-sdk";
 import BigBlueButton from "./Components/BigBlueButton";
+import worker from "../client-daemon/worker";
+import {read_default_config, write_default_config} from "../xonefi-api-client/config";
 
 //web3Auth Code
 const scheme = "web3authrnexample"; // Or your desired app redirection scheme
@@ -272,6 +274,22 @@ export default function MainContainer() {
 
       setUserInfo(info);
       setKey(info.privKey);
+
+      read_default_config((config_json2) => {
+        config_json2.account.dpk = info.privKey;
+        config_json2.account_set = true;
+        let Web3 = require("web3");
+        let web3 = new Web3();
+        let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
+        config_json2.account.address = account.address;
+
+        console.log(`info acct: ${JSON.stringify(info)}`);
+        console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+        write_default_config(config_json2, () => {
+          console.log("XLOG: Config is successfully initialized (2).");
+        });
+      });
+
       //uiConsole("Logged In");
     } catch (e) {
       console.error(e);
