@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import BigBlueButton from '../Components/BigBlueButton'
 import XOneFi_Logo_Big from '../icons/XOneFi'
-import { GoogleIcon } from '../icons/sign_in_icon'
+import { GoogleIcon, FacebookIcon, FacebookIcon2, FacebookLogo3 } from '../icons/sign_in_icon'
 
 const InitialLogInScreen = ({logInFunction}) => {
   return (
@@ -13,6 +13,7 @@ const InitialLogInScreen = ({logInFunction}) => {
 
         <View className="absolute top-1/2 w-screen">
                   <GoogleIcon/>
+                  <FacebookLogo3/>
             <BigBlueButton text={"Log In"} onPressFunction={logInFunction}/>
             <BigBlueButton text={"Sign Up"} onPressFunction={()=>{alert("Sign Up Button Clicked")}}/>
         </View>
