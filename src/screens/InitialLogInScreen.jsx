@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import BigBlueButton from '../Components/BigBlueButton'
 import XOneFi_Logo_Big from '../icons/XOneFi'
@@ -12,10 +12,17 @@ const InitialLogInScreen = ({logInFunction}) => {
         </View>
 
         <View className="absolute top-1/2 w-screen">
+            <Text className='text-white text-2xl mb-5 mx-auto left-0 right-0'>Login In</Text>
+            <View className='flex flex-row justify-around'>
+              <TouchableOpacity onPress={logInFunction}> 
                   <GoogleIcon/>
-                  <FacebookLogo3/>
+              </TouchableOpacity>
+
+                  <TouchableOpacity onPress={logInFunction}>
+                    <FacebookLogo3/>
+                  </TouchableOpacity>
+            </View>
             <BigBlueButton text={"Log In"} onPressFunction={logInFunction}/>
-            <BigBlueButton text={"Sign Up"} onPressFunction={()=>{alert("Sign Up Button Clicked")}}/>
         </View>
     </View>
   )
