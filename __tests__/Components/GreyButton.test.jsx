@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 
 import AssetGain from "../../assets/AssetGainLogo.png";
-import GreyButton from "../../navigation/Components/GreyButton";
+import GreyButton from "../../src/Components/GreyButton";
 
 //const GreyButton = ({ imageSource, textInput, onPressFunction }) => {
 test("Rendering the GreyButton Component", () => {

@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { colors } from '../../constants/colors';
-import BuggerIcon from '../../navigation/icons/bugger_icon';
-import WifiIcon from '../../navigation/icons/wifi_icon';
-import ChevronRight from '../../navigation/icons/chevron_right';
+import BuggerIcon from '../../src/icons/bugger_icon';
+import WifiIcon from '../../src/icons/wifi_icon';
+import ChevronRight from '../../src/icons/chevron_right';
 import { useClientStatus } from '../../store/clientStatus';
 
 export type PageHeaderProps = BottomTabHeaderProps & {

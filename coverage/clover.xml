@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685129719863" clover="3.2.0">
-  <project timestamp="1685129719863" name="All files">
-    <metrics statements="327" coveredstatements="56" conditionals="35" coveredconditionals="0" methods="86" coveredmethods="24" elements="448" coveredelements="80" complexity="0" loc="327" ncloc="327" packages="2" files="19" classes="19"/>
+<coverage generated="1686235744536" clover="3.2.0">
+  <project timestamp="1686235744536" name="All files">
+    <metrics statements="217" coveredstatements="43" conditionals="25" coveredconditionals="0" methods="74" coveredmethods="19" elements="316" coveredelements="62" complexity="0" loc="217" ncloc="217" packages="2" files="15" classes="15"/>
     <package name="Components">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="TextInputEntry.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/Components/TextInputEntry.tsx">
+      <file name="TextInputEntry.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/TextInputEntry.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -13,14 +13,24 @@
       </file>
     </package>
     <package name="screens">
-      <metrics statements="323" coveredstatements="52" conditionals="35" coveredconditionals="0" methods="85" coveredmethods="23"/>
-      <file name="AccountInformationScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/AccountInformationScreen.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="22" count="4" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+      <metrics statements="213" coveredstatements="39" conditionals="25" coveredconditionals="0" methods="73" coveredmethods="18"/>
+      <file name="AccountInformationScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/AccountInformationScreen.js">
+        <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
       </file>
-      <file name="Account_AddBankCard.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/Account_AddBankCard.tsx">
+      <file name="Account_AddBankCard.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/Account_AddBankCard.tsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -30,7 +40,7 @@
         <line num="21" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
       </file>
-      <file name="Account_AddCryptoPaymentCard.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/Account_AddCryptoPaymentCard.tsx">
+      <file name="Account_AddCryptoPaymentCard.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/Account_AddCryptoPaymentCard.tsx">
         <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -41,7 +51,7 @@
         <line num="35" count="0" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
       </file>
-      <file name="Account_BankDetails.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/Account_BankDetails.tsx">
+      <file name="Account_BankDetails.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/Account_BankDetails.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -50,11 +60,11 @@
         <line num="24" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
       </file>
-      <file name="AddNewPaymentCard.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/AddNewPaymentCard.js">
+      <file name="AddNewPaymentCard.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/AddNewPaymentCard.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="1" type="stmt"/>
       </file>
-      <file name="ConnectScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/ConnectScreen.tsx">
+      <file name="ConnectScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ConnectScreen.tsx">
         <metrics statements="53" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -110,7 +120,7 @@
         <line num="175" count="0" type="stmt"/>
         <line num="195" count="0" type="stmt"/>
       </file>
-      <file name="ConnectStatusScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/ConnectStatusScreen.tsx">
+      <file name="ConnectStatusScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ConnectStatusScreen.tsx">
         <metrics statements="28" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -141,156 +151,23 @@
         <line num="339" count="0" type="stmt"/>
         <line num="340" count="0" type="stmt"/>
       </file>
-      <file name="CreateNewAccountScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/CreateNewAccountScreen.tsx">
-        <metrics statements="41" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="31" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-      </file>
-      <file name="GenerateAccountDialog.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/GenerateAccountDialog.tsx">
-        <metrics statements="31" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+      <file name="LinkedAccountsScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/LinkedAccountsScreen.js">
+        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="18" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="108" count="0" type="stmt"/>
-      </file>
-      <file name="ImportAccountDialog.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/ImportAccountDialog.tsx">
-        <metrics statements="29" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-      </file>
-      <file name="LinkedAccountsScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/LinkedAccountsScreen.js">
-        <metrics statements="26" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
       </file>
-      <file name="LinkedPaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/LinkedPaymentCardScreen.js">
+      <file name="LinkedPaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/LinkedPaymentCardScreen.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="16" count="1" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
       </file>
-      <file name="LogoutScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/LogoutScreen.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="1" type="stmt"/>
-      </file>
-      <file name="PayAndConnect.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/PayAndConnect.tsx">
-        <metrics statements="63" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="PayAndConnect.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/PayAndConnect.tsx">
+        <metrics statements="64" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="14" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
@@ -314,63 +191,64 @@
         <line num="48" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="88" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="90" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
         <line num="99" count="0" type="stmt"/>
         <line num="101" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="173" count="0" type="stmt"/>
-        <line num="174" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
         <line num="176" count="0" type="stmt"/>
-        <line num="188" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="190" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="190" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="192" count="0" type="stmt"/>
         <line num="194" count="0" type="stmt"/>
         <line num="196" count="0" type="stmt"/>
-        <line num="203" count="0" type="stmt"/>
-        <line num="209" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
-        <line num="212" count="0" type="stmt"/>
-        <line num="213" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="213" count="0" type="stmt"/>
         <line num="214" count="0" type="stmt"/>
+        <line num="215" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="216" count="0" type="stmt"/>
-        <line num="231" count="0" type="stmt"/>
-        <line num="235" count="0" type="stmt"/>
-        <line num="267" count="0" type="stmt"/>
-        <line num="273" count="0" type="stmt"/>
-        <line num="278" count="0" type="stmt"/>
-        <line num="300" count="0" type="stmt"/>
-        <line num="303" count="0" type="stmt"/>
-        <line num="307" count="0" type="stmt"/>
-        <line num="353" count="0" type="stmt"/>
+        <line num="218" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="269" count="0" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
+        <line num="280" count="0" type="stmt"/>
+        <line num="302" count="0" type="stmt"/>
+        <line num="305" count="0" type="stmt"/>
+        <line num="309" count="0" type="stmt"/>
         <line num="355" count="0" type="stmt"/>
+        <line num="357" count="0" type="stmt"/>
       </file>
-      <file name="PaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/PaymentCardScreen.js">
+      <file name="PaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/PaymentCardScreen.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="1" type="stmt"/>
       </file>
-      <file name="ProviderDetailScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/ProviderDetailScreen.js">
+      <file name="ProviderDetailScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ProviderDetailScreen.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="13" count="1" type="stmt"/>
       </file>
-      <file name="ProviderScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/ProviderScreen.js">
+      <file name="ProviderScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ProviderScreen.js">
         <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
         <line num="11" count="1" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
       </file>
-      <file name="WalletScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/navigation/screens/WalletScreen.js">
+      <file name="WalletScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/WalletScreen.js">
         <metrics statements="18" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="10"/>
         <line num="28" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>

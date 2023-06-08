@@ -87,14 +87,14 @@
     "preset": "jest-expo",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "navigation/Components/*.{js, jsx}",
-      "navigation/Components/*.ts",
-      "navigation/Components/*.tsx",
-      "navigation/screens/*.{js, jsx}",
-      "navigation/screens/*.ts",
-      "navigation/screens/*.tsx",
-      "!navigation/Components/*.d.ts",
-      "!navigation/screens/*.d.ts"
+      "src/Components/*.{js, jsx}",
+      "src/Components/*.ts",
+      "src/Components/*.tsx",
+      "src/screens/*.{js, jsx}",
+      "src/screens/*.ts",
+      "src/screens/*.tsx",
+      "!src/Components/*.d.ts",
+      "!src/screens/*.d.ts"
     ],
     "globals": {
       "ts-jest": {
@@ -113,7 +113,6 @@
       "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.(js|jsx)$": "babel-jest"
     },
-    "testEnvironment": "jsdom",
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-quick-crypto|web3)"
     ]

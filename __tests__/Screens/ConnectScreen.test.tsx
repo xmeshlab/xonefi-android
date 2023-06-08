@@ -5,7 +5,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import {
     RouteComponent,
   } from "../../types/global";
-import ConnectScreen from "../../navigation/screens/ConnectScreen";
+import ConnectScreen from "../../src/screens/ConnectScreen";
 
 it("renders", ()=>{
     const pushMock = jest.fn();

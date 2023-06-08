@@ -1,5 +1,5 @@
 import { RouteConfigComponent } from '@react-navigation/core/lib/typescript/src/types';
-import { GlobalRoute } from '../navigation/MainContainer';
+import { GlobalRoute } from '../src/MainContainer';
 import * as React from 'react';
 import { RouteProp } from '@react-navigation/core/src/types';
 import { WifiEntry } from 'react-native-wifi-reborn';

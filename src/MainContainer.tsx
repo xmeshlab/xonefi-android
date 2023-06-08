@@ -15,8 +15,6 @@ import WalletScreen from "./screens/WalletScreen";
 import ProviderDetailScreen from "./screens/ProviderDetailScreen";
 import AccountInformationScreen from "./screens/AccountInformationScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
-import CreateNewAccountScreen from "./screens/CreateNewAccountScreen";
-import LogoutScreen from "./screens/LogoutScreen";
 import AccountBankDetails from "./screens/Account_BankDetails";
 import AccountAddBankCard from "./screens/Account_AddBankCard";
 import PayAndConnectScreen from "./screens/PayAndConnect";
@@ -43,8 +41,6 @@ import PurchaseSell from "./screens/PurchaseSell";
 import { WifiWithSignalLevel } from "../types/global";
 import { OneFiStorage } from "../api/storage/OneFiStorage";
 import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
-import GenerateAccountDialog from "./screens/GenerateAccountDialog";
-import ImportAccountDialog from "./screens/ImportAccountDialog";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";
 //web3 auth code
@@ -238,7 +234,7 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
 
 
 
-export const userContext = React.createContext(['', (value: string)=>{},'', (value: string)=>{}]);
+export const userContext = React.createContext(['', (value: string)=>{},{}, (value: string)=>{}]);
 
 export default function MainContainer() {
   useEffect(() => {
@@ -290,6 +286,32 @@ export default function MainContainer() {
         });
       });
 
+      //uiConsole("Logged In");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const loginWithWeb3AuthFacebook = async () => {
+    console.log("Loggin in with Web3Auth");
+    try {
+      console.log("Loggin in with Web3Auth");
+      //setConsole("Logging in");
+      const web3auth = new Web3Auth(WebBrowser, {
+        clientId,
+        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+      });
+      console.log("web3auth object");
+      console.log(web3auth);
+      const info = await web3auth.login({
+        loginProvider: LOGIN_PROVIDER.FACEBOOK,
+        redirectUrl: resolvedRedirectUrl,
+      });
+      console.log("info returned from web3 Auth");
+      console.log(info);
+
+      setUserInfo(info);
+      setKey(info.privKey);
       //uiConsole("Logged In");
     } catch (e) {
       console.error(e);
@@ -352,37 +374,10 @@ export default function MainContainer() {
             }}
             component={AccountInformationScreen}
           />
-          <Stack.Screen
-            name="Create New Account"
-            options={{
-              ...stackNavigatorScreenOptions,
-              title: "Create New Account",
-            }}
-            component={CreateNewAccountScreen}
-          />
-          <Stack.Screen
-            name="Generating New Account"
-            options={{
-              ...stackNavigatorScreenOptions,
-              title: "Generating New Account ",
-            }}
-            component={GenerateAccountDialog}
-          />
-          <Stack.Screen
-            name="Importing New Account"
-            options={{
-              ...stackNavigatorScreenOptions,
-              title: "Importing New Account",
-            }}
-            component={ImportAccountDialog}
-          />
-          <Stack.Screen name="Logout" 
-          options={{ ...stackNavigatorScreenOptions, title: "Logout",}}
-          component={AccountAddCrptoPaymentCard} />
         </Stack.Navigator>
       </NavigationContainer>
       </userContext.Provider>
-       : <InitialLogInScreen logInFunction={loginWithWeb3Auth}/>}
+       : <InitialLogInScreen logInFunction={loginWithWeb3Auth} loginFacebook={loginWithWeb3AuthFacebook}/>}
     </WithMainBg>
   );
 }

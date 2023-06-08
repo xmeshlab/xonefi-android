@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 
 import AssetGain from "../../assets/AssetGainLogo.png";
-import OneFiAsset from "../../navigation/Components/OneFiAsset.jsx";
+import OneFiAsset from "../../src/Components/OneFiAsset.jsx";
 
 //OneFiAsset({ AssetAmount, AssetPrice, AssetChange }) {
 test("Rendering the OneFiAsset Component", () => {

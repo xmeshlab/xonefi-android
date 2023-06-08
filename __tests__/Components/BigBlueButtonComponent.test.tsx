@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
-import BigBlueButton from "../../navigation/Components/BigBlueButton";
+import BigBlueButton from "../../src/Components/BigBlueButton";
 
 //function BigBlueButton({text, onPressFunction})
 test("Rendering the Big Blue Button Component", () => {

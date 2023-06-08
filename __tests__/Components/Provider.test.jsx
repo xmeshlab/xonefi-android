@@ -2,7 +2,7 @@ import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
 
-import Provider from "../../navigation/Components/Provider.jsx";
+import Provider from "../../src/Components/Provider.jsx";
 
 //function Provider({ProviderName,UsersConnectedNumber,TokenGenNumber,Status,}) 
 test("Rendering the Provider Component", () => {

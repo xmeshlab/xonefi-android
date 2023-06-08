@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { RootSiblingParent } from "react-native-root-siblings";
-import MainContainer from "./navigation/MainContainer";
+import MainContainer from "./src/MainContainer";
 import BackgroundTimer from "react-native-background-timer";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
