@@ -27,8 +27,8 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 6. Issue that pull request!
 
 
-## Report bugs using Github's [issues](https://github.com/xmeshlab/xonefi/issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/xmeshlab/xonefi/issues/new).
+## Report bugs using Github's [issues](https://github.com/xmeshlab/xonefi-android/issues)
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/xmeshlab/xonefi-android/issues/new).
 
 ## Write bug reports with detail, background, and sample code
 [This is an example](http://stackoverflow.com/q/12488905/180626) of a good and thorough bug report.
