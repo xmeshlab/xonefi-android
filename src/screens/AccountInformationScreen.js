@@ -6,10 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-
-import backgroundImage from "../../assets/background.png";
 import Modal from 'react-native-modal';
-import ReactDOM from 'react-dom';
 
 import { useContext } from "react";
 import { userContext } from "../MainContainer";
