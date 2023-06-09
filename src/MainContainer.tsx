@@ -70,7 +70,7 @@ const connectName = "Connect" as keyof RootStackParamList;
 const linkedAccountName = "Account" as keyof RootStackParamList;
 const providerName = "Provider" as keyof RootStackParamList;
 const cardName = "Wallet" as keyof RootStackParamList;
-const homeName = "Home" as keyof RootStackParamList;
+const ProviderName = "Provider" as keyof RootStackParamList;
 const StatusName = "Status" as keyof RootStackParamList;
 type RootStackParamList = {
   Connect: undefined;
@@ -137,7 +137,7 @@ function HomeTab() {
           return <UserIcon color={iconColor} />;
         } else if (rn === StatusName) {
           return <WifiIcon color={iconColor} />;
-        } else if (rn === homeName) {
+        } else if (rn === ProviderName) {
           return <CircleIcon color={iconColor} />;
         } else if (rn === cardName) {
           return <CardIcon color={iconColor} />;
@@ -183,9 +183,9 @@ function HomeTab() {
       />
       {/*<TabScreen name={providerName} component={ProviderScreen} options={{...tabOptions, title: providerName}}/>*/}
       <TabScreen
-        options={{ ...tabOptions, title: homeName }}
-        name={homeName}
-        component={tabScreenComponent}
+        options={{ ...tabOptions, title: ProviderName }}
+        name={ProviderName}
+        component={ProviderScreen}
       />
       <TabScreen
         options={{ ...tabOptions, title: cardName }}
