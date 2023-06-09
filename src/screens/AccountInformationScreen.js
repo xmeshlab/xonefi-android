@@ -12,26 +12,10 @@ import { useContext } from "react";
 import { userContext } from "../MainContainer";
 import { ScrollView } from "react-native-gesture-handler";
 
+import ViewButton from "../Components/ViewButton"
+import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 
-function ViewButton({ OnPressFunction }) {
-  return (
-    <TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1" onPress={OnPressFunction}>
-      <Text className="text-white">View</Text>
-    </TouchableOpacity>
-  );
-}
-
-function GreyBackgroundBar({ RightSideComponent, LeftText }) {
-  return (
-    <View className="flex flex-row mb-5 justify-between items-center">
-      <Text className="text-white text-base">{LeftText}</Text>
-      {RightSideComponent}
-    </View>
-  );
-}
-
-export default function AccountInformationScreen({ navigation }) {
-  const userContext_array = useContext(userContext)
+export function AccountInformationScreen({ navigation, userContext_array }) {
 
   const [pkModalIsOpen, setPKModalIsOpen] = useState(false);
 
@@ -121,4 +105,11 @@ function ModalWithCustomText({inputText, modalIsOpen, closeModal}){
     </View>
   </Modal>
   )
+}
+
+export default ({navigation}) =>{
+  //the context is passed in as a prop. This makes writing jest tests feasible while dealing with the usage of native code
+  const userContext_array = useContext(userContext)
+
+  return <AccountInformationScreen navigation={navigation} userContext_array={userContext_array}/>
 }

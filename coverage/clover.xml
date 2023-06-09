@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686335428483" clover="3.2.0">
-  <project timestamp="1686335428483" name="All files">
-    <metrics statements="217" coveredstatements="43" conditionals="25" coveredconditionals="0" methods="74" coveredmethods="19" elements="316" coveredelements="62" complexity="0" loc="217" ncloc="217" packages="2" files="15" classes="15"/>
+<coverage generated="1686338149688" clover="3.2.0">
+  <project timestamp="1686338149688" name="All files">
+    <metrics statements="218" coveredstatements="43" conditionals="25" coveredconditionals="0" methods="75" coveredmethods="19" elements="318" coveredelements="62" complexity="0" loc="218" ncloc="218" packages="2" files="15" classes="15"/>
     <package name="Components">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="TextInputEntry.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/TextInputEntry.tsx">
@@ -13,22 +13,23 @@
       </file>
     </package>
     <package name="screens">
-      <metrics statements="213" coveredstatements="39" conditionals="25" coveredconditionals="0" methods="73" coveredmethods="18"/>
+      <metrics statements="214" coveredstatements="39" conditionals="25" coveredconditionals="0" methods="74" coveredmethods="18"/>
       <file name="AccountInformationScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/AccountInformationScreen.js">
-        <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+        <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="17" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
       </file>
       <file name="Account_AddBankCard.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/Account_AddBankCard.tsx">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
