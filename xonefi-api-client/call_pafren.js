@@ -60,8 +60,8 @@ function call_pafren(ip, port, web3, prk, session, re, amount, exp_timestamp, pa
 
     message.signature = signature_json.signature;
 
-    const send_udp = require('./send_udp');
-    send_udp.send_udp3(ip, port, JSON.stringify(message), (result) => {
+    const send_rest = require('./send_rest');
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
         return callback(result);
     });
 }

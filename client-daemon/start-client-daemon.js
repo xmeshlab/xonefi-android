@@ -45,6 +45,23 @@ export async function startClientDaemon() {
             //     console.log(`config_json: ${JSON.stringify(config_json)}`);
             // });
 
+
+            // fetch('http://137.184.213.75:3000/client', {
+            //     method: 'POST',
+            //     headers: {
+            //         Accept: 'application/json',
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //         command: 'TEST',
+            //         data: 'WHATEV',
+            //     }),
+            // })
+            //     .then((response) => response.json())
+            //     .then((json) => console.log(json))
+            //     .catch((error) => console.log(error));
+
+
             console.log("XLOG: startClientDaemon 5");
 
             read_default_config((config_json1) => {

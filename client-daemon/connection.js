@@ -170,26 +170,23 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                     console.log("DEBUG: " + private_key);
 
                     call_hello.call_hello(
-                        deserealized_ssid.ip,
-                        deserealized_ssid.port,
+                        "137.184.213.75",
+                        3000,
                         new Web3(),
                         private_key,
                         uuid.generate_unique_id(),
                         (response) => {
-                            console.log(`PROVIDER'S RESPONSE: ${response}`);
+                            console.log(`PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 
-                            let response_json = {};
+                            let response_json = response;
 
-                            try {
-                                response_json = JSON.parse(response);
-                            } catch (error) {
-                                console.log(`ERROR: Unable to parse JSON: ${error}`);
-                            }
+                            console.log(`XLOG: RESPONSE_JSON: ${response_json}`);
+                            console.log(`XLOG: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
 
                             if (response_json.command.arguments.answer === "HELLO-OK") {
 
 
-                                let response_json = JSON.parse(response);
+                                //let response_json = JSON.parse(response);
                                 //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
 
                                 let current_amount = calculated_pafren_amount * Math.pow(10, 12);
@@ -211,8 +208,8 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
 
 
                                 call_pafren.call_pafren(
-                                    deserealized_ssid.ip,
-                                    deserealized_ssid.port,
+                                    "137.184.213.75",
+                                    3000,
                                     new Web3(),
                                     private_key,
                                     response_json.command.session,
@@ -228,12 +225,7 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                                     ),
                                     (response1) => {
                                         console.log(`PAFREN sent. RESPONSE1: ${response1}`);
-                                        let response1_json = {};
-                                        try {
-                                            response1_json = JSON.parse(response1);
-                                        } catch (e) {
-                                            console.log(`Failure to parse JSON: ${e}`);
-                                        }
+                                        let response1_json = response1;
 
                                         if (response1_json.command.arguments.answer === "PAFREN-OK") {
                                             console.log("Initiating sack sequence");
@@ -274,8 +266,8 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
 
                                                     console.log("XLOG: Calling call_sack...");
                                                     call_sack.call_sack(
-                                                        deserealized_ssid.ip,
-                                                        deserealized_ssid.port,
+                                                        "137.184.213.75",
+                                                        3000,
                                                         new Web3(),
                                                         private_key,
                                                         response1_json.command.session,
@@ -292,30 +284,24 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                                                         (response2) => {
                                                             console.log(`SACK SENT. RESPONSE2: ${response2}`);
 
-                                                            let response2_json = {};
+                                                            let response2_json = response2;
 
-                                                            try {
-                                                                response2_json = JSON.parse(response2);
-
-                                                                if (response2_json.command.arguments.answer === "SACK-OK") {
-                                                                    console.log("SACK is accepted by provider! Session is active.");
-                                                                    let session = config_json.client_session;
-                                                                    session.status = session_status.status.ACTIVE;
-                                                                    session.expiration_timestamp = current_timestamp + pafren_length;
-                                                                    session.sack_number = 1;
-                                                                    client_session.set_client_session(session, () => {
-                                                                        config_json.client_session = session;
-                                                                        sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp, () => {
-                                                                            sackok.set_sackok(response2_json, () => {
-                                                                                console.log("XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete.")
-                                                                            });
+                                                            if (response2_json.command.arguments.answer === "SACK-OK") {
+                                                                console.log("SACK is accepted by provider! Session is active.");
+                                                                let session = config_json.client_session;
+                                                                session.status = session_status.status.ACTIVE;
+                                                                session.expiration_timestamp = current_timestamp + pafren_length;
+                                                                session.sack_number = 1;
+                                                                client_session.set_client_session(session, () => {
+                                                                    config_json.client_session = session;
+                                                                    sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp, () => {
+                                                                        sackok.set_sackok(response2_json, () => {
+                                                                            console.log("XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete.")
                                                                         });
-
                                                                     });
 
-                                                                }
-                                                            } catch (e) {
-                                                                console.log(`ERROR[3971f3907d]: unable to parsej JSON: ${e}`);
+                                                                });
+
                                                             }
                                                         });
                                                 }

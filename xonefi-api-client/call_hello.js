@@ -55,8 +55,8 @@ function call_hello(ip, port, web3, prk, session, callback) {
 
     console.log("XLOG: call_hello() message: " + JSON.stringify(message));
 
-    const send_udp = require('./send_udp');
-    send_udp.send_udp3(ip, port, JSON.stringify(message), (result) => {
+    const send_rest = require('./send_rest');
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
         return callback(result);
     });
 }
