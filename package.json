@@ -107,7 +107,8 @@
       "js",
       "jsx",
       "json",
-      "tsx"
+      "tsx",
+      "ts"
     ],
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest",

@@ -39,11 +39,6 @@ export default function LinkedAccountScreen({ navigation }) {
         onPressFunction={onTouchableOpacityPress}
       />
       <GreyButton
-        imageSource={CreateNewUserIcon}
-        textInput={"Create New Account"}
-        onPressFunction={() => navigation.navigate("Create New Account")}
-      />
-      <GreyButton
         imageSource={LogoutIcon}
         textInput={"Logout"}
         onPressFunction={() => {userContext_array[1](''); userContext_array[3]({});}}
