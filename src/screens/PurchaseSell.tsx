@@ -133,7 +133,11 @@ const PurchaseSell: FunctionComponent<Props & RouteProp<any>> = (props) => {
       <InputBar IconComponent={OneFiLogoSVG} TokenName="OFI" />
       <InputBar IconComponent={CashLogoSVG} TokenName="USD" />
       <View className="mt-4">
-        <BigBlueButton text={"Complete Purchase"} onPressFunction={()=>{alert("Button Pressed")}}
+        <BigBlueButton
+          text={"Complete Purchase"}
+          onPressFunction={() => {
+            alert("Button Pressed");
+          }}
         />
       </View>
     </ImageBackground>

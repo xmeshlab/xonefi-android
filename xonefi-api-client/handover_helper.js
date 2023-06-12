@@ -24,28 +24,33 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {boolean} true if eligible, false otherwise.
  */
 function handover_match(ssid1, ssid2) {
-    const ssid = require("./ssid");
+  const ssid = require("./ssid");
 
-    let dssid1 = ssid.deserialize_ssid(ssid1);
-    let dssid2 = ssid.deserialize_ssid(ssid2);
+  let dssid1 = ssid.deserialize_ssid(ssid1);
+  let dssid2 = ssid.deserialize_ssid(ssid2);
 
-    let pref1 = dssid1.prefix;
-    let pref2 = dssid2.prefix;
+  let pref1 = dssid1.prefix;
+  let pref2 = dssid2.prefix;
 
-    let type1 = dssid1.hotspot_type;
-    let type2 = dssid2.hotspot_type;
+  let type1 = dssid1.hotspot_type;
+  let type2 = dssid2.hotspot_type;
 
-    let cost1 = dssid1.cost;
-    let cost2 = dssid2.cost;
+  let cost1 = dssid1.cost;
+  let cost2 = dssid2.cost;
 
-    let pafren1 = dssid1.pafren;
-    let pafren2 = dssid2.pafren;
+  let pafren1 = dssid1.pafren;
+  let pafren2 = dssid2.pafren;
 
-    if(ssid1 !== ssid2) {
-        return pref1 === pref2 && type1 === type2 && cost1 === cost2 && pafren1 === pafren2;
-    }
+  if (ssid1 !== ssid2) {
+    return (
+      pref1 === pref2 &&
+      type1 === type2 &&
+      cost1 === cost2 &&
+      pafren1 === pafren2
+    );
+  }
 
-    return false;
+  return false;
 }
 
 module.exports = { handover_match };

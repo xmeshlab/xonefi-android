@@ -17,14 +17,13 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Generate unique ID (a.k.a. GUID, a.k.a. UUID)
  * @returns {string} Unique ID string.
  */
 function generate_unique_id() {
-    const uuidv4 = require("uuid");
-    return uuidv4.v4().toString();
+  const uuidv4 = require("uuid");
+  return uuidv4.v4().toString();
 }
 
 module.exports = { generate_unique_id };

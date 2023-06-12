@@ -1,5 +1,3 @@
-
 export const dimension = {
-    headerHeight: 80,
-
+  headerHeight: 80,
 } as const;

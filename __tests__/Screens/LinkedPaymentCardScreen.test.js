@@ -4,6 +4,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 import LinkedPaymentCardScreen from "../../src/screens/LinkedPaymentCardScreen";
 
-it("renders", ()=>{
-    render(<LinkedPaymentCardScreen/>)
-})
+it("renders", () => {
+  render(<LinkedPaymentCardScreen />);
+});

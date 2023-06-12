@@ -17,23 +17,22 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Obtain the list of wireless interfaces.
  * @param callback - returns the list of interfaces.
  */
 function get_interfaces(callback) {
-    var iwconfig = require('wireless-tools/iwconfig');
- 
-    iwconfig.status(function(err, status) {
-        var lst = [];
+  var iwconfig = require("wireless-tools/iwconfig");
 
-        for(x of status) {
-            lst.push(x.interface);
-        }
+  iwconfig.status(function (err, status) {
+    var lst = [];
 
-        return callback(lst);
-    });
+    for (x of status) {
+      lst.push(x.interface);
+    }
+
+    return callback(lst);
+  });
 }
 
 module.exports = { get_interfaces };

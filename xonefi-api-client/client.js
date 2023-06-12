@@ -17,15 +17,14 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Read current client status from the config (whether the client is on or off).
  * @returns {boolean} true - client is on, false - client is off.
  */
 function get_client_status() {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_on;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_on;
 }
 
 /**
@@ -34,11 +33,11 @@ function get_client_status() {
  * @returns {boolean} true - success, false - failure.
  */
 function set_client_status(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_on = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.client_on = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -46,9 +45,9 @@ function set_client_status(enabled) {
  * @returns {boolean} true: client agrees to pay for data; false: client disagrees to pay for data.
  */
 function get_pay_for_data() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.pfd;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.pfd;
 }
 
 /**
@@ -57,11 +56,11 @@ function get_pay_for_data() {
  * @returns {boolean} true - success, false - failure.
  */
 function set_pay_for_data(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.pfd = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.pfd = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -69,9 +68,9 @@ function set_pay_for_data(enabled) {
  * @returns {boolean} true: client agrees to pay for time; false:  client disagrees to pay for time.
  */
 function get_pay_for_time() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.pft;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.pft;
 }
 
 /**
@@ -80,11 +79,11 @@ function get_pay_for_time() {
  * @returns {boolean} true - success, false - failure.
  */
 function set_pay_for_time(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.pft = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.pft = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -92,9 +91,9 @@ function set_pay_for_time(enabled) {
  * @returns {boolean} true: client agrees for private connections; false: client disagrees for private (restricted) connections.
  */
 function get_private_client() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.private_client;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.private_client;
 }
 
 /**
@@ -103,11 +102,11 @@ function get_private_client() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_private_client(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.private_client = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.private_client = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -116,10 +115,10 @@ function set_private_client(enabled) {
  * @returns {int} maximum number of OFI (OneFi points/tokens) the client is willing to pay for one GB of data.
  */
 function get_max_ofi_mb() {
-    // TODO: Refactor to GB from MB.
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.max_ofi_mb;  // TODO: refactor this config parameter to account for GB, not MB.
+  // TODO: Refactor to GB from MB.
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.max_ofi_mb; // TODO: refactor this config parameter to account for GB, not MB.
 }
 
 /**
@@ -129,14 +128,13 @@ function get_max_ofi_mb() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_max_ofi_mb(max_price) {
-    // TODO: Refactor to GB, not MB.
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.max_ofi_mb = max_price; // TODO: refactor this config parameter to account for GB, not MB.
-    config.write_default_config(config_json);
-    return true;
+  // TODO: Refactor to GB, not MB.
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.max_ofi_mb = max_price; // TODO: refactor this config parameter to account for GB, not MB.
+  config.write_default_config(config_json);
+  return true;
 }
-
 
 /**
  * Read from OneFi configuration the maximum number of OneFi tokens the client is ready to pay for one hour
@@ -144,9 +142,9 @@ function set_max_ofi_mb(max_price) {
  * @returns {int} maximum number of OFI (OneFi points/tokens) the client is willing to pay for one hour of connection.
  */
 function get_max_ofi_hr() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.max_ofi_hr;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.max_ofi_hr;
 }
 
 /**
@@ -156,25 +154,24 @@ function get_max_ofi_hr() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_max_ofi_hr(max_price) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.max_ofi_hr = max_price;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.max_ofi_hr = max_price;
+  config.write_default_config(config_json);
+  return true;
 }
 
-
 module.exports = {
-    set_client_status,
-    get_client_status,
-    set_pay_for_data,
-    set_pay_for_time,
-    set_private_client,
-    get_pay_for_data,
-    get_pay_for_time,
-    get_private_client,
-    get_max_ofi_mb,
-    set_max_ofi_mb,
-    get_max_ofi_hr,
-    set_max_ofi_hr
+  set_client_status,
+  get_client_status,
+  set_pay_for_data,
+  set_pay_for_time,
+  set_private_client,
+  get_pay_for_data,
+  get_pay_for_time,
+  get_private_client,
+  get_max_ofi_mb,
+  set_max_ofi_mb,
+  get_max_ofi_hr,
+  set_max_ofi_hr,
 };

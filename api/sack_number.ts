@@ -17,20 +17,18 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
-import { OneFiStorage } from './storage/OneFiStorage';
+import { OneFiStorage } from "./storage/OneFiStorage";
 
 /**
  * Retrieve the most recent SACK (satisfaction acknowledgement) number from the client session state.
  * @returns {int} Most recent SACK number.
  */
 export function get_sack_number() {
-    // const config  = require("./config");
-    // let config_json = config.read_default_config();
-    // return config_json.client_session.sack_number;
-    return  OneFiStorage.getItem('client_session').then(r => r.sack_number);
+  // const config  = require("./config");
+  // let config_json = config.read_default_config();
+  // return config_json.client_session.sack_number;
+  return OneFiStorage.getItem("client_session").then((r) => r.sack_number);
 }
-
 
 /**
  * Save in the client session state the most recent SACK number.
@@ -38,12 +36,11 @@ export function get_sack_number() {
  * @returns {boolean} true: success; false: failure.
  */
 export async function set_sack_number(number) {
-    const clientSession = await OneFiStorage.getItem('client_session');
-    clientSession.sack_number = number;
-    OneFiStorage.setItem('client_session', clientSession);
-    return true;
+  const clientSession = await OneFiStorage.getItem("client_session");
+  clientSession.sack_number = number;
+  OneFiStorage.setItem("client_session", clientSession);
+  return true;
 }
-
 
 /**
  * Retrieve the serial number of the SACK, which is in the process of sending, but has not sent yet to the provider.
@@ -51,11 +48,10 @@ export async function set_sack_number(number) {
  * @returns {int} The number of the SACK that is in the process of sending.
  */
 function get_initiated_sack_number() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session.initiated_sack_number;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_session.initiated_sack_number;
 }
-
 
 /**
  * Save in the client session state the serial number of the SACK that is initiated, but not yet sent-and-processed
@@ -64,16 +60,16 @@ function get_initiated_sack_number() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_initiated_sack_number(number) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session.initiated_sack_number = number;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.client_session.initiated_sack_number = number;
+  config.write_default_config(config_json);
+  return true;
 }
 
 module.exports = {
-    get_sack_number,
-    set_sack_number,
-    get_initiated_sack_number,
-    set_initiated_sack_number
+  get_sack_number,
+  set_sack_number,
+  get_initiated_sack_number,
+  set_initiated_sack_number,
 };

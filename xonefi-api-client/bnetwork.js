@@ -17,17 +17,15 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Return currently selected blockchain network (i.e., goerli, Mainnet, Kovan, etc.)
  * @returns {string} Ethereum blockchain network: currently, "goerli", "mainnet", or "kovan".
  */
 function get_bnetwork() {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.network;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.network;
 }
-
 
 /**
  * Set (save in configuration) the currently used Ethereum blockchain network.
@@ -35,28 +33,26 @@ function get_bnetwork() {
  * @returns {boolean} true - success, false - failure.
  */
 function set_bnetwork(net) {
-    const config = require("./config");
-    config_json = config.read_default_config();
-    config_json.network = net;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  config_json = config.read_default_config();
+  config_json.network = net;
+  config.write_default_config(config_json);
+  return true;
 }
-
 
 /**
  * Callback-driven version of get_bnetwork. Return current Ethereum blockchain network
  * @param {function(string)} callback - Set parameter to "goerli", "mainnet", or "kovan".
  */
 function get_bnetwork_db(callback) {
-    const config = require("./config");
+  const config = require("./config");
 
-    config.read_default_config_db((config_json) => {
-        return callback(config_json.network);
-    });
+  config.read_default_config_db((config_json) => {
+    return callback(config_json.network);
+  });
 
-    return callback("");
+  return callback("");
 }
-
 
 /**
  * Set (save in configuration) the currently used Ethereum blockchain network. Async version.
@@ -64,22 +60,21 @@ function get_bnetwork_db(callback) {
  * @param {function(boolean)} callback Return status: true - success, false - failure.
  */
 function set_bnetwork_db(net, callback) {
-    const config = require("./config");
+  const config = require("./config");
 
-    config.read_default_config_db((config_json) => {
-        config_json.network = net;
-        config.write_default_config_db(config_json, () => {
-            return callback(true);
-        })
-    })
+  config.read_default_config_db((config_json) => {
+    config_json.network = net;
+    config.write_default_config_db(config_json, () => {
+      return callback(true);
+    });
+  });
 
-    return callback(false);
+  return callback(false);
 }
 
-
 module.exports = {
-    get_bnetwork_db,
-    set_bnetwork_db,
-    get_bnetwork,
-    set_bnetwork
+  get_bnetwork_db,
+  set_bnetwork_db,
+  get_bnetwork,
+  set_bnetwork,
 };

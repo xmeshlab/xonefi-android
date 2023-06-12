@@ -4,6 +4,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 import AccountAddCrptoPaymentCard from "../../src/screens/Account_AddCryptoPaymentCard";
 
-it("renders", ()=>{
-    render(<AccountAddCrptoPaymentCard key={"Test"} name={"Test"}/>)
-})
+it("renders", () => {
+  render(<AccountAddCrptoPaymentCard key={"Test"} name={"Test"} />);
+});

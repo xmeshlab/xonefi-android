@@ -17,18 +17,16 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Retrieve from the client session state the most recent SACK-OK from the provider, which is used as the proof of
  * the onlgoing session for session handover.
  * @returns {Object} JSON object - the entire SACK-OK message from the provider.
  */
 function get_sackok() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session.sackok;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_session.sackok;
 }
-
 
 // /**
 //  * Store in the client session state the most recent SACK-OK messge retrieved from the provider.
@@ -36,18 +34,18 @@ function get_sackok() {
 //  * @returns {boolean} true: success, false: failure.
 //  */
 function set_sackok(sackok, callback) {
-    const config = require("./config");
-    //let config_json = config.read_default_config();
-    // config_json.client_session.sackok = sackok;
-    // config.write_default_config(config_json);
-    // return true;
+  const config = require("./config");
+  //let config_json = config.read_default_config();
+  // config_json.client_session.sackok = sackok;
+  // config.write_default_config(config_json);
+  // return true;
 
-    config.read_default_config((config_json) => {
-        config_json.client_session.sackok = sackok;
-        config.write_default_config(config_json, (res) => {
-            return callback(res);
-        });
+  config.read_default_config((config_json) => {
+    config_json.client_session.sackok = sackok;
+    config.write_default_config(config_json, (res) => {
+      return callback(res);
     });
+  });
 }
 
 module.exports = { get_sackok, set_sackok };

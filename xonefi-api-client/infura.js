@@ -23,25 +23,24 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {boolean} - true: success; false: failure
  */
 function save_infura_id(id) {
-    const config = require("./config");
-    var config_json = config.read_default_config();
-    config_json.infura_api_key = id;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  var config_json = config.read_default_config();
+  config_json.infura_api_key = id;
+  config.write_default_config(config_json);
+  return true;
 }
-
 
 /**
  * Read Infura API key (token) from the config
  * @returns {string} Infura API key.
  */
 function get_infura_id() {
-    const config = require("./config");
-    var config_json = config.read_default_config();
-    return config_json.infura_api_key;
+  const config = require("./config");
+  var config_json = config.read_default_config();
+  return config_json.infura_api_key;
 }
 
 module.exports = {
-    save_infura_id,
-    get_infura_id
+  save_infura_id,
+  get_infura_id,
 };

@@ -17,18 +17,16 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Retrieve from the client session state the counter of wireless network scans. This parameter is used to
  * eliminate the reentrancy bug in Wi-Fi SSID scanning and prevent reconnection thrashing effect.
  * @returns {int} Number of scans since last counter reset.
  */
 function get_scan_counter() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session.scan_counter;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_session.scan_counter;
 }
-
 
 // /**
 //  * Store in the client session state the current scan counter. This function is predominantly to be used to reset
@@ -37,18 +35,18 @@ function get_scan_counter() {
 //  * @returns {boolean} true: success, false: failure.
 //  */
 function set_scan_counter(counter, callback) {
-    const config = require("./config");
-    // let config_json = config.read_default_config();
-    // config_json.client_session.scan_counter = parseInt(counter);
-    // config.write_default_config(config_json);
-    // return true;
+  const config = require("./config");
+  // let config_json = config.read_default_config();
+  // config_json.client_session.scan_counter = parseInt(counter);
+  // config.write_default_config(config_json);
+  // return true;
 
-    config.read_default_config((config_json) => {
-        config_json.client_session.scan_counter = parseInt(counter);
-        config.write_default_config(config_json, (res) => {
-            return callback(res);
-        });
+  config.read_default_config((config_json) => {
+    config_json.client_session.scan_counter = parseInt(counter);
+    config.write_default_config(config_json, (res) => {
+      return callback(res);
     });
+  });
 }
 
 module.exports = { get_scan_counter, set_scan_counter };

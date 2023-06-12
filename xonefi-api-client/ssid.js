@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 // /**
 //  * Scan for Wi-Fi SSIDs
 //  * @param {string} iface - 802.11 interface
@@ -141,40 +140,38 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 //     return "OF" + base64_part;
 // }
 
-
 /**
  * Convert Base64-encoded OneFi SSID into a JSON object with hotspot parameters.
  * @param {string} ssid - Base64-encoded OneFi SSID with serialized parameters (see dev. documentation for more information).
  * @returns {Object} JSON object with hostpot parameters.
  */
 export function deserialize_ssid(ssid) {
-    var base64_part = ssid.substring(2);
-    var decoded_str = Buffer.from(base64_part, 'base64').toString('hex');
-    var protocol_version_hex = decoded_str.substring(0,2);
-    var hotspot_type_hex = decoded_str.substring(2,4);
-    var downlink_hex = decoded_str.substring(4,6);
-    var uplink_hex = decoded_str.substring(6,8);
-    var ip_hex = decoded_str.substring(8,16);
-    var port_hex = decoded_str.substring(16,20);
-    var cost_hex = decoded_str.substring(20,28);
-    var pafren_hex = decoded_str.substring(28,32);
-    var prefix_hex = decoded_str.substring(32,42);
+  var base64_part = ssid.substring(2);
+  var decoded_str = Buffer.from(base64_part, "base64").toString("hex");
+  var protocol_version_hex = decoded_str.substring(0, 2);
+  var hotspot_type_hex = decoded_str.substring(2, 4);
+  var downlink_hex = decoded_str.substring(4, 6);
+  var uplink_hex = decoded_str.substring(6, 8);
+  var ip_hex = decoded_str.substring(8, 16);
+  var port_hex = decoded_str.substring(16, 20);
+  var cost_hex = decoded_str.substring(20, 28);
+  var pafren_hex = decoded_str.substring(28, 32);
+  var prefix_hex = decoded_str.substring(32, 42);
 
-    let ssid_json = {};
+  let ssid_json = {};
 
-    ssid_json.protocol_version = parseInt(protocol_version_hex, 16);
-    ssid_json.hotspot_type = parseInt(hotspot_type_hex, 16);
-    ssid_json.downlink = parseInt(downlink_hex, 16);
-    ssid_json.uplink = parseInt(uplink_hex, 16);
-    ssid_json.ip = ip_number_to_quartet(parseInt(ip_hex, 16));
-    ssid_json.port = parseInt(port_hex, 16);
-    ssid_json.cost = parseInt(cost_hex, 16);
-    ssid_json.pafren = parseInt(pafren_hex, 16);
-    ssid_json.prefix = prefix_hex;
+  ssid_json.protocol_version = parseInt(protocol_version_hex, 16);
+  ssid_json.hotspot_type = parseInt(hotspot_type_hex, 16);
+  ssid_json.downlink = parseInt(downlink_hex, 16);
+  ssid_json.uplink = parseInt(uplink_hex, 16);
+  ssid_json.ip = ip_number_to_quartet(parseInt(ip_hex, 16));
+  ssid_json.port = parseInt(port_hex, 16);
+  ssid_json.cost = parseInt(cost_hex, 16);
+  ssid_json.pafren = parseInt(pafren_hex, 16);
+  ssid_json.prefix = prefix_hex;
 
-    return ssid_json;
+  return ssid_json;
 }
-
 
 /**
  * Convert IPv4 address into a number
@@ -182,17 +179,16 @@ export function deserialize_ssid(ssid) {
  * @returns {int} Number representing the IP address.
  */
 function ip_quartet_to_number(ip_quartet) {
-    var ss = ip_quartet.split(".");
+  var ss = ip_quartet.split(".");
 
-    var n1 = parseInt(ss[0]);
-    var n2 = parseInt(ss[1]);
-    var n3 = parseInt(ss[2]);
-    var n4 = parseInt(ss[3]);
+  var n1 = parseInt(ss[0]);
+  var n2 = parseInt(ss[1]);
+  var n3 = parseInt(ss[2]);
+  var n4 = parseInt(ss[3]);
 
-    var nn = n1 * 16777216 + n2 * 65536 + n3 * 256 + n4;
-    return nn;
+  var nn = n1 * 16777216 + n2 * 65536 + n3 * 256 + n4;
+  return nn;
 }
-
 
 /**
  * Convert IPv4 address encoded in a number into the canonical A.B.C.D format
@@ -200,18 +196,17 @@ function ip_quartet_to_number(ip_quartet) {
  * @returns {string} IPv4 address in the canonical A.B.C.D format.
  */
 function ip_number_to_quartet(ip_number) {
-    var n1 = Math.floor(ip_number / 16777216);
-    ip_number = ip_number - 16777216 * n1;
+  var n1 = Math.floor(ip_number / 16777216);
+  ip_number = ip_number - 16777216 * n1;
 
-    var n2 = Math.floor(ip_number / 65536);
-    ip_number = ip_number - 65536 * n2;
+  var n2 = Math.floor(ip_number / 65536);
+  ip_number = ip_number - 65536 * n2;
 
-    var n3 = Math.floor(ip_number / 256);
-    var n4 = ip_number - 256 * n3;
+  var n3 = Math.floor(ip_number / 256);
+  var n4 = ip_number - 256 * n3;
 
-    return `${n1}.${n2}.${n3}.${n4}`;
+  return `${n1}.${n2}.${n3}.${n4}`;
 }
-
 
 // /**
 //  * Creates the hotspot parameters object that is used for serialization into the OneFi SSID.
@@ -345,7 +340,6 @@ function ip_number_to_quartet(ip_number) {
 //     return res;
 // }
 
-
 // module.exports = {
 //     ssid_scan,
 //     ssid_scan_experimental,
@@ -362,5 +356,5 @@ function ip_number_to_quartet(ip_number) {
 // };
 
 module.exports = {
-    deserialize_ssid
+  deserialize_ssid,
 };

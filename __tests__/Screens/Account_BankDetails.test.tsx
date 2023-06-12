@@ -4,6 +4,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 import AccountBankDetails from "../../src/screens/Account_BankDetails";
 
-it("renders", ()=>{
-    render(<AccountBankDetails key={"Test"} name={"Test"}/>)
-})
+it("renders", () => {
+  render(<AccountBankDetails key={"Test"} name={"Test"} />);
+});

@@ -28,32 +28,32 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {function} callback - Return status: true - success, false - failure.
  */
 function call_handover(ip, port, web3, prk, session, sackok, callback) {
-    const uuid = require('uuid');
-    var message = {};
+  const uuid = require("uuid");
+  var message = {};
 
-    let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+  let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
-    message.command = {};
-    message.command.op = "HANDOVER";
-    message.command.from = pubaddress;
-    msg_uuid = uuid.v4().toString();
-    message.command.uuid = msg_uuid;
-    message.command.timestamp = Math.floor(new Date() / 1000);
-    message.command.session = session;
-    message.command.re = "";
-    message.command.arguments = sackok;
+  message.command = {};
+  message.command.op = "HANDOVER";
+  message.command.from = pubaddress;
+  msg_uuid = uuid.v4().toString();
+  message.command.uuid = msg_uuid;
+  message.command.timestamp = Math.floor(new Date() / 1000);
+  message.command.session = session;
+  message.command.re = "";
+  message.command.arguments = sackok;
 
-    var signature_json = web3.eth.accounts.sign(
-        JSON.stringify(message.command),
-        prk
-    );
+  var signature_json = web3.eth.accounts.sign(
+    JSON.stringify(message.command),
+    prk
+  );
 
-    message.signature = signature_json.signature;
+  message.signature = signature_json.signature;
 
-    const send_udp = require('./send_udp');
-    send_udp.send_udp2(ip, port, JSON.stringify(message), (result) => {
-        return callback(result);
-    });
+  const send_udp = require("./send_udp");
+  send_udp.send_udp2(ip, port, JSON.stringify(message), (result) => {
+    return callback(result);
+  });
 }
 
 module.exports = { call_handover };

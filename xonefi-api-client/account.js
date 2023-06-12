@@ -24,19 +24,24 @@ along with XOneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {Object} A JSON object that cointains address, unencrypted private key and encrypted private key.
  */
 function generate_account(seed, password) {
-    var Web3 = require("web3");
-    var web3 = new Web3();
-    const symcrypto = require("./symcrypto");
-    const os = require("os");
+  var Web3 = require("web3");
+  var web3 = new Web3();
+  const symcrypto = require("./symcrypto");
+  const os = require("os");
 
-    var res = {"address": "", "privateKey": "", "encryptedPrivateKey": "" };
-    var timed_seed = `${Date.now()}${seed}-${os.uptime()}-${os.totalmem()}-${os.cpus()[0].times.user}-${os.freemem()}`;
-    var account = web3.eth.accounts.create(timed_seed);
-    res.address = account.address;
-    res.privateKey = account.privateKey;
-    res.encryptedPrivateKey = symcrypto.encrypt_aes256ctr_base64(account.privateKey, password);
+  var res = { address: "", privateKey: "", encryptedPrivateKey: "" };
+  var timed_seed = `${Date.now()}${seed}-${os.uptime()}-${os.totalmem()}-${
+    os.cpus()[0].times.user
+  }-${os.freemem()}`;
+  var account = web3.eth.accounts.create(timed_seed);
+  res.address = account.address;
+  res.privateKey = account.privateKey;
+  res.encryptedPrivateKey = symcrypto.encrypt_aes256ctr_base64(
+    account.privateKey,
+    password
+  );
 
-    return res;
+  return res;
 }
 
 /**
@@ -46,17 +51,20 @@ function generate_account(seed, password) {
  * @returns {Object} A JSON object that cointains address, unencrypted private key and encrypted private key.
  */
 function import_account(prk, password) {
-    var Web3 = require("web3");
-    var web3 = new Web3();
-    const symcrypto = require("./symcrypto");
-    const os = require("os");
-    var res = {"address": "", "privateKey": "", "encryptedPrivateKey": "" };
-    var account = web3.eth.accounts.privateKeyToAccount(prk);
-    res.address = account.address;
-    res.privateKey = account.privateKey;
-    res.encryptedPrivateKey = symcrypto.encrypt_aes256ctr_base64(account.privateKey, password);
+  var Web3 = require("web3");
+  var web3 = new Web3();
+  const symcrypto = require("./symcrypto");
+  const os = require("os");
+  var res = { address: "", privateKey: "", encryptedPrivateKey: "" };
+  var account = web3.eth.accounts.privateKeyToAccount(prk);
+  res.address = account.address;
+  res.privateKey = account.privateKey;
+  res.encryptedPrivateKey = symcrypto.encrypt_aes256ctr_base64(
+    account.privateKey,
+    password
+  );
 
-    return res;
+  return res;
 }
 
 /**
@@ -65,18 +73,21 @@ function import_account(prk, password) {
  * @returns {string} Private key of the current account in hexadecimal format.
  */
 function get_prk(password) {
-    const symcrypto = require("./symcrypto");
-    const config = require("./config");
+  const symcrypto = require("./symcrypto");
+  const config = require("./config");
 
-    let config_json = config.read_default_config();
-    let prk = symcrypto.decrypt_aes256ctr(config_json.account.encrypted_prk, password);
+  let config_json = config.read_default_config();
+  let prk = symcrypto.decrypt_aes256ctr(
+    config_json.account.encrypted_prk,
+    password
+  );
 
-    // Some of them have prefix '0x', others go without prefix.
-    if(prk.length !== 64 && prk.length !== 66) {
-        return "";
-    }
+  // Some of them have prefix '0x', others go without prefix.
+  if (prk.length !== 64 && prk.length !== 66) {
+    return "";
+  }
 
-    return prk;
+  return prk;
 }
 
 /**
@@ -85,26 +96,26 @@ function get_prk(password) {
  * @returns {boolean} true - correct format, false - incorrect format.
  */
 function test_prk_format(prk) {
-    let valid = true;
+  let valid = true;
 
-    if(prk.length >= 2) {
-        if(prk[0] === '0' && prk[1] === 'x') {
-            prk = prk.substr(2);
-        }
+  if (prk.length >= 2) {
+    if (prk[0] === "0" && prk[1] === "x") {
+      prk = prk.substr(2);
     }
+  }
 
-    if(prk.length === 64) {
-        for(let i = 0; i < prk.length; i++) {
-            if("0123456789abcdefABCDEF".indexOf(`${prk.charAt(i)}`) === -1) {
-              valid = false;
-              break;
-            }
-        }
-    } else {
-      valid = false;
+  if (prk.length === 64) {
+    for (let i = 0; i < prk.length; i++) {
+      if ("0123456789abcdefABCDEF".indexOf(`${prk.charAt(i)}`) === -1) {
+        valid = false;
+        break;
+      }
     }
+  } else {
+    valid = false;
+  }
 
-    return valid;
+  return valid;
 }
 
 /**
@@ -114,31 +125,30 @@ function test_prk_format(prk) {
  * @returns {boolean} true - match, false - mismatch.
  */
 function test_prk(address, prk) {
-    if(!test_prk_format(prk)) {
-        return false;
-    }
+  if (!test_prk_format(prk)) {
+    return false;
+  }
 
-    var Web3 = require("web3");
-    var web3 = new Web3();
-    var account = web3.eth.accounts.privateKeyToAccount(prk);
-    return address.toLowerCase() === account.address.toLowerCase();
+  var Web3 = require("web3");
+  var web3 = new Web3();
+  var account = web3.eth.accounts.privateKeyToAccount(prk);
+  return address.toLowerCase() === account.address.toLowerCase();
 }
-
 
 /**
  * Delete current (active) Ethereum account.
  * @returns {boolean} true - success, false - failure.
  */
 function delete_current_account() {
-    const config = require("./config");
-    var config_json = config.read_default_config();
+  const config = require("./config");
+  var config_json = config.read_default_config();
 
-    config_json.account.name = "";
-    config_json.account.address = "";
-    config_json.account.encrypted_prk = "";
-    config_json.account_set = false;
+  config_json.account.name = "";
+  config_json.account.address = "";
+  config_json.account.encrypted_prk = "";
+  config_json.account_set = false;
 
-    return config.write_default_config(config_json);
+  return config.write_default_config(config_json);
 }
 
 /**
@@ -147,11 +157,10 @@ function delete_current_account() {
  * @returns {boolean} true - proper format, false - not an Ethereum address.
  */
 function test_address(address) {
-    var Web3 = require("web3");
-    var web3 = new Web3();
-    return web3.utils.isAddress(address);
+  var Web3 = require("web3");
+  var web3 = new Web3();
+  return web3.utils.isAddress(address);
 }
-
 
 /**
  * Extract XOneFi raw prefix of the current account, which is the lowercase sequence of the leading
@@ -159,24 +168,23 @@ function test_address(address) {
  * @returns {string} Raw prefix in hexadecimal string format.
  */
 function get_account_raw_prefix() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
+  const config = require("./config");
+  let config_json = config.read_default_config();
 
-    if(config_json.account.address.length !== 42) {
-        return ""
-    }
+  if (config_json.account.address.length !== 42) {
+    return "";
+  }
 
-    return config_json.account.address.substr(2, 10).toLowerCase();
+  return config_json.account.address.substr(2, 10).toLowerCase();
 }
 
-
 module.exports = {
-    generate_account,
-    import_account,
-    test_prk,
-    test_prk_format,
-    test_address,
-    delete_current_account,
-    get_prk,
-    get_account_raw_prefix
+  generate_account,
+  import_account,
+  test_prk,
+  test_prk_format,
+  test_address,
+  delete_current_account,
+  get_prk,
+  get_account_raw_prefix,
 };

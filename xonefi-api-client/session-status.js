@@ -22,13 +22,13 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @type {{SLEEP: number, ACTIVE: number, CLOSED: number, UNDEFINED: number, EXPIRED: number, HANDSHAKE: number, SCAN: number}}
  */
 const status = {
-    UNDEFINED:  0,          // pre-session status
-    HANDSHAKE:  1,          // handshake stage
-    ACTIVE:     2,          // active session
-    SLEEP:      3,          // client did not provide SACK by deadline
-    EXPIRED:    4,          // PAFREN expiration time reached
-    CLOSED:     5,          // the session has been properly closed
-    SCAN:       6,          // Scanning for SSIDs Stage
-}
+  UNDEFINED: 0, // pre-session status
+  HANDSHAKE: 1, // handshake stage
+  ACTIVE: 2, // active session
+  SLEEP: 3, // client did not provide SACK by deadline
+  EXPIRED: 4, // PAFREN expiration time reached
+  CLOSED: 5, // the session has been properly closed
+  SCAN: 6, // Scanning for SSIDs Stage
+};
 
 module.exports = { status };

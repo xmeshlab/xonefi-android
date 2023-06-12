@@ -17,8 +17,7 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
-import { OneFiStorage } from './storage/OneFiStorage';
+import { OneFiStorage } from "./storage/OneFiStorage";
 
 /**
  * Retrieve from the client session state the counter of wireless network scans. This parameter is used to
@@ -26,11 +25,8 @@ import { OneFiStorage } from './storage/OneFiStorage';
  * @returns {Promise<number>>} Number of scans since last counter reset.
  */
 export function get_scan_counter() {
-    return OneFiStorage
-        .getItem('client_session')
-        .then(r => r.scan_counter)
+  return OneFiStorage.getItem("client_session").then((r) => r.scan_counter);
 }
-
 
 /**
  * Store in the client session state the current scan counter. This function is predominantly to be used to reset
@@ -39,12 +35,12 @@ export function get_scan_counter() {
  * @returns {Promise<boolean>} true: success, false: failure.
  */
 export async function set_scan_counter(counter) {
-    // const config = require("./config");
-    // let config_json = config.read_default_config();
-    // config_json.client_session.scan_counter = parseInt(counter);
-    // config.write_default_config(config_json);
-    const clientSession = await OneFiStorage.getItem('client_session');
-    clientSession.scan_counter = counter;
-    await OneFiStorage.setItem('client_session', clientSession);
-    return true;
+  // const config = require("./config");
+  // let config_json = config.read_default_config();
+  // config_json.client_session.scan_counter = parseInt(counter);
+  // config.write_default_config(config_json);
+  const clientSession = await OneFiStorage.getItem("client_session");
+  clientSession.scan_counter = counter;
+  await OneFiStorage.setItem("client_session", clientSession);
+  return true;
 }

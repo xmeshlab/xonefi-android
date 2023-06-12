@@ -15,7 +15,7 @@ import { userContext } from "../MainContainer";
 import { useCallback } from "react";
 
 export default function LinkedAccountScreen({ navigation }) {
-  const userContext_array = useContext(userContext)
+  const userContext_array = useContext(userContext);
 
   const onTouchableOpacityPress = useCallback(
     () => navigation.navigate("Account Information"),
@@ -41,7 +41,10 @@ export default function LinkedAccountScreen({ navigation }) {
       <GreyButton
         imageSource={LogoutIcon}
         textInput={"Logout"}
-        onPressFunction={() => {userContext_array[1](''); userContext_array[3]({});}}
+        onPressFunction={() => {
+          userContext_array[1]("");
+          userContext_array[3]({});
+        }}
       />
     </View>
   );

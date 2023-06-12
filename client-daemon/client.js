@@ -43,64 +43,68 @@ const process_mgmt = require("../api/process_mgmt");
 
 const worker = require("./worker");
 
+const Web3 = require("web3");
 
-const Web3 = require('web3');
-
-if(!process_mgmt.save_pid(process_mgmt.get_client_pid_path())) {
-    console.log(`ERROR: Unable to save PID of the current process.`);
-    process.exit(1);
+if (!process_mgmt.save_pid(process_mgmt.get_client_pid_path())) {
+  console.log(`ERROR: Unable to save PID of the current process.`);
+  process.exit(1);
 }
 
 async function main() {
-    config.config_init_if_absent();
+  config.config_init_if_absent();
 
-    scan_counter.set_scan_counter(0);
-    sack_number.set_sack_number(0);
-    sack_number.set_initiated_sack_number(0);
+  scan_counter.set_scan_counter(0);
+  sack_number.set_sack_number(0);
+  sack_number.set_initiated_sack_number(0);
 
-    let config_json = config.read_default_config();
+  let config_json = config.read_default_config();
 
-    if(process.argv.length < 3) {
-        console.log("USAGE: node clientclient.js <PASSWORD>");
-        return;
+  if (process.argv.length < 3) {
+    console.log("USAGE: node clientclient.js <PASSWORD>");
+    return;
+  }
+
+  console.log("Dropping previous sessions");
+  let session = config_json.client_session;
+  session.status = session_status.status.CLOSED;
+  client_session.set_client_session(session);
+
+  let user_password = process.argv[2];
+  let decrypted_private_key = symcrypto.decrypt_aes256ctr(
+    config_json.account.encrypted_prk,
+    user_password
+  );
+  console.log(`decrypted prk: ${decrypted_private_key}`);
+
+  while (true) {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    } catch (e) {
+      break;
     }
 
-    console.log("Dropping previous sessions");
-    let session = config_json.client_session;
-    session.status = session_status.status.CLOSED;
-    client_session.set_client_session(session);
+    config_json = config.read_default_config();
 
-    let user_password  = process.argv[2];
-    let decrypted_private_key = symcrypto.decrypt_aes256ctr(config_json.account.encrypted_prk, user_password);
-    console.log(`decrypted prk: ${decrypted_private_key}`);
+    console.log(`config_json: ${JSON.stringify(config_json)}`);
 
-    while(true) {
-        try {
-            await new Promise(resolve => setTimeout(resolve, 5000));
-        } catch(e) {
-            break;
+    if (config_json.client_on === true) {
+      worker.client_worker(
+        config_json,
+        user_password,
+        decrypted_private_key,
+        () => {
+          console.log(`${global_counter}: Client is on`);
         }
-
-        config_json = config.read_default_config();
-
-        console.log(`config_json: ${JSON.stringify(config_json)}`);
-
-        if(config_json.client_on === true) {
-            worker.client_worker(config_json, user_password, decrypted_private_key, () => {
-                console.log(`${global_counter}: Client is on`);
-            });
-        } else {
-            console.log(`${global_counter}: Client is off`);
-        }
-
-        global_counter++;
+      );
+    } else {
+      console.log(`${global_counter}: Client is off`);
     }
 
+    global_counter++;
+  }
 }
 
 main();
-
-
 
 // function send_next_sack(config_json, user_password, private_key) {
 //     console.log(`Calling send_next_sack() with config_json = ${JSON.stringify(config_json)}`);
@@ -155,7 +159,6 @@ main();
 //             }
 //         });
 // }
-
 
 // function initiate_handover(deserealized_ssid, chosen_ssid, user_password, private_key, config_json) {
 //     console.log(`Handing the session over to: ${JSON.stringify(deserealized_ssid)}`);

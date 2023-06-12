@@ -17,17 +17,15 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Obtain the provider's minimum declared downlink tier (see developer documentation for the breakdown).
  * @returns {int} Minimum downlink available bandwidth tier
  */
 function get_min_downlink_tier() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.min_downlink_tier;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.min_downlink_tier;
 }
-
 
 /**
  * Store in the config (state) the provider's minimum declared downlink tier.
@@ -35,13 +33,12 @@ function get_min_downlink_tier() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_min_downlink_tier(tier) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.min_downlink_tier = parseInt(tier);
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.min_downlink_tier = parseInt(tier);
+  config.write_default_config(config_json);
+  return true;
 }
-
 
 /**
  * Validate the range and format of the downlink tier value.
@@ -49,15 +46,17 @@ function set_min_downlink_tier(tier) {
  * @returns {boolean} true: valid, false: invalid.
  */
 function valid_min_downlink_tier(tier) {
-    if(!isNaN(tier) // TODO: simplify it
-        && !isNaN(parseFloat(tier))
-        && parseInt(tier) >= 0
-        && parseInt(tier) <= 31
-        && parseInt(tier) === parseFloat(tier)) {
-        return true;
-    } else {
-        return false;
-    }
+  if (
+    !isNaN(tier) && // TODO: simplify it
+    !isNaN(parseFloat(tier)) &&
+    parseInt(tier) >= 0 &&
+    parseInt(tier) <= 31 &&
+    parseInt(tier) === parseFloat(tier)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -65,11 +64,10 @@ function valid_min_downlink_tier(tier) {
  * @returns {int} Minimum uplink available bandwidth tier
  */
 function get_min_uplink_tier() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.min_uplink_tier;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.min_uplink_tier;
 }
-
 
 /**
  * Store in the config (state) the provider's minimum declared uplink tier.
@@ -77,13 +75,12 @@ function get_min_uplink_tier() {
  * @returns {boolean} true: success; false: failure.
  */
 function set_min_uplink_tier(tier) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.min_uplink_tier = parseInt(tier);
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.min_uplink_tier = parseInt(tier);
+  config.write_default_config(config_json);
+  return true;
 }
-
 
 /**
  * Validate the range and format of the uplink tier value.
@@ -91,22 +88,24 @@ function set_min_uplink_tier(tier) {
  * @returns {boolean} true: valid, false: invalid.
  */
 function valid_min_uplink_tier(tier) {
-    if(!isNaN(tier) // TODO: simplify it
-        && !isNaN(parseFloat(tier))
-        && parseInt(tier) >= 0
-        && parseInt(tier) <= 31
-        && parseInt(tier) === parseFloat(tier)) {
-        return true;
-    } else {
-        return false;
-    }
+  if (
+    !isNaN(tier) && // TODO: simplify it
+    !isNaN(parseFloat(tier)) &&
+    parseInt(tier) >= 0 &&
+    parseInt(tier) <= 31 &&
+    parseInt(tier) === parseFloat(tier)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 module.exports = {
-    get_min_downlink_tier,
-    set_min_downlink_tier,
-    valid_min_downlink_tier,
-    get_min_uplink_tier,
-    set_min_uplink_tier,
-    valid_min_uplink_tier
+  get_min_downlink_tier,
+  set_min_downlink_tier,
+  valid_min_downlink_tier,
+  get_min_uplink_tier,
+  set_min_uplink_tier,
+  valid_min_uplink_tier,
 };

@@ -1,7 +1,6 @@
-import { OneFiInfo } from '../../types/one.json';
-import { createTypeSafeStorage } from './Storage'
-import { usePersistenceState } from '../../utils/hooks/usePersistenceState';
-
+import { OneFiInfo } from "../../types/one.json";
+import { createTypeSafeStorage } from "./Storage";
+import { usePersistenceState } from "../../utils/hooks/usePersistenceState";
 
 /**
  * @example
@@ -9,7 +8,6 @@ import { usePersistenceState } from '../../utils/hooks/usePersistenceState';
  */
 export const OneFiStorage = createTypeSafeStorage<OneFiInfo>();
 
-
 export const useOnFiStorage = <K extends keyof OneFiInfo>(key: K) => {
-    return usePersistenceState<OneFiInfo, K>(OneFiStorage, key);
-}
+  return usePersistenceState<OneFiInfo, K>(OneFiStorage, key);
+};

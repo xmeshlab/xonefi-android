@@ -17,15 +17,14 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Read current provider Ethernet-to-Ethernet status from the config (whether the mode on or off).
  * @returns {boolean} true - Ethernet-to-Ethernet status is on, false - Ethernet-to-Ethernet status is off.
  */
 function get_e2e_status() {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.e2e_mode;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.e2e_mode;
 }
 
 /**
@@ -34,11 +33,11 @@ function get_e2e_status() {
  * @returns {boolean} true - success, false - failure.
  */
 function set_e2e_status(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.e2e_mode = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.e2e_mode = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 module.exports = { get_e2e_status, set_e2e_status };
