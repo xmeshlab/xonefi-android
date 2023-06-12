@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, { Path, Defs, Pattern, Use, Image, LinearGradient, Stop,} from "react-native-svg";
+import Svg, { G, Path, Defs, Pattern, Use, Image,  ClipPath, LinearGradient, Stop,} from "react-native-svg";
 
 export function GoogleIcon(props) {
   return (
@@ -123,3 +123,31 @@ export function FacebookLogo3(props) {
     );
   }
   
+
+export function TwitterLogo(props) {
+    return (
+      <Svg
+        width={72}
+        height={72}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <G clipPath="url(#prefix__clip0_13_11)">
+          <Path
+            d="M36 72c19.882 0 36-16.118 36-36S55.882 0 36 0 0 16.118 0 36s16.118 36 36 36z"
+            fill="#2DAAE1"
+          />
+          <Path
+            d="M59.083 21.68a18.907 18.907 0 01-5.44 1.492 9.498 9.498 0 004.164-5.24 18.918 18.918 0 01-6.015 2.299 9.456 9.456 0 00-6.913-2.99c-5.228 0-9.469 4.239-9.469 9.47 0 .742.084 1.465.244 2.16-7.87-.396-14.849-4.166-19.52-9.895a9.424 9.424 0 00-1.282 4.761 9.465 9.465 0 004.213 7.882 9.427 9.427 0 01-4.29-1.184v.12c0 4.589 3.263 8.415 7.596 9.285a9.425 9.425 0 01-2.495.332 9.614 9.614 0 01-1.783-.167 9.482 9.482 0 008.846 6.577 19 19 0 01-11.761 4.055c-.764 0-1.52-.045-2.26-.135a26.802 26.802 0 0014.517 4.257c17.418 0 26.945-14.43 26.945-26.945 0-.411-.01-.819-.029-1.225a19.299 19.299 0 004.732-4.91z"
+            fill="#fff"
+          />
+        </G>
+        <Defs>
+          <ClipPath id="prefix__clip0_13_11">
+            <Path fill="#fff" d="M0 0h72v72H0z" />
+          </ClipPath>
+        </Defs>
+      </Svg>
+    );
+  }

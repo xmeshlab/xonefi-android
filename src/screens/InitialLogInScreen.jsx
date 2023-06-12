@@ -2,9 +2,9 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import BigBlueButton from '../Components/BigBlueButton'
 import XOneFi_Logo_Big from '../icons/XOneFi'
-import { GoogleIcon, FacebookIcon, FacebookIcon2, FacebookLogo3 } from '../icons/sign_in_icon'
+import { GoogleIcon, FacebookIcon, FacebookIcon2, FacebookLogo3, TwitterLogo } from '../icons/sign_in_icon'
 
-const InitialLogInScreen = ({logInFunction, loginFacebook}) => {
+const InitialLogInScreen = ({logInFunction, loginFacebook, loginTwitter}) => {
   return (
     <View className="h-screen">
         <View className="flex flex-row justify-center w-screen absolute top-1/4">
@@ -20,6 +20,9 @@ const InitialLogInScreen = ({logInFunction, loginFacebook}) => {
 
                   <TouchableOpacity onPress={loginFacebook}>
                     <FacebookLogo3/>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={loginTwitter}>
+                    <TwitterLogo/>
                   </TouchableOpacity>
             </View>
         </View>

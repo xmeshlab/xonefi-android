@@ -318,6 +318,58 @@ export default function MainContainer() {
     }
   };
 
+  const loginWithWeb3AuthWECHAT = async () => {
+    console.log("Loggin in with Web3Auth");
+    try {
+      console.log("Loggin in with Web3Auth");
+      //setConsole("Logging in");
+      const web3auth = new Web3Auth(WebBrowser, {
+        clientId,
+        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+      });
+      console.log("web3auth object");
+      console.log(web3auth);
+      const info = await web3auth.login({
+        loginProvider: LOGIN_PROVIDER.WECHAT,
+        redirectUrl: resolvedRedirectUrl,
+      });
+      console.log("info returned from web3 Auth");
+      console.log(info);
+
+      setUserInfo(info);
+      setKey(info.privKey);
+      //uiConsole("Logged In");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const loginWithWeb3AuthTwitter = async () => {
+    console.log("Loggin in with Web3Auth");
+    try {
+      console.log("Loggin in with Web3Auth");
+      //setConsole("Logging in");
+      const web3auth = new Web3Auth(WebBrowser, {
+        clientId,
+        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+      });
+      console.log("web3auth object");
+      console.log(web3auth);
+      const info = await web3auth.login({
+        loginProvider: LOGIN_PROVIDER.TWITTER,
+        redirectUrl: resolvedRedirectUrl,
+      });
+      console.log("info returned from web3 Auth");
+      console.log(info);
+
+      setUserInfo(info);
+      setKey(info.privKey);
+      //uiConsole("Logged In");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <WithMainBg style={{ flex: 1 }}>
       <StatusBar style="light" />
@@ -377,7 +429,7 @@ export default function MainContainer() {
         </Stack.Navigator>
       </NavigationContainer>
       </userContext.Provider>
-       : <InitialLogInScreen logInFunction={loginWithWeb3Auth} loginFacebook={loginWithWeb3AuthFacebook}/>}
+       : <InitialLogInScreen logInFunction={loginWithWeb3Auth} loginFacebook={loginWithWeb3AuthFacebook} loginTwitter={loginWithWeb3AuthTwitter}/>}
     </WithMainBg>
   );
 }
