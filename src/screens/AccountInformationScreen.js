@@ -58,8 +58,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           />
           </>}/>
 
-      <Text className="text-white text-3xl mt-6 mb-8 mx-6">Legal</Text>
-      <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
+      <GreyBackgroundBox titleText={"Legal"} children={<>
         <GreyBackgroundBar
           LeftText={"Terms"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal_PK()}} />}
@@ -69,10 +68,9 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           LeftText={"Privacy Policy"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal_PK()}}/>}
         />
-      </View>
+      </>}/>
 
-      <Text className="text-white text-3xl mt-6 mb-8 mx-6">Wallet Address</Text>
-      <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
+      <GreyBackgroundBox titleText={"Wallet Address"} children={<>
         <GreyBackgroundBar
           LeftText={"Address"}
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal_PK()}}/>}
@@ -83,7 +81,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           RightSideComponent={<ViewButton OnPressFunction={()=>{openModal_PK()}} />}
         />
         <ModalWithCustomText inputText={userContext_array[0]} modalIsOpen={pkModalIsOpen} closeModal={closeModal_PK}/>
-      </View>
+      </>}/>
       </ScrollView>
   );
 }
