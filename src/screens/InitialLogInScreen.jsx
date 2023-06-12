@@ -8,6 +8,8 @@ import {
   FacebookIcon2,
   FacebookLogo3,
   TwitterLogo,
+  EmailLogo,
+  WeChatLogo
 } from "../icons/sign_in_icon";
 
 const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
