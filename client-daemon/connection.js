@@ -175,6 +175,7 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                         new Web3(),
                         private_key,
                         uuid.generate_unique_id(),
+                        config_json.client_mac,
                         (response) => {
                             console.log(`PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 

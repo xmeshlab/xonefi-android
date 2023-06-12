@@ -14,6 +14,7 @@ export async function startClientDaemon() {
 
     console.log("XLOG: startClientDaemon 2");
     let config_json = starter_config();
+    config_json.client_mac = "48:2c:a0:73:fa:9f";
     config_json.client_on = false;
     config_json.pft = true;
     config_json.cft = true;

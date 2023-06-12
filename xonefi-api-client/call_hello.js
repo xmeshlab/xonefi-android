@@ -19,6 +19,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 //const { symlinkSync } = require('fs');
 
+import DeviceInfo from 'react-native-device-info';
+
+
 /**
  * Call OneFi provider to request a new session.
  * @param {string} ip - IP address of OneFi AP.
@@ -28,9 +31,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {string} session - UUID of the current session.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_hello(ip, port, web3, prk, session, callback) {
+function call_hello(ip, port, web3, prk, session, mac, callback) {
     var uuid = require('uuid');
-    
+
     var message = new Object();
 
     let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
@@ -42,6 +45,7 @@ function call_hello(ip, port, web3, prk, session, callback) {
     message.command.uuid = msg_uuid;
     message.command.timestamp = Math.floor(new Date() / 1000);
     message.command.session = session;
+    message.command.mac = mac;
     message.command.re = "";
     message.command.arguments = new Object();
 
