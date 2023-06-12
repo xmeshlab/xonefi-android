@@ -14,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 import ViewButton from "../Components/ViewButton"
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
+import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 
 export function AccountInformationScreen({ navigation, userContext_array }) {
 
@@ -34,31 +35,28 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
 
   return (
     <ScrollView>
-      <Text className="text-white text-3xl mt-6 mb-8 mx-6">
-        Account Informtion
-      </Text>
-      <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
-        <GreyBackgroundBar
-          LeftText={"Native Currency"}
-          RightSideComponent={
-            <>
-              <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
-                <Text className="text-white">***************</Text>
-              </View>
-            </>
-          }
-        />
-        <GreyBackgroundBar
-          LeftText={"Country"}
-          RightSideComponent={
-            <>
-              <View className="rounded-md border-slate-600 bg-slate-600 pl-4 pr-3 py-1">
-                <Text className="text-white">United States</Text>
-              </View>
-            </>
-          }
-        />
-      </View>
+        <GreyBackgroundBox titleText={"Account Informtion"} children={<>
+          <GreyBackgroundBar
+            LeftText={"Native Currency"}
+            RightSideComponent={
+              <>
+                <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
+                  <Text className="text-white">***************</Text>
+                </View>
+              </>
+            }
+          />
+          <GreyBackgroundBar
+            LeftText={"Country"}
+            RightSideComponent={
+              <>
+                <View className="rounded-md border-slate-600 bg-slate-600 pl-4 pr-3 py-1">
+                  <Text className="text-white">United States</Text>
+                </View>
+              </>
+            }
+          />
+          </>}/>
 
       <Text className="text-white text-3xl mt-6 mb-8 mx-6">Legal</Text>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
