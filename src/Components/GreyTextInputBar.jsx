@@ -8,7 +8,7 @@ function GreyTextInputBar({ placeholder_text, state_function }) {
   }, []);
 
   return (
-    <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1 mt-2 mb-2 mx-6">
+    <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1 mt-2 mb-2 mx-6" testID="Grey Text Input Bar">
       <TextInput
         selectionColor="#FFF"
         onChangeText={onTextInputChangeText}
