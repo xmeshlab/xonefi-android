@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686675294609" clover="3.2.0">
-  <project timestamp="1686675294609" name="All files">
+<coverage generated="1686680947852" clover="3.2.0">
+  <project timestamp="1686680947852" name="All files">
     <metrics statements="232" coveredstatements="55" conditionals="29" coveredconditionals="4" methods="85" coveredmethods="28" elements="346" coveredelements="87" complexity="0" loc="232" ncloc="232" packages="2" files="24" classes="24"/>
     <package name="Components">
       <metrics statements="17" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="11" coveredmethods="10"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Asset.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="16" count="8" type="stmt"/>
-        <line num="17" count="8" type="stmt"/>
+        <line num="16" count="12" type="stmt"/>
+        <line num="17" count="12" type="stmt"/>
       </file>
       <file name="BigBlueButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/BigBlueButton.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>

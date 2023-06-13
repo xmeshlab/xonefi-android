@@ -1,5 +1,4 @@
 import React from "react";
-import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
 import Asset from "../../src/Components/Asset.jsx";
 
@@ -57,27 +56,82 @@ function EthLogoSVG(props) {
   );
 }
 
-//<Asset AssetName="Eth Wallet" AssetAmount="1.23 Eth" AssetPrice={"$" + priceJson.ethereum.usd} AssetLogo={() => <EthLogoSVG/>} AssetChange="4.06%"/>
-test("Rendering the Asset Component", () => {
-  const { getByText } = render(
-    <Asset
-      AssetName="Eth Wallet"
-      AssetAmount="1.23 Eth"
-      AssetPrice={"$12"}
-      AssetLogo={() => <EthLogoSVG />}
-      AssetChange="10"
-    />
-  );
+it("render", () => {
+  const {getByText, getAllByText, getByTestId} = render(<Asset
+    AssetName="Eth Wallet"
+    AssetAmount="1.23 Eth"
+    AssetPrice={"12"}
+    AssetLogo={() => <EthLogoSVG />}
+    AssetChange="10"
+  />);
 
-  //const AssetComponent = getByText("Eth Wallet")
-  //expect(AssetComponent).not.toBeNull()
+  //Check that the correct outputs are displayed
+  expect(getByText("Eth Wallet")).not.toBeNull();
+  expect(getByText("1.23 Eth")).not.toBeNull();
+  expect(getByText("$12")).not.toBeNull();
+  expect(getByText("10%")).not.toBeNull();
+});
 
-  AssetComponent = getByText("1.23 Eth");
-  expect(AssetComponent).not.toBeNull();
+it("render test 2", () => {
+  const {getByText, getAllByText, getByTestId} = render(<Asset
+    AssetName="Eth Wallet"
+    AssetAmount="77 Eth"
+    AssetPrice={"85"}
+    AssetLogo={() => <EthLogoSVG />}
+    AssetChange="45"
+  />);
 
-  //AssetComponent = getByText("$12")
-  //expect(AssetComponent).not.toBeNull()
+  //Check that the correct outputs are displayed
+  expect(getByText("Eth Wallet")).not.toBeNull();
+  expect(getByText("77 Eth")).not.toBeNull();
+  expect(getByText("$85")).not.toBeNull();
+  expect(getByText("45%")).not.toBeNull();
+});
 
-  //AssetComponent = getByText("10")
-  //expect(AssetComponent).not.toBeNull()
+it("render with 5 digit price", () => {
+  const {getByText, getAllByText, getByTestId} = render(<Asset
+    AssetName="Eth Wallet"
+    AssetAmount="9 Eth"
+    AssetPrice={"12345"}
+    AssetLogo={() => <EthLogoSVG />}
+    AssetChange="5.89"
+  />);
+
+  //Check that the correct outputs are displayed
+  expect(getByText("Eth Wallet")).not.toBeNull();
+  expect(getByText("9 Eth")).not.toBeNull();
+  expect(getByText("$12,345")).not.toBeNull();
+  expect(getByText("5.89%")).not.toBeNull();
+});
+
+it("render test with negative Asset Change", () => {
+  const {getByText, getAllByText, getByTestId} = render(<Asset
+    AssetName="Eth Wallet"
+    AssetAmount="17 Eth"
+    AssetPrice={"4345"}
+    AssetLogo={() => <EthLogoSVG />}
+    AssetChange="-5.66"
+  />);
+
+  //Check that the correct outputs are displayed
+  expect(getByText("Eth Wallet")).not.toBeNull();
+  expect(getByText("17 Eth")).not.toBeNull();
+  expect(getByText("$4,345")).not.toBeNull();
+  expect(getByText("-5.66%")).not.toBeNull();
+});
+
+it("render test with Different Asset Name", () => {
+  const {getByText, getAllByText, getByTestId} = render(<Asset
+    AssetName="Cryptocurrency"
+    AssetAmount="80 Cryptocurrency"
+    AssetPrice={"4345"}
+    AssetLogo={() => <EthLogoSVG />}
+    AssetChange="-5.66"
+  />);
+
+  //Check that the correct outputs are displayed
+  expect(getByText("Cryptocurrency")).not.toBeNull();
+  expect(getByText("80 Cryptocurrency")).not.toBeNull();
+  expect(getByText("$4,345")).not.toBeNull();
+  expect(getByText("-5.66%")).not.toBeNull();
 });
