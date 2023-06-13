@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -144,8 +144,13 @@
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -187,6 +192,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,11 +202,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,83 +239,89 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react";
 import { View, Text, Image, ImageBackground } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import ViewButton from "../Components/ViewButton";
+import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 &nbsp;
 //import providor component
 import Provider from "../Components/Provider";
-&nbsp;
-//You can't have an imported Component in a View
-&nbsp;
-import backgroundImage from "../../assets/background.png";
+import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 &nbsp;
 export default function ProviderDetailScreen({ navigation }) {
   return (
-    &lt;ImageBackground
-      source={backgroundImage}
-      resizeMode="cover"
-      className="flex-1 flex-col"
-    &gt;
-      &lt;Text className="text-white text-xl mt-6 mb-1 mx-6"&gt;
-        Router Information
-      &lt;/Text&gt;
-      &lt;View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around"&gt;
-        &lt;View className="flex flex-row mb-2 justify-between"&gt;
-          &lt;Text className="text-white text-base"&gt;Router Name&lt;/Text&gt;
-          &lt;View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;***************&lt;/Text&gt;
-          &lt;/View&gt;
-        &lt;/View&gt;
+    &lt;ScrollView&gt;
+      &lt;GreyBackgroundBox
+        titleText={"Router Information"}
+        children={
+          &lt;&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"Router Name"}
+              RightSideComponent={&lt;Text&gt;Insert&lt;/Text&gt;}
+            /&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"IP Address"}
+              RightSideComponent={&lt;Text&gt;Insert&lt;/Text&gt;}
+            /&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"Wifi-Speed"}
+              RightSideComponent={&lt;Text&gt;Insert&lt;/Text&gt;}
+            /&gt;
+          &lt;/&gt;
+        }
+      /&gt;
 &nbsp;
-        &lt;View className="flex flex-row justify-between mb-2"&gt;
-          &lt;Text className="text-white text-base"&gt;IP Address&lt;/Text&gt;
-          &lt;View className="rounded-md border-slate-600 bg-slate-600 pl-4 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;__.__.__.__&lt;/Text&gt;
-          &lt;/View&gt;
-        &lt;/View&gt;
+      &lt;GreyBackgroundBox
+        titleText={"Sharing  Setting"}
+        children={
+          &lt;&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"OFI/GB"}
+              RightSideComponent={
+                &lt;ViewButton
+                  OnPressFunction={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                    alert("Button Pressed");</span>
+                  }}
+                /&gt;
+              }
+            /&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"Private Connection"}
+              RightSideComponent={
+                &lt;ViewButton
+                  OnPressFunction={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                    alert("Button Pressed");</span>
+                  }}
+                /&gt;
+              }
+            /&gt;
+            &lt;GreyBackgroundBar
+              LeftText={"Share Time/Daily"}
+              RightSideComponent={
+                &lt;ViewButton
+                  OnPressFunction={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                    alert("Share Times/Daily");</span>
+                  }}
+                /&gt;
+              }
+            /&gt;
+          &lt;/&gt;
+        }
+      /&gt;
 &nbsp;
-        &lt;View className="flex flex-row justify-between"&gt;
-          &lt;Text className="text-white text-base"&gt;WiFi Speed&lt;/Text&gt;
-          &lt;View className="rounded-md border-slate-600 bg-slate-600 pl-4 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;130 mbs&lt;/Text&gt;
-          &lt;/View&gt;
-        &lt;/View&gt;
-      &lt;/View&gt;
-&nbsp;
-      &lt;Text className="text-white text-xl mt-3 mb-1 mx-6"&gt;Sharing Setting&lt;/Text&gt;
-      &lt;View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around"&gt;
-        &lt;View className="flex flex-row mb-2 justify-between"&gt;
-          &lt;Text className="text-white text-base"&gt;OFI/GB&lt;/Text&gt;
-          &lt;TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;View&lt;/Text&gt;
-          &lt;/TouchableOpacity&gt;
-        &lt;/View&gt;
-&nbsp;
-        &lt;View className="flex flex-row justify-between mb-2"&gt;
-          &lt;Text className="text-white text-base"&gt;Private Connection&lt;/Text&gt;
-          &lt;TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;View&lt;/Text&gt;
-          &lt;/TouchableOpacity&gt;
-        &lt;/View&gt;
-        &lt;View className="flex flex-row justify-between"&gt;
-          &lt;Text className="text-white text-base"&gt;Share Times/Daily&lt;/Text&gt;
-          &lt;TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;Time&lt;/Text&gt;
-          &lt;/TouchableOpacity&gt;
-        &lt;/View&gt;
-      &lt;/View&gt;
-&nbsp;
-      &lt;Text className="text-white text-xl mt-3 mb-1 mx-6"&gt;
-        Connected Clients
-      &lt;/Text&gt;
-      &lt;View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around"&gt;
-        &lt;View className="flex flex-row mb-2 justify-between"&gt;
-          &lt;Text className="text-white text-base"&gt;OFI/GB&lt;/Text&gt;
-          &lt;TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
-            &lt;Text className="text-white"&gt;View&lt;/Text&gt;
-          &lt;/TouchableOpacity&gt;
-        &lt;/View&gt;
-      &lt;/View&gt;
-    &lt;/ImageBackground&gt;
+      &lt;GreyBackgroundBox
+        titleText={"Connected Clients"}
+        children={
+          &lt;&gt;
+            &lt;View className="flex flex-row mb-2 justify-between"&gt;
+              &lt;Text className="text-white text-base"&gt;OFI/GB&lt;/Text&gt;
+              &lt;TouchableOpacity className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1"&gt;
+                &lt;Text className="text-white"&gt;View&lt;/Text&gt;
+              &lt;/TouchableOpacity&gt;
+            &lt;/View&gt;
+          &lt;/&gt;
+        }
+      /&gt;
+    &lt;/ScrollView&gt;
   );
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -313,7 +331,7 @@ export default function ProviderDetailScreen({ navigation }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-09T19:15:49.674Z
+                at 2023-06-13T16:54:54.590Z
             </div>
         <script src="../prettify.js"></script>
         <script>

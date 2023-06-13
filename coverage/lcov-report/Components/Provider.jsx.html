@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -102,7 +102,21 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,7 +155,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react";
+import { useState } from "react";
 import { View, Text, Image, ImageBackground } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 &nbsp;
@@ -156,30 +181,41 @@ export default function Provider({
   UsersConnectedNumber,
   TokenGenNumber,
   Status,
+  navigationFunction,
 }) {
   return (
-    &lt;View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2"&gt;
-      &lt;View className="flex flex-row justify-between pb-1"&gt;
-        &lt;View className="flex flex-row justify-start"&gt;
-          &lt;Image source={Bars} /&gt;
-          &lt;Text className="text-white ml-3"&gt;{ProviderName}&lt;/Text&gt;
+    &lt;TouchableOpacity onPress={navigationFunction}&gt;
+      &lt;View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2"&gt;
+        &lt;View className="flex flex-row justify-between pb-1"&gt;
+          &lt;View className="flex flex-row justify-start"&gt;
+            &lt;Image source={Bars} /&gt;
+            &lt;Text className="text-white ml-3"&gt;{ProviderName}&lt;/Text&gt;
+          &lt;/View&gt;
+          &lt;View className="flex flex-row justify-end"&gt;
+            {Status ? (
+              &lt;&gt;
+                &lt;Text className="text-green-400 mt-1"&gt;Active&lt;/Text&gt;
+                &lt;Image source={WifiGreen} /&gt;
+              &lt;/&gt;
+            ) : (
+              &lt;&gt;
+                &lt;Text className="text-neutral-600 mt-1"&gt;Inactive&lt;/Text&gt;
+                &lt;Image source={WifiWhite} /&gt;
+              &lt;/&gt;
+            )}
+          &lt;/View&gt;
         &lt;/View&gt;
-        &lt;View className="flex flex-row justify-end"&gt;
-          &lt;Text className="text-green-400 mt-1"&gt;Active&lt;/Text&gt;
-          &lt;Image source={WifiGreen} /&gt;
+        &lt;View className="flex flex-row justify-around"&gt;
+          &lt;Text className="text-white"&gt;{UsersConnectedNumber}&lt;/Text&gt;
+          &lt;Text className="text-white"&gt;USERS {"\n"} CONNECTED&lt;/Text&gt;
+          &lt;Text className="text-white"&gt;{TokenGenNumber}&lt;/Text&gt;
+          &lt;Text className="text-white"&gt;OFI TOKEN {"\n"} GENERATED&lt;/Text&gt;
+          &lt;Image source={arrow} /&gt;
         &lt;/View&gt;
       &lt;/View&gt;
-      &lt;View className="flex flex-row justify-around"&gt;
-        &lt;Text className="text-white"&gt;{UsersConnectedNumber}&lt;/Text&gt;
-        &lt;Text className="text-white"&gt;USERS {"\n"} CONNECTED&lt;/Text&gt;
-        &lt;Text className="text-white"&gt;{TokenGenNumber}&lt;/Text&gt;
-        &lt;Text className="text-white"&gt;OFI TOKEN {"\n"} GENERATED&lt;/Text&gt;
-        &lt;Image source={arrow} /&gt;
-      &lt;/View&gt;
-    &lt;/View&gt;
+    &lt;/TouchableOpacity&gt;
   );
 }
-&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -187,7 +223,7 @@ export default function Provider({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-24T20:23:58.570Z
+                at 2023-06-13T16:54:54.590Z
             </div>
         <script src="../prettify.js"></script>
         <script>
