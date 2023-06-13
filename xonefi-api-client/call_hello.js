@@ -19,6 +19,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 //const { symlinkSync } = require('fs');
 
+import DeviceInfo from 'react-native-device-info';
+
+
 /**
  * Call OneFi provider to request a new session.
  * @param {string} ip - IP address of OneFi AP.
@@ -28,22 +31,23 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {string} session - UUID of the current session.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_hello(ip, port, web3, prk, session, callback) {
-  var uuid = require("uuid");
+function call_hello(ip, port, web3, prk, session, mac, callback) {
+    var uuid = require('uuid');
 
-  var message = new Object();
+    var message = new Object();
 
   let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
-  message.command = new Object();
-  message.command.op = "HELLO";
-  message.command.from = pubaddress;
-  msg_uuid = uuid.v4().toString();
-  message.command.uuid = msg_uuid;
-  message.command.timestamp = Math.floor(new Date() / 1000);
-  message.command.session = session;
-  message.command.re = "";
-  message.command.arguments = new Object();
+    message.command = new Object();
+    message.command.op = "HELLO";
+    message.command.from = pubaddress;
+    msg_uuid = uuid.v4().toString();
+    message.command.uuid = msg_uuid;
+    message.command.timestamp = Math.floor(new Date() / 1000);
+    message.command.session = session;
+    message.command.mac = mac;
+    message.command.re = "";
+    message.command.arguments = new Object();
 
   var signature_json = web3.eth.accounts.sign(
     JSON.stringify(message.command),
@@ -54,10 +58,10 @@ function call_hello(ip, port, web3, prk, session, callback) {
 
   console.log("XLOG: call_hello() message: " + JSON.stringify(message));
 
-  const send_udp = require("./send_udp");
-  send_udp.send_udp3(ip, port, JSON.stringify(message), (result) => {
-    return callback(result);
-  });
+    const send_rest = require('./send_rest');
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+        return callback(result);
+    });
 }
 
 /**

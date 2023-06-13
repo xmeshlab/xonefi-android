@@ -31,21 +31,10 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {string} sack - Serialized SACK. Please see encode_sack() for generation thereof.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_sack(
-  ip,
-  port,
-  web3,
-  prk,
-  session,
-  re,
-  amount,
-  current_timestamp,
-  sack,
-  callback
-) {
-  console.log("XLOG: @call_sack: entering the function.");
-  const uuid = require("uuid");
-  const send_udp = require("./send_udp");
+function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, sack, callback) {
+    console.log("XLOG: @call_sack: entering the function.");
+    const uuid = require('uuid');
+    const send_rest = require('./send_rest');
 
   var message = {};
   let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
@@ -73,9 +62,9 @@ function call_sack(
 
   message.signature = signature_json.signature;
 
-  send_udp.send_udp3(ip, port, JSON.stringify(message), (result) => {
-    return callback(result);
-  });
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+        return callback(result);
+    });
 }
 
 module.exports = { call_sack };
