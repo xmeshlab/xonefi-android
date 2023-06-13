@@ -4,7 +4,6 @@
 //     return web3.version
 //
 // }
-import Web3 from 'web3';
-
+import Web3 from "web3";
 
 // web3.eth.get

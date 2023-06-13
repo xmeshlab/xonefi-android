@@ -17,13 +17,12 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Generate current UNIX timestamp (seconds).
  * @returns {int} UNIX timestamp.
  */
 function get_current_timestamp() {
-    return Math.floor(new Date() / 1000);
+  return Math.floor(new Date() / 1000);
 }
 
 module.exports = { get_current_timestamp };

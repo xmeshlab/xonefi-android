@@ -1,10 +1,10 @@
-import { OneFiStorage } from './storage/OneFiStorage';
+import { OneFiStorage } from "./storage/OneFiStorage";
 
 /**
  * @description Get current client statusL whether the client is on or off.
  */
 export async function get_client_status(): Promise<boolean> {
-    return await OneFiStorage.getItem('client_on');
+  return await OneFiStorage.getItem("client_on");
 }
 
 /**
@@ -12,8 +12,8 @@ export async function get_client_status(): Promise<boolean> {
  * @param {boolean} enable - client status (true = enabled, false = disabled).
  * @returns {Promise<boolean>} true - success, false - failure.
  */
-export async function set_client_status (enable: boolean) {
-    return await OneFiStorage.setItem('client_on', enable);
+export async function set_client_status(enable: boolean) {
+  return await OneFiStorage.setItem("client_on", enable);
 }
 
 /**
@@ -22,16 +22,15 @@ export async function set_client_status (enable: boolean) {
  * @return Promise<boolean>
  */
 export async function get_pay_for_data(): Promise<boolean> {
-    return OneFiStorage.getItem('pfd')
+  return OneFiStorage.getItem("pfd");
 }
-
 
 /**
  * Read the client PFT (pay for time) parameter value from OneFi configuration.
  * @returns {Promise<boolean>} true: client agrees to pay for time; false:  client disagrees to pay for time.
  */
 export async function get_pay_for_time() {
-    return OneFiStorage.getItem('pft');
+  return OneFiStorage.getItem("pft");
 }
 
 /**
@@ -39,17 +38,16 @@ export async function get_pay_for_time() {
  * @param {boolean} enabled - client PFT (true = enabled, false = disabled).
  * @returns {Promise<boolean>} true - success, false - failure.
  */
-export function set_pay_for_time(enabled:boolean) {
-    return OneFiStorage.setItem('pft', enabled);
+export function set_pay_for_time(enabled: boolean) {
+  return OneFiStorage.setItem("pft", enabled);
 }
-
 
 /**
  * Read the private client parameter value from OneFi configuration.
  * @returns {Promise<boolean>} true: client agrees for private connections; false: client disagrees for private (restricted) connections.
  */
 function get_private_client() {
-    return OneFiStorage.getItem('private_client');
+  return OneFiStorage.getItem("private_client");
 }
 
 /**
@@ -57,8 +55,8 @@ function get_private_client() {
  * @param {boolean} enabled - private (restricted) client parameter (true = enabled, false = disabled).
  * @returns {Promise<boolean>} true: success; false: failure.
  */
-function set_private_client(enabled:boolean) {
-    return OneFiStorage.setItem('private_client', enabled);
+function set_private_client(enabled: boolean) {
+  return OneFiStorage.setItem("private_client", enabled);
 }
 
 /**
@@ -67,7 +65,7 @@ function set_private_client(enabled:boolean) {
  * @returns {Promise<number>} maximum number of OFI (OneFi points/tokens) the client is willing to pay for one GB of data.
  */
 function get_max_ofi_mb() {
-    return OneFiStorage.getItem('max_ofi_mb');
+  return OneFiStorage.getItem("max_ofi_mb");
 }
 
 /**
@@ -76,10 +74,9 @@ function get_max_ofi_mb() {
  * @param {number} max_price - maximum number of OFI (OneFi tokens/points) the client is willing to pay.
  * @returns {Promise<number>} true: success; false: failure.
  */
-function set_max_ofi_mb(max_price:number) {
-    return OneFiStorage.setItem('max_ofi_mb', max_price);
+function set_max_ofi_mb(max_price: number) {
+  return OneFiStorage.setItem("max_ofi_mb", max_price);
 }
-
 
 /**
  * Read from OneFi configuration the maximum number of OneFi tokens the client is ready to pay for one hour
@@ -87,9 +84,8 @@ function set_max_ofi_mb(max_price:number) {
  * @returns {Promise<number>} maximum number of OFI (OneFi points/tokens) the client is willing to pay for one hour of connection.
  */
 function get_max_ofi_hr() {
-    return OneFiStorage.getItem('max_ofi_hr');
+  return OneFiStorage.getItem("max_ofi_hr");
 }
-
 
 /**
  * Set (save in configuration) the maximum number of OneFi tokens (points) that the client is ready to pay
@@ -98,7 +94,7 @@ function get_max_ofi_hr() {
  * @returns {Promise<void>} true: success; false: failure.
  */
 function set_max_ofi_hr(max_price) {
-    return OneFiStorage.setItem('max_ofi_hr', max_price);
+  return OneFiStorage.setItem("max_ofi_hr", max_price);
 }
 
 /**
@@ -107,13 +103,13 @@ function set_max_ofi_hr(max_price) {
  * @returns {boolean} true: matches, false: doesn't match.
  */
 export function is_onefi_ssid(ssid: string) {
-    if(ssid.length > 2) {
-        if(ssid[0] === 'O' && ssid[1] === 'F') {
-            let base64_part = ssid.substring(2);
-            let decoded_str = Buffer.from(base64_part, 'base64').toString('hex');
-            return decoded_str.length === 42;
-        }
+  if (ssid.length > 2) {
+    if (ssid[0] === "O" && ssid[1] === "F") {
+      let base64_part = ssid.substring(2);
+      let decoded_str = Buffer.from(base64_part, "base64").toString("hex");
+      return decoded_str.length === 42;
     }
+  }
 
-    return false;
+  return false;
 }

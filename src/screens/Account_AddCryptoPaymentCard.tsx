@@ -32,7 +32,12 @@ const AccountAddCrptoPaymentCard: FunctionComponent<Props & RouteProp<any>> = (
           <TextInputEntry input_text={"Password"} />
           <TextInputEntry input_text={""} />
         </View>
-        <BigBlueButton text={"Add Payment Card"} onPressFunction={()=>{alert("Button Pressed")}}/>
+        <BigBlueButton
+          text={"Add Payment Card"}
+          onPressFunction={() => {
+            alert("Button Pressed");
+          }}
+        />
       </View>
     </ScrollView>
   );

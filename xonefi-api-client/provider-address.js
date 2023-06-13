@@ -17,15 +17,14 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Obtain the Ethereum address of the provider from the config.
  * @returns {string} Ethereum address of the currently configured provider (in EIP-55-checksummed format)
  */
 function get_provider_address() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session.provider_address;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_session.provider_address;
 }
 
 /**
@@ -34,11 +33,11 @@ function get_provider_address() {
  * @returns {boolean} true: success; false: failure
  */
 function set_provider_address(addr) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.client_session.provider_address = addr;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.client_session.provider_address = addr;
+  config.write_default_config(config_json);
+  return true;
 }
 
 module.exports = { get_provider_address, set_provider_address };

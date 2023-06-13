@@ -1,87 +1,132 @@
-import React, { FunctionComponent, ReactComponentElement, useCallback, useContext, useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { colors } from '../../constants/colors';
-import BuggerIcon from '../../src/icons/bugger_icon';
-import WifiIcon from '../../src/icons/wifi_icon';
-import ChevronRight from '../../src/icons/chevron_right';
-import { useClientStatus } from '../../store/clientStatus';
+import React, {
+  FunctionComponent,
+  ReactComponentElement,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import { colors } from "../../constants/colors";
+import BuggerIcon from "../../src/icons/bugger_icon";
+import WifiIcon from "../../src/icons/wifi_icon";
+import ChevronRight from "../../src/icons/chevron_right";
+import { useClientStatus } from "../../store/clientStatus";
 
 export type PageHeaderProps = BottomTabHeaderProps & {
-    leftView?: JSX.Element, rightView?: JSX.Element
-}
-const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
-    return (<>
-        <View style={pageHeaderStyle.headerStatusPadding}/>
-        <View style={pageHeaderStyle.header}>
-            <View style={pageHeaderStyle.headerBtn}>
-                {props?.leftView ?? null}
-            </View>
-
-            <Text style={pageHeaderStyle.headerTitle}>{props.options.title}</Text>
-            <View style={pageHeaderStyle.headerBtn}>
-                {props?.rightView ?? null}
-            </View>
-        </View></>);
+  leftView?: JSX.Element;
+  rightView?: JSX.Element;
 };
-export const WithBackBtnPageHeader: FunctionComponent<PageHeaderProps> = ({leftView, rightView, ...otherProps}) => {
-    const onTouchableOpacityPress = useCallback(() => otherProps.navigation.goBack(), [])
+const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
+  return (
+    <>
+      <View style={pageHeaderStyle.headerStatusPadding} />
+      <View style={pageHeaderStyle.header}>
+        <View style={pageHeaderStyle.headerBtn}>{props?.leftView ?? null}</View>
 
-    return <PageHeader
-        {...otherProps}
-        leftView={<TouchableOpacity onPress={onTouchableOpacityPress}>
-            <View style={{
-                transform: [{
-                    rotateY: '180deg'
-                }]
-            }}>
-                <ChevronRight/>
+        <Text style={pageHeaderStyle.headerTitle}>{props.options.title}</Text>
+        <View style={pageHeaderStyle.headerBtn}>
+          {props?.rightView ?? null}
+        </View>
+      </View>
+    </>
+  );
+};
+export const WithBackBtnPageHeader: FunctionComponent<PageHeaderProps> = ({
+  leftView,
+  rightView,
+  ...otherProps
+}) => {
+  const onTouchableOpacityPress = useCallback(
+    () => otherProps.navigation.goBack(),
+    []
+  );
 
-            </View>
-        </TouchableOpacity>}
+  return (
+    <PageHeader
+      {...otherProps}
+      leftView={
+        <TouchableOpacity onPress={onTouchableOpacityPress}>
+          <View
+            style={{
+              transform: [
+                {
+                  rotateY: "180deg",
+                },
+              ],
+            }}
+          >
+            <ChevronRight />
+          </View>
+        </TouchableOpacity>
+      }
     />
-}
+  );
+};
 
-export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({leftView, rightView, ...otherProps}) => {
-    const clientStatus  = useClientStatus();
-    const buggerIconClick = useCallback(() => {
+export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
+  leftView,
+  rightView,
+  ...otherProps
+}) => {
+  const clientStatus = useClientStatus();
+  const buggerIconClick = useCallback(() => {}, []);
+  const wifiIconClick = useCallback(() => {}, []);
 
-    }, [])
-    const wifiIconClick = useCallback(() => {
-
-    }, [])
-
-    return <PageHeader {...otherProps}
-                       leftView={<TouchableOpacity onPress={buggerIconClick}>
-                           <BuggerIcon/>
-                       </TouchableOpacity>}
-                       rightView={<TouchableOpacity onPress={wifiIconClick}>
-                           <View style={{
-                               transform: [{
-                                   rotate: '-45deg'
-                               }, {
-                                   translateY: -6
-                               }]
-                           }}>
-                               <WifiIcon color={clientStatus.isActive ? colors.successColor : colors.light}/></View>
-                       </TouchableOpacity>}
-
+  return (
+    <PageHeader
+      {...otherProps}
+      leftView={
+        <TouchableOpacity onPress={buggerIconClick}>
+          <BuggerIcon />
+        </TouchableOpacity>
+      }
+      rightView={
+        <TouchableOpacity onPress={wifiIconClick}>
+          <View
+            style={{
+              transform: [
+                {
+                  rotate: "-45deg",
+                },
+                {
+                  translateY: -6,
+                },
+              ],
+            }}
+          >
+            <WifiIcon
+              color={clientStatus.isActive ? colors.successColor : colors.light}
+            />
+          </View>
+        </TouchableOpacity>
+      }
     />
-}
+  );
+};
 export default PageHeader;
 const pageHeaderStyle = StyleSheet.create({
-    headerStatusPadding: {height: getStatusBarHeight(), backgroundColor: colors.pageHeaderBackgroundColor,}, header: {
-        height: 60,
-        backgroundColor: colors.pageHeaderBackgroundColor,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 15,
-        paddingRight: 15,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-    }, headerTitle: {fontSize: 20, fontWeight: 'bold', color: '#fff'}, headerBtn: {
-        height: 40, width: 40, justifyContent: 'center', alignItems: 'center'
-    }
-})
+  headerStatusPadding: {
+    height: getStatusBarHeight(),
+    backgroundColor: colors.pageHeaderBackgroundColor,
+  },
+  header: {
+    height: 60,
+    backgroundColor: colors.pageHeaderBackgroundColor,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: "#fff" },
+  headerBtn: {
+    height: 40,
+    width: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

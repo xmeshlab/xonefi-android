@@ -22,9 +22,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {array} JSON array of the private providers.
  */
 function get_priv_providers() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.private_providers;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.private_providers;
 }
 
 /**
@@ -33,11 +33,11 @@ function get_priv_providers() {
  * @returns {boolean} true: success, false: failure.
  */
 function save_priv_providers(providers) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.private_providers = providers;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.private_providers = providers;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -45,9 +45,9 @@ function save_priv_providers(providers) {
  * @returns {array} JSON array of Ethereum addresses of subscribers.
  */
 function get_priv_clients() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.private_clients;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.private_clients;
 }
 
 /**
@@ -57,16 +57,16 @@ function get_priv_clients() {
  * @returns {boolean} true: success; false: failure.
  */
 function save_priv_clients(clients) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.private_clients = clients;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.private_clients = clients;
+  config.write_default_config(config_json);
+  return true;
 }
 
 module.exports = {
-    get_priv_providers,
-    save_priv_providers,
-    get_priv_clients,
-    save_priv_clients
+  get_priv_providers,
+  save_priv_providers,
+  get_priv_clients,
+  save_priv_clients,
 };

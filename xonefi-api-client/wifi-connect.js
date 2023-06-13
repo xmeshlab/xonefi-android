@@ -17,37 +17,37 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Connect to the specified Wi-Fi network with the OneFi provider prefix as the password.
  * @param {string} network - SSID of the network.
  * @param {function} callback Pass true on success and false on failure.
  */
 function wifi_connect(network, callback) {
-    const wifi = require("node-wifi");
-    const config = require("./config");
-    const ssid = require("./ssid");
+  const wifi = require("node-wifi");
+  const config = require("./config");
+  const ssid = require("./ssid");
 
-    let config_json = config.read_default_config();
-    let ssid_json = ssid.deserialize_ssid(network);
+  let config_json = config.read_default_config();
+  let ssid_json = ssid.deserialize_ssid(network);
 
-    wifi.init({
-        iface: config_json.wlan_interface
-    });
+  wifi.init({
+    iface: config_json.wlan_interface,
+  });
 
-    console.log(`@wifi_connect network: ${network}, ssid_json.prefix: ${ssid_json.prefix}`);
+  console.log(
+    `@wifi_connect network: ${network}, ssid_json.prefix: ${ssid_json.prefix}`
+  );
 
-    wifi.connect({ ssid: network, password: ssid_json.prefix }, error => {
-        if (error) {
-            console.log(`@wifi_connect ERROR: ${error}`);
-            callback(false);
-        }
+  wifi.connect({ ssid: network, password: ssid_json.prefix }, (error) => {
+    if (error) {
+      console.log(`@wifi_connect ERROR: ${error}`);
+      callback(false);
+    }
 
-        console.log(`@wifi_connect: Successfully connected to ${network}`);
-        callback(true);
-    });
+    console.log(`@wifi_connect: Successfully connected to ${network}`);
+    callback(true);
+  });
 }
-
 
 /**
  * Disconnect from the specified network.
@@ -55,23 +55,23 @@ function wifi_connect(network, callback) {
  * @param {function} callback - Pass true on success and false otherwise.
  */
 function disconnect_and_remove(network, callback) {
-    const wifi = require("node-wifi");
-    const config = require("./config");
+  const wifi = require("node-wifi");
+  const config = require("./config");
 
-    let config_json = config.read_default_config();
+  let config_json = config.read_default_config();
 
-    wifi.init({
-        iface: config_json.wlan_interface
-    });
+  wifi.init({
+    iface: config_json.wlan_interface,
+  });
 
-    wifi.deleteConnection({ ssid: network }, error => {
-        if (error) {
-            console.log(error);
-            return callback(false);
-        } else {
-            return callback(true);
-        }
-    });
+  wifi.deleteConnection({ ssid: network }, (error) => {
+    if (error) {
+      console.log(error);
+      return callback(false);
+    } else {
+      return callback(true);
+    }
+  });
 }
 
 module.exports = { wifi_connect, disconnect_and_remove };

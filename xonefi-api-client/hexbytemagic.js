@@ -23,12 +23,12 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {string} Corresponding ASCII raw string.
  */
 function hex_string_to_bytes(str) {
-    let bytes = [];
-    for (let i = 0; i < str.length; i += 2) {
-        bytes.push(parseInt(str.substr(i, 2), 16));
-    }
+  let bytes = [];
+  for (let i = 0; i < str.length; i += 2) {
+    bytes.push(parseInt(str.substr(i, 2), 16));
+  }
 
-    return bytes;
+  return bytes;
 }
 
 module.exports = { hex_string_to_bytes };

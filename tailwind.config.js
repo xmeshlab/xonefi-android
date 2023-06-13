@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./App.{js,jsx,ts,tsx}",
+  content: [
+    "./App.{js,jsx,ts,tsx}",
     "./src/screens/*.{js,jsx,ts,tsx}",
     "./src/*.{js,jsx,ts,tsx}",
-    "./src/Components/*.{js,jsx,ts,tsx}"
+    "./src/Components/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     // colors: {
@@ -12,11 +13,11 @@ module.exports = {
     // },
     extend: {
       colors: {
-        inputBox: '#273343',
-        backgroundBox: '#161F28'
+        inputBox: "#273343",
+        backgroundBox: "#161F28",
       },
     },
   },
   plugins: [],
-  corePlugins: require('tailwind-rn/unsupported-core-plugins'),
-}
+  corePlugins: require("tailwind-rn/unsupported-core-plugins"),
+};

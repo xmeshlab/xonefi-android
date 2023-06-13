@@ -17,157 +17,184 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-function initiate_connection(deserealized_ssid, chosen_ssid, user_password, private_key, config_json) {
-    //const ssid = require("../xonefi-api-client/ssid");
-    //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
-    const client_session = require("../xonefi-api-client/client_session");
-    const session_status = require("../xonefi-api-client/session-status");
-    const timestamp = require("../xonefi-api-client/timestamp");
-    //const symcrypto = require("../xonefi-api-client/symcrypto");
-    const uuid = require("../xonefi-api-client/uuid");
-    const hotspot_type = require("../xonefi-api-client/hotspot-type");
-    //const scan_counter = require("../xonefi-api-client/scan_counter");
-    const config = require("../xonefi-api-client/config");
-    const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
-    //const wifi_connect = require("../xonefi-api-client/wifi-connect");
-    const call_hello = require("../xonefi-api-client/call_hello");
-    const call_pafren = require("../xonefi-api-client/call_pafren");
-    //const call_handover = require("../xonefi-api-client/call_handover");
-    const encode_pafren = require("../xonefi-api-client/encode-pafren");
-    const call_sack = require("../xonefi-api-client/call_sack");
-    const encode_sack = require("../xonefi-api-client/encode-sack");
-    //const sack_number = require("../xonefi-api-client/sack_number");
-    //const handover_helper = require("../xonefi-api-client/handover_helper");
-    const sackok = require("../xonefi-api-client/sackok");
-    //const process_mgmt = require("../xonefi-api-client/process_mgmt");
+function initiate_connection(
+  deserealized_ssid,
+  chosen_ssid,
+  user_password,
+  private_key,
+  config_json
+) {
+  //const ssid = require("../xonefi-api-client/ssid");
+  //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
+  const client_session = require("../xonefi-api-client/client_session");
+  const session_status = require("../xonefi-api-client/session-status");
+  const timestamp = require("../xonefi-api-client/timestamp");
+  //const symcrypto = require("../xonefi-api-client/symcrypto");
+  const uuid = require("../xonefi-api-client/uuid");
+  const hotspot_type = require("../xonefi-api-client/hotspot-type");
+  //const scan_counter = require("../xonefi-api-client/scan_counter");
+  const config = require("../xonefi-api-client/config");
+  const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
+  //const wifi_connect = require("../xonefi-api-client/wifi-connect");
+  const call_hello = require("../xonefi-api-client/call_hello");
+  const call_pafren = require("../xonefi-api-client/call_pafren");
+  //const call_handover = require("../xonefi-api-client/call_handover");
+  const encode_pafren = require("../xonefi-api-client/encode-pafren");
+  const call_sack = require("../xonefi-api-client/call_sack");
+  const encode_sack = require("../xonefi-api-client/encode-sack");
+  //const sack_number = require("../xonefi-api-client/sack_number");
+  //const handover_helper = require("../xonefi-api-client/handover_helper");
+  const sackok = require("../xonefi-api-client/sackok");
+  //const process_mgmt = require("../xonefi-api-client/process_mgmt");
 
-    const Web3 = require('web3');
+  const Web3 = require("web3");
 
-    console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
+  console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
 
-    console.log(`chosen_ssid: ${chosen_ssid}`);
+  console.log(`chosen_ssid: ${chosen_ssid}`);
 
-    // wifi_connect.wifi_connect(chosen_ssid, (res) => {
-    //     if(res === true) {
-    console.log(`Successfully connected to ${chosen_ssid}`);
+  // wifi_connect.wifi_connect(chosen_ssid, (res) => {
+  //     if(res === true) {
+  console.log(`Successfully connected to ${chosen_ssid}`);
 
-    console.log(`Initiating the handshake stage`);
+  console.log(`Initiating the handshake stage`);
 
-    let hotspot_type_json = hotspot_type.decode_hotspot_type(deserealized_ssid.hotspot_type);
+  let hotspot_type_json = hotspot_type.decode_hotspot_type(
+    deserealized_ssid.hotspot_type
+  );
 
-    let calculated_sack_amount;
+  let calculated_sack_amount;
 
-    console.log(`DEB2@hotspot_type_json.access_method: ${hotspot_type_json.access_method}`);
-    console.log(`DEB2@deserealized_ssid.cost: ${deserealized_ssid.cost}`);
+  console.log(
+    `DEB2@hotspot_type_json.access_method: ${hotspot_type_json.access_method}`
+  );
+  console.log(`DEB2@deserealized_ssid.cost: ${deserealized_ssid.cost}`);
 
-    if(hotspot_type_json.access_method === "pft") {
-        calculated_sack_amount = deserealized_ssid.cost / 60;
-    } else if(hotspot_type_json.access_method === "pfd") {
-        calculated_sack_amount = deserealized_ssid.cost / 64;
-    } else if(hotspot_type_json.access_method === "restricted") {
-        calculated_sack_amount = 0;
-    } else if(hotspot_type_json.access_method === "free") {
-        calculated_sack_amount = 0;
-    } else {
-        console.log(`ERROR: Unknown access type: ${hotspot_type_json.access_method}`);
-        return;
-    }
+  if (hotspot_type_json.access_method === "pft") {
+    calculated_sack_amount = deserealized_ssid.cost / 60;
+  } else if (hotspot_type_json.access_method === "pfd") {
+    calculated_sack_amount = deserealized_ssid.cost / 64;
+  } else if (hotspot_type_json.access_method === "restricted") {
+    calculated_sack_amount = 0;
+  } else if (hotspot_type_json.access_method === "free") {
+    calculated_sack_amount = 0;
+  } else {
+    console.log(
+      `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
+    );
+    return;
+  }
 
-    console.log(`DEB2@calculated_sack_amount: ${calculated_sack_amount}`);
+  console.log(`DEB2@calculated_sack_amount: ${calculated_sack_amount}`);
 
-    let calculated_pafren_amount;
+  let calculated_pafren_amount;
 
-    if(hotspot_type_json.access_method === "pft") {
-        calculated_pafren_amount = deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 60;
-    } else if(hotspot_type_json.access_method === "pfd") {
-        calculated_pafren_amount = deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 64;
-    } else if(hotspot_type_json.access_method === "restricted") {
-        calculated_pafren_amount = 0;
-    } else if(hotspot_type_json.access_method === "free") {
-        calculated_pafren_amount = 0;
-    } else {
-        console.log(`ERROR: Unknown access type: ${hotspot_type_json.access_method}`);
-        return;
-    }
+  if (hotspot_type_json.access_method === "pft") {
+    calculated_pafren_amount =
+      deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 60;
+  } else if (hotspot_type_json.access_method === "pfd") {
+    calculated_pafren_amount =
+      deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 64;
+  } else if (hotspot_type_json.access_method === "restricted") {
+    calculated_pafren_amount = 0;
+  } else if (hotspot_type_json.access_method === "free") {
+    calculated_pafren_amount = 0;
+  } else {
+    console.log(
+      `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
+    );
+    return;
+  }
 
-    console.log(`hotspot_type_json.access_method: ${hotspot_type_json.access_method}`);
+  console.log(
+    `hotspot_type_json.access_method: ${hotspot_type_json.access_method}`
+  );
 
-    let calculated_number_of_sacks;
+  let calculated_number_of_sacks;
 
-    // if(hotspot_type_json.access_method === "pft" || hotspot_type_json.access_method === "pfd") {
-    //     calculated_number_of_sacks = calculated_pafren_amount / calculated_sack_amount;
-    // } else {
-    //     calculated_number_of_sacks = 0;
-    // }
+  // if(hotspot_type_json.access_method === "pft" || hotspot_type_json.access_method === "pfd") {
+  //     calculated_number_of_sacks = calculated_pafren_amount / calculated_sack_amount;
+  // } else {
+  //     calculated_number_of_sacks = 0;
+  // }
 
-    if(hotspot_type_json.access_method === "pft") {
-        calculated_number_of_sacks = calculated_pafren_amount / (calculated_sack_amount * 60);
-    } else if(hotspot_type_json.access_method === "pfd") {
-        calculated_number_of_sacks = calculated_pafren_amount / (calculated_sack_amount * 64);
-    } else if(hotspot_type_json.access_method === "restricted") {
-        calculated_number_of_sacks = 0;
-    } else if(hotspot_type_json.access_method === "free") {
-        calculated_number_of_sacks = 0;
-    } else {
-        console.log(`ERROR: Unknown access type: ${hotspot_type_json.access_method}`);
-        return;
-    }
+  if (hotspot_type_json.access_method === "pft") {
+    calculated_number_of_sacks =
+      calculated_pafren_amount / (calculated_sack_amount * 60);
+  } else if (hotspot_type_json.access_method === "pfd") {
+    calculated_number_of_sacks =
+      calculated_pafren_amount / (calculated_sack_amount * 64);
+  } else if (hotspot_type_json.access_method === "restricted") {
+    calculated_number_of_sacks = 0;
+  } else if (hotspot_type_json.access_method === "free") {
+    calculated_number_of_sacks = 0;
+  } else {
+    console.log(
+      `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
+    );
+    return;
+  }
 
-    let pafren_length;
+  let pafren_length;
 
-    if(hotspot_type_json.access_method === "pft") {
-        pafren_length = calculated_number_of_sacks * 60;
-    } else if(hotspot_type_json.access_method === "pfd") {
-        pafren_length = 3600 * 24; // User has 24 hours to spend 1 GB. TODO: Change in future protocols.
-    } else if(hotspot_type_json.access_method === "restricted") {
-        pafren_length = 0;
-    } else if(hotspot_type_json.access_method === "free") {
-        pafren_length = 0;
-    } else {
-        console.log(`ERROR: Unknown access type: ${hotspot_type_json.access_method}`);
-        return;
-    }
+  if (hotspot_type_json.access_method === "pft") {
+    pafren_length = calculated_number_of_sacks * 60;
+  } else if (hotspot_type_json.access_method === "pfd") {
+    pafren_length = 3600 * 24; // User has 24 hours to spend 1 GB. TODO: Change in future protocols.
+  } else if (hotspot_type_json.access_method === "restricted") {
+    pafren_length = 0;
+  } else if (hotspot_type_json.access_method === "free") {
+    pafren_length = 0;
+  } else {
+    console.log(
+      `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
+    );
+    return;
+  }
 
-    client_session.set_client_session(
-        {
-            status: session_status.status.HANDSHAKE,
-            ssid: chosen_ssid,
-            ip: deserealized_ssid.ip,
-            port: deserealized_ssid.port,
-            prefix: deserealized_ssid.prefix,
-            pfd: hotspot_type_json.access_method === "pfd",
-            pft: hotspot_type_json.access_method === "pft",
-            free: hotspot_type_json.access_method === "free",
-            restricted: hotspot_type_json.access_method === "restricted",
-            sack_number: 0,
-            expiration_timestamp: timestamp.get_current_timestamp() + config_json.handshake_time,
-            cost: deserealized_ssid.cost,
-            pafren_percentage: deserealized_ssid.pafren,
-            sack_amount: calculated_sack_amount,
-            pafren_amount: calculated_pafren_amount,
-            number_of_sacks: calculated_number_of_sacks,
-            initiated_sack_number: 0,
-            sackok: {},
-            provider_address: "",
-            last_sack_timestamp: 0,
-            scan_counter: 0,
-            paften_timestamp: 0,
-            session_id: ""
-        }, () => {
-            // console.log(`CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`);
-            console.log(`Handshake stage initiated.`);
+  client_session.set_client_session(
+    {
+      status: session_status.status.HANDSHAKE,
+      ssid: chosen_ssid,
+      ip: deserealized_ssid.ip,
+      port: deserealized_ssid.port,
+      prefix: deserealized_ssid.prefix,
+      pfd: hotspot_type_json.access_method === "pfd",
+      pft: hotspot_type_json.access_method === "pft",
+      free: hotspot_type_json.access_method === "free",
+      restricted: hotspot_type_json.access_method === "restricted",
+      sack_number: 0,
+      expiration_timestamp:
+        timestamp.get_current_timestamp() + config_json.handshake_time,
+      cost: deserealized_ssid.cost,
+      pafren_percentage: deserealized_ssid.pafren,
+      sack_amount: calculated_sack_amount,
+      pafren_amount: calculated_pafren_amount,
+      number_of_sacks: calculated_number_of_sacks,
+      initiated_sack_number: 0,
+      sackok: {},
+      provider_address: "",
+      last_sack_timestamp: 0,
+      scan_counter: 0,
+      paften_timestamp: 0,
+      session_id: "",
+    },
+    () => {
+      // console.log(`CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`);
+      console.log(`Handshake stage initiated.`);
 
-            config.read_default_config((config_json) => {
-                console.log(`Saying HELLO to provider...`);
+      config.read_default_config((config_json) => {
+        console.log(`Saying HELLO to provider...`);
 
+        console.log("Setting a timeout...");
+        setTimeout(() => {
+          console.log("Timeout is over.");
 
-                console.log("Setting a timeout...");
-                setTimeout(() => {
-                    console.log("Timeout is over.");
-
-                    console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
-                    console.log("DEBUG: deserealized_ssid.port: " + deserealized_ssid.port);
-                    console.log("DEBUG: " + private_key);
+          console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
+          console.log(
+            "DEBUG: deserealized_ssid.port: " + deserealized_ssid.port
+          );
+          console.log("DEBUG: " + private_key);
 
                     call_hello.call_hello(
                         "137.184.213.75",
@@ -190,22 +217,33 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                                 //let response_json = JSON.parse(response);
                                 //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
 
-                                let current_amount = calculated_pafren_amount * Math.pow(10, 12);
-                                console.log(`CALCULATED current_amount: ${current_amount}`);
+                let current_amount =
+                  calculated_pafren_amount * Math.pow(10, 12);
+                console.log(`CALCULATED current_amount: ${current_amount}`);
 
-                                let current_timestamp = timestamp.get_current_timestamp();
+                let current_timestamp = timestamp.get_current_timestamp();
 
-                                console.log(`=DEB(`);
-                                console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
-                                console.log(`deserealized_ssid.port: ${deserealized_ssid.port}`);
-                                console.log(`private_key: ${private_key}`);
-                                console.log(`response_json.command.session: ${response_json.command.session}`);
-                                console.log(`response_json.command.uuid: ${response_json.command.uuid}`);
-                                console.log(`current_amount: ${current_amount}`);
-                                console.log(`current_timestamp: ${current_timestamp}`);
-                                console.log(`config_json.account.address: ${config_json.account.address}`);
-                                console.log(`response_json.command.from: ${response_json.command.from}`);
-                                console.log(`)DEB=`);
+                console.log(`=DEB(`);
+                console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
+                console.log(
+                  `deserealized_ssid.port: ${deserealized_ssid.port}`
+                );
+                console.log(`private_key: ${private_key}`);
+                console.log(
+                  `response_json.command.session: ${response_json.command.session}`
+                );
+                console.log(
+                  `response_json.command.uuid: ${response_json.command.uuid}`
+                );
+                console.log(`current_amount: ${current_amount}`);
+                console.log(`current_timestamp: ${current_timestamp}`);
+                console.log(
+                  `config_json.account.address: ${config_json.account.address}`
+                );
+                console.log(
+                  `response_json.command.from: ${response_json.command.from}`
+                );
+                console.log(`)DEB=`);
 
 
                                 call_pafren.call_pafren(
@@ -228,42 +266,79 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
                                         console.log(`PAFREN sent. RESPONSE1: ${response1}`);
                                         let response1_json = response1;
 
-                                        if (response1_json.command.arguments.answer === "PAFREN-OK") {
-                                            console.log("Initiating sack sequence");
-                                            let session = config_json.client_session;
-                                            session.initiated_sack_number = 1;
-                                            session.pafren_timestamp = current_timestamp + pafren_length;
-                                            session.provider_address = response1_json.command.from;
-                                            session.session_id = response1_json.command.session;
-                                            session.status = session_status.status.ACTIVE;
-                                            client_session.set_client_session(session, () => {
-                                                config_json.client_session = session;
-                                                console.log("Calling the first sack");
+                    if (
+                      response1_json.command.arguments.answer === "PAFREN-OK"
+                    ) {
+                      console.log("Initiating sack sequence");
+                      let session = config_json.client_session;
+                      session.initiated_sack_number = 1;
+                      session.pafren_timestamp =
+                        current_timestamp + pafren_length;
+                      session.provider_address = response1_json.command.from;
+                      session.session_id = response1_json.command.session;
+                      session.status = session_status.status.ACTIVE;
+                      client_session.set_client_session(session, () => {
+                        config_json.client_session = session;
+                        console.log("Calling the first sack");
 
-                                                console.log(`config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`);
-                                                console.log(`config_json.client_session.sack_number: ${config_json.client_session.sack_number}`);
+                        console.log(
+                          `config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`
+                        );
+                        console.log(
+                          `config_json.client_session.sack_number: ${config_json.client_session.sack_number}`
+                        );
 
-                                                let current_sack_amount = config_json.client_session.sack_amount * (config_json.client_session.sack_number + 1) * Math.pow(10, 12);
-                                                console.log(`XLOG: config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`);
-                                                console.log(`XLOG: config_json.client_session.sack_number: ${config_json.client_session.sack_number}`);
-                                                console.log(`CALCULATED current_sack_amount: ${current_sack_amount}`);
+                        let current_sack_amount =
+                          config_json.client_session.sack_amount *
+                          (config_json.client_session.sack_number + 1) *
+                          Math.pow(10, 12);
+                        console.log(
+                          `XLOG: config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`
+                        );
+                        console.log(
+                          `XLOG: config_json.client_session.sack_number: ${config_json.client_session.sack_number}`
+                        );
+                        console.log(
+                          `CALCULATED current_sack_amount: ${current_sack_amount}`
+                        );
 
-                                                if (hotspot_type_json.access_method === "pft") {
-                                                    console.log(`XLOG: The access method is detected as PFT.`);
-                                                    console.log(`XLOG: deserealized_ssid.ip: ${deserealized_ssid.ip}`);
-                                                    console.log(`XLOG: deserealized_ssid.port: ${deserealized_ssid.port}`);
-                                                    console.log(`XLOG: response1_json.command.session: ${response1_json.command.session}`);
-                                                    console.log(`XLOG: response1_json.command.uuid: ${response1_json.command.uuid}`);
-                                                    console.log(`XLOG: current_sack_amount: ${current_sack_amount}`);
-                                                    console.log(`XLOG: current_timestamp: ${current_timestamp}`);
+                        if (hotspot_type_json.access_method === "pft") {
+                          console.log(
+                            `XLOG: The access method is detected as PFT.`
+                          );
+                          console.log(
+                            `XLOG: deserealized_ssid.ip: ${deserealized_ssid.ip}`
+                          );
+                          console.log(
+                            `XLOG: deserealized_ssid.port: ${deserealized_ssid.port}`
+                          );
+                          console.log(
+                            `XLOG: response1_json.command.session: ${response1_json.command.session}`
+                          );
+                          console.log(
+                            `XLOG: response1_json.command.uuid: ${response1_json.command.uuid}`
+                          );
+                          console.log(
+                            `XLOG: current_sack_amount: ${current_sack_amount}`
+                          );
+                          console.log(
+                            `XLOG: current_timestamp: ${current_timestamp}`
+                          );
 
-
-                                                    console.log("XLOG: Encode sack parameters:");
-                                                    console.log(`XLOG: config_json.account.address: ${config_json.account.address}`);
-                                                    console.log(`XLOG: response_json.command.from: ${response_json.command.from}`);
-                                                    console.log(`XLOG: current_sack_amount: ${current_sack_amount}`);
-                                                    console.log(`XLOG: current_timestamp: ${current_timestamp}`);
-                                                    console.log(`XLOG: private_key: ${private_key}`);
+                          console.log("XLOG: Encode sack parameters:");
+                          console.log(
+                            `XLOG: config_json.account.address: ${config_json.account.address}`
+                          );
+                          console.log(
+                            `XLOG: response_json.command.from: ${response_json.command.from}`
+                          );
+                          console.log(
+                            `XLOG: current_sack_amount: ${current_sack_amount}`
+                          );
+                          console.log(
+                            `XLOG: current_timestamp: ${current_timestamp}`
+                          );
+                          console.log(`XLOG: private_key: ${private_key}`);
 
                                                     console.log("XLOG: Calling call_sack...");
                                                     call_sack.call_sack(
@@ -331,11 +406,11 @@ function initiate_connection(deserealized_ssid, chosen_ssid, user_password, priv
             });
         });
 
-    //config_json = config.read_default_config();
-    //     } else {
-    //         console.log(`Unable to connect to ${deserealized_ssid.ssid}`);
-    //     }
-    // });
+  //config_json = config.read_default_config();
+  //     } else {
+  //         console.log(`Unable to connect to ${deserealized_ssid.ssid}`);
+  //     }
+  // });
 }
 
 module.exports = { initiate_connection };

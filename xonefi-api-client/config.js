@@ -17,13 +17,11 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 //import storage from 'react-native-sync-storage'
 
-let SQLite = require('react-native-sqlite-storage');
+let SQLite = require("react-native-sqlite-storage");
 //SQLite.enablePromise(true);
-
 
 //import * as os from "react-native-os";
 
@@ -105,84 +103,83 @@ let SQLite = require('react-native-sqlite-storage');
 //     return ".onefi.json";
 //  }
 
-
 export function starter_config() {
-    return {
-        "version": "0.2",
-        "account_set": false,
-        "client_on": false,
-        "ap_on": false,
-        "pft": false,
-        "pfd": false,
-        "cft": false,
-        "cfd": false,
-        "private_client": false,
-        "private_provider": false,
-        "max_ofi_mb": 0,
-        "max_ofi_hr": 0,
-        "price_ofi_mb": 0,
-        "price_ofi_hr": 0,
-        "infura_api_key": "",
-        "network": "goerli",
-        "account": {
-            "name": "",
-            "encrypted_prk": "",
-            "address": ""
-        },
-        "private_providers": [],
-        "private_clients": [],
-        "provider_ip": "192.168.0.1",
-        "port": 3141,
-        "wlan_interface": "[none]",
-        "ssids": [],
-        "pafren_percentage": 100,
-        "min_downlink_tier": 10,
-        "min_uplink_tier": 9,
-        "client_max_pafren": 200,
-        "gas_offer": {
-            "mainnet": "121000000000",
-            "kovan": "2000000",
-            "goerli": "100000"
-        },
-        "gas_price": {
-            "mainnet": "121000000000",
-            "goerli": "50000000000",
-            "kovan": "2000000"
-        },
-        "call_confirmation_threshold": 2,
-        "handshake_time": 300,
-        "sack_period": 70,
-        "minimum_pafren_length": 3540,
-        "expected_sack_amount": 131,
-        "expected_pafren_amount": 7900,
-        "allow_handover": false,
-        "e2e_mode": false,
-        "client_session": {
-            "status": 0,
-            "ssid": "",
-            "ip": "",
-            "port": 0,
-            "prefix": "",
-            "pfd": false,
-            "pft": false,
-            "free": false,
-            "restricted": false,
-            "sack_number": 0,
-            "expiration_timestamp": 0,
-            "pafren_timestamp": 0,
-            "session_id": "",
-            "number_of_sacks": 0,
-            "pafren_amount": 0,
-            "sack_amount": 0,
-            "pafren_percentage": 0,
-            "cost": 0,
-            "scan_counter": 0,
-            "last_sack_timestamp": 0,
-            "provider_address": "",
-            "initiated_sack_number": 0,
-            "sackok": {}
-        }
-    }
+  return {
+    version: "0.2",
+    account_set: false,
+    client_on: false,
+    ap_on: false,
+    pft: false,
+    pfd: false,
+    cft: false,
+    cfd: false,
+    private_client: false,
+    private_provider: false,
+    max_ofi_mb: 0,
+    max_ofi_hr: 0,
+    price_ofi_mb: 0,
+    price_ofi_hr: 0,
+    infura_api_key: "",
+    network: "goerli",
+    account: {
+      name: "",
+      encrypted_prk: "",
+      address: "",
+    },
+    private_providers: [],
+    private_clients: [],
+    provider_ip: "192.168.0.1",
+    port: 3141,
+    wlan_interface: "[none]",
+    ssids: [],
+    pafren_percentage: 100,
+    min_downlink_tier: 10,
+    min_uplink_tier: 9,
+    client_max_pafren: 200,
+    gas_offer: {
+      mainnet: "121000000000",
+      kovan: "2000000",
+      goerli: "100000",
+    },
+    gas_price: {
+      mainnet: "121000000000",
+      goerli: "50000000000",
+      kovan: "2000000",
+    },
+    call_confirmation_threshold: 2,
+    handshake_time: 300,
+    sack_period: 70,
+    minimum_pafren_length: 3540,
+    expected_sack_amount: 131,
+    expected_pafren_amount: 7900,
+    allow_handover: false,
+    e2e_mode: false,
+    client_session: {
+      status: 0,
+      ssid: "",
+      ip: "",
+      port: 0,
+      prefix: "",
+      pfd: false,
+      pft: false,
+      free: false,
+      restricted: false,
+      sack_number: 0,
+      expiration_timestamp: 0,
+      pafren_timestamp: 0,
+      session_id: "",
+      number_of_sacks: 0,
+      pafren_amount: 0,
+      sack_amount: 0,
+      pafren_percentage: 0,
+      cost: 0,
+      scan_counter: 0,
+      last_sack_timestamp: 0,
+      provider_address: "",
+      initiated_sack_number: 0,
+      sackok: {},
+    },
+  };
 }
 
 // export function read_default_config(callback) {
@@ -230,91 +227,105 @@ export function starter_config() {
 //     // }
 // }
 
-
 export function read_default_config(callback) {
-    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
-        console.log("XLOG: read_default_config 1");
-        console.log(`XLOG: db ${JSON.stringify(db)}`);
-        db.transaction((tx) => {
-            console.log("XLOG: read_default_config 2");
-            tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
-                console.log("XLOG: read_default_config 3");
-                console.log("XLOG: Checking the contents of the table.")
-                let len = results.rows.length;
-                console.log(`XLOG: Found ${len} rows.`);
+  let db = SQLite.openDatabase(
+    "config.db",
+    "1.0",
+    "Test Database",
+    200000,
+    () => {
+      console.log("XLOG: read_default_config 1");
+      console.log(`XLOG: db ${JSON.stringify(db)}`);
+      db.transaction((tx) => {
+        console.log("XLOG: read_default_config 2");
+        tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
+          console.log("XLOG: read_default_config 3");
+          console.log("XLOG: Checking the contents of the table.");
+          let len = results.rows.length;
+          console.log(`XLOG: Found ${len} rows.`);
 
-                if (len > 0) {
-                    console.log("XLOG: read_default_config 4");
-                    return callback(JSON.parse(results.rows.item(0).json));
-                } else {
-                    console.log("XLOG: read_default_config 5");
-                    console.log("XLOG: ERROR: Table Config has no rows.");
-                    return callback(null);
-                }
-
-            });
+          if (len > 0) {
+            console.log("XLOG: read_default_config 4");
+            return callback(JSON.parse(results.rows.item(0).json));
+          } else {
+            console.log("XLOG: read_default_config 5");
+            console.log("XLOG: ERROR: Table Config has no rows.");
+            return callback(null);
+          }
         });
-    }, (err) => {
-        console.log("XLOG: Error opening database 1");
-        console.log("XLOG: read_default_config 6");
-        return callback(false);
-    });
+      });
+    },
+    (err) => {
+      console.log("XLOG: Error opening database 1");
+      console.log("XLOG: read_default_config 6");
+      return callback(false);
+    }
+  );
 }
 
-
 export function write_default_config(config_json, callback) {
-    let db = SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, () => {
-         db.transaction((tx) => {
-            tx.executeSql(`UPDATE Config SET json = '${JSON.stringify(config_json)}' WHERE id = 0`, [], (tx, results) => {
-                console.log("XLOG: Successfully updated config.");
-                return callback(true);
-            });
-        });
-    }, (err) => {
-        console.log("XLOG: Error opening database 1");
-        return callback(false);
-    });
+  let db = SQLite.openDatabase(
+    "config.db",
+    "1.0",
+    "Test Database",
+    200000,
+    () => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          `UPDATE Config SET json = '${JSON.stringify(
+            config_json
+          )}' WHERE id = 0`,
+          [],
+          (tx, results) => {
+            console.log("XLOG: Successfully updated config.");
+            return callback(true);
+          }
+        );
+      });
+    },
+    (err) => {
+      console.log("XLOG: Error opening database 1");
+      return callback(false);
+    }
+  );
 
+  // try {
+  //     const jsonValue = JSON.stringify(config_json)
+  //     await AsyncStorage.setItem('config', jsonValue)
+  //     //await storage.set('config', jsonValue);
+  //     return true;
+  // } catch (e) {
+  //     return false;
+  // }
 
-    // try {
-    //     const jsonValue = JSON.stringify(config_json)
-    //     await AsyncStorage.setItem('config', jsonValue)
-    //     //await storage.set('config', jsonValue);
-    //     return true;
-    // } catch (e) {
-    //     return false;
-    // }
+  //
+  //
+  //
+  // const getData = async () => {
+  //     try {
+  //         const jsonValue = await AsyncStorage.getItem(`@config`)
+  //         if(jsonValue === "" || jsonValue === null) {
+  //
+  //         }
+  //         let ret = jsonValue != null ? JSON.parse(jsonValue) : null;
+  //
+  //     } catch(e) {
+  //         // error reading value
+  //     }
+  // }
+  //
+  // const storeData = async (value) => {
+  //     try {
+  //         const jsonValue = JSON.stringify(value)
+  //         await AsyncStorage.setItem('@storage_Key', jsonValue)
+  //         return true;
+  //     } catch (e) {
+  //         // saving error
+  //         return false;
+  //     }
+  // }
 
-    //
-    //
-    //
-    // const getData = async () => {
-    //     try {
-    //         const jsonValue = await AsyncStorage.getItem(`@config`)
-    //         if(jsonValue === "" || jsonValue === null) {
-    //
-    //         }
-    //         let ret = jsonValue != null ? JSON.parse(jsonValue) : null;
-    //
-    //     } catch(e) {
-    //         // error reading value
-    //     }
-    // }
-    //
-    // const storeData = async (value) => {
-    //     try {
-    //         const jsonValue = JSON.stringify(value)
-    //         await AsyncStorage.setItem('@storage_Key', jsonValue)
-    //         return true;
-    //     } catch (e) {
-    //         // saving error
-    //         return false;
-    //     }
-    // }
-
-
-
-    //return true;
+  //return true;
 }
 
 //  /**
@@ -363,8 +374,6 @@ export function write_default_config(config_json, callback) {
 // }
 //
 
-
-
 /**
  * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
  * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
@@ -372,66 +381,91 @@ export function write_default_config(config_json, callback) {
  * @returns {boolean} true: success; false: failure.
  */
 export async function config_init_if_absent(callback) {
-    let db = await SQLite.openDatabase("config.db", "1.0", "Test Database", 200000, async () => {
-        console.log("XLOG: config_init_if_absent: Database opened");
-        await db.transaction((tx) => {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)', [], (tx, results) => {
-                console.log("XLOG: Results", results);
-                tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
-                    console.log("Query completed");
+  let db = await SQLite.openDatabase(
+    "config.db",
+    "1.0",
+    "Test Database",
+    200000,
+    async () => {
+      console.log("XLOG: config_init_if_absent: Database opened");
+      await db.transaction(
+        (tx) => {
+          tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)",
+            [],
+            (tx, results) => {
+              console.log("XLOG: Results", results);
+              tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
+                console.log("Query completed");
 
-                    // Get rows with Web SQL Database spec compliance.
+                // Get rows with Web SQL Database spec compliance.
 
-                    let len = results.rows.length;
+                let len = results.rows.length;
 
-                    if(len === 0) {
-                        console.log("XLOG: The table is empty.")
-                        tx.executeSql(`INSERT INTO Config (id, json) VALUES (0, '${JSON.stringify(starter_config())}')`, [], (tx, results) => {
-                            console.log("XLOG: Initialized config with a starter code.")
+                if (len === 0) {
+                  console.log("XLOG: The table is empty.");
+                  tx.executeSql(
+                    `INSERT INTO Config (id, json) VALUES (0, '${JSON.stringify(
+                      starter_config()
+                    )}')`,
+                    [],
+                    (tx, results) => {
+                      console.log(
+                        "XLOG: Initialized config with a starter code."
+                      );
 
-                            tx.executeSql('SELECT * FROM Config', [], (tx, results) => {
-                               console.log("XLOG: Checking the contents of the table.")
-                                let len = results.rows.length;
-                                console.log(`XLOG: Found ${len} rows.`);
-                                for (let i = 0; i < len; i++) {
-                                    let row = results.rows.item(i);
-                                    console.log(`ID: ${row.id}, JSON: ${row.json}`);
-                                }
-                                return callback(true);
-                            });
-
-                        });
-                    } else {
-                        console.log("XLOG: The table is already populated.")
-                        return callback(true);
+                      tx.executeSql(
+                        "SELECT * FROM Config",
+                        [],
+                        (tx, results) => {
+                          console.log(
+                            "XLOG: Checking the contents of the table."
+                          );
+                          let len = results.rows.length;
+                          console.log(`XLOG: Found ${len} rows.`);
+                          for (let i = 0; i < len; i++) {
+                            let row = results.rows.item(i);
+                            console.log(`ID: ${row.id}, JSON: ${row.json}`);
+                          }
+                          return callback(true);
+                        }
+                      );
                     }
+                  );
+                } else {
+                  console.log("XLOG: The table is already populated.");
+                  return callback(true);
+                }
 
-                    // for (let i = 0; i < len; i++) {
-                    //     let row = results.rows.item(i);
-                    //     console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
-                    // }
+                // for (let i = 0; i < len; i++) {
+                //     let row = results.rows.item(i);
+                //     console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
+                // }
 
-                    return callback(true);
-                });
-            });
-        }, (err) => {
-            console.log("XLOG: Error opening database 1");
-            return callback(false);
-        });
-
-    // if(!config_exists()) {
-    //     config_init();
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-    //}
-    },  () => {
-            console.log("XLOG: Error opening database");
+                return callback(true);
+              });
+            }
+          );
+        },
+        (err) => {
+          console.log("XLOG: Error opening database 1");
+          return callback(false);
         }
-    );
-}
+      );
 
+      // if(!config_exists()) {
+      //     config_init();
+      //     return true;
+      // } else {
+      //     return false;
+      // }
+      //}
+    },
+    () => {
+      console.log("XLOG: Error opening database");
+    }
+  );
+}
 
 //
 //
@@ -482,8 +516,8 @@ export async function config_init_if_absent(callback) {
 // };
 
 module.exports = {
-    read_default_config,
-    write_default_config,
-    starter_config,
-    config_init_if_absent
+  read_default_config,
+  write_default_config,
+  starter_config,
+  config_init_if_absent,
 };

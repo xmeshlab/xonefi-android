@@ -17,17 +17,15 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Obtain from the client session state the timestamp of the last SACK sent to the provider.
  * @returns {int} Timestamp of the last SACK.
  */
 function get_last_sack_timestamp() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.client_session.last_sack_timestamp;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.client_session.last_sack_timestamp;
 }
-
 
 // /**
 //  * Save in the client session state the timestamp (UNIX timestamp in seconds) of the last SACK sent to the provider.
@@ -35,19 +33,18 @@ function get_last_sack_timestamp() {
 //  * @returns {boolean} true: success; false: failure.
 //  */
 function set_last_sack_timestamp(stamp, callback) {
-    const config = require("./config");
-    // let config_json = config.read_default_config();
-    // config_json.client_session.last_sack_timestamp = stamp;
-    // config.write_default_config(config_json);
-    // return true;
+  const config = require("./config");
+  // let config_json = config.read_default_config();
+  // config_json.client_session.last_sack_timestamp = stamp;
+  // config.write_default_config(config_json);
+  // return true;
 
-    config.read_default_config((config_json) => {
-        config_json.client_session.last_sack_timestamp = stamp;
-        config.write_default_config(config_json, (res) => {
-            return callback(res);
-        });
+  config.read_default_config((config_json) => {
+    config_json.client_session.last_sack_timestamp = stamp;
+    config.write_default_config(config_json, (res) => {
+      return callback(res);
     });
-
+  });
 }
 
 module.exports = { get_last_sack_timestamp, set_last_sack_timestamp };

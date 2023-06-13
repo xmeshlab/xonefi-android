@@ -31,34 +31,45 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {string} pafren - Serialized PAFREN. Please see encode_sack() for generation thereof.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_pafren(ip, port, web3, prk, session, re, amount, exp_timestamp, pafren, callback) {
-    var uuid = require('uuid');
+function call_pafren(
+  ip,
+  port,
+  web3,
+  prk,
+  session,
+  re,
+  amount,
+  exp_timestamp,
+  pafren,
+  callback
+) {
+  var uuid = require("uuid");
 
-    var message = {};
+  var message = {};
 
-    let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
-    message.command = new Object();
-    message.command.op = "PAFREN";
-    message.command.from = pubaddress;
-    msg_uuid = uuid.v4().toString();
-    message.command.uuid = msg_uuid;
-    message.command.timestamp = exp_timestamp;
-    message.command.session = session;
-    message.command.re = "";
-    message.command.arguments = {};
-    message.command.arguments.pafren = {
-        client: pubaddress,
-        amount: amount,
-        timestamp: exp_timestamp,
-        proof: pafren
-    };
+  let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+  message.command = new Object();
+  message.command.op = "PAFREN";
+  message.command.from = pubaddress;
+  msg_uuid = uuid.v4().toString();
+  message.command.uuid = msg_uuid;
+  message.command.timestamp = exp_timestamp;
+  message.command.session = session;
+  message.command.re = "";
+  message.command.arguments = {};
+  message.command.arguments.pafren = {
+    client: pubaddress,
+    amount: amount,
+    timestamp: exp_timestamp,
+    proof: pafren,
+  };
 
-    var signature_json = web3.eth.accounts.sign(
-        JSON.stringify(message.command),
-        prk
-    );
+  var signature_json = web3.eth.accounts.sign(
+    JSON.stringify(message.command),
+    prk
+  );
 
-    message.signature = signature_json.signature;
+  message.signature = signature_json.signature;
 
     const send_rest = require('./send_rest');
     send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {

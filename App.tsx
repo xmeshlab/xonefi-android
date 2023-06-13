@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
 import MainContainer from "./src/MainContainer";
 import BackgroundTimer from "react-native-background-timer";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   read_default_config,
   write_default_config,
@@ -11,7 +11,7 @@ import {
 } from "./xonefi-api-client/config";
 import { startClientDaemon } from "./client-daemon/start-client-daemon";
 
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from "react-native-splash-screen";
 
 function App() {
   console.log("XLOG: App.tsx");
@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     SplashScreen.hide();
-  }, [])
+  }, []);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

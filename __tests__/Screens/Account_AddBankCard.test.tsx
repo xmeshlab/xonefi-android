@@ -4,6 +4,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 import AccountAddBankCard from "../../src/screens/Account_AddBankCard";
 
-it("renders", ()=>{
-    render(<AccountAddBankCard key={"Test"} name={"Test"}/>)
-})
+it("renders", () => {
+  render(<AccountAddBankCard key={"Test"} name={"Test"} />);
+});

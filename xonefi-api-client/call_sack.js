@@ -36,31 +36,31 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
     const uuid = require('uuid');
     const send_rest = require('./send_rest');
 
-    var message = {};
-    let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+  var message = {};
+  let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
-    message.command = {};
-    message.command.op = "SACK";
-    message.command.from = pubaddress;
-    msg_uuid = uuid.v4().toString();
-    message.command.uuid = msg_uuid;
-    message.command.timestamp = current_timestamp;
-    message.command.session = session;
-    message.command.re = "";
-    message.command.arguments = {};
-    message.command.arguments.sack = {
-        client: pubaddress,
-        amount: Math.ceil(Number(amount)).toString(),
-        timestamp: current_timestamp,
-        proof: sack
-    };
+  message.command = {};
+  message.command.op = "SACK";
+  message.command.from = pubaddress;
+  msg_uuid = uuid.v4().toString();
+  message.command.uuid = msg_uuid;
+  message.command.timestamp = current_timestamp;
+  message.command.session = session;
+  message.command.re = "";
+  message.command.arguments = {};
+  message.command.arguments.sack = {
+    client: pubaddress,
+    amount: Math.ceil(Number(amount)).toString(),
+    timestamp: current_timestamp,
+    proof: sack,
+  };
 
-    var signature_json = web3.eth.accounts.sign(
-        JSON.stringify(message.command),
-        prk
-    );
+  var signature_json = web3.eth.accounts.sign(
+    JSON.stringify(message.command),
+    prk
+  );
 
-    message.signature = signature_json.signature;
+  message.signature = signature_json.signature;
 
     send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
         return callback(result);

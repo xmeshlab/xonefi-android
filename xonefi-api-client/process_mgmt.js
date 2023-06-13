@@ -17,44 +17,40 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Get the path to the OneFi Client PID file. This file stores the PID of the currently running OneFi Client PID.
  * @returns {string} PID file path.
  */
 function get_client_pid_path() {
-    const homedir = require('os').homedir();
-    const path = require('path');
-    return path.join(homedir, ".onefi-client.pid");
+  const homedir = require("os").homedir();
+  const path = require("path");
+  return path.join(homedir, ".onefi-client.pid");
 }
-
 
 /**
  * Get the path to the OneFi Provider PID file. This file stores the PID of the currently running OneFi Provider PID.
  * @returns {string} PID file path.
  */
 function get_provider_pid_path() {
-    const homedir = require('os').homedir();
-    const path = require('path');
-    return path.join(homedir, ".onefi-provider.pid");
+  const homedir = require("os").homedir();
+  const path = require("path");
+  return path.join(homedir, ".onefi-provider.pid");
 }
-
 
 /**
  * Obtain the PID (process ID) of the current process.
  * @returns {int} PID of the current process on success; -1 on failure.
  */
 function get_current_pid() {
-    // TODO: Test this function on MAC
-    // TODO: Test this function on Windows.
-    const process = require("process");
-    if (process.pid) {
-        return process.pid;
-    }
+  // TODO: Test this function on MAC
+  // TODO: Test this function on Windows.
+  const process = require("process");
+  if (process.pid) {
+    return process.pid;
+  }
 
-    return -1;
+  return -1;
 }
-
 
 /**
  * Save the PID of the current process in a file.
@@ -62,18 +58,23 @@ function get_current_pid() {
  * @returns {boolean} true on success, and false on failure.
  */
 function save_pid(pid_file) {
-    // TODO: Test this function on MAC
-    // TODO: Test this function on Windows.
-    const fs = require("fs");
+  // TODO: Test this function on MAC
+  // TODO: Test this function on Windows.
+  const fs = require("fs");
 
-    try {
-        fs.writeFileSync(pid_file, get_current_pid().toString());
-    } catch(e) {
-        console.log(`ERROR [e622a9f9b7]: ${e}`);
-        return false;
-    }
+  try {
+    fs.writeFileSync(pid_file, get_current_pid().toString());
+  } catch (e) {
+    console.log(`ERROR [e622a9f9b7]: ${e}`);
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
-module.exports = { get_client_pid_path, get_provider_pid_path, get_current_pid, save_pid };
+module.exports = {
+  get_client_pid_path,
+  get_provider_pid_path,
+  get_current_pid,
+  save_pid,
+};

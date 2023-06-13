@@ -23,9 +23,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {string} Log file path.
  */
 function get_log_path() {
-    const homedir = require('os').homedir();
-    const path = require('path');
-    return path.join(homedir, ".onefi.log");
+  const homedir = require("os").homedir();
+  const path = require("path");
+  return path.join(homedir, ".onefi.log");
 }
 
 /**
@@ -35,15 +35,15 @@ function get_log_path() {
  * @returns {boolean} true: success, false: failure.
  */
 function log(msg) {
-    var fs = require('fs');
-    // TODO: get rid of n.
-    var n = fs.appendFileSync(get_log_path(), `${msg}\n`);
-        
-    if(n <= 0) {
-        return false;
-    }
+  var fs = require("fs");
+  // TODO: get rid of n.
+  var n = fs.appendFileSync(get_log_path(), `${msg}\n`);
 
-    return true;
+  if (n <= 0) {
+    return false;
+  }
+
+  return true;
 }
 
 module.exports = { log, get_log_path };

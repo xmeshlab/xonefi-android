@@ -17,24 +17,23 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 /**
  * Check if a file exists (sync version).
  * @param {string} path - full path to the file.
  * @returns {boolean} true if exists, false if does not exist or an error occurs.
  */
 function file_exists(path) {
-    const fs = require("fs");
+  const fs = require("fs");
 
-    try {
-        if (fs.existsSync(path)) {
-            return true;
-        }
-    } catch(err) {
-        return false;
+  try {
+    if (fs.existsSync(path)) {
+      return true;
     }
-
+  } catch (err) {
     return false;
+  }
+
+  return false;
 }
 
 module.exports = { file_exists };

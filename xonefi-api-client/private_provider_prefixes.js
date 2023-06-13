@@ -23,13 +23,13 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {array} Array of prefixes corresponding to private providers.
  */
 function get_private_provider_prefixes(config_json) {
-    let prefixes = [];
+  let prefixes = [];
 
-    for(let x of config_json.private_providers) {
-        prefixes.push(x.substr(2, 10).toLowerCase());
-    }
+  for (let x of config_json.private_providers) {
+    prefixes.push(x.substr(2, 10).toLowerCase());
+  }
 
-    return prefixes;
+  return prefixes;
 }
 
 module.exports = { get_private_provider_prefixes };

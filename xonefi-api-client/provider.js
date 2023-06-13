@@ -22,9 +22,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {boolean} true: on; false: off.
  */
 function get_provider_status() {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.ap_on;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.ap_on;
 }
 
 /**
@@ -33,11 +33,11 @@ function get_provider_status() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_provider_status(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.ap_on = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.ap_on = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -45,9 +45,9 @@ function set_provider_status(enabled) {
  * @returns {boolean} true: CFD mode is activated; false: CFD mode is deactivated.
  */
 function get_charge_for_data() {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.cfd;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.cfd;
 }
 
 /**
@@ -56,11 +56,11 @@ function get_charge_for_data() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_charge_for_data(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.cfd = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.cfd = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -68,9 +68,9 @@ function set_charge_for_data(enabled) {
  * @returns {boolean} true if CFT is enabled, false if otherwise.
  */
 function get_charge_for_time() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.cft;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.cft;
 }
 
 /**
@@ -79,11 +79,11 @@ function get_charge_for_time() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_charge_for_time(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.cft = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.cft = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -91,11 +91,10 @@ function set_charge_for_time(enabled) {
  * @returns {boolean} true: activated, false: deactivated.
  */
 function get_private_provider() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.private_provider;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.private_provider;
 }
-
 
 /**
  * Activates the private provider mode in the configuration.
@@ -103,11 +102,11 @@ function get_private_provider() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_private_provider(enabled) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.private_provider = enabled;
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.private_provider = enabled;
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -115,10 +114,10 @@ function set_private_provider(enabled) {
  * @returns {int} Amount of OFI tokens that the provider requests per gigabyte of traffic.
  */
 function get_price_ofi_mb() {
-    // TODO: Refactor MB into GB.
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.price_ofi_mb;
+  // TODO: Refactor MB into GB.
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.price_ofi_mb;
 }
 
 /**
@@ -127,12 +126,12 @@ function get_price_ofi_mb() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_price_ofi_mb(price) {
-    // TODO: Refactor MB into GB.
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.price_ofi_mb = parseInt(price);
-    config.write_default_config(config_json);
-    return true;
+  // TODO: Refactor MB into GB.
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.price_ofi_mb = parseInt(price);
+  config.write_default_config(config_json);
+  return true;
 }
 
 /**
@@ -140,9 +139,9 @@ function set_price_ofi_mb(price) {
  * @returns {int} Number of OFI tokens that the provider expects to be paid for one hour of Internet provided.
  */
 function get_price_ofi_hr() {
-    const config  = require("./config");
-    let config_json = config.read_default_config();
-    return config_json.price_ofi_hr;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  return config_json.price_ofi_hr;
 }
 
 /**
@@ -151,24 +150,24 @@ function get_price_ofi_hr() {
  * @returns {boolean} true: success, false: failure.
  */
 function set_price_ofi_hr(price) {
-    const config = require("./config");
-    let config_json = config.read_default_config();
-    config_json.price_ofi_hr = parseInt(price);
-    config.write_default_config(config_json);
-    return true;
+  const config = require("./config");
+  let config_json = config.read_default_config();
+  config_json.price_ofi_hr = parseInt(price);
+  config.write_default_config(config_json);
+  return true;
 }
 
 module.exports = {
-    get_charge_for_data,
-    set_charge_for_data,
-    get_charge_for_time,
-    set_charge_for_time,
-    get_private_provider,
-    set_private_provider,
-    get_price_ofi_mb,
-    set_price_ofi_mb,
-    get_price_ofi_hr,
-    set_price_ofi_hr,
-    set_provider_status,
-    get_provider_status
+  get_charge_for_data,
+  set_charge_for_data,
+  get_charge_for_time,
+  set_charge_for_time,
+  get_private_provider,
+  set_private_provider,
+  get_price_ofi_mb,
+  set_price_ofi_mb,
+  get_price_ofi_hr,
+  set_price_ofi_hr,
+  set_provider_status,
+  get_provider_status,
 };
