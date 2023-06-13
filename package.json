@@ -5,7 +5,7 @@
     "start": "expo start --dev-client -c --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test": "jest",
+    "test": "jest  --watchAll --collect-coverage",
     "web": "expo start --web",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
@@ -88,7 +88,8 @@
     "preset": "jest-expo",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/Components/*.{js, jsx}",
+      "src/Components/*.js",
+      "src/Components/*.jsx",
       "src/Components/*.ts",
       "src/Components/*.tsx",
       "src/screens/*.{js, jsx}",
