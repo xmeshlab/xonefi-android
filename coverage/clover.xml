@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686771053927" clover="3.2.0">
-  <project timestamp="1686771053927" name="All files">
+<coverage generated="1686772845763" clover="3.2.0">
+  <project timestamp="1686772845763" name="All files">
     <metrics statements="237" coveredstatements="107" conditionals="33" coveredconditionals="4" methods="86" coveredmethods="29" elements="356" coveredelements="140" complexity="0" loc="237" ncloc="237" packages="2" files="24" classes="24"/>
     <package name="Components">
       <metrics statements="17" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="11" coveredmethods="10"/>
@@ -207,8 +207,8 @@
       </file>
       <file name="LinkedPaymentCardScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/LinkedPaymentCardScreen.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
       </file>
       <file name="PayAndConnect.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/PayAndConnect.tsx">
         <metrics statements="64" coveredstatements="15" conditionals="16" coveredconditionals="0" methods="14" coveredmethods="0"/>

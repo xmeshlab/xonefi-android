@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 import backgroundImage from "../../assets/background.png";
-import buttonBackground from "../../assets/CreateNewUserButtonBackground.png";
 import BigBlueButton from "../Components/BigBlueButton";
 
 export default function LinkedPaymentCardScreen({ navigation }) {
