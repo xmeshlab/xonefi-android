@@ -31,7 +31,7 @@ import DeviceInfo from 'react-native-device-info';
  * @param {string} session - UUID of the current session.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_hello(ip, port, web3, prk, session, mac, callback) {
+function call_hello(ip, port, web3, prk, session, client_ip, callback) {
     var uuid = require('uuid');
 
     var message = new Object();
@@ -45,7 +45,7 @@ function call_hello(ip, port, web3, prk, session, mac, callback) {
     message.command.uuid = msg_uuid;
     message.command.timestamp = Math.floor(new Date() / 1000);
     message.command.session = session;
-    message.command.mac = mac;
+    message.command.client_ip = client_ip;
     message.command.re = "";
     message.command.arguments = new Object();
 
