@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686772845763" clover="3.2.0">
-  <project timestamp="1686772845763" name="All files">
-    <metrics statements="237" coveredstatements="107" conditionals="33" coveredconditionals="4" methods="86" coveredmethods="29" elements="356" coveredelements="140" complexity="0" loc="237" ncloc="237" packages="2" files="24" classes="24"/>
+<coverage generated="1686773334132" clover="3.2.0">
+  <project timestamp="1686773334132" name="All files">
+    <metrics statements="237" coveredstatements="110" conditionals="33" coveredconditionals="4" methods="86" coveredmethods="31" elements="356" coveredelements="145" complexity="0" loc="237" ncloc="237" packages="2" files="24" classes="24"/>
     <package name="Components">
       <metrics statements="17" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="11" coveredmethods="10"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Asset.jsx">
@@ -15,11 +15,11 @@
       </file>
       <file name="GreyBackgroundBar.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/GreyBackgroundBar.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="6" type="stmt"/>
+        <line num="5" count="12" type="stmt"/>
       </file>
       <file name="GreyBackgroundBox.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/GreyBackgroundBox.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="3" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
       </file>
       <file name="GreyButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/GreyButton.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -49,23 +49,23 @@
       </file>
       <file name="ViewButton.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/ViewButton.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="3" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
       </file>
     </package>
     <package name="screens">
-      <metrics statements="220" coveredstatements="91" conditionals="29" coveredconditionals="0" methods="75" coveredmethods="19"/>
+      <metrics statements="220" coveredstatements="94" conditionals="29" coveredconditionals="0" methods="75" coveredmethods="21"/>
       <file name="AccountInformationScreen.js" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/AccountInformationScreen.js">
-        <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
-        <line num="20" count="0" type="stmt"/>
+        <metrics statements="12" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="2"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
         <line num="103" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
+        <line num="132" count="1" type="stmt"/>
         <line num="149" count="0" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
       </file>

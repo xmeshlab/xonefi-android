@@ -19,7 +19,6 @@ jest.mock("../../src/MainContainer");
 it("renders", () => {
   const pushMock = jest.fn();
   jest.mock("../../src/MainContainer");
-  jest.mock("../MainContainer");
   const { getByText } = render(
     <AccountInformationScreen
       navigation={{ push: pushMock }}
@@ -27,3 +26,15 @@ it("renders", () => {
     />
   );
 });
+
+/*it("renders", () => {
+  const pushMock = jest.fn();
+  jest.mock("../../src/MainContainer");
+  jest.mock("../MainContainer");
+  const { getByText } = render(
+    <AccountInformationScreen
+      navigation={{ push: pushMock }}
+      userContext_array={["Test", jest.fn(), {}, jest.fn()]}
+    />
+  );
+});*/
