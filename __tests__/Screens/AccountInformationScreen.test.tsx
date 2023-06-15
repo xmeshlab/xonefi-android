@@ -19,22 +19,30 @@ jest.mock("../../src/MainContainer");
 it("renders", () => {
   const pushMock = jest.fn();
   jest.mock("../../src/MainContainer");
-  const { getByText } = render(
+  const { getByText, getAllByText } = render(
     <AccountInformationScreen
       navigation={{ push: pushMock }}
       userContext_array={["Test", jest.fn(), {}, jest.fn()]}
     />
   );
-});
 
-/*it("renders", () => {
-  const pushMock = jest.fn();
-  jest.mock("../../src/MainContainer");
-  jest.mock("../MainContainer");
-  const { getByText } = render(
-    <AccountInformationScreen
-      navigation={{ push: pushMock }}
-      userContext_array={["Test", jest.fn(), {}, jest.fn()]}
-    />
-  );
-});*/
+  //There should be 4 View Buttons
+  expect(getAllByText("View").length).toBe(4);
+
+  expect(getByText("Account Informtion")).not.toBeNull();
+  expect(getAllByText("Account Informtion").length).toBe(1);
+
+  expect(getByText("Legal")).not.toBeNull();
+  expect(getAllByText("Legal").length).toBe(1);
+  expect(getByText("Terms")).not.toBeNull();
+  expect(getAllByText("Terms").length).toBe(1);
+  expect(getByText("Privacy Policy")).not.toBeNull();
+  expect(getAllByText("Privacy Policy").length).toBe(1);
+
+  expect(getByText("Wallet Address")).not.toBeNull();
+  expect(getAllByText("Wallet Address").length).toBe(1);
+  expect(getByText("Address")).not.toBeNull();
+  expect(getAllByText("Address").length).toBe(1);
+  expect(getByText("Private Key")).not.toBeNull();
+  expect(getAllByText("Private Key").length).toBe(1);
+});
