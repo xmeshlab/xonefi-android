@@ -61,6 +61,7 @@
     "react-native-udp": "4.1.5",
     "react-native-vector-icons": "^9.2.0",
     "react-native-wifi-reborn": "^4.7.0",
+    "react-native-network-info": "^5.2.1",
     "react-router-dom": "^6.11.2",
     "tailwind-rn": "^4.2.0",
     "typescript": "^5.0.4",
