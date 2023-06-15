@@ -219,6 +219,7 @@ function initiate_connection(
                   private_key,
                   uuid.generate_unique_id(),
                   ipAddress,
+                  deserealized_ssid.prefix,
                   (response) => {
                       console.log(`PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 

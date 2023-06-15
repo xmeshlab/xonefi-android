@@ -57,6 +57,7 @@ function call_pafren(
   message.command.session = session;
   message.command.re = "";
   message.command.client_ip = "";
+  message.command.provider_prefix = "";
   message.command.arguments = {};
   message.command.arguments.pafren = {
     client: pubaddress,
