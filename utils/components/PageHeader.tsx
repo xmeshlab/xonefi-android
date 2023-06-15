@@ -12,7 +12,7 @@ import { colors } from "../../constants/colors";
 import BuggerIcon from "../../src/icons/bugger_icon";
 import WifiIcon from "../../src/icons/wifi_icon";
 import ChevronRight from "../../src/icons/chevron_right";
-import { useClientStatus } from "../../store/clientStatus";
+//import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
 
 export type PageHeaderProps = BottomTabHeaderProps & {
   leftView?: JSX.Element;
@@ -70,7 +70,8 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
   rightView,
   ...otherProps
 }) => {
-  const clientStatus = useClientStatus();
+  //const clientStatus = useClientStatus();
+  const clientStatus = false
   const buggerIconClick = useCallback(() => {}, []);
   const wifiIconClick = useCallback(() => {}, []);
 
@@ -96,8 +97,9 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
               ],
             }}
           >
+            {/*color={clientStatus.isActive ? colors.successColor : colors.light}*/}
             <WifiIcon
-              color={clientStatus.isActive ? colors.successColor : colors.light}
+              color={0? colors.successColor : colors.light}
             />
           </View>
         </TouchableOpacity>

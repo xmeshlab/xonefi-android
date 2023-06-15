@@ -11,6 +11,7 @@ const GreyButton = ({ imageSource, textInput, onPressFunction }) => {
     <TouchableOpacity
       onPress={onPressFunction}
       className="flex flex-row bg-slate-800 bg-rounded p-5 rounded-3xl justify-around mb-3"
+      testID="Grey Button"
     >
       <Image source={imageSource} className="" />
       <Text className="text-white">{textInput}</Text>

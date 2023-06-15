@@ -21,17 +21,17 @@ const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
 
       <View className="absolute top-1/2 w-screen">
         <Text className="text-white text-2xl mb-5 mx-auto left-0 right-0">
-          Login In
+          Login
         </Text>
         <View className="flex flex-row justify-around">
-          <TouchableOpacity onPress={logInFunction}>
+          <TouchableOpacity onPress={logInFunction} testID="Google Login">
             <GoogleIcon />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={loginFacebook}>
+          <TouchableOpacity onPress={loginFacebook} testID="Facebook Login">
             <FacebookLogo3 />
           </TouchableOpacity>
-          <TouchableOpacity onPress={loginTwitter}>
+          <TouchableOpacity onPress={loginTwitter} testID="Twitter Login">
             <TwitterLogo />
           </TouchableOpacity>
         </View>

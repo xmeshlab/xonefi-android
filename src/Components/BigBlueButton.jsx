@@ -4,7 +4,7 @@ import { PrimaryBtn } from "../../utils/components/PrimaryBtn";
 
 function BigBlueButton({ text, onPressFunction }) {
   return (
-    <View className="mx-5 flex flex-row justify-center my-2">
+    <View className="mx-5 flex flex-row justify-center my-2" testID="Big Blue Button">
       <PrimaryBtn className="flex-1" onPress={onPressFunction}>
         <Text className="text-white text-sm m-1">{text}</Text>
       </PrimaryBtn>

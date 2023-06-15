@@ -39,7 +39,7 @@ import {
 import { colors } from "../constants/colors";
 import PurchaseSell from "./screens/PurchaseSell";
 import { WifiWithSignalLevel } from "../types/global";
-import { OneFiStorage } from "../api/storage/OneFiStorage";
+//import { OneFiStorage } from "../api/storage/OneFiStorage";
 import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";
@@ -238,14 +238,15 @@ export const userContext = React.createContext([
 ]);
 
 export default function MainContainer() {
-  useEffect(() => {
+  //Commented out because clientSession is not being used atm
+ /*useEffect(() => {
     (async () => {
       // OneFiStorage.clear();
       const clientSession = await OneFiStorage.getItem("client_session");
       //
       console.log("get client session", clientSession);
     })();
-  }, []);
+  }, []);*/
 
   const [key, setKey] = useState("");
   const [userInfo, setUserInfo] = useState({});
