@@ -1,6 +1,6 @@
 import { OneFiInfo } from "../../types/one.json";
 import { createTypeSafeStorage } from "./Storage";
-import { usePersistenceState } from "../../utils/hooks/usePersistenceState";
+import { usePersistenceState } from "../../src/hooks/usePersistenceState";
 
 /**
  * @example

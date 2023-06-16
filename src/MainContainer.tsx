@@ -30,13 +30,13 @@ import {
   RouteConfig,
 } from "@react-navigation/core/lib/typescript/src/types";
 import ConnectStatusScreen from "./screens/ConnectStatusScreen";
-import { WithMainBg } from "../utils/components/WithMainBg";
+import { WithMainBg } from "./Components/WithMainBg";
 import { StatusBar } from "expo-status-bar";
 import {
   TabPageHeader,
   WithBackBtnPageHeader,
-} from "../utils/components/PageHeader";
-import { colors } from "../constants/colors";
+} from "./Components/PageHeader";
+import { colors } from "./constants/colors";
 import PurchaseSell from "./screens/PurchaseSell";
 import { WifiWithSignalLevel } from "../types/global";
 //import { OneFiStorage } from "../api/storage/OneFiStorage";

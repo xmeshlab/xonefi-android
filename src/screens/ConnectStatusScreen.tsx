@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
-import Card from "../../utils/components/Card";
+import Card from "../Components/Card";
 import { RouteComponent } from "../../types/global";
-import { colors } from "../../constants/colors";
-import { Slider } from "../../utils/components/Slider";
+import { colors } from "../constants/colors";
+import { Slider } from "../Components/Slider";
 import ArrowUpIcon from "../icons/arrow_up_icon";
-import { globalStyle } from "../../constants/globalStyle";
+import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
 import { LineChart } from "react-native-charts-wrapper";

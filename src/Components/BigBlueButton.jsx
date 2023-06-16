@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text } from "react-native";
-import { PrimaryBtn } from "../../utils/components/PrimaryBtn";
+import { PrimaryBtn } from "./PrimaryBtn";
 
 function BigBlueButton({ text, onPressFunction }) {
   return (

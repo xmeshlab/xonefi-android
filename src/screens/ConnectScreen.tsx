@@ -23,10 +23,10 @@ import {
   WifiWithSignalLevel,
 } from "../../types/global";
 import { NavigationProp } from "@react-navigation/core/src/types";
-import { PrimaryBtn } from "../../utils/components/PrimaryBtn";
+import { PrimaryBtn } from "../Components/PrimaryBtn";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import LockICon from "../icons/LockIcon";
-import { globalStyle } from "../../constants/globalStyle";
+import { globalStyle } from "../constants/globalStyle";
 
 //import { is_onefi_ssid } from "../../api/client";
 /**
