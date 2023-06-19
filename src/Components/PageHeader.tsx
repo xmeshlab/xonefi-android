@@ -79,9 +79,8 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
     <PageHeader
       {...otherProps}
       leftView={
-        <TouchableOpacity onPress={buggerIconClick}>
-          <BuggerIcon />
-        </TouchableOpacity>
+        <>
+        </>
       }
       rightView={
         <TouchableOpacity onPress={wifiIconClick}>
