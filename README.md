@@ -47,7 +47,7 @@ Documentation for using the two navigators together - https://reactnavigation.or
 
 # Components 
 
-**Asset.jsx**
+**Asset.jsx**\
 This component is used to display the various crypto assets shown under the Wallet page. 
 
 The component takes in the following props : 
@@ -57,23 +57,23 @@ The component takes in the following props :
   AssetPrice : The current price of the crypto asset.
   AssetChange : The 24 hour percent change in the crypto asset. 
 
-**BigBlueButton.tsx**
+**BigBlueButton.tsx**\
 This component is used to display the rectangualr dark blue buttons found throughout the application. 
 
 The component takes in the following props : 
  text : The text to display on the button
  onPressFunction : The function to call once the button has been pressed. 
 
-**BlurModall.tsx**
+**BlurModall.tsx**\
 
- **GreyBackgroundBar.jsx**
+ **GreyBackgroundBar.jsx**\
 This component is used to display the grey layout bars found throughout the application.
 
 The component takes in the following props : 
  RightSideComponent : Component to display on the right side of the bar
  LeftText : text to display on the left side of the bar
 
-**GreyBackgroundBox.jsx**
+**GreyBackgroundBox.jsx**\
 This component is used to display the rectangualar grey boxes found throughout the application. 
 The main purpose of this application is to help standardize the styling found throughout the applicaiton. 
 
@@ -81,7 +81,7 @@ The component takes in the following props :
  titleText : The text to show at the top of the box
  children : The components to display inside the box
 
-**GreyButton.jsx**
+**GreyButton.jsx**\
 This component is used to display the grey buttons found throughout the application.
 
 The component takes in the following props : 
@@ -89,14 +89,14 @@ The component takes in the following props :
  textInput : The text to display for the button  
  onPressFunction : The function to run when the button is pressed
 
-**GreyTextInputBar.jsx**
+**GreyTextInputBar.jsx**\
 This component is used to display the grey text inputs found throughout the application.
 
 The component takes in the following props : 
  placeholder_text : The default text to show on the input bar
  state_function : The function that is used to change a state variable. 
 
-**ViewButton.jsx**
+**ViewButton.jsx**\
 This component is used to display the View Buuttons found throughout the application.
 
 The component takes in the following props : 
