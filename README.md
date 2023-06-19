@@ -106,6 +106,23 @@ The component takes in the following props :
 
 # Screens 
 
+**LinkedAccountScreen.js**\
+This screen is handles various functionalities regarding the Users Account. 
+On this screen the user can view information regarding their acount, logout of their account, and view their payment card. 
+
+**AccountInformationScreen.js**\
+This screen displays various information regarding a user's account.
+
+**InitialLogInScreen.jsx**\
+This screen is the login screen for our application. The application utalizes web3Auth to handle user authentication. 
+
+**ConnectScreen.tsx**\
+This screen is where users can go to connect to XOneFi Providers.
+
+**WalletScreen.js**\
+This screen allows users to view the various cryptocurrencies which they own. 
+
+
 
 
 # icons
