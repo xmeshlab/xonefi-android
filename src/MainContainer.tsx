@@ -405,7 +405,7 @@ export default function MainContainer() {
               <Stack.Screen
                 options={{
                   ...stackNavigatorScreenOptions,
-                  title: "ProviderDetails",
+                  title: "Provider",
                 }}
                 name="ProviderDetails"
                 component={ProviderDetailScreen}
