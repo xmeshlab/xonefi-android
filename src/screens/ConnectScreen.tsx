@@ -46,11 +46,6 @@ function is_onefi_ssid(ssid: string) {
   return false;
 }
 
-import {
-  read_default_config,
-  write_default_config,
-} from "../../xonefi-api-client/config";
-
 async function getPermission() {
   if (Platform.OS === "android") {
     const granted = await PermissionsAndroid.request(

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Storage } from "../../api/storage/Storage";
+//import { Storage } from "../../api/storage/Storage";
 
 export const usePersistenceState = <T, K extends keyof T>(
   storage: Storage<T>,

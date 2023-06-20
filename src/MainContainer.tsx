@@ -39,7 +39,6 @@ import {
 import { colors } from "./constants/colors";
 import PurchaseSell from "./screens/PurchaseSell";
 import { WifiWithSignalLevel } from "../types/global";
-//import { OneFiStorage } from "../api/storage/OneFiStorage";
 import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";

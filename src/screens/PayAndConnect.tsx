@@ -25,7 +25,6 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
-import { OneFiStorage } from "../../api/storage/OneFiStorage";
 
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
