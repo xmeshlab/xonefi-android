@@ -126,5 +126,37 @@ This screen allows users to view the various cryptocurrencies which they own.
 
 
 # icons
+The Icons folder contains many of the icons used through out our application. Many of these icons are svg assets generated using
+Figma's SVG to JSX plugin.
+
+**sign_in_icon.jsx**\
+This folder contains the svg assets used to display the various social media logos on the initial sign in page.
+
+**crypto_icon.tsx**\
+This folder contains the svg assets for the various cryptocurrency logos found throughout the application.
+
+
+
+# constants
+This folder contains the constant values that are used throughout our application. 
+
+**colors.ts**\
+This file standardizes the colors that are used throughout our application. 
+
+**dimension.ts**\
+This file standardizes certain dimensions that are found throughout our application. For example,
+the height of header is set in this file.
+
+**globalStyle.ts**\
+This file contains the global styles that are used throughout our application.
+
+
+# hooks
+This folder contains many of the custom hooks found within our application
+
+
+
+
+
 
 

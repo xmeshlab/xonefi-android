@@ -1,10 +1,7 @@
 import * as React from "react";
-import { useState } from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View} from "react-native";
 import LinkedPaymentCardIcon from "../../assets/LinkedPaymentCardIcon.png";
-import RightArrowIcon from "../../assets/RightArrowIcon.png";
 import UserIcon from "../../assets/UserIcon.png";
-import CreateNewUserIcon from "../../assets/CreateNewUserIcon.png";
 import LogoutIcon from "../../assets/LogoutIcon.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 //This Screen Should just be an option under accounts
