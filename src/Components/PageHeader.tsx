@@ -13,6 +13,7 @@ import BuggerIcon from "../icons/bugger_icon";
 import WifiIcon from "../icons/wifi_icon";
 import ChevronRight from "../icons/chevron_right";
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
+//Use professor Nick's client status
 
 export type PageHeaderProps = BottomTabHeaderProps & {
   leftView?: JSX.Element;
