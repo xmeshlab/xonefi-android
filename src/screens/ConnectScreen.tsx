@@ -52,13 +52,11 @@ async function getPermission() {
   }
 }
 
-//bg-gradient-to-br from-blue via-black to-red"
 const tabBtnList = ["Hourly", "Data Usage", "Private"];
 console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
 
 const ConnectScreen: RouteComponent<"Connect"> = () => {
   const navigation = useNavigation<NavigationProp<GlobalRoute>>();
-  // navigation.navigate
   const [wifiList, setWifiList] = useState<WifiWithSignalLevel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentActive, setCurrentActive] = useState("Hourly");
@@ -66,9 +64,6 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
     setIsLoading(true);
     try {
       await getPermission();
-      // const configs = await NativeModules.XOneFiWiFiModule.getWiFiConfiguration();
-      // const connectInfo = await NativeModules.XOneFiWiFiModule.getConnectionInfo();
-      //const ret = await WifiManager.loadWifiList();
       const ret = await WifiManager.reScanAndLoadWifiList();
 
       console.log("XLOG: Got list of WiFi networks as follows...");
