@@ -8,13 +8,13 @@ import {
   ScrollView,
   PermissionsAndroid,
 } from "react-native";
-import { PrimaryBtn } from "../../utils/components/PrimaryBtn";
-import { colors } from "../../constants/colors";
+import { PrimaryBtn } from "../Components/PrimaryBtn";
+import { colors } from "../constants/colors";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
-import { globalStyle } from "../../constants/globalStyle";
+import { globalStyle } from "../constants/globalStyle";
 import { RouteComponent } from "../../types/global";
 import WifiManager from "react-native-wifi-reborn";
-import { useAsync } from "../../utils/hooks/useAsync";
+import { useAsync } from "../hooks/useAsync";
 import BackgroundTimer from "react-native-background-timer";
 import {
   read_default_config,

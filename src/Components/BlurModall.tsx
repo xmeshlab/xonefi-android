@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import * as React from "react";
 import { useCallback } from "react";
-import { globalStyle } from "../../constants/globalStyle";
-import SuccessIcon from "../../src/icons/SuccessIcon";
+import { globalStyle } from "../constants/globalStyle";
+import SuccessIcon from "../icons/SuccessIcon";
 
 export type BlurModalProps = Partial<ModalProps> & {
   onContentPress?: (event: GestureResponderEvent) => void;

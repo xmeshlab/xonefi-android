@@ -8,10 +8,10 @@ import React, {
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { colors } from "../../constants/colors";
-import BuggerIcon from "../../src/icons/bugger_icon";
-import WifiIcon from "../../src/icons/wifi_icon";
-import ChevronRight from "../../src/icons/chevron_right";
+import { colors } from "../constants/colors";
+import BuggerIcon from "../icons/bugger_icon";
+import WifiIcon from "../icons/wifi_icon";
+import ChevronRight from "../icons/chevron_right";
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
 
 export type PageHeaderProps = BottomTabHeaderProps & {
@@ -79,9 +79,8 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
     <PageHeader
       {...otherProps}
       leftView={
-        <TouchableOpacity onPress={buggerIconClick}>
-          <BuggerIcon />
-        </TouchableOpacity>
+        <>
+        </>
       }
       rightView={
         <TouchableOpacity onPress={wifiIconClick}>

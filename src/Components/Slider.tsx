@@ -1,6 +1,6 @@
 import { StyleSheet, View, ViewComponent, ViewProps, Text } from "react-native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { colors } from "../../constants/colors";
+import { colors } from "../constants/colors";
 import { useViewRect } from "../hooks/useViewRect";
 
 interface SliderProps {

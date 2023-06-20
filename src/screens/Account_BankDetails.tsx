@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { RouteProp } from "@react-navigation/native";
-import { WithMainBg } from "../../utils/components/WithMainBg";
+import { WithMainBg } from "../Components/WithMainBg";
 import {
   View,
   Text,

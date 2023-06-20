@@ -1,4 +1,4 @@
-import { encrypt_aes256ctr_base64 } from "../utils/symcrypto";
+import { encrypt_aes256ctr_base64 } from "../src/symcrypto";
 import * as uuid from "uuid";
 import DeviceInfo from "react-native-device-info";
 import { OneFiStorage } from "./storage/OneFiStorage";
