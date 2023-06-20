@@ -15,8 +15,6 @@ import WalletScreen from "./screens/WalletScreen";
 import ProviderDetailScreen from "./screens/ProviderDetailScreen";
 import AccountInformationScreen from "./screens/AccountInformationScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
-import AccountBankDetails from "./screens/Account_BankDetails";
-import AccountAddBankCard from "./screens/Account_AddBankCard";
 import PayAndConnectScreen from "./screens/PayAndConnect";
 import AddNewPaymentScreen from "./screens/AddNewPaymentCard";
 import { useCallback, useEffect, useState } from "react";
