@@ -21,7 +21,7 @@ import {
   RouteComponent,
   WiFiLevel,
   WifiWithSignalLevel,
-} from "../../types/global";
+} from "../types/global";
 import { NavigationProp } from "@react-navigation/core/src/types";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import WifiLevelIcon from "../icons/WifiLevelIcon";

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../Components/Card";
-import { RouteComponent } from "../../types/global";
+import { RouteComponent } from "../types/global";
 import { colors } from "../constants/colors";
 import { Slider } from "../Components/Slider";
 import ArrowUpIcon from "../icons/arrow_up_icon";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { SvgProps, Path, Rect, G } from "react-native-svg";
-import { WiFiLevel } from "../../types/global";
+import { WiFiLevel } from "../types/global";
 import { useCallback } from "react";
 import { RectProps } from "react-native-svg/src/elements/Rect";
 

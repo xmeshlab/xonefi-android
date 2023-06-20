@@ -38,7 +38,7 @@ import {
 } from "./Components/PageHeader";
 import { colors } from "./constants/colors";
 import PurchaseSell from "./screens/PurchaseSell";
-import { WifiWithSignalLevel } from "../types/global";
+import { WifiWithSignalLevel } from "./types/global";
 import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";

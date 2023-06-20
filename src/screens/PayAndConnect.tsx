@@ -12,7 +12,7 @@ import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import { globalStyle } from "../constants/globalStyle";
-import { RouteComponent } from "../../types/global";
+import { RouteComponent } from "../types/global";
 import WifiManager from "react-native-wifi-reborn";
 import { useAsync } from "../hooks/useAsync";
 import BackgroundTimer from "react-native-background-timer";
