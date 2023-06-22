@@ -18,9 +18,6 @@ import { useUserContext } from "../context/UserContext";
 const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
   const userContext_array = useUserContext()
 
-  alert(userContext_array)
-  alert(useUserContext()[0] !== "")
-
   return (
     <View className="h-screen">
       <View className="flex flex-row justify-center w-screen absolute top-1/4">

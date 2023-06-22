@@ -38,16 +38,18 @@ import { colors } from "./constants/colors";
 import { WifiWithSignalLevel } from "./types/global";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";
+
+//login function imports
+import { loginWithWeb3Auth } from "./hooks/LoginWithWeb3Auth";
+import { loginWithWeb3AuthFacebook } from "./hooks/LoginWithWeb3Auth";
+import { loginWithWeb3AuthTwitter } from "./hooks/LoginWithWeb3Auth";
+
 //web3 auth code
 import * as WebBrowser from "@toruslabs/react-native-web-browser";
 import Web3Auth, {
   LOGIN_PROVIDER,
   OPENLOGIN_NETWORK,
 } from "@web3auth/react-native-sdk";
-import {
-  read_default_config,
-  write_default_config,
-} from "../xonefi-api-client/config";
 
 import { UserContextProvider } from "./context/UserContext";
 import { useUserContext } from "./context/UserContext";
@@ -219,144 +221,7 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
 };
 
 export default function MainContainer() {
-  //const userContext_array = useContext(userContext);
-  //Commented out because clientSession is not being used atm
- /*useEffect(() => {
-    (async () => {
-      // OneFiStorage.clear();
-      const clientSession = await OneFiStorage.getItem("client_session");
-      //
-      console.log("get client session", clientSession);
-    })();
-  }, []);*/
-
-  //const [key, setKey] = useState("");
-  //const [userInfo, setUserInfo] = useState({});
-
-
-  const loginWithWeb3Auth = async (setKey, setUserInfo) => { 
-    console.log("Loggin in with Web3Auth");
-    try {
-      console.log("Loggin in with Web3Auth");
-      //setConsole("Logging in");
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-      });
-      console.log("web3auth object");
-      console.log(web3auth);
-      const info = await web3auth.login({
-        loginProvider: LOGIN_PROVIDER.GOOGLE,
-        redirectUrl: resolvedRedirectUrl,
-      });
-      console.log("info returned from web3 Auth");
-      console.log(info);
-
-      setUserInfo(info);
-      setKey(info.privKey);
-
-      read_default_config((config_json2) => {
-        config_json2.account.dpk = info.privKey;
-        config_json2.account_set = true;
-        let Web3 = require("web3");
-        let web3 = new Web3();
-        let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
-        config_json2.account.address = account.address;
-
-        console.log(`info acct: ${JSON.stringify(info)}`);
-        console.log(`config_json2: ${JSON.stringify(config_json2)}`);
-        write_default_config(config_json2, () => {
-          console.log("XLOG: Config is successfully initialized (2).");
-        });
-      });
-
-      //uiConsole("Logged In");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
-    console.log("Loggin in with Web3Auth");
-    try {
-      console.log("Loggin in with Web3Auth");
-      //setConsole("Logging in");
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-      });
-      console.log("web3auth object");
-      console.log(web3auth);
-      const info = await web3auth.login({
-        loginProvider: LOGIN_PROVIDER.FACEBOOK,
-        redirectUrl: resolvedRedirectUrl,
-      });
-      console.log("info returned from web3 Auth");
-      console.log(info);
-
-      setUserInfo(info);
-      setKey(info.privKey);
-      //uiConsole("Logged In");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
-    console.log("Loggin in with Web3Auth");
-    try {
-      console.log("Loggin in with Web3Auth");
-      //setConsole("Logging in");
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-      });
-      console.log("web3auth object");
-      console.log(web3auth);
-      const info = await web3auth.login({
-        loginProvider: LOGIN_PROVIDER.WECHAT,
-        redirectUrl: resolvedRedirectUrl,
-      });
-      console.log("info returned from web3 Auth");
-      console.log(info);
-
-      setUserInfo(info);
-      setKey(info.privKey);
-      //uiConsole("Logged In");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
-    console.log("Loggin in with Web3Auth");
-    try {
-      console.log("Loggin in with Web3Auth");
-      //setConsole("Logging in");
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-      });
-      console.log("web3auth object");
-      console.log(web3auth);
-      const info = await web3auth.login({
-        loginProvider: LOGIN_PROVIDER.TWITTER,
-        redirectUrl: resolvedRedirectUrl,
-      });
-      console.log("info returned from web3 Auth");
-      console.log(info);
-
-      setUserInfo(info);
-      setKey(info.privKey);
-      //uiConsole("Logged In");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const context_array = useUserContext()
-  //alert(context_array[0] == null)
-  alert(context_array[0] == "")
   if(context_array[0] == ""){
     return(
     <InitialLogInScreen
