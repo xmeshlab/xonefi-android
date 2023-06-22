@@ -28,15 +28,12 @@ import {
   RouteConfig,
 } from "@react-navigation/core/lib/typescript/src/types";
 import ConnectStatusScreen from "./screens/ConnectStatusScreen";
-import { WithMainBg } from "./Components/WithMainBg";
-import { StatusBar } from "expo-status-bar";
 import {
   TabPageHeader,
   WithBackBtnPageHeader,
 } from "./Components/PageHeader";
 import { colors } from "./constants/colors";
 import { WifiWithSignalLevel } from "./types/global";
-
 import InitialLogInScreen from "./screens/InitialLogInScreen";
 
 //login function imports
@@ -44,28 +41,7 @@ import { loginWithWeb3Auth } from "./hooks/LoginWithWeb3Auth";
 import { loginWithWeb3AuthFacebook } from "./hooks/LoginWithWeb3Auth";
 import { loginWithWeb3AuthTwitter } from "./hooks/LoginWithWeb3Auth";
 
-//web3 auth code
-import * as WebBrowser from "@toruslabs/react-native-web-browser";
-import Web3Auth, {
-  LOGIN_PROVIDER,
-  OPENLOGIN_NETWORK,
-} from "@web3auth/react-native-sdk";
-
-import { UserContextProvider } from "./context/UserContext";
 import { useUserContext } from "./context/UserContext";
-import { useContext } from "react";
-
-//web3Auth Code
-const scheme = "web3authrnexample"; // Or your desired app redirection scheme
-const resolvedRedirectUrl = `${scheme}://openlogin`;
-
-const clientId =
-  "BHU5wO49Ul-c13pLy6HT84KINj4fcQ20W_3H7dZWj5AP3LRWIE69ZjVVWZ3B0u_TkJx8TbPK6iFeK0gzf5is5Oo";
-
-const web3auth = new Web3Auth(WebBrowser, {
-  clientId,
-  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-});
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -219,6 +195,8 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   // cardShadowEnabled: true,
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
+
+
 
 export default function MainContainer() {
   const context_array = useUserContext()
