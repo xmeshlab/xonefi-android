@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, Image, NativeModules } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -35,9 +35,7 @@ import {
   WithBackBtnPageHeader,
 } from "./Components/PageHeader";
 import { colors } from "./constants/colors";
-import PurchaseSell from "./screens/PurchaseSell";
 import { WifiWithSignalLevel } from "./types/global";
-import AccountAddCrptoPaymentCard from "./screens/Account_AddCryptoPaymentCard";
 
 import InitialLogInScreen from "./screens/InitialLogInScreen";
 //web3 auth code
@@ -46,12 +44,14 @@ import Web3Auth, {
   LOGIN_PROVIDER,
   OPENLOGIN_NETWORK,
 } from "@web3auth/react-native-sdk";
-import BigBlueButton from "./Components/BigBlueButton";
-import worker from "../client-daemon/worker";
 import {
   read_default_config,
   write_default_config,
 } from "../xonefi-api-client/config";
+
+import { UserContextProvider } from "./context/UserContext";
+import { useUserContext } from "./context/UserContext";
+import { useContext } from "react";
 
 //web3Auth Code
 const scheme = "web3authrnexample"; // Or your desired app redirection scheme
@@ -157,15 +157,6 @@ function HomeTab() {
     };
   }, []);
 
-  const tabScreenComponent = useCallback(
-    () => (
-      <View>
-        <Text>home</Text>
-      </View>
-    ),
-    []
-  );
-
   return (
     <TabNavigator
       initialRouteName={connectName}
@@ -227,14 +218,8 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
 
-export const userContext = React.createContext([
-  "",
-  (value: string) => {},
-  {},
-  (value: string) => {},
-]);
-
 export default function MainContainer() {
+  //const userContext_array = useContext(userContext);
   //Commented out because clientSession is not being used atm
  /*useEffect(() => {
     (async () => {
@@ -245,11 +230,11 @@ export default function MainContainer() {
     })();
   }, []);*/
 
-  const [key, setKey] = useState("");
-  const [userInfo, setUserInfo] = useState({});
-  //const [console, setConsole] = useState("");
+  //const [key, setKey] = useState("");
+  //const [userInfo, setUserInfo] = useState({});
 
-  const loginWithWeb3Auth = async () => {
+
+  const loginWithWeb3Auth = async (setKey, setUserInfo) => { 
     console.log("Loggin in with Web3Auth");
     try {
       console.log("Loggin in with Web3Auth");
@@ -291,7 +276,7 @@ export default function MainContainer() {
     }
   };
 
-  const loginWithWeb3AuthFacebook = async () => {
+  const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
     console.log("Loggin in with Web3Auth");
     try {
       console.log("Loggin in with Web3Auth");
@@ -317,7 +302,7 @@ export default function MainContainer() {
     }
   };
 
-  const loginWithWeb3AuthWECHAT = async () => {
+  const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
     console.log("Loggin in with Web3Auth");
     try {
       console.log("Loggin in with Web3Auth");
@@ -343,7 +328,7 @@ export default function MainContainer() {
     }
   };
 
-  const loginWithWeb3AuthTwitter = async () => {
+  const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
     console.log("Loggin in with Web3Auth");
     try {
       console.log("Loggin in with Web3Auth");
@@ -369,75 +354,74 @@ export default function MainContainer() {
     }
   };
 
-  return (
-    <WithMainBg style={{ flex: 1 }}>
-      <StatusBar style="light" />
-      {key ? (
-        <userContext.Provider value={[key, setKey, userInfo, setUserInfo]}>
-          <NavigationContainer theme={MyTheme}>
-            <Stack.Navigator initialRouteName={"HomeTab"}>
-              <Stack.Screen
-                options={{ header: () => null }}
-                name={"HomeTab"}
-                component={HomeTab}
-              />
-              <Stack.Screen
-                options={{ ...stackNavigatorScreenOptions, title: "Connect" }}
-                name={"PayAndConnect"}
-                component={PayAndConnectScreen}
-              />
-              <Stack.Screen
-                options={{
-                  ...stackNavigatorScreenOptions,
-                  title: "ConnectStatus",
-                }}
-                name={"ConnectStatus"}
-                component={ConnectStatusScreen}
-              />
-              <Stack.Screen
-                options={{ ...stackNavigatorScreenOptions, title: "Provider" }}
-                name="Provider"
-                component={ProviderScreen}
-              />
-              <Stack.Screen
-                options={{
-                  ...stackNavigatorScreenOptions,
-                  title: "Provider",
-                }}
-                name="ProviderDetails"
-                component={ProviderDetailScreen}
-              />
-              <Stack.Screen
-                options={{ ...stackNavigatorScreenOptions, title: "Account" }}
-                name="Account"
-                component={LinkedAccountScreen}
-              />
-              <Stack.Screen
-                name="Linked Payment Card"
-                options={{
-                  ...stackNavigatorScreenOptions,
-                  title: "Linked Payment Card",
-                }}
-                component={LinkedPaymentCardScreen}
-              />
-              <Stack.Screen
-                name="Account Information"
-                options={{
-                  ...stackNavigatorScreenOptions,
-                  title: "Account Information",
-                }}
-                component={AccountInformationScreen}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </userContext.Provider>
-      ) : (
-        <InitialLogInScreen
+  const context_array = useUserContext()
+  //alert(context_array[0] == null)
+  alert(context_array[0] == "")
+  if(context_array[0] == ""){
+    return(
+    <InitialLogInScreen
           logInFunction={loginWithWeb3Auth}
           loginFacebook={loginWithWeb3AuthFacebook}
           loginTwitter={loginWithWeb3AuthTwitter}
-        />
-      )}
-    </WithMainBg>
-  );
+        />)
+  }else{
+      return (
+              <NavigationContainer theme={MyTheme}>
+                <Stack.Navigator initialRouteName={"HomeTab"}>
+                  <Stack.Screen
+                    options={{ header: () => null }}
+                    name={"HomeTab"}
+                    component={HomeTab}
+                  />
+                  <Stack.Screen
+                    options={{ ...stackNavigatorScreenOptions, title: "Connect" }}
+                    name={"PayAndConnect"}
+                    component={PayAndConnectScreen}
+                  />
+                  <Stack.Screen
+                    options={{
+                      ...stackNavigatorScreenOptions,
+                      title: "ConnectStatus",
+                    }}
+                    name={"ConnectStatus"}
+                    component={ConnectStatusScreen}
+                  />
+                  <Stack.Screen
+                    options={{ ...stackNavigatorScreenOptions, title: "Provider" }}
+                    name="Provider"
+                    component={ProviderScreen}
+                  />
+                  <Stack.Screen
+                    options={{
+                      ...stackNavigatorScreenOptions,
+                      title: "Provider",
+                    }}
+                    name="ProviderDetails"
+                    component={ProviderDetailScreen}
+                  />
+                  <Stack.Screen
+                    options={{ ...stackNavigatorScreenOptions, title: "Account" }}
+                    name="Account"
+                    component={LinkedAccountScreen}
+                  />
+                  <Stack.Screen
+                    name="Linked Payment Card"
+                    options={{
+                      ...stackNavigatorScreenOptions,
+                      title: "Linked Payment Card",
+                    }}
+                    component={LinkedPaymentCardScreen}
+                  />
+                  <Stack.Screen
+                    name="Account Information"
+                    options={{
+                      ...stackNavigatorScreenOptions,
+                      title: "Account Information",
+                    }}
+                    component={AccountInformationScreen}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+      );  
+}
 }

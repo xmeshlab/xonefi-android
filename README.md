@@ -102,6 +102,9 @@ This component is used to display the View Buuttons found throughout the applica
 The component takes in the following props : 
  OnPressFunction : The function to call when the button is pressed
 
+**WithMainBg.tsx**\
+This is the component responsible for the background Image displayed throughout our application
+
 
 
 # Screens 
