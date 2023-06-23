@@ -12,7 +12,7 @@ import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import { globalStyle } from "../constants/globalStyle";
-import { RouteComponent } from "../../types/global";
+import { RouteComponent } from "../types/global";
 import WifiManager from "react-native-wifi-reborn";
 import { useAsync } from "../hooks/useAsync";
 import BackgroundTimer from "react-native-background-timer";
@@ -25,7 +25,6 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
-import { OneFiStorage } from "../../api/storage/OneFiStorage";
 
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");

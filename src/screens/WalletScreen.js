@@ -27,24 +27,24 @@ import { MaticLogoSVG } from "../icons/crypto_icons";
 
 default_json = {
   binancecoin: {
-    usd: 306.36,
-    usd_24h_change: -3.1936254367349934,
+    usd: 0,
+    usd_24h_change: 0,
   },
   bitcoin: {
-    usd: 26885,
-    usd_24h_change: -3.6496973439437213,
+    usd: 0,
+    usd_24h_change: 0,
   },
   ethereum: {
-    usd: 1790.7,
-    usd_24h_change: -3.7306858661681077,
+    usd: 0,
+    usd_24h_change: 0,
   },
   "matic-network": {
-    usd: 0.842185,
-    usd_24h_change: -4.64440223078995,
+    usd: 0,
+    usd_24h_change: 0,
   },
   solana: {
-    usd: 20.04,
-    usd_24h_change: -5.5707787222889635,
+    usd: 0,
+    usd_24h_change: 0,
   },
 };
 

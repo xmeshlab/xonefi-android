@@ -9,12 +9,12 @@ import {
 import Modal from "react-native-modal";
 
 import { useContext } from "react";
-import { userContext } from "../MainContainer";
 import { ScrollView } from "react-native-gesture-handler";
 
 import ViewButton from "../Components/ViewButton";
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
+import { useUserContext } from "../context/UserContext";
 
 export function AccountInformationScreen({ navigation, userContext_array }) {
   const [pkModalIsOpen, setPKModalIsOpen] = useState(false);
@@ -146,7 +146,7 @@ function ModalWithCustomText({ inputText, modalIsOpen, closeModal }) {
 
 export default ({ navigation }) => {
   //the context is passed in as a prop. This makes writing jest tests feasible while dealing with the usage of native code
-  const userContext_array = useContext(userContext);
+  const userContext_array = useUserContext()
 
   return (
     <AccountInformationScreen

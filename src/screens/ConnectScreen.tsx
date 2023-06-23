@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
-  ImageBackground,
   FlatList,
   TouchableOpacity,
   StyleSheet,
@@ -21,35 +20,14 @@ import {
   RouteComponent,
   WiFiLevel,
   WifiWithSignalLevel,
-} from "../../types/global";
+} from "../types/global";
 import { NavigationProp } from "@react-navigation/core/src/types";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import LockICon from "../icons/LockIcon";
 import { globalStyle } from "../constants/globalStyle";
 
-//import { is_onefi_ssid } from "../../api/client";
-/**
- * Check if the given SSID matches the OneFi format.
- * @param {string} ssid - SSID candidate
- * @returns {boolean} true: matches, false: doesn't match.
- */
-function is_onefi_ssid(ssid: string) {
-  if (ssid.length > 2) {
-    if (ssid[0] === "O" && ssid[1] === "F") {
-      let base64_part = ssid.substring(2);
-      let decoded_str = Buffer.from(base64_part, "base64").toString("hex");
-      return decoded_str.length === 42;
-    }
-  }
-
-  return false;
-}
-
-import {
-  read_default_config,
-  write_default_config,
-} from "../../xonefi-api-client/config";
+import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
 
 async function getPermission() {
   if (Platform.OS === "android") {
@@ -74,13 +52,11 @@ async function getPermission() {
   }
 }
 
-//bg-gradient-to-br from-blue via-black to-red"
 const tabBtnList = ["Hourly", "Data Usage", "Private"];
 console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
 
 const ConnectScreen: RouteComponent<"Connect"> = () => {
   const navigation = useNavigation<NavigationProp<GlobalRoute>>();
-  // navigation.navigate
   const [wifiList, setWifiList] = useState<WifiWithSignalLevel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentActive, setCurrentActive] = useState("Hourly");
@@ -88,9 +64,6 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
     setIsLoading(true);
     try {
       await getPermission();
-      // const configs = await NativeModules.XOneFiWiFiModule.getWiFiConfiguration();
-      // const connectInfo = await NativeModules.XOneFiWiFiModule.getConnectionInfo();
-      //const ret = await WifiManager.loadWifiList();
       const ret = await WifiManager.reScanAndLoadWifiList();
 
       console.log("XLOG: Got list of WiFi networks as follows...");

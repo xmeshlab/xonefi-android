@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 
 import {
     RouteComponent,
-  } from "../../types/global";
+  } from "../../src/types/global";
 import ConnectScreen from "../../src/screens/ConnectScreen";
 
 it("renders", ()=>{

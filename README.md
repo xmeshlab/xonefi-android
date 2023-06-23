@@ -45,6 +45,14 @@ Bottom Tab Navigator - https://reactnavigation.org/docs/bottom-tab-navigator/
 Stack Navigator - https://reactnavigation.org/docs/stack-navigator/#api-definition
 Documentation for using the two navigators together - https://reactnavigation.org/docs/nesting-navigators/
 
+# src
+**MainContainer.tsx**
+This file handles the logic for if the Login Screen should be displayed or not. If the 
+key state variable in the UserContext is an empty string (""), the login screen will be displayed, if not the
+rest of the application will be displayed
+
+This file also handles the navigation for our application. 
+
 # Components 
 
 **Asset.jsx**\
@@ -101,6 +109,9 @@ This component is used to display the View Buuttons found throughout the applica
 
 The component takes in the following props : 
  OnPressFunction : The function to call when the button is pressed
+
+**WithMainBg.tsx**\
+This is the component responsible for the background Image displayed throughout our application
 
 
 

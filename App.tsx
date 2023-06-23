@@ -9,9 +9,12 @@ import {
   starter_config,
   config_init_if_absent,
 } from "./xonefi-api-client/config";
+import { UserContextProvider } from "./src/context/UserContext";
 import { startClientDaemon } from "./client-daemon/start-client-daemon";
 
 import SplashScreen from "react-native-splash-screen";
+import { WithMainBg } from "./src/Components/WithMainBg";
+import { StatusBar } from "expo-status-bar";
 
 function App() {
   console.log("XLOG: App.tsx");
@@ -35,7 +38,12 @@ function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <RootSiblingParent>
-        <MainContainer />
+          <UserContextProvider>
+          <WithMainBg style={{ flex: 1 }}>
+            <StatusBar style="light" />
+            <MainContainer />
+            </WithMainBg>
+          </UserContextProvider>
       </RootSiblingParent>
     </GestureHandlerRootView>
   );
