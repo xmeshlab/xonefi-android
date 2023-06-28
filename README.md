@@ -26,9 +26,6 @@ The MainContainer.tsx has most of the Navigation code. It imports all of the scr
 
 The tailwind.config.js file contains all the paths which utalize NativeWind for styling. If an additional directory is created which contains files that utalize NativeWind for styling, the new path must be appended in this file.
 
-# Project Design
-
-The design for this Mobile Application is based off of a Figma File provided by Professor Yan
 
 # Technologies Used
 
