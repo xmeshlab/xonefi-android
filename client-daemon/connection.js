@@ -214,6 +214,12 @@ function initiate_connection(
 
             WiFi.getIP().then(ipAddress => {
               console.log(`XLOG2: Local IP address: ${ipAddress}`);
+
+              try {
+
+
+
+
               call_hello.call_hello(
                   "137.184.213.75",
                   3000,
@@ -422,6 +428,14 @@ function initiate_connection(
                       }
                   }
               );
+
+
+              /// except
+
+
+              } catch(error) {
+                  console.log(`XLOG2: CAUGHT ERROR: ${error}`);
+              }
           });
 
 
