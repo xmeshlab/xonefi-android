@@ -58,6 +58,7 @@ function call_pafren(
   message.command.re = "";
   message.command.client_ip = "";
   message.command.provider_prefix = "";
+  message.command.router_no = "";
   message.command.arguments = {};
   message.command.arguments.pafren = {
     client: pubaddress,

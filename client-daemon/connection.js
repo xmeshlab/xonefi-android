@@ -220,6 +220,7 @@ function initiate_connection(
                   uuid.generate_unique_id(),
                   ipAddress,
                   deserealized_ssid.prefix,
+                  deserealized_ssid.port,
                   (response) => {
                       console.log(`PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 

@@ -49,6 +49,7 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
   message.command.re = "";
   message.command.client_ip = "";
   message.command.provider_prefix = "";
+  message.command.router_no = "";
   message.command.arguments = {};
   message.command.arguments.sack = {
     client: pubaddress,

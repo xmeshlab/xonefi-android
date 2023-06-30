@@ -91,7 +91,7 @@ function send_rest(ip, port, msg, callback) {
     })
         .then((response) => response.json())
         .then((json) => { return callback(json) })
-        .catch((error) => { });
+        .catch((error) => { console.log("ERROR: CANNOT FETCH")});
 
     // const dgram = require("react-native-udp");
     //
