@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import uuid from 'react-native-uuid';
+
 /**
  * Call OneFi provider to provide partial freeze endorsement (PAFREN) of the tokens in the smart contract.
  * @param {string} ip - IP address of OneFi AP.
@@ -43,7 +45,7 @@ function call_pafren(
   pafren,
   callback
 ) {
-  var uuid = require("uuid");
+  //var uuid = require("uuid");
 
   var message = {};
 

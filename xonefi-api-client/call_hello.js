@@ -21,6 +21,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 import DeviceInfo from 'react-native-device-info';
 
+import uuid from 'react-native-uuid';
+
+
 
 /**
  * Call OneFi provider to request a new session.
@@ -33,7 +36,7 @@ import DeviceInfo from 'react-native-device-info';
  */
 function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, router_no, callback) {
   console.log(`XLOG2: calling call_hello()`);
-  var uuid = require('uuid');
+  //var uuid = require('uuid');
 
   var message = new Object();
 

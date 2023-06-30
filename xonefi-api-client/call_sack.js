@@ -17,6 +17,9 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import uuid from 'react-native-uuid';
+
+
 /**
  * Call OneFi provider to provide the next cryptographic satisfaction acknowledgement (SACK).
  * @param {string} ip - IP address of OneFi AP.
@@ -33,7 +36,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  */
 function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, sack, callback) {
     console.log("XLOG: @call_sack: entering the function.");
-    const uuid = require('uuid');
+    //const uuid = require('uuid');
     const send_rest = require('./send_rest');
 
   var message = {};

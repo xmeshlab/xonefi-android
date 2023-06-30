@@ -17,6 +17,9 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import uuid from 'react-native-uuid';
+
+
 /**
  * Call OneFi provider to request session handover.
  * @param {string} ip - IP address of OneFi AP.
@@ -28,7 +31,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {function} callback - Return status: true - success, false - failure.
  */
 function call_handover(ip, port, web3, prk, session, sackok, callback) {
-  const uuid = require("uuid");
+  //const uuid = require("uuid");
   var message = {};
 
   let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
