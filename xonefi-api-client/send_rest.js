@@ -80,6 +80,8 @@ function send_udp2(ip, port, msg, callback) {
 
 
 function send_rest(ip, port, msg, callback) {
+    console.log(`XLOG2: calling send_rest()`);
+    console.log(`XLOG2: send_rest()::msg: ${msg}`);
 
     fetch('http://137.184.213.75:3000/client', {
         method: 'POST',
@@ -89,41 +91,14 @@ function send_rest(ip, port, msg, callback) {
         },
         body: msg,
     })
-        .then((response) => response.json())
-        .then((json) => { return callback(json) })
-        .catch((error) => { console.log("ERROR: CANNOT FETCH")});
-
-    // const dgram = require("react-native-udp");
-    //
-    //
-    // const socket = dgram.createSocket('udp4')
-    // socket.bind()
-    // console.log("XLOG: @send_udp: socket is bound.")
-    // socket.once('listening', function() {
-    //     console.log("XLOG: @send_udp: socket is listening...")
-    //     socket.send(msg, 0, msg.length, port, ip, function(err) {
-    //         console.log("XLOG: @send_udp3: socket.send() invoked.")
-    //         if (err) throw err
-    //         console.log('XLOG: @send_udp3: Message sent!');
-    //         socket.on('message', function(rmsg, rinfo) {
-    //             console.log('XLOG: @send_udp3: Message received: ', rmsg)
-    //             socket.close(() => {
-    //                 console.log("XLOG: @send_udp3: the socket successfully closed.");
-    //                 return callback(rmsg);
-    //             });
-    //         });
-    //
-    //         socket.on("error", (error) => {
-    //             console.log("XLOG: @send_udp3: error occurred.");
-    //             return callback(error);
-    //         });
-    //     });
-    // });
+    .then((response) => response.json())
+    .then((json) => {
+        console.log("XLOG2: send_rest(): then->json");
+        return callback(json);
+    })
+    .catch((error) => {
+        console.log("XLOG2: send_rest(): ERROR: CANNOT FETCH");
+    });
 }
-
-
-
-
-
 
 module.exports = { send_rest };
