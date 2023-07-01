@@ -65,6 +65,10 @@ export default function WalletScreen({ navigation }) {
           console.log(resJSON);
           setPriceJson(resJSON);
         });
+        setTimeout(function(){
+          document.getElementsByTagName("Text")[0].style.color = "#cccccc";
+      },3000);
+
     }, 10000);
 
     return () => {
