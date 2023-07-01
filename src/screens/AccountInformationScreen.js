@@ -18,6 +18,7 @@ import { useUserContext } from "../context/UserContext";
 
 //var web3 = require("web3");
 import Web3 from 'web3';
+//@TODO check what the local host param is doing
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 export function AccountInformationScreen({ navigation, userContext_array }) {
@@ -79,7 +80,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
-                    openModal_PK();
+                    alert("Terms Pressed");
                   }}
                 />
               }
@@ -90,7 +91,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
-                    openModal_PK();
+                    alert("Privacy Policy Pressed");;
                   }}
                 />
               }
@@ -124,8 +125,8 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
                 />
               }
             />
-            <AddressModeal
-              inputText={userContext_array[0]}
+            <PrivateKeyModal
+              inputText={"Private Key cannot be viewed at the moment"}
               modalIsOpen={pkModalIsOpen}
               closeModal={closeModal_PK}
             />
