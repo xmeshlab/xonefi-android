@@ -5,8 +5,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 //import providor component
 import Provider from "../Components/Provider";
 
-import backgroundImage from "../../assets/background.png";
-
 export default function ProviderScreen({ navigation }) {
   return (
     <View className="flex-1">

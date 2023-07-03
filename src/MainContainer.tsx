@@ -78,6 +78,7 @@ const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createStackNavigator<GlobalRoute>();
 const TabNavigator = Tab.Navigator;
 const TabScreen = Tab.Screen;
+//Sets our TabPageHeader as the header for tabOptions
 const tabOptions = {
   tabBarLabel: () => null,
   header: (props) => <TabPageHeader {...props} />,

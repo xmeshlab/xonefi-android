@@ -21,6 +21,7 @@ import {
   write_default_config,
 } from "../../xonefi-api-client/config";
 
+//API used to get information regarding the Provider. The information is encoded into the SSID
 import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -30,7 +31,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
   const { SSID, BSSID, signalLevel } = props.route.params;
   const [password, setPassword] = useState("seitlab123!@");
-  //const [buttonText, setButtonText] = useState('')
 
   const {
     value: currentConnectedSSID,

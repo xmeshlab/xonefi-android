@@ -84,6 +84,21 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+
+    read_default_config((config_json2) => {
+      config_json2.account.dpk = info.privKey;
+      config_json2.account_set = true;
+      let Web3 = require("web3");
+      let web3 = new Web3();
+      let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
+      config_json2.account.address = account.address;
+
+      console.log(`info acct: ${JSON.stringify(info)}`);
+      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      write_default_config(config_json2, () => {
+        console.log("XLOG: Config is successfully initialized (2).");
+      });
+    });
     //uiConsole("Logged In");
   } catch (e) {
     console.error(e);
@@ -110,6 +125,21 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+
+    read_default_config((config_json2) => {
+      config_json2.account.dpk = info.privKey;
+      config_json2.account_set = true;
+      let Web3 = require("web3");
+      let web3 = new Web3();
+      let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
+      config_json2.account.address = account.address;
+
+      console.log(`info acct: ${JSON.stringify(info)}`);
+      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      write_default_config(config_json2, () => {
+        console.log("XLOG: Config is successfully initialized (2).");
+      });
+    });
     //uiConsole("Logged In");
   } catch (e) {
     console.error(e);
@@ -136,6 +166,21 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+
+    read_default_config((config_json2) => {
+      config_json2.account.dpk = info.privKey;
+      config_json2.account_set = true;
+      let Web3 = require("web3");
+      let web3 = new Web3();
+      let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
+      config_json2.account.address = account.address;
+
+      console.log(`info acct: ${JSON.stringify(info)}`);
+      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      write_default_config(config_json2, () => {
+        console.log("XLOG: Config is successfully initialized (2).");
+      });
+    });
     //uiConsole("Logged In");
   } catch (e) {
     console.error(e);
