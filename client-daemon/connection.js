@@ -199,10 +199,12 @@ function initiate_connection(
 
       config.read_default_config((config_json) => {
         console.log(`Saying HELLO to provider...`);
+        console.log(`XLOG2: Preparing to send HELLO.`);
 
         console.log("Setting a timeout...");
         setTimeout(() => {
           console.log("Timeout is over.");
+          console.log(`XLOG2: Timeout threshold`);
 
           console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
           console.log(
@@ -211,7 +213,13 @@ function initiate_connection(
           console.log("DEBUG: " + private_key);
 
             WiFi.getIP().then(ipAddress => {
-              console.log(`XLOG: Local IP address: ${ipAddress}`);
+              console.log(`XLOG2: Local IP address: ${ipAddress}`);
+
+              try {
+
+
+
+
               call_hello.call_hello(
                   "137.184.213.75",
                   3000,
@@ -220,13 +228,14 @@ function initiate_connection(
                   uuid.generate_unique_id(),
                   ipAddress,
                   deserealized_ssid.prefix,
+                  deserealized_ssid.port,
                   (response) => {
-                      console.log(`PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
+                      console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 
                       let response_json = response;
 
-                      console.log(`XLOG: RESPONSE_JSON: ${response_json}`);
-                      console.log(`XLOG: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
+                      console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
+                      console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
 
                       if (response_json.command.arguments.answer === "HELLO-OK") {
 
@@ -419,6 +428,14 @@ function initiate_connection(
                       }
                   }
               );
+
+
+              /// except
+
+
+              } catch(error) {
+                  console.log(`XLOG2: CAUGHT ERROR: ${error}`);
+              }
           });
 
 

@@ -21,6 +21,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 import DeviceInfo from 'react-native-device-info';
 
+import uuid from 'react-native-uuid';
+
+
 
 /**
  * Call OneFi provider to request a new session.
@@ -31,24 +34,28 @@ import DeviceInfo from 'react-native-device-info';
  * @param {string} session - UUID of the current session.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, callback) {
-    var uuid = require('uuid');
+function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, router_no, callback) {
+  console.log(`XLOG2: calling call_hello()`);
+  //var uuid = require('uuid');
 
-    var message = new Object();
+  var message = new Object();
 
   let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
-    message.command = new Object();
-    message.command.op = "HELLO";
-    message.command.from = pubaddress;
-    msg_uuid = uuid.v4().toString();
-    message.command.uuid = msg_uuid;
-    message.command.timestamp = Math.floor(new Date() / 1000);
-    message.command.session = session;
-    message.command.client_ip = client_ip;
-    message.command.provider_prefix = provider_prefix;
-    message.command.re = "";
-    message.command.arguments = new Object();
+  console.log(`XLOG2: call_hello()::pubaddress: ${pubaddress}`);
+
+  message.command = new Object();
+  message.command.op = "HELLO";
+  message.command.from = pubaddress;
+  msg_uuid = uuid.v4().toString();
+  message.command.uuid = msg_uuid;
+  message.command.timestamp = Math.floor(new Date() / 1000);
+  message.command.session = session;
+  message.command.client_ip = client_ip;
+  message.command.provider_prefix = provider_prefix;
+  message.command.router_no = router_no;
+  message.command.re = "";
+  message.command.arguments = new Object();
 
   var signature_json = web3.eth.accounts.sign(
     JSON.stringify(message.command),
@@ -57,10 +64,11 @@ function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, ca
 
   message.signature = signature_json.signature;
 
-  console.log("XLOG: call_hello() message: " + JSON.stringify(message));
+  console.log("XLOG2: call_hello()::message: " + JSON.stringify(message));
 
     const send_rest = require('./send_rest');
     send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+        console.log(`XLOG2: call_hello() post send_rest()`);
         return callback(result);
     });
 }
