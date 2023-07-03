@@ -27,6 +27,8 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
+import {wifi_connect} from "../../xonefi-api-client/wifi-connect"
+
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
   const { SSID, BSSID, signalLevel } = props.route.params;
@@ -54,16 +56,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     });
   });
 
-  //const sack_number = require("../../xonefi-api-client/sack_number");
-
-  // sack_number.set_initiated_sack_number(2048, (res) => {
-  //     if(res) {
-  //         console.log("XLOG: Successfully set initiated sack number.");
-  //     } else {
-  //         console.log("XLOG: Failure setting initiated sack number.");
-  //     }
-  // });
-
   const client_session = require("../../xonefi-api-client/client_session");
 
   client_session.get_client_session((res) => {
@@ -90,11 +82,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       let ssid_json = deserialize_ssid(SSID);
 
-      // let config_json = await read_default_config();
-      // config_json.client_session.ssid = SSID;
-      // config_json.client_on = true;
-      // await write_default_config(config_json);
-
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
@@ -105,69 +92,17 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           console.log("XLOG: Connection failed!");
         }
       );
-      /*.then(()=>{
-                setButtonText('Disconnect')
-            })*/
-      //setButtonText('Disconnect')
-      //Set the text for the button. Will cause React to rerender the component
+
+      //Try this out - fails due to node package usage
+      //wifi_connect(SSID, ()=>{})
+
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
-
-      // let config_json = await read_default_config();
-      // config_json.client_on = false;
-      // await write_default_config(config_json);
-      //
-      //
-      // let status = await WifiManager.connectionStatus();
-      //
-      // console.log("XLOG: current WiFi conntection status: " + status)
     }
 
-    //
-    // try {
-    //     // Enable Wi-Fi (Android only)
-    //     //WifiManager.setEnabled(true);
-    //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
-    //
-    //     // WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
-    //     //     console.log('Connected successfully!')
-    //     // }, () => {
-    //     //     console.log('Connection failed!')
-    //     // })
-    //
-    //
-    // } catch (error) {
-    //     console.log('Error connecting to Wi-Fi:', error.message);
-    // }
-
-    // if (isConnected) {
-    //     try {
-    //        await WifiManager.disconnect();
-    //        setCurrentConnectSSID(undefined);
-    //     } catch (e) {
-    //         console.error('disconnect', e);
-    //     } finally {
-    //     }
-    //     return;
-    // }
-
-    // <<<<<<< previous code >>>>>>>>>>>>
-    // try {
-    //     // await NativeModules.XOneFiWiFiModule.connectWifi(SSID, 'QwerTyuioP');
-    //     // 'QwerTyuioP'
-    //     await NativeModules.XOneFiWiFiModule.initialConnect(SSID, // replace with your Wi-Fi pwd
-    //         password);
-    //     await OneFiStorage.setItem('client_on', true);
-    //     setCurrentConnectSSID(SSID,);
-    // } catch (e) {
-    //     console.warn('connect error', '#051e2a');
-    //     console.error(e)
-    // } finally {
-    // }
-    // <<<<<< end-of-previous code >>>>>>>>>
   }, [isConnected, setCurrentConnectSSID, password]);
 
   //discconect function
