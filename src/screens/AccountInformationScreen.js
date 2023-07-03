@@ -126,7 +126,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               }
             />
             <PrivateKeyModal
-              inputText={"Private Key cannot be viewed at the moment"}
+              inputText={"Private Key"}
               modalIsOpen={pkModalIsOpen}
               closeModal={closeModal_PK}
             />
