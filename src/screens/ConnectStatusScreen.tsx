@@ -10,6 +10,9 @@ import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
 import { LineChart } from "react-native-charts-wrapper";
 import ExchangeIcon from "../icons/ExchangeIcon";
+
+import Slider2 from '@react-native-community/slider';
+
 type ConnectStatusDetail = {
   ofiTokens: number;
   gbData: number;
@@ -168,6 +171,16 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
               value={connectStatus?.dataUsage ?? 0}
               maxiumValue={connectStatus?.maxUsage ?? 10}
             />
+
+            <Slider2
+              style={{width: "100%", height: 80}}
+              minimumValue={0}
+              maximumValue={1}
+              minimumTrackTintColor="#2B3FF2"
+              maximumTrackTintColor="#000000"
+              thumbTintColor="#FFFFFF"
+            />
+
           </View>
           <View style={style.maxUsage}>
             <Text style={style.summaryItemValue}>
