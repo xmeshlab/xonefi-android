@@ -16,20 +16,29 @@ import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useUserContext } from "../context/UserContext";
 
+//var web3 = require("web3");
+import Web3 from 'web3';
+//@TODO check what the local host param is doing
+const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
 export function AccountInformationScreen({ navigation, userContext_array }) {
   const [pkModalIsOpen, setPKModalIsOpen] = useState(false);
+  const [addressModalIsOpen, setAddressModalIsOpen] = useState(false);
 
   function openModal_PK() {
     setPKModalIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
-  }
-
   function closeModal_PK() {
     setPKModalIsOpen(false);
+  }
+
+  function openAddressModal() {
+    setAddressModalIsOpen(true);
+  }
+
+  function closeAddressModal() {
+    setAddressModalIsOpen(false);
   }
 
   return (
@@ -71,7 +80,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
-                    openModal_PK();
+                    alert("Terms Pressed");
                   }}
                 />
               }
@@ -82,7 +91,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
-                    openModal_PK();
+                    alert("Privacy Policy Pressed");;
                   }}
                 />
               }
@@ -100,7 +109,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
-                    openModal_PK();
+                    openAddressModal();
                   }}
                 />
               }
@@ -116,10 +125,15 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
                 />
               }
             />
-            <ModalWithCustomText
-              inputText={userContext_array[0]}
+            <PrivateKeyModal
+              inputText={"Private Key"}
               modalIsOpen={pkModalIsOpen}
               closeModal={closeModal_PK}
+            />
+            <AddressModeal
+              inputText={userContext_array[0]}
+              modalIsOpen={addressModalIsOpen}
+              closeModal={closeAddressModal}
             />
           </>
         }
@@ -128,7 +142,23 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
   );
 }
 
-function ModalWithCustomText({ inputText, modalIsOpen, closeModal }) {
+function AddressModeal({ inputText, modalIsOpen, closeModal }) {
+  return (
+    <Modal isVisible={modalIsOpen}>
+      <View className="flex flex-col bg-white h-24 p-5">
+        <TouchableOpacity
+          onPress={closeModal}
+          className="absolute top-1 right-2"
+        >
+          <Text className="text-red-400">X</Text>
+        </TouchableOpacity>
+        <Text className="mt-1">{web3.eth.accounts.privateKeyToAccount(inputText).address}</Text>
+      </View>
+    </Modal>
+  );
+}
+
+function PrivateKeyModal({ inputText, modalIsOpen, closeModal }) {
   return (
     <Modal isVisible={modalIsOpen}>
       <View className="flex flex-col bg-white h-24 p-5">

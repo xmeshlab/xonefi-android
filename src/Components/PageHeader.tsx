@@ -12,6 +12,11 @@ import { colors } from "../constants/colors";
 import BuggerIcon from "../icons/bugger_icon";
 import WifiIcon from "../icons/wifi_icon";
 import ChevronRight from "../icons/chevron_right";
+import { useNavigation } from "@react-navigation/native";
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
+
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
 //Use professor Nick's client status
 
@@ -73,9 +78,20 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
 }) => {
   //const clientStatus = useClientStatus();
   const clientStatus = false
+  //const navigation = useNavigation()
   const buggerIconClick = useCallback(() => {}, []);
   const wifiIconClick = useCallback(() => {}, []);
-
+  
+  /*type RootStackParamList = {
+    Connect: undefined;
+    Status: undefined;
+    Account: undefined;
+    Provider: undefined;
+    Wallet: undefined;
+    Home: undefined;
+  };
+  const navigation = useNavigation<RootStackParamList>();
+*/
   return (
     <PageHeader
       {...otherProps}
@@ -84,7 +100,7 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
         </>
       }
       rightView={
-        <TouchableOpacity onPress={wifiIconClick}>
+        <TouchableOpacity onPress={()=>{() => {}}}>
           <View
             style={{
               transform: [

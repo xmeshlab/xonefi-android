@@ -1,3 +1,5 @@
+//file currently not used
+
 export interface Account {
   name: string;
   encrypted_prk: string;

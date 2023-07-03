@@ -50,6 +50,7 @@ default_json = {
 
 export default function WalletScreen({ navigation }) {
   const [priceJson, setPriceJson] = useState(default_json);
+  const [backgroundFlash, setBackgroundFlash] = useState(false);
 
   //API call to coingecko to get prices of eth and bitcoin and binance coin
   //bitcoin,ethereum,binancecoin,solana,matic-network,
@@ -65,12 +66,21 @@ export default function WalletScreen({ navigation }) {
           console.log(resJSON);
           setPriceJson(resJSON);
         });
+
+        //backgroundFlash state should only be true for half a second
+        setBackgroundFlash(true)
+        setTimeout(function(){
+          setBackgroundFlash(false)
+      },50);
+
     }, 10000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  //style={backgroundFlash ? {backgroundColor: "#000000"} : {backgroundColor: "transparent" }}
 
   return (
     <View className="flex-1">
@@ -80,7 +90,7 @@ export default function WalletScreen({ navigation }) {
           AssetChange={"0.00%"}
           AssetPrice="$0.00 USD"
         />
-        <ScrollView style={{ backgroundColor: "transparent" }}>
+        <ScrollView style={{backgroundColor: "transparent" }}>
           <Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"

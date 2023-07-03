@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">68.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/18</span>
+                <span class='fraction'>15/22</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.92% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>10/13</span>
+                <span class='fraction'>10/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">68.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/18</span>
+                <span class='fraction'>15/22</span>
             </div>
         
             
@@ -204,7 +204,17 @@
 <a name='L139'></a><a href='#L139'>139</a>
 <a name='L140'></a><a href='#L140'>140</a>
 <a name='L141'></a><a href='#L141'>141</a>
-<a name='L142'></a><a href='#L142'>142</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +241,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -255,6 +265,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -273,8 +284,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,29 +394,30 @@ import { MaticLogoSVG } from "../icons/crypto_icons";
 &nbsp;
 default_json = {
   binancecoin: {
-    usd: 306.36,
-    usd_24h_change: -3.1936254367349934,
+    usd: 0,
+    usd_24h_change: 0,
   },
   bitcoin: {
-    usd: 26885,
-    usd_24h_change: -3.6496973439437213,
+    usd: 0,
+    usd_24h_change: 0,
   },
   ethereum: {
-    usd: 1790.7,
-    usd_24h_change: -3.7306858661681077,
+    usd: 0,
+    usd_24h_change: 0,
   },
   "matic-network": {
-    usd: 0.842185,
-    usd_24h_change: -4.64440223078995,
+    usd: 0,
+    usd_24h_change: 0,
   },
   solana: {
-    usd: 20.04,
-    usd_24h_change: -5.5707787222889635,
+    usd: 0,
+    usd_24h_change: 0,
   },
 };
 &nbsp;
 export default function WalletScreen({ navigation }) {
   const [priceJson, setPriceJson] = useState(default_json);
+  const [backgroundFlash, setBackgroundFlash] = useState(false);
 &nbsp;
   //API call to coingecko to get prices of eth and bitcoin and binance coin
   //bitcoin,ethereum,binancecoin,solana,matic-network,
@@ -412,12 +433,21 @@ export default function WalletScreen({ navigation }) {
 <span class="cstat-no" title="statement not covered" >          console.log(resJSON);</span>
 <span class="cstat-no" title="statement not covered" >          setPriceJson(resJSON);</span>
         });
+&nbsp;
+        //backgroundFlash state should only be true for half a second
+<span class="cstat-no" title="statement not covered" >        setBackgroundFlash(true)</span>
+<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction(){</span>
+<span class="cstat-no" title="statement not covered" >          setBackgroundFlash(false)</span>
+      },50);
+&nbsp;
     }, 10000);
 &nbsp;
     return () =&gt; {
       clearInterval(interval);
     };
   }, []);
+&nbsp;
+  //style={backgroundFlash ? {backgroundColor: "#000000"} : {backgroundColor: "transparent" }}
 &nbsp;
   return (
     &lt;View className="flex-1"&gt;
@@ -427,7 +457,7 @@ export default function WalletScreen({ navigation }) {
           AssetChange={"0.00%"}
           AssetPrice="$0.00 USD"
         /&gt;
-        &lt;ScrollView style={{ backgroundColor: "transparent" }}&gt;
+        &lt;ScrollView style={{backgroundColor: "transparent" }}&gt;
           &lt;Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"
@@ -493,7 +523,7 @@ export default function WalletScreen({ navigation }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-15T14:50:43.933Z
+                at 2023-07-03T16:04:52.350Z
             </div>
         <script src="../prettify.js"></script>
         <script>

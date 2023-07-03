@@ -143,17 +143,11 @@ This folder contains the svg assets used to display the various social media log
 **crypto_icon.tsx**\
 This folder contains the svg assets for the various cryptocurrency logos found throughout the application.
 
-
-
 # constants
 This folder contains the constant values that are used throughout our application. 
 
 **colors.ts**\
 This file standardizes the colors that are used throughout our application. 
-
-**dimension.ts**\
-This file standardizes certain dimensions that are found throughout our application. For example,
-the height of header is set in this file.
 
 **globalStyle.ts**\
 This file contains the global styles that are used throughout our application.

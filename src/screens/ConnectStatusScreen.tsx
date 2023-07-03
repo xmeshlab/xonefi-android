@@ -3,13 +3,16 @@ import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../Components/Card";
 import { RouteComponent } from "../types/global";
 import { colors } from "../constants/colors";
-import { Slider } from "../Components/Slider";
+//import { Slider } from "../Components/Slider";
 import ArrowUpIcon from "../icons/arrow_up_icon";
 import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
 import { LineChart } from "react-native-charts-wrapper";
 import ExchangeIcon from "../icons/ExchangeIcon";
+
+import Slider from '@react-native-community/slider';
+
 type ConnectStatusDetail = {
   ofiTokens: number;
   gbData: number;
@@ -163,11 +166,21 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         </View>
         <View style={style.percentContainer}>
           <View style={{ height: 8, flex: 1 }}>
-            <Slider
+            {/*<Slider
               style={{ width: "100%" }}
               value={connectStatus?.dataUsage ?? 0}
               maxiumValue={connectStatus?.maxUsage ?? 10}
+              />*/}
+
+            <Slider
+              style={{width: "100%", height: 80}}
+              minimumValue={0}
+              maximumValue={1}
+              minimumTrackTintColor="#2B3FF2"
+              maximumTrackTintColor="#000000"
+              thumbTintColor="#FFFFFF"
             />
+
           </View>
           <View style={style.maxUsage}>
             <Text style={style.summaryItemValue}>
