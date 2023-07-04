@@ -45,7 +45,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   useMemo(() => {
     setIsConnected(currentConnectedSSID === SSID)
   }, [currentConnectedSSID]);
-  
+
   //debug code
   console.log("XLOG: Current value of isConnected : " + isConnected);
 
@@ -210,6 +210,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mb-1">Private</Text>
+          <Text className="text-white text-base mb-1">0</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
@@ -219,10 +220,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           <Text className="text-white text-base my-1">Per GB</Text>
         </View>
         <View className="flex flex-row justify-between">
-          <Text className="text-white text-base mt-1">Conversion</Text>
-        </View>
-        <View style={{ flexDirection: "row" }}>
           <Text className="text-white text-base mt-1">Total</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost}</Text>
         </View>
       </View>
 
