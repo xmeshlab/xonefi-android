@@ -218,6 +218,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per GB</Text>
+          <Text className="text-white text-base mb-1">0</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mt-1">Total</Text>

@@ -10,8 +10,13 @@ import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
 import { LineChart } from "react-native-charts-wrapper";
 import ExchangeIcon from "../icons/ExchangeIcon";
+import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
 import Slider from '@react-native-community/slider';
+
+import {
+  read_default_config,
+} from "../../xonefi-api-client/config";
 
 type ConnectStatusDetail = {
   ofiTokens: number;
@@ -25,14 +30,13 @@ type ConnectStatusDetail = {
 
 const getStatusDetail = (): ConnectStatusDetail => {
   return {
-    ofiTokens: 37.49,
-    dataCost: 0.14,
-    dataUsage: Math.random() * 5,
-    // dataUsage: 4,
-    gbData: 3.7,
-    maxUsage: 5,
-    usageTime: 46,
-    usdCost: 4.76,
+    ofiTokens: 0,
+    dataCost: 0,
+    dataUsage: 0,
+    gbData: 0,
+    maxUsage: 0,
+    usageTime: 0,
+    usdCost: 0,
   };
 };
 
@@ -40,8 +44,17 @@ const lineChartStartARGBColor = "rgba(43,63,242, 0.25)";
 const lineChartEenARGBColor = "rgba(43,63,242, 0.4)";
 
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
+
+  //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
+  const [ssid, setSSID] = useState();
+
+  read_default_config((config_json) => {
+    setSSID(config_json.client_session.ssid)
+  });
+
+
   // const {BSSID, SSID} = props.route.params ?? {BSSID: undefined, SSID: undefined};
-  const { BSSID, SSID } = { BSSID: "1111q", SSID: "cccccc" };
+  const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid};
   const [connectStatus, setConnectStatus] = useState<ConnectStatusDetail>(
     null as ConnectStatusDetail
   );
@@ -194,7 +207,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         {/*</Text>*/}
       </Card>
       <Card style={style.card}>
-        <View style={style.description}>
+        <View style={style.routerName}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Name
           </Text>
@@ -400,7 +413,16 @@ const style = StyleSheet.create({
     marginBottom: 15,
     // backgroundColor: 'red',
     flexDirection: "row",
-    height: 21,
+    height: 24,
+    justifyContent: "space-between",
+  },
+  routerName: {
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginBottom: 15,
+    // backgroundColor: 'red',
+    flexDirection: "row",
+    height: 35,
     justifyContent: "space-between",
   },
   percentContainer: {
