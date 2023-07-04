@@ -40,9 +40,12 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     setValue: setCurrentConnectSSID,
   } = useAsync(WifiManager.getCurrentWifiSSID, true);
 
-  const isConnected = useMemo(() => {
-    return currentConnectedSSID === SSID;
+  const [isConnected, setIsConnected] = useState(false);
+
+  useMemo(() => {
+    setIsConnected(currentConnectedSSID === SSID)
   }, [currentConnectedSSID]);
+  
   //debug code
   console.log("XLOG: Current value of isConnected : " + isConnected);
 
@@ -130,10 +133,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       WifiManager.isRemoveWifiNetwork(SSID);
-      /*.then(()=>{
-                setButtonText('Pay and Connect')
-            })*/
-      //setButtonText('Pay and Connect')
     } else {
       // Permission denied
       console.log(
@@ -150,55 +149,12 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         console.log("XLOG: The device is already connected to: " + SSID);
 
         console.log("XLOG: Background timer will start in here.");
-
-        // let config_json = await read_default_config();
-        // config_json.client_session.ssid = SSID;
-        // config_json.client_on = true;
-        // await write_default_config(config_json);
-
-        // BackgroundTimer.runBackgroundTimer(async () => {
-        //         let config_json = await read_default_config();
-        //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-        //         config_json["port"]++;
-        //         await write_default_config(config_json);
-        //     },
-        //     3000);
       } else {
         console.log(
           "XLOG: Before using XOneFi, the device must connect to: " + SSID
         );
 
         console.log("XLOG: Background timer will start in here.");
-
-        // let ssid_json = deserialize_ssid(SSID);
-        //
-        // console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
-        //
-        // try {
-        //     // Enable Wi-Fi (Android only)
-        //     //WifiManager.setEnabled(true);
-        //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
-        //
-        //     WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
-        //         console.log('Connected successfully!')
-        //     }, () => {
-        //         console.log('Connection failed!')
-        //     })
-        // } catch (error) {
-        //     console.log('Error connecting to Wi-Fi:', error.message);
-        // }
-
-        //await WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false);
-
-        //console.log("XLOG: Connected successfully!");
-
-        // BackgroundTimer.runBackgroundTimer(async () => {
-        //         let config_json = await read_default_config();
-        //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-        //         config_json["port"]++;
-        //         await write_default_config(config_json);
-        //     },
-        //     3000);
 
         console.log(
           "XLOG: Confirming that the background timer doesn't block the main thread."
@@ -210,7 +166,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     }
   );
 
-  //isConnected ? setButtonText('Disconnect') : setButtonText('Pay and Connect')
   return (
     <ScrollView className="flex-1 flex-col">
       <View style={[globalStyle.row, { marginLeft: 37, marginTop: 23 }]}>
@@ -251,7 +206,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           <WifiLevelIcon signalLevel={signalLevel ?? 0} />
           <Text style={[globalStyle.light, { paddingRight: 40 }]}>{SSID}</Text>
         </View>
-        <Text style={globalStyle.light}>.014 OFI/GB</Text>
       </View>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <View className="flex flex-row justify-between">
@@ -259,6 +213,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost}</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per GB</Text>
@@ -266,11 +221,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mt-1">Conversion</Text>
         </View>
-        {/*<View className="flex flex-row justify-between" style={{alignItems: 'center'}}>*/}
-        {/*    <Text className="text-white text-base mt-1">Password</Text>*/}
-        {/*    <TextInput secureTextEntry={true} style={style.input} textContentType={'password'} value={password}*/}
-        {/*               onChangeText={setPassword}/>*/}
-        {/*</View>*/}
         <View style={{ flexDirection: "row" }}>
           <Text className="text-white text-base mt-1">Total</Text>
         </View>

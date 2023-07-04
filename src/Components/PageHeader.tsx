@@ -100,7 +100,7 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
         </>
       }
       rightView={
-        <TouchableOpacity onPress={()=>{() => {}}}>
+        <TouchableOpacity onPress={()=>{otherProps.navigation.navigate("Status")}}>
           <View
             style={{
               transform: [

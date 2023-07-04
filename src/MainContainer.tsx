@@ -142,7 +142,7 @@ function HomeTab() {
       screenOptions={tabNavigatorScreenOptions}
     >
       <TabScreen
-        options={{ ...tabOptions, title: connectName }}
+        options={{ ...tabOptions, title: connectName  }}
         name={connectName}
         component={ConnectScreen}
       />
@@ -217,8 +217,9 @@ export default function MainContainer() {
                     name={"HomeTab"}
                     component={HomeTab}
                   />
+                  {/*({ navigation }) =>({...stackNavigatorScreenOptions, title: "Connect", navFunction: ()=>navigation.navigate("Status")})*/}
                   <Stack.Screen
-                    options={{ ...stackNavigatorScreenOptions, title: "Connect" }}
+                    options={{...stackNavigatorScreenOptions, title: "Connect"}}
                     name={"PayAndConnect"}
                     component={PayAndConnectScreen}
                   />
