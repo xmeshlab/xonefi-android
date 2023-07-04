@@ -60,7 +60,7 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
 
     //uiConsole("Logged In");
   } catch (e) {
-    console.error(e);
+    console.error(`Web3Auth ERROR: ${e}`);
   }
 };
 
