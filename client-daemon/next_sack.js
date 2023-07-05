@@ -82,7 +82,8 @@ function send_next_sack(config_json, user_password, private_key) {
             let response2_json = {};
 
             try {
-              response2_json = JSON.parse(response2);
+              //response2_json = JSON.parse(response2);
+              response2_json = response2;
 
               if (response2_json.command.arguments.answer === "SACK-OK") {
                 console.log(
