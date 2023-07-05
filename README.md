@@ -130,6 +130,13 @@ This screen is where users can go to connect to XOneFi Providers.
 **WalletScreen.js**\
 This screen allows users to view the various cryptocurrencies which they own. 
 
+**PayAndConnect.tsx**\
+This screen handles the functionality of allowing the user to either connect or disconnect from an XOneFi Provider
+
+**ConnectStatusScreen.tsx**\
+
+
+
 
 
 

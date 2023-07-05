@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -27,8 +27,15 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
-import {wifi_connect} from "../../xonefi-api-client/wifi-connect"
-
+/**
+ * This Component handles the functionality of allowing a user to Connect or 
+ * Disconnect from an XOneFi Provider
+ * 
+ * A User is routed to this page after clicking on a WifiItem that is rendered on the ConnectScreen
+ * 
+ * It is passed in the Provider's SSID and BSSID as props
+ * 
+ */
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
   const { SSID, BSSID, signalLevel } = props.route.params;
@@ -42,9 +49,14 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
   const [isConnected, setIsConnected] = useState(false);
 
-  useMemo(() => {
+  //maybe change back to useMemo?
+  useEffect(() => {
     setIsConnected(currentConnectedSSID === SSID)
   }, [currentConnectedSSID]);
+  /*onst isConnected = useMemo(() => {
+    return currentConnectedSSID === SSID;
+  }, [currentConnectedSSID]);*/
+
 
   //debug code
   console.log("XLOG: Current value of isConnected : " + isConnected);
@@ -65,7 +77,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     console.log("XLOG: CLIENT SESSION: " + JSON.stringify(res));
   });
 
-  const payAndConnect = useCallback(async () => {
+  //function to connect to OneFi Provider
+  const payAndConnect = async ()=> {
     console.log("XLOG: Pay and Connect Callback Activated");
 
     const granted = await PermissionsAndroid.request(
@@ -87,17 +100,16 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
+      //swtiched from two functions in then, to a then and catch
       WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
         () => {
           console.log("XLOG: Connected successfully!");
+          setIsConnected(true)
+          //setCurrentConnectSSID(SSID)
         },
         () => {
           console.log("XLOG: Connection failed!");
-        }
-      );
-
-      //Try this out - fails due to node package usage
-      //wifi_connect(SSID, ()=>{})
+        });
 
     } else {
       // Permission denied
@@ -106,10 +118,10 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       );
     }
 
-  }, [isConnected, setCurrentConnectSSID, password]);
+  }
 
-  //discconect function
-  const disconnectFromOnefi = useCallback(async () => {
+  //Function to disconnect from OneFi Provider
+  const disconnectFromOnefi = async () => {
     console.log("XLOG: DisconnectFromOnefi Callback Activated");
 
     const granted = await PermissionsAndroid.request(
@@ -133,13 +145,15 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       WifiManager.isRemoveWifiNetwork(SSID);
+      setIsConnected(false)
+
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
     }
-  }, [isConnected, setCurrentConnectSSID, password]);
+  }
 
   WifiManager.getCurrentWifiSSID().then(
     async (ssid) => {
@@ -210,19 +224,19 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mb-1">Private</Text>
-          <Text className="text-white text-base mb-1">0</Text>
+          <Text className="text-white text-base mb-1">0 OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
-          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost}</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per GB</Text>
-          <Text className="text-white text-base mb-1">0</Text>
+          <Text className="text-white text-base mb-1">0 OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mt-1">Total</Text>
-          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost}</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
         </View>
       </View>
 
