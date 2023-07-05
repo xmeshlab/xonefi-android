@@ -151,7 +151,12 @@ function client_worker(config_json, user_password, private_key, callback) {
                     next_sack.send_next_sack(
                       config_json,
                       user_password,
-                      private_key
+                      private_key,
+                        (result11) => {
+                          setTimeout(() => {
+                            console.log("XLOG3: Successful SACK round completed");
+                          }, 1000);
+                        }
                     );
                   });
                 } else {

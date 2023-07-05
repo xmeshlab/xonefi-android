@@ -19,7 +19,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 const sackok = require("../xonefi-api-client/sackok");
 
-function send_next_sack(config_json, user_password, private_key) {
+function send_next_sack(config_json, user_password, private_key, callback) {
   //const ssid = require("../xonefi-api-client/ssid");
   //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
   const client_session = require("../xonefi-api-client/client_session");
@@ -91,6 +91,7 @@ function send_next_sack(config_json, user_password, private_key) {
                       console.log("SACK is accepted by provider! Active session continues.");
                       sackok.set_sackok(response2_json, () => {
                           console.log("XLOG: SACK-OK object saved.");
+                          return callback(true);
                       });
 
                     // let session = config_json.client_session;
