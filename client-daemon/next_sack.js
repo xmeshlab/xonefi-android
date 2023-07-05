@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+const sackok = require("../xonefi-api-client/sackok");
+
 function send_next_sack(config_json, user_password, private_key) {
   //const ssid = require("../xonefi-api-client/ssid");
   //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
@@ -44,12 +46,12 @@ function send_next_sack(config_json, user_password, private_key) {
   const Web3 = require("web3");
 
   console.log(
-    `Calling send_next_sack() with config_json = ${JSON.stringify(config_json)}`
+      `Calling send_next_sack() with config_json = ${JSON.stringify(config_json)}`
   );
   let current_sack_amount =
-    config_json.client_session.sack_amount *
-    (config_json.client_session.sack_number + 1) *
-    Math.pow(10, 12);
+      config_json.client_session.sack_amount *
+      (config_json.client_session.sack_number + 1) *
+      Math.pow(10, 12);
 
   let session = config_json.client_session;
   session.status = session_status.status.ACTIVE;
@@ -60,7 +62,6 @@ function send_next_sack(config_json, user_password, private_key) {
     sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
       config.read_default_config((config_json) => {
         console.log("XLOG: Last sack timestamp set to the current timestamp.");
-        setTimeout(() => {
           call_sack.call_sack(
               config_json.client_session.ip,
               config_json.client_session.port,
@@ -87,12 +88,16 @@ function send_next_sack(config_json, user_password, private_key) {
                   response2_json = response2;
 
                   if (response2_json.command.arguments.answer === "SACK-OK") {
-                    console.log(
-                        "SACK is accepted by provider! Active session continues."
-                    );
-                    sackok.set_sackok(response2_json, () => {
-                      console.log("XLOG: SACK-OK object saved.");
-                    });
+
+                    setTimeout(() => {
+                      console.log("SACK is accepted by provider! Active session continues.");
+                      sackok.set_sackok(response2_json, () => {
+                        setTimeout(() => {
+                          console.log("XLOG: SACK-OK object saved.");
+                        },1000);
+                      });
+                    }, 1000);
+
                     // let session = config_json.client_session;
                     // session.status = session_status.status.ACTIVE;
                     // session.expiration_timestamp = config_json.client_session.pafren_timestamp;
@@ -101,11 +106,10 @@ function send_next_sack(config_json, user_password, private_key) {
                     // sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp);
                   }
                 } catch (e) {
-                  console.log(`ERROR[be6da098a5]: unable to parsej JSON: ${e}`);
+                  console.log(`ERROR[be6da098a5]: unable to parse JSON: ${e}`);
                 }
               }
           );
-        }, 1000);
       });
     });
   });
