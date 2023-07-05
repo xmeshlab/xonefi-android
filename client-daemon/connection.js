@@ -35,7 +35,8 @@ function initiate_connection(
   chosen_ssid,
   user_password,
   private_key,
-  config_json
+  config_json,
+  callback
 ) {
   //const ssid = require("../xonefi-api-client/ssid");
   //const fhs = require("../xonefi-api-client/fast_hotspot_selection");
@@ -96,7 +97,7 @@ function initiate_connection(
     console.log(
       `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
     );
-    return;
+    return callback();
   }
 
   console.log(`DEB2@calculated_sack_amount: ${calculated_sack_amount}`);
@@ -117,7 +118,7 @@ function initiate_connection(
     console.log(
       `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
     );
-    return;
+    return callback();
   }
 
   console.log(
@@ -146,7 +147,7 @@ function initiate_connection(
     console.log(
       `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
     );
-    return;
+    return callback();
   }
 
   let pafren_length;
@@ -163,7 +164,7 @@ function initiate_connection(
     console.log(
       `ERROR: Unknown access type: ${hotspot_type_json.access_method}`
     );
-    return;
+    return callback();
   }
 
   client_session.set_client_session(
@@ -400,6 +401,7 @@ function initiate_connection(
                                                               sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp, () => {
                                                                   sackok.set_sackok(response2_json, () => {
                                                                       console.log("XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete.")
+                                                                      return callback();
                                                                   });
                                                               });
 
@@ -418,6 +420,7 @@ function initiate_connection(
                                       session.sack_number = 1;
                                       client_session.set_client_session(session, () => {
                                           sack_timestamp.set_last_sack_timestamp(current_timestamp + 3600 * 24 * 365);
+                                          return callback();
                                       });
                                   } else {
                                       console.log("ERROR: UNKNOWN RESPONSE TO PAFREN.");
@@ -426,6 +429,7 @@ function initiate_connection(
                           );
                       } else {
                           console.log(`The provider is not ready to serve. Continue connecting.`);
+                          return callback();
                       }
                   }
               );
@@ -436,6 +440,7 @@ function initiate_connection(
 
               } catch(error) {
                   console.log(`XLOG2: CAUGHT ERROR: ${error}`);
+                  return callback();
               }
           });
 

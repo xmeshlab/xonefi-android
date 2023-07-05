@@ -153,9 +153,8 @@ function client_worker(config_json, user_password, private_key, callback) {
                       user_password,
                       private_key,
                         (result11) => {
-                          setTimeout(() => {
                             console.log("XLOG3: Successful SACK round completed");
-                          }, 1000);
+                            return callback();
                         }
                     );
                   });
@@ -191,6 +190,7 @@ function client_worker(config_json, user_password, private_key, callback) {
       });
     } else {
       console.log(`Continue handshake`);
+      return callback();
     }
   } else {
     console.log(
@@ -202,12 +202,16 @@ function client_worker(config_json, user_password, private_key, callback) {
         chosen_ssid,
         user_password,
         private_key,
-        config_json
+        config_json,
+          () => {
+            return callback();
+          }
       );
     } else if (config_json.client_session.scan_counter >= 15) {
       console.log("Trying to scan again");
       scan_counter.set_scan_counter(0, () => {
         console.log("XLOG: Scan counter set to 0.");
+        return callback();
       });
     } else {
       console.log("Wait for previous scan to complete");
@@ -216,6 +220,7 @@ function client_worker(config_json, user_password, private_key, callback) {
         config_json.client_session.scan_counter + 1,
         () => {
           console.log("XLOG: Scan counter incremented");
+          return callback();
         }
       );
     }
