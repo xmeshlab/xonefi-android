@@ -88,15 +88,10 @@ function send_next_sack(config_json, user_password, private_key) {
                   response2_json = response2;
 
                   if (response2_json.command.arguments.answer === "SACK-OK") {
-
-                    setTimeout(() => {
                       console.log("SACK is accepted by provider! Active session continues.");
                       sackok.set_sackok(response2_json, () => {
-                        setTimeout(() => {
                           console.log("XLOG: SACK-OK object saved.");
-                        },1000);
                       });
-                    }, 1000);
 
                     // let session = config_json.client_session;
                     // session.status = session_status.status.ACTIVE;

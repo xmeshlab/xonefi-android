@@ -78,7 +78,7 @@ async function main() {
 
   while (true) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     } catch (e) {
       break;
     }
