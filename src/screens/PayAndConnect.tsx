@@ -27,6 +27,9 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
+const {WifiModule} = NativeModules;
+WifiModule.logEvent();
+
 /**
  * This Component handles the functionality of allowing a user to Connect or 
  * Disconnect from an XOneFi Provider
