@@ -7,7 +7,7 @@ import {
 
 const worker = require("./worker");
 
-export function startClientDaemon() {
+export async function startClientDaemon() {
   console.log("XLOG: startClientDaemon 1");
   let global_counter = 0;
   const user_password = "seitlab123!@";
