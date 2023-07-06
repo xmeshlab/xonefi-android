@@ -17,7 +17,9 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-var global_counter = 0;
+let global_counter = 0;
+let last_counter = 0;
+
 const ssid = require("../api/ssid");
 const fhs = require("../api/fast_hotspot_selection");
 const client_session = require("../api/client_session");
@@ -88,19 +90,26 @@ async function main() {
     console.log(`config_json: ${JSON.stringify(config_json)}`);
 
     if (config_json.client_on === true) {
-      worker.client_worker(
+
+      await worker.client_worker(
         config_json,
         user_password,
-        decrypted_private_key,
-        () => {
-          console.log(`${global_counter}: Client is on`);
-        }
-      );
+        decrypted_private_key).then(() =>
+      {
+        console.log(`${global_counter}: Client is on`);
+        global_counter++;
+      });
+
+      //     ,
+      //   () => {
+      //     console.log(`${global_counter}: Client is on`);
+      //   }
+      // );
     } else {
       console.log(`${global_counter}: Client is off`);
     }
 
-    global_counter++;
+    //global_counter++;
   }
 }
 
