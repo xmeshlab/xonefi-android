@@ -5,6 +5,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 //import providor component
 import Provider from "../Components/Provider";
 
+
+/**
+ * This Screen shows the various Available XOneFi Providers. When a Provider is clicked, the user is navigated to the ProviderDetailScreen
+ * 
+ */
 export default function ProviderScreen({ navigation }) {
   return (
     <View className="flex-1">

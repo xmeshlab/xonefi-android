@@ -38,7 +38,7 @@ import { Circle } from "react-native-svg";
  */
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
-  const { SSID, BSSID, signalLevel } = props.route.params;
+  const { SSID, BSSID, signalLevel, frequency } = props.route.params;
   const [password, setPassword] = useState("seitlab123!@");
 
   const {
@@ -107,8 +107,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           setIsConnected(true)
           //setCurrentConnectSSID(SSID)
         },
-        () => {
+        (error) => {
           console.log("XLOG: Connection failed!");
+          console.error(error)
         });
 
     } else {
@@ -210,7 +211,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         >
           {(v) => (
             <View>
-              <Text style={globalStyle.light}>{v}</Text>
+              {/*frequency is the speed in MHz*/}
+              <Text style={globalStyle.light}>{frequency}</Text>
             </View>
           )}
         </AnimatedCircularProgress>

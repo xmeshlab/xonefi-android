@@ -31,14 +31,14 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("web3auth object");
-    console.log(web3auth);
+    //console.log("web3auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.GOOGLE,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("info returned from web3 Auth");
-    console.log(info);
+    //console.log("info returned from web3 Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -51,8 +51,8 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -73,14 +73,14 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("web3auth object");
-    console.log(web3auth);
+    //console.log("web3auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.FACEBOOK,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("info returned from web3 Auth");
-    console.log(info);
+    //console.log("info returned from web3 Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -93,8 +93,8 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -114,14 +114,14 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("web3auth object");
-    console.log(web3auth);
+    //console.log("web3auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.WECHAT,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("info returned from web3 Auth");
-    console.log(info);
+    //console.log("info returned from web3 Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -134,8 +134,8 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -155,14 +155,14 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("web3auth object");
-    console.log(web3auth);
+    //console.log("web3auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.TWITTER,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("info returned from web3 Auth");
-    console.log(info);
+    //console.log("info returned from web3 Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -175,8 +175,8 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });

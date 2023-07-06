@@ -8,6 +8,10 @@ import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import Provider from "../Components/Provider";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 
+/**
+ * This screen displays additional information about a specific XOneFi Provider. 
+ * A User is routed to this page after clicking on a Provider displayed on the Provider Screen. 
+ */
 export default function ProviderDetailScreen({ navigation }) {
   return (
     <ScrollView>

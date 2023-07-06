@@ -48,6 +48,11 @@ default_json = {
   },
 };
 
+/**
+ * This Screen showcases the prices of various cryptocurrencies. 
+ * The Price information is gathered using CoinGecko's Free API.
+ * 
+ */
 export default function WalletScreen({ navigation }) {
   const [priceJson, setPriceJson] = useState(default_json);
   const [backgroundFlash, setBackgroundFlash] = useState(false);

@@ -9,6 +9,16 @@ import WifiWhite from "../../assets/WifiWhite.png";
 import Bars from "../../assets/ProviderBars.png";
 import arrow from "../../assets/RightArrowIcon.png";
 
+/**
+ * This is a component for displaying the Provider Information on the Provider Screen. 
+ * 
+ * The Provider takes the various props : 
+ * ProviderName - The name of the provider to be displayed
+ * UsersConnectedNumber - The number of users which are currently connected to the Provider
+ * TokenGenNumber - The number of tokens that were generated
+ * Status - The bool status of the Provider (Active/inActive)
+ * navigationFunction - the function which is used to navigate the user to the ProviderDetails screen when the Provider is pressed
+ */
 export default function Provider({
   ProviderName,
   UsersConnectedNumber,
