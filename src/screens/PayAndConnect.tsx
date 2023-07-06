@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -27,6 +27,15 @@ import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
+/**
+ * This Component handles the functionality of allowing a user to Connect or 
+ * Disconnect from an XOneFi Provider
+ * 
+ * A User is routed to this page after clicking on a WifiItem that is rendered on the ConnectScreen
+ * 
+ * It is passed in the Provider's SSID and BSSID as props
+ * 
+ */
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
   const { SSID, BSSID, signalLevel } = props.route.params;
@@ -38,9 +47,17 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     setValue: setCurrentConnectSSID,
   } = useAsync(WifiManager.getCurrentWifiSSID, true);
 
-  const isConnected = useMemo(() => {
-    return currentConnectedSSID === SSID;
+  const [isConnected, setIsConnected] = useState(false);
+
+  //maybe change back to useMemo?
+  useEffect(() => {
+    setIsConnected(currentConnectedSSID === SSID)
   }, [currentConnectedSSID]);
+  /*onst isConnected = useMemo(() => {
+    return currentConnectedSSID === SSID;
+  }, [currentConnectedSSID]);*/
+
+
   //debug code
   console.log("XLOG: Current value of isConnected : " + isConnected);
 
@@ -54,23 +71,14 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     });
   });
 
-  //const sack_number = require("../../xonefi-api-client/sack_number");
-
-  // sack_number.set_initiated_sack_number(2048, (res) => {
-  //     if(res) {
-  //         console.log("XLOG: Successfully set initiated sack number.");
-  //     } else {
-  //         console.log("XLOG: Failure setting initiated sack number.");
-  //     }
-  // });
-
   const client_session = require("../../xonefi-api-client/client_session");
 
   client_session.get_client_session((res) => {
     console.log("XLOG: CLIENT SESSION: " + JSON.stringify(res));
   });
 
-  const payAndConnect = useCallback(async () => {
+  //function to connect to OneFi Provider
+  const payAndConnect = async ()=> {
     console.log("XLOG: Pay and Connect Callback Activated");
 
     const granted = await PermissionsAndroid.request(
@@ -90,88 +98,30 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       let ssid_json = deserialize_ssid(SSID);
 
-      // let config_json = await read_default_config();
-      // config_json.client_session.ssid = SSID;
-      // config_json.client_on = true;
-      // await write_default_config(config_json);
-
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
+      //swtiched from two functions in then, to a then and catch
       WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
         () => {
           console.log("XLOG: Connected successfully!");
+          setIsConnected(true)
+          //setCurrentConnectSSID(SSID)
         },
         () => {
           console.log("XLOG: Connection failed!");
-        }
-      );
-      /*.then(()=>{
-                setButtonText('Disconnect')
-            })*/
-      //setButtonText('Disconnect')
-      //Set the text for the button. Will cause React to rerender the component
+        });
+
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
-
-      // let config_json = await read_default_config();
-      // config_json.client_on = false;
-      // await write_default_config(config_json);
-      //
-      //
-      // let status = await WifiManager.connectionStatus();
-      //
-      // console.log("XLOG: current WiFi conntection status: " + status)
     }
 
-    //
-    // try {
-    //     // Enable Wi-Fi (Android only)
-    //     //WifiManager.setEnabled(true);
-    //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
-    //
-    //     // WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
-    //     //     console.log('Connected successfully!')
-    //     // }, () => {
-    //     //     console.log('Connection failed!')
-    //     // })
-    //
-    //
-    // } catch (error) {
-    //     console.log('Error connecting to Wi-Fi:', error.message);
-    // }
+  }
 
-    // if (isConnected) {
-    //     try {
-    //        await WifiManager.disconnect();
-    //        setCurrentConnectSSID(undefined);
-    //     } catch (e) {
-    //         console.error('disconnect', e);
-    //     } finally {
-    //     }
-    //     return;
-    // }
-
-    // <<<<<<< previous code >>>>>>>>>>>>
-    // try {
-    //     // await NativeModules.XOneFiWiFiModule.connectWifi(SSID, 'QwerTyuioP');
-    //     // 'QwerTyuioP'
-    //     await NativeModules.XOneFiWiFiModule.initialConnect(SSID, // replace with your Wi-Fi pwd
-    //         password);
-    //     await OneFiStorage.setItem('client_on', true);
-    //     setCurrentConnectSSID(SSID,);
-    // } catch (e) {
-    //     console.warn('connect error', '#051e2a');
-    //     console.error(e)
-    // } finally {
-    // }
-    // <<<<<< end-of-previous code >>>>>>>>>
-  }, [isConnected, setCurrentConnectSSID, password]);
-
-  //discconect function
-  const disconnectFromOnefi = useCallback(async () => {
+  //Function to disconnect from OneFi Provider
+  const disconnectFromOnefi = async () => {
     console.log("XLOG: DisconnectFromOnefi Callback Activated");
 
     const granted = await PermissionsAndroid.request(
@@ -195,17 +145,15 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       WifiManager.isRemoveWifiNetwork(SSID);
-      /*.then(()=>{
-                setButtonText('Pay and Connect')
-            })*/
-      //setButtonText('Pay and Connect')
+      setIsConnected(false)
+
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
     }
-  }, [isConnected, setCurrentConnectSSID, password]);
+  }
 
   WifiManager.getCurrentWifiSSID().then(
     async (ssid) => {
@@ -215,55 +163,12 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         console.log("XLOG: The device is already connected to: " + SSID);
 
         console.log("XLOG: Background timer will start in here.");
-
-        // let config_json = await read_default_config();
-        // config_json.client_session.ssid = SSID;
-        // config_json.client_on = true;
-        // await write_default_config(config_json);
-
-        // BackgroundTimer.runBackgroundTimer(async () => {
-        //         let config_json = await read_default_config();
-        //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-        //         config_json["port"]++;
-        //         await write_default_config(config_json);
-        //     },
-        //     3000);
       } else {
         console.log(
           "XLOG: Before using XOneFi, the device must connect to: " + SSID
         );
 
         console.log("XLOG: Background timer will start in here.");
-
-        // let ssid_json = deserialize_ssid(SSID);
-        //
-        // console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`)
-        //
-        // try {
-        //     // Enable Wi-Fi (Android only)
-        //     //WifiManager.setEnabled(true);
-        //     //WifiManager.connect(SSID, ssid_json.prefix, false, false);
-        //
-        //     WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(() => {
-        //         console.log('Connected successfully!')
-        //     }, () => {
-        //         console.log('Connection failed!')
-        //     })
-        // } catch (error) {
-        //     console.log('Error connecting to Wi-Fi:', error.message);
-        // }
-
-        //await WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false);
-
-        //console.log("XLOG: Connected successfully!");
-
-        // BackgroundTimer.runBackgroundTimer(async () => {
-        //         let config_json = await read_default_config();
-        //         console.log("XLOG: ping: " + JSON.stringify(config_json));
-        //         config_json["port"]++;
-        //         await write_default_config(config_json);
-        //     },
-        //     3000);
 
         console.log(
           "XLOG: Confirming that the background timer doesn't block the main thread."
@@ -275,7 +180,6 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     }
   );
 
-  //isConnected ? setButtonText('Disconnect') : setButtonText('Pay and Connect')
   return (
     <ScrollView className="flex-1 flex-col">
       <View style={[globalStyle.row, { marginLeft: 37, marginTop: 23 }]}>
@@ -316,28 +220,23 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           <WifiLevelIcon signalLevel={signalLevel ?? 0} />
           <Text style={[globalStyle.light, { paddingRight: 40 }]}>{SSID}</Text>
         </View>
-        <Text style={globalStyle.light}>.014 OFI/GB</Text>
       </View>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mb-1">Private</Text>
+          <Text className="text-white text-base mb-1">0 OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per GB</Text>
+          <Text className="text-white text-base mb-1">0 OFI</Text>
         </View>
         <View className="flex flex-row justify-between">
-          <Text className="text-white text-base mt-1">Conversion</Text>
-        </View>
-        {/*<View className="flex flex-row justify-between" style={{alignItems: 'center'}}>*/}
-        {/*    <Text className="text-white text-base mt-1">Password</Text>*/}
-        {/*    <TextInput secureTextEntry={true} style={style.input} textContentType={'password'} value={password}*/}
-        {/*               onChangeText={setPassword}/>*/}
-        {/*</View>*/}
-        <View style={{ flexDirection: "row" }}>
           <Text className="text-white text-base mt-1">Total</Text>
+          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
         </View>
       </View>
 

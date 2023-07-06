@@ -110,7 +110,6 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
           signalLevel={item.signalLevel}
           key={item.BSSID}
           SSID={item.SSID}
-          price={0.8}
         />
       </TouchableOpacity>
     ),
@@ -158,10 +157,9 @@ export default ConnectScreen;
 
 const WifiItem = ({
   SSID,
-  price,
   frequency,
   signalLevel,
-}: Partial<WifiWithSignalLevel> & { price: number }) => {
+}: Partial<WifiWithSignalLevel>) => {
   return (
     <View style={style.wifiItem}>
       <View
@@ -177,7 +175,6 @@ const WifiItem = ({
         <LockICon style={{ marginLeft: 15, marginTop: 5 }} />
       </View>
       <Text style={style.wifiItemText}>{SSID}</Text>
-      <Text style={style.wifiItemText}>{price} OFI/GB</Text>
       <ChevronRight />
     </View>
   );
