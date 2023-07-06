@@ -19,17 +19,19 @@ import { StatusBar } from "expo-status-bar";
 function App() {
   console.log("XLOG: App.tsx");
 
-  config_init_if_absent((ret) => {
-    if (ret === true) {
-      console.log("XLOG: Database is ready.");
-      console.log("XLOG: Starting Client Daemon.");
-      startClientDaemon().then(() => {
-        console.log("XLOG: Client Daemon Started");
-      });
-    } else {
-      console.log("XLOG: Database initialization error.");
-    }
-  });
+  // config_init_if_absent((ret) => {
+  //   if (ret === true) {
+  //     console.log("XLOG: Database is ready.");
+  //     console.log("XLOG: Starting Client Daemon.");
+  //     startClientDaemon().then(() => {
+  //       console.log("XLOG: Client Daemon Started");
+  //     });
+  //   } else {
+  //     console.log("XLOG: Database initialization error.");
+  //   }
+  // });
+
+  startClientDaemon();
 
   useEffect(() => {
     SplashScreen.hide();

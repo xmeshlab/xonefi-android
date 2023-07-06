@@ -218,9 +218,6 @@ function initiate_connection(
 
               try {
 
-
-
-
               call_hello.call_hello(
                   "137.184.213.75",
                   3000,
