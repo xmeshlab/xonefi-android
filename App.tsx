@@ -27,9 +27,12 @@ function App() {
       console.log("XLOG: Starting Client Daemon.");
       daemon_counter++;
       console.log(`Daemon counter: ${daemon_counter}`);
-      startClientDaemon().then(() => {
-        console.log("XLOG: Client Daemon Started");
-      });
+      if(daemon_counter === 1) {
+        console.log(`XLOG5: daemon counter after start ${daemon_counter}`);
+        startClientDaemon().then(() => {
+          console.log("XLOG: Client Daemon Started");
+        });
+      }
     } else {
       console.log("XLOG: Database initialization error.");
     }
