@@ -11,7 +11,7 @@
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "~1.17.3",
+    "@react-native-async-storage/async-storage": "^1.19.0",
     "@react-native-community/blur": "^4.3.0",
     "@react-native-community/slider": "^4.4.2",
     "@react-native-masked-view/masked-view": "0.2.8",

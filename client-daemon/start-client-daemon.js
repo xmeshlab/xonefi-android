@@ -94,6 +94,7 @@ export async function startClientDaemon() {
         );
       } else {
         console.log(`${global_counter}: Client is off`);
+        global_counter++;
       }
 
     });
