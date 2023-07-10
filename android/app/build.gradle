@@ -143,8 +143,8 @@ android {
 
     defaultConfig {
         applicationId 'com.vidy.XOneFiApp'
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion 29
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()

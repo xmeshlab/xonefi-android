@@ -28,7 +28,8 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
 const {WifiModule} = NativeModules;
-WifiModule.logEvent();
+//Takes a callback as a param
+WifiModule.logEvent(res => console.log(res));
 
 /**
  * This Component handles the functionality of allowing a user to Connect or 
@@ -103,8 +104,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
-      //swtiched from two functions in then, to a then and catch
-      WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
+      /*WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
         () => {
           console.log("XLOG: Connected successfully!");
           setIsConnected(true)
@@ -113,7 +113,13 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         (error) => {
           console.log("XLOG: Connection failed!");
           console.error(error)
-        });
+        });*/
+
+
+        WifiModule.logEvent(res => console.log(res));
+        //Becareful here. The setIsConnected should be set to getting the current connected wifi and checking if its true to ssid
+        WifiModule.connectToWifi2(SSID, ssid_json.prefix);
+        setIsConnected(true)
 
     } else {
       // Permission denied
