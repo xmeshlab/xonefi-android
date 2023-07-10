@@ -68,9 +68,13 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
 
   message.signature = signature_json.signature;
 
+  try {
     send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
         return callback(result);
     });
+  } catch(e) {
+    console.log(`@call_sack: ERROR: send_rest failed: ${e}`);
+  }
 }
 
 module.exports = { call_sack };

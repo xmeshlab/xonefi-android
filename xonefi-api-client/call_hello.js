@@ -67,10 +67,15 @@ function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, ro
   console.log("XLOG2: call_hello()::message: " + JSON.stringify(message));
 
     const send_rest = require('./send_rest');
-    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-        console.log(`XLOG2: call_hello() post send_rest()`);
-        return callback(result);
-    });
+
+    try {
+      send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+          console.log(`XLOG2: call_hello() post send_rest()`);
+          return callback(result);
+      });
+    } catch(e) {
+      console.log(`@call_hello: ERROR: send_rest failed: ${e}`);
+    }
 }
 
 /**
