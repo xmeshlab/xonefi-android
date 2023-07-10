@@ -98,7 +98,7 @@ export async function startClientDaemon() {
       }
 
     });
-  }, 3000);
+  }, 7000);
 }
 
 module.exports = { startClientDaemon };
