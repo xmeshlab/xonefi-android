@@ -157,7 +157,7 @@ function client_worker(config_json, user_password, private_key, callback) {
         }
       }
 
-      console.log(`Continuie session`);
+      console.log(`Continue session`);
       //}
     } else if (
       config_json.client_session.status === session_status.status.HANDSHAKE
