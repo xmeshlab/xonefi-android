@@ -1,7 +1,7 @@
 /*
 SPDX-License-Identifier: GPL-3.0-or-later
 
-Copyright (c) 2020-2021 OneFi <https://onefi.io>
+Copyright (c) 2020-2023 XOneFi
 
 OneFi is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -203,73 +203,72 @@ function initiate_connection(
         console.log(`XLOG2: Preparing to send HELLO.`);
 
         console.log("Setting a timeout...");
-        setTimeout(() => {
-          console.log("Timeout is over.");
-          console.log(`XLOG2: Timeout threshold`);
+      console.log("Timeout is over.");
+      console.log(`XLOG2: Timeout threshold`);
 
-          console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
-          console.log(
-            "DEBUG: deserealized_ssid.port: " + deserealized_ssid.port
-          );
-          console.log("DEBUG: " + private_key);
+      console.log("DEBUG: deserealized_ssid.ip: " + deserealized_ssid.ip);
+      console.log(
+        "DEBUG: deserealized_ssid.port: " + deserealized_ssid.port
+      );
+      console.log("DEBUG: " + private_key);
 
-            WiFi.getIP().then(ipAddress => {
-              console.log(`XLOG2: Local IP address: ${ipAddress}`);
+        WiFi.getIP().then(ipAddress => {
+          console.log(`XLOG2: Local IP address: ${ipAddress}`);
 
-              try {
+          try {
 
-              call_hello.call_hello(
-                  "137.184.213.75",
-                  3000,
-                  new Web3(),
-                  private_key,
-                  uuid.generate_unique_id(),
-                  ipAddress,
-                  deserealized_ssid.prefix,
-                  deserealized_ssid.port,
-                  (response) => {
-                      console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
+          call_hello.call_hello(
+              "137.184.213.75",
+              3000,
+              new Web3(),
+              private_key,
+              uuid.generate_unique_id(),
+              ipAddress,
+              deserealized_ssid.prefix,
+              deserealized_ssid.port,
+              (response) => {
+                  console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 
-                      let response_json = response;
+                  let response_json = response;
 
-                      console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
-                      console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
+                  console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
+                  console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
 
-                      if (response_json.command.arguments.answer === "HELLO-OK") {
-
-
-                          //let response_json = JSON.parse(response);
-                          //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
-
-                          let current_amount =
-                              calculated_pafren_amount * Math.pow(10, 12);
-                          console.log(`CALCULATED current_amount: ${current_amount}`);
-
-                          let current_timestamp = timestamp.get_current_timestamp();
-
-                          console.log(`=DEB(`);
-                          console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
-                          console.log(
-                              `deserealized_ssid.port: ${deserealized_ssid.port}`
-                          );
-                          console.log(`private_key: ${private_key}`);
-                          console.log(
-                              `response_json.command.session: ${response_json.command.session}`
-                          );
-                          console.log(
-                              `response_json.command.uuid: ${response_json.command.uuid}`
-                          );
-                          console.log(`current_amount: ${current_amount}`);
-                          console.log(`current_timestamp: ${current_timestamp}`);
-                          console.log(
-                              `config_json.account.address: ${config_json.account.address}`
-                          );
-                          console.log(
-                              `response_json.command.from: ${response_json.command.from}`
-                          );
-                          console.log(`)DEB=`);
+                  if (response_json.command.arguments.answer === "HELLO-OK") {
 
 
+                      //let response_json = JSON.parse(response);
+                      //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
+
+                      let current_amount =
+                          calculated_pafren_amount * Math.pow(10, 12);
+                      console.log(`CALCULATED current_amount: ${current_amount}`);
+
+                      let current_timestamp = timestamp.get_current_timestamp();
+
+                      console.log(`=DEB(`);
+                      console.log(`deserealized_ssid.ip: ${deserealized_ssid.ip}`);
+                      console.log(
+                          `deserealized_ssid.port: ${deserealized_ssid.port}`
+                      );
+                      console.log(`private_key: ${private_key}`);
+                      console.log(
+                          `response_json.command.session: ${response_json.command.session}`
+                      );
+                      console.log(
+                          `response_json.command.uuid: ${response_json.command.uuid}`
+                      );
+                      console.log(`current_amount: ${current_amount}`);
+                      console.log(`current_timestamp: ${current_timestamp}`);
+                      console.log(
+                          `config_json.account.address: ${config_json.account.address}`
+                      );
+                      console.log(
+                          `response_json.command.from: ${response_json.command.from}`
+                      );
+                      console.log(`)DEB=`);
+
+                      try {
                           call_pafren.call_pafren(
                               "137.184.213.75",
                               3000,
@@ -424,33 +423,28 @@ function initiate_connection(
                                   }
                               }
                           );
-                      } else {
-                          console.log(`The provider is not ready to serve. Continue connecting.`);
-                          return callback();
+                      } catch(e) {
+                          console.log(`XLOG6: ERROR: call_pafren fails as follows: ${e}`);
                       }
+
+                  } else {
+                      console.log(`The provider is not ready to serve. Continue connecting.`);
+                      return callback();
                   }
-              );
-
-
-              /// except
-
-
-              } catch(error) {
-                  console.log(`XLOG2: CAUGHT ERROR: ${error}`);
-                  return callback();
               }
-          });
+          );
 
 
-                }, 3000);
-            });
-        });
+          /// except
 
-  //config_json = config.read_default_config();
-  //     } else {
-  //         console.log(`Unable to connect to ${deserealized_ssid.ssid}`);
-  //     }
-  // });
+
+          } catch(error) {
+              console.log(`XLOG2: CAUGHT ERROR: ${error}`);
+              return callback();
+          }
+      });
+    });
+  });
 }
 
 module.exports = { initiate_connection };

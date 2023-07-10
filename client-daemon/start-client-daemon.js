@@ -65,7 +65,7 @@ export async function startClientDaemon() {
             //     .catch((error) => console.log(error));
 
 
-            console.log("XLOG: startClientDaemon 5");
+    console.log("XLOG: startClientDaemon 5");
 
     read_default_config((config_json1) => {
       //console.log(`config_json: ${JSON.stringify(config_json)}`);
@@ -98,7 +98,7 @@ export async function startClientDaemon() {
       }
 
     });
-  }, 5000);
+  }, 3000);
 }
 
 module.exports = { startClientDaemon };
