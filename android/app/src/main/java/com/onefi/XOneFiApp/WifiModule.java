@@ -23,6 +23,7 @@ import android.net.NetworkRequest;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiNetworkSuggestion;
 import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.provider.Settings;
 
 import android.content.Context;
 import android.content.BroadcastReceiver;
@@ -92,6 +93,8 @@ public class WifiModule extends ReactContextBaseJavaModule {
         Log.d("WifiModule", "ssid : " + ssid);
         Log.d("WifiModule", "password : " + password);
 
+        ReactApplicationContext context = getReactApplicationContext();
+
         final WifiNetworkSuggestion networkSuggestion  = new WifiNetworkSuggestion.Builder()
                 .setSsid(ssid)
                 .setWpa2Passphrase(password)
@@ -115,6 +118,10 @@ public class WifiModule extends ReactContextBaseJavaModule {
         if (status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS) {
         // do error handling here…
             Log.d("WifiModule", "status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS");
+        }else{
+            //Go to Wifi Page
+            context.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+            //startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
@@ -132,7 +139,6 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 // do post connect processing here...
             }
         };
-        ReactApplicationContext context = getReactApplicationContext();
         context.registerReceiver(broadcastReceiver, intentFilter);
     }
 }

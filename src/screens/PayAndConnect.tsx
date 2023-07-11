@@ -121,7 +121,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         //Becareful here. The setIsConnected should be set to getting the current connected wifi and checking if its true to ssid
         WifiModule.connectToWifi2(SSID, ssid_json.prefix);
 
-        Linking.sendIntent('android.settings.WIFI_SETTINGS');
+
+        //Find out if suggestion was successful, or have a go to wifi settings page
+        //Linking.sendIntent('android.settings.WIFI_SETTINGS');
 
         //If the connected ssid is equal to SSID, set isConnected to True
         WifiManager.getCurrentWifiSSID().then(_ssid =>{
