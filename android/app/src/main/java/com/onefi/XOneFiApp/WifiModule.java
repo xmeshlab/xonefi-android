@@ -119,9 +119,13 @@ public class WifiModule extends ReactContextBaseJavaModule {
         // do error handling here…
             Log.d("WifiModule", "status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS");
         }else{
-            //Go to Wifi Page
-            context.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-            //startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+
+            //Add logic to check if your already connected
+            
+            //Go to Wifi Page - works
+            Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+            wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(wifiIntent);
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
@@ -137,6 +141,11 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 }
                 Log.d("WifiModule", "connectByWifiNetworkSuggestion: onReceive: ");
                 // do post connect processing here...
+
+                //Go to Wifi Page - works
+                //Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                //wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //context.startActivity(wifiIntent);
             }
         };
         context.registerReceiver(broadcastReceiver, intentFilter);
