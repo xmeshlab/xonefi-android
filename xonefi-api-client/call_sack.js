@@ -18,6 +18,11 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import uuid from 'react-native-uuid';
+import {
+  read_default_config,
+  write_default_config,
+  starter_config,
+} from "../xonefi-api-client/config";
 
 
 /**
@@ -39,42 +44,56 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
     //const uuid = require('uuid');
     const send_rest = require('./send_rest');
 
-  var message = {};
-  let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+    const enforced_sack_delay = 2;
+  read_default_config((config_json1) => {
+    if(!'last_sack_timestamp' in config_json1) {
+      config_json1.last_sack_timestamp = 0;
+    }
 
-  message.command = {};
-  message.command.op = "SACK";
-  message.command.from = pubaddress;
-  msg_uuid = uuid.v4().toString();
-  message.command.uuid = msg_uuid;
-  message.command.timestamp = current_timestamp;
-  message.command.session = session;
-  message.command.re = "";
-  message.command.client_ip = "";
-  message.command.provider_prefix = "";
-  message.command.router_no = "";
-  message.command.arguments = {};
-  message.command.arguments.sack = {
-    client: pubaddress,
-    amount: Math.ceil(Number(amount)).toString(),
-    timestamp: current_timestamp,
-    proof: sack,
-  };
+    if(current_timestamp <= config_json1.last_sack_timestamp + enforced_sack_delay) {
+      console.log(`WARNING: Attempt to send multiple SACKS. SKIPPING!`);
+    } else {
+      config_json1.last_sack_timestamp = current_timestamp;
+      write_default_config(config_json1, () => {
+        var message = {};
+        let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
 
-  var signature_json = web3.eth.accounts.sign(
-    JSON.stringify(message.command),
-    prk
-  );
+        message.command = {};
+        message.command.op = "SACK";
+        message.command.from = pubaddress;
+        msg_uuid = uuid.v4().toString();
+        message.command.uuid = msg_uuid;
+        message.command.timestamp = current_timestamp;
+        message.command.session = session;
+        message.command.re = "";
+        message.command.client_ip = "";
+        message.command.provider_prefix = "";
+        message.command.router_no = "";
+        message.command.arguments = {};
+        message.command.arguments.sack = {
+          client: pubaddress,
+          amount: Math.ceil(Number(amount)).toString(),
+          timestamp: current_timestamp,
+          proof: sack,
+        };
 
-  message.signature = signature_json.signature;
+        var signature_json = web3.eth.accounts.sign(
+            JSON.stringify(message.command),
+            prk
+        );
 
-  try {
-    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-        return callback(result);
-    });
-  } catch(e) {
-    console.log(`@call_sack: ERROR: send_rest failed: ${e}`);
-  }
+        message.signature = signature_json.signature;
+
+        try {
+          send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+            return callback(result);
+          });
+        } catch(e) {
+          console.log(`@call_sack: ERROR: send_rest failed: ${e}`);
+        }
+      });
+    }
+  });
 }
 
 module.exports = { call_sack };
