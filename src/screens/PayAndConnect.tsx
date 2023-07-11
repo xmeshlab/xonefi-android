@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   PermissionsAndroid,
+  Linking
 } from "react-native";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
@@ -119,7 +120,16 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         WifiModule.logEvent(res => console.log(res));
         //Becareful here. The setIsConnected should be set to getting the current connected wifi and checking if its true to ssid
         WifiModule.connectToWifi2(SSID, ssid_json.prefix);
-        setIsConnected(true)
+
+        Linking.sendIntent('android.settings.WIFI_SETTINGS');
+
+        //If the connected ssid is equal to SSID, set isConnected to True
+        WifiManager.getCurrentWifiSSID().then(_ssid =>{
+          setIsConnected(SSID == _ssid);
+          
+        }, () => {
+          console.log("Cannot get current SSID!");
+        })
 
     } else {
       // Permission denied
