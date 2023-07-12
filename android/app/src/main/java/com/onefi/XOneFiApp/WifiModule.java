@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.widget.Toast;
 
 public class WifiModule extends ReactContextBaseJavaModule {
 
@@ -121,11 +122,19 @@ public class WifiModule extends ReactContextBaseJavaModule {
         }else{
 
             //Add logic to check if your already connected
-            
+
             //Go to Wifi Page - works
             Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
             wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(wifiIntent);
+
+            //Toast to show to the user
+            CharSequence text = "Connect To :  " + ssid;
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
@@ -142,10 +151,16 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 Log.d("WifiModule", "connectByWifiNetworkSuggestion: onReceive: ");
                 // do post connect processing here...
 
-                //Go to Wifi Page - works
-                //Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                //wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //context.startActivity(wifiIntent);
+                /*Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(wifiIntent);
+
+                //Toast to show to the user
+                CharSequence text = "Connect To :  " + ssid;
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();*/
             }
         };
         context.registerReceiver(broadcastReceiver, intentFilter);
