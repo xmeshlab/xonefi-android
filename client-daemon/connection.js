@@ -295,6 +295,7 @@ function initiate_connection(
                                       console.log("Initiating sack sequence");
                                       let session = config_json.client_session;
                                       session.initiated_sack_number = 1;
+                                      session.started_timestamp = current_timestamp;
                                       session.pafren_timestamp =
                                           current_timestamp + pafren_length;
                                       session.provider_address = response1_json.command.from;
