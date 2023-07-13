@@ -44,56 +44,57 @@ function call_sack(ip, port, web3, prk, session, re, amount, current_timestamp, 
     //const uuid = require('uuid');
     const send_rest = require('./send_rest');
 
-    const enforced_sack_delay = 2;
-  read_default_config((config_json1) => {
-    if(!'last_sack_timestamp' in config_json1) {
-      config_json1.last_sack_timestamp = 0;
+    const enforced_sack_delay = 40;
+
+    var message = {};
+    let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
+
+    message.command = {};
+    message.command.op = "SACK";
+    message.command.from = pubaddress;
+    msg_uuid = uuid.v4().toString();
+    message.command.uuid = msg_uuid;
+    message.command.timestamp = current_timestamp;
+    message.command.session = session;
+    message.command.re = "";
+    message.command.client_ip = "";
+    message.command.provider_prefix = "";
+    message.command.router_no = "";
+    message.command.arguments = {};
+    message.command.arguments.sack = {
+      client: pubaddress,
+      amount: Math.ceil(Number(amount)).toString(),
+      timestamp: current_timestamp,
+      proof: sack,
+    };
+
+    var signature_json = web3.eth.accounts.sign(
+        JSON.stringify(message.command),
+        prk
+    );
+
+    message.signature = signature_json.signature;
+
+    try {
+      read_default_config((config_json1) => {
+          if (!'last_sack_timestamp' in config_json1) {
+            config_json1.last_sack_timestamp = 0;
+          }
+
+          if (current_timestamp <= config_json1.last_sack_timestamp + enforced_sack_delay) {
+            console.log(`WARNING: Attempt to send multiple SACKS. SKIPPING!`);
+          } else {
+            config_json1.last_sack_timestamp = current_timestamp;
+            write_default_config(config_json1, () => {
+              send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+                return callback(result);
+              });
+            });
+          }
+        });
+    } catch(e) {
+      console.log(`@call_sack: ERROR: send_rest failed: ${e}`);
     }
-
-    if(current_timestamp <= config_json1.last_sack_timestamp + enforced_sack_delay) {
-      console.log(`WARNING: Attempt to send multiple SACKS. SKIPPING!`);
-    } else {
-      config_json1.last_sack_timestamp = current_timestamp;
-      write_default_config(config_json1, () => {
-        var message = {};
-        let pubaddress = web3.eth.accounts.privateKeyToAccount(prk).address;
-
-        message.command = {};
-        message.command.op = "SACK";
-        message.command.from = pubaddress;
-        msg_uuid = uuid.v4().toString();
-        message.command.uuid = msg_uuid;
-        message.command.timestamp = current_timestamp;
-        message.command.session = session;
-        message.command.re = "";
-        message.command.client_ip = "";
-        message.command.provider_prefix = "";
-        message.command.router_no = "";
-        message.command.arguments = {};
-        message.command.arguments.sack = {
-          client: pubaddress,
-          amount: Math.ceil(Number(amount)).toString(),
-          timestamp: current_timestamp,
-          proof: sack,
-        };
-
-        var signature_json = web3.eth.accounts.sign(
-            JSON.stringify(message.command),
-            prk
-        );
-
-        message.signature = signature_json.signature;
-
-        try {
-          send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-            return callback(result);
-          });
-        } catch(e) {
-          console.log(`@call_sack: ERROR: send_rest failed: ${e}`);
-        }
-      });
-    }
-  });
 }
 
 module.exports = { call_sack };
