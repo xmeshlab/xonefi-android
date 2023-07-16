@@ -5,8 +5,10 @@ import "./global";
 import { registerRootComponent } from "expo";
 
 
-import App from "./App";
+import {AppRegistry} from 'react-native';
 
+
+import App from "./App";
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
@@ -14,3 +16,6 @@ import App from "./App";
 registerRootComponent(App);
 
 
+AppRegistry.registerHeadlessTask('bgtask', () =>
+    require('./bgtask'),
+);

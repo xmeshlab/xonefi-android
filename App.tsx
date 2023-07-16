@@ -25,9 +25,9 @@ function App() {
 
 
 
-  startClientDaemon().then(() => {
-    console.log("Client Daemon Started..")
-  });
+  // startClientDaemon().then(() => {
+  //   console.log("Client Daemon Started..")
+  // });
 
   return (
       <GestureHandlerRootView style={{ flex: 1 }}>

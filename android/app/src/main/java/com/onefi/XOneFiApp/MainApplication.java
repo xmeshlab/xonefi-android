@@ -28,6 +28,10 @@ import expo.modules.ReactNativeHostWrapper;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import android.os.Bundle;
+import android.content.Intent;
+import android.util.Log;
+
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHostWrapper(
     this,
@@ -71,6 +75,18 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
+    Intent service = new Intent(getApplicationContext(), MyTaskService.class);
+    Bundle bundle = new Bundle();
+
+    bundle.putString("foo", "bar");
+    service.putExtras(bundle);
+
+    Log.d("hello1", "hello2");
+    getApplicationContext().startService(service);
+
+
+
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
@@ -78,6 +94,10 @@ public class MainApplication extends Application implements ReactApplication {
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     ApplicationLifecycleDispatcher.onApplicationCreate(this);
     initStorage();
+
+
+
+
   }
 
   private void initStorage() {
