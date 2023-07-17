@@ -76,10 +76,14 @@ function call_pafren(
 
   message.signature = signature_json.signature;
 
-    const send_rest = require('./send_rest');
-    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-        return callback(result);
-    });
+    try {
+      const send_rest = require('./send_rest');
+      send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+          return callback(result);
+      });
+    } catch(e) {
+      console.log(`@call_pafren: ERROR: send_rest failed: ${e}`);
+    }
 }
 
 module.exports = { call_pafren };

@@ -20,6 +20,8 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 //import storage from 'react-native-sync-storage'
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 let SQLite = require("react-native-sqlite-storage");
 //SQLite.enablePromise(true);
 
@@ -228,105 +230,135 @@ export function starter_config() {
 // }
 
 export function read_default_config(callback) {
-  let db = SQLite.openDatabase(
-    "config.db",
-    "1.0",
-    "Test Database",
-    200000,
-    () => {
-      console.log("XLOG: read_default_config 1");
-      console.log(`XLOG: db ${JSON.stringify(db)}`);
-      db.transaction((tx) => {
-        console.log("XLOG: read_default_config 2");
-        tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
-          console.log("XLOG: read_default_config 3");
-          console.log("XLOG: Checking the contents of the table.");
-          let len = results.rows.length;
-          console.log(`XLOG: Found ${len} rows.`);
-
-          if (len > 0) {
-            console.log("XLOG: read_default_config 4");
-            return callback(JSON.parse(results.rows.item(0).json));
-          } else {
-            console.log("XLOG: read_default_config 5");
-            console.log("XLOG: ERROR: Table Config has no rows.");
-            return callback(null);
-          }
-        });
-      });
-    },
-    (err) => {
-      console.log("XLOG: Error opening database 1");
-      console.log("XLOG: read_default_config 6");
-      return callback(false);
-    }
-  );
+  try {
+    AsyncStorage.getItem('config').then((value) => {
+      if(value !== null) {
+        return callback(JSON.parse(value));
+      } else {
+        return callback(starter_config());
+      }
+    });
+  } catch (e) {
+    console.log(`read_default_config: ERROR: ${e}`);
+    return callback(null);
+  }
 }
+
+
+// export function read_default_config(callback) {
+//   let db = SQLite.openDatabase(
+//     "config.db",
+//     "1.0",
+//     "Test Database",
+//     200000,
+//     () => {
+//       console.log("XLOG: read_default_config 1");
+//       console.log(`XLOG: db ${JSON.stringify(db)}`);
+//       db.transaction((tx) => {
+//         console.log("XLOG: read_default_config 2");
+//         tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
+//           console.log("XLOG: read_default_config 3");
+//           console.log("XLOG: Checking the contents of the table.");
+//           let len = results.rows.length;
+//           console.log(`XLOG: Found ${len} rows.`);
+//
+//           if (len > 0) {
+//             console.log("XLOG: read_default_config 4");
+//             return callback(JSON.parse(results.rows.item(0).json));
+//           } else {
+//             console.log("XLOG: read_default_config 5");
+//             console.log("XLOG: ERROR: Table Config has no rows.");
+//             return callback(null);
+//           }
+//         });
+//       });
+//     },
+//     (err) => {
+//       console.log("XLOG: Error opening database 1");
+//       console.log("XLOG: read_default_config 6");
+//       return callback(false);
+//     }
+//   );
+// }
+
 
 export function write_default_config(config_json, callback) {
-  let db = SQLite.openDatabase(
-    "config.db",
-    "1.0",
-    "Test Database",
-    200000,
-    () => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          `UPDATE Config SET json = '${JSON.stringify(
-            config_json
-          )}' WHERE id = 0`,
-          [],
-          (tx, results) => {
-            console.log("XLOG: Successfully updated config.");
-            return callback(true);
-          }
-        );
-      });
-    },
-    (err) => {
-      console.log("XLOG: Error opening database 1");
-      return callback(false);
-    }
-  );
-
-  // try {
-  //     const jsonValue = JSON.stringify(config_json)
-  //     await AsyncStorage.setItem('config', jsonValue)
-  //     //await storage.set('config', jsonValue);
-  //     return true;
-  // } catch (e) {
-  //     return false;
-  // }
-
-  //
-  //
-  //
-  // const getData = async () => {
-  //     try {
-  //         const jsonValue = await AsyncStorage.getItem(`@config`)
-  //         if(jsonValue === "" || jsonValue === null) {
-  //
-  //         }
-  //         let ret = jsonValue != null ? JSON.parse(jsonValue) : null;
-  //
-  //     } catch(e) {
-  //         // error reading value
-  //     }
-  // }
-  //
-  // const storeData = async (value) => {
-  //     try {
-  //         const jsonValue = JSON.stringify(value)
-  //         await AsyncStorage.setItem('@storage_Key', jsonValue)
-  //         return true;
-  //     } catch (e) {
-  //         // saving error
-  //         return false;
-  //     }
-  // }
-
-  //return true;
+  try {
+    const jsonValue = JSON.stringify(config_json);
+    AsyncStorage.setItem('config', jsonValue).then(() => {
+      return callback(true);
+    });
+  } catch (e) {
+    console.log(`read_default_config: ERROR: ${e}`);
+    return callback(false);
+  }
 }
+
+
+// export function write_default_config(config_json, callback) {
+//   let db = SQLite.openDatabase(
+//     "config.db",
+//     "1.0",
+//     "Test Database",
+//     200000,
+//     () => {
+//       db.transaction((tx) => {
+//         tx.executeSql(
+//           `UPDATE Config SET json = '${JSON.stringify(
+//             config_json
+//           )}' WHERE id = 0`,
+//           [],
+//           (tx, results) => {
+//             console.log("XLOG: Successfully updated config.");
+//             return callback(true);
+//           }
+//         );
+//       });
+//     },
+//     (err) => {
+//       console.log("XLOG: Error opening database 1");
+//       return callback(false);
+//     }
+//   );
+//
+//   // try {
+//   //     const jsonValue = JSON.stringify(config_json)
+//   //     await AsyncStorage.setItem('config', jsonValue)
+//   //     //await storage.set('config', jsonValue);
+//   //     return true;
+//   // } catch (e) {
+//   //     return false;
+//   // }
+//
+//   //
+//   //
+//   //
+//   // const getData = async () => {
+//   //     try {
+//   //         const jsonValue = await AsyncStorage.getItem(`@config`)
+//   //         if(jsonValue === "" || jsonValue === null) {
+//   //
+//   //         }
+//   //         let ret = jsonValue != null ? JSON.parse(jsonValue) : null;
+//   //
+//   //     } catch(e) {
+//   //         // error reading value
+//   //     }
+//   // }
+//   //
+//   // const storeData = async (value) => {
+//   //     try {
+//   //         const jsonValue = JSON.stringify(value)
+//   //         await AsyncStorage.setItem('@storage_Key', jsonValue)
+//   //         return true;
+//   //     } catch (e) {
+//   //         // saving error
+//   //         return false;
+//   //     }
+//   // }
+//
+//   //return true;
+// }
 
 //  /**
 //   * Safe procedure for checking the existence of configuratin (state) file.
@@ -374,98 +406,98 @@ export function write_default_config(config_json, callback) {
 // }
 //
 
-/**
- * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
- * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
- * taken from onefi-sample-config.json
- * @returns {boolean} true: success; false: failure.
- */
-export async function config_init_if_absent(callback) {
-  let db = await SQLite.openDatabase(
-    "config.db",
-    "1.0",
-    "Test Database",
-    200000,
-    async () => {
-      console.log("XLOG: config_init_if_absent: Database opened");
-      await db.transaction(
-        (tx) => {
-          tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)",
-            [],
-            (tx, results) => {
-              console.log("XLOG: Results", results);
-              tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
-                console.log("Query completed");
-
-                // Get rows with Web SQL Database spec compliance.
-
-                let len = results.rows.length;
-
-                if (len === 0) {
-                  console.log("XLOG: The table is empty.");
-                  tx.executeSql(
-                    `INSERT INTO Config (id, json) VALUES (0, '${JSON.stringify(
-                      starter_config()
-                    )}')`,
-                    [],
-                    (tx, results) => {
-                      console.log(
-                        "XLOG: Initialized config with a starter code."
-                      );
-
-                      tx.executeSql(
-                        "SELECT * FROM Config",
-                        [],
-                        (tx, results) => {
-                          console.log(
-                            "XLOG: Checking the contents of the table."
-                          );
-                          let len = results.rows.length;
-                          console.log(`XLOG: Found ${len} rows.`);
-                          for (let i = 0; i < len; i++) {
-                            let row = results.rows.item(i);
-                            console.log(`ID: ${row.id}, JSON: ${row.json}`);
-                          }
-                          return callback(true);
-                        }
-                      );
-                    }
-                  );
-                } else {
-                  console.log("XLOG: The table is already populated.");
-                  return callback(true);
-                }
-
-                // for (let i = 0; i < len; i++) {
-                //     let row = results.rows.item(i);
-                //     console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
-                // }
-
-                return callback(true);
-              });
-            }
-          );
-        },
-        (err) => {
-          console.log("XLOG: Error opening database 1");
-          return callback(false);
-        }
-      );
-
-      // if(!config_exists()) {
-      //     config_init();
-      //     return true;
-      // } else {
-      //     return false;
-      // }
-      //}
-    },
-    () => {
-      console.log("XLOG: Error opening database");
-    }
-  );
-}
+// /**
+//  * Thread/concurrency-safe procedure for initialization of a config with pre-defined values only in the case if
+//  * the configuration (system state) file (a.k.a. onefi.json) is absent. The default values are
+//  * taken from onefi-sample-config.json
+//  * @returns {boolean} true: success; false: failure.
+//  */
+// export async function config_init_if_absent(callback) {
+//   let db = await SQLite.openDatabase(
+//     "config.db",
+//     "1.0",
+//     "Test Database",
+//     200000,
+//     async () => {
+//       console.log("XLOG: config_init_if_absent: Database opened");
+//       await db.transaction(
+//         (tx) => {
+//           tx.executeSql(
+//             "CREATE TABLE IF NOT EXISTS Config (id INTEGER PRIMARY KEY AUTOINCREMENT, json TEXT)",
+//             [],
+//             (tx, results) => {
+//               console.log("XLOG: Results", results);
+//               tx.executeSql("SELECT * FROM Config", [], (tx, results) => {
+//                 console.log("Query completed");
+//
+//                 // Get rows with Web SQL Database spec compliance.
+//
+//                 let len = results.rows.length;
+//
+//                 if (len === 0) {
+//                   console.log("XLOG: The table is empty.");
+//                   tx.executeSql(
+//                     `INSERT INTO Config (id, json) VALUES (0, '${JSON.stringify(
+//                       starter_config()
+//                     )}')`,
+//                     [],
+//                     (tx, results) => {
+//                       console.log(
+//                         "XLOG: Initialized config with a starter code."
+//                       );
+//
+//                       tx.executeSql(
+//                         "SELECT * FROM Config",
+//                         [],
+//                         (tx, results) => {
+//                           console.log(
+//                             "XLOG: Checking the contents of the table."
+//                           );
+//                           let len = results.rows.length;
+//                           console.log(`XLOG: Found ${len} rows.`);
+//                           for (let i = 0; i < len; i++) {
+//                             let row = results.rows.item(i);
+//                             console.log(`ID: ${row.id}, JSON: ${row.json}`);
+//                           }
+//                           return callback(true);
+//                         }
+//                       );
+//                     }
+//                   );
+//                 } else {
+//                   console.log("XLOG: The table is already populated.");
+//                   return callback(true);
+//                 }
+//
+//                 // for (let i = 0; i < len; i++) {
+//                 //     let row = results.rows.item(i);
+//                 //     console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
+//                 // }
+//
+//                 return callback(true);
+//               });
+//             }
+//           );
+//         },
+//         (err) => {
+//           console.log("XLOG: Error opening database 1");
+//           return callback(false);
+//         }
+//       );
+//
+//       // if(!config_exists()) {
+//       //     config_init();
+//       //     return true;
+//       // } else {
+//       //     return false;
+//       // }
+//       //}
+//     },
+//     () => {
+//       console.log("XLOG: Error opening database");
+//     }
+//   );
+// }
 
 //
 //
@@ -518,6 +550,5 @@ export async function config_init_if_absent(callback) {
 module.exports = {
   read_default_config,
   write_default_config,
-  starter_config,
-  config_init_if_absent,
+  starter_config
 };

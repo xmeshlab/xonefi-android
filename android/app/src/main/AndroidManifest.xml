@@ -91,6 +91,9 @@
             android:name=".service.wifi.WifiService"
             android:enabled="true"
             android:exported="true" />
+
+        <service android:name=".MyTaskService" />
+
     </application>
     <queries>
         <intent>
