@@ -19,6 +19,11 @@ import com.thanosfisherman.wifiutils.WifiUtils;
 
 import expo.modules.ReactActivityDelegateWrapper;
 
+//imports put in by Sungyu to return current activity
+import android.app.Activity;
+
+
+
 //spalsh screen imports
 import android.os.Bundle; // here
 // react-native-splash-screen >= 0.3.1
@@ -27,6 +32,8 @@ import org.devio.rn.splashscreen.SplashScreen; // here
 //import com.cboy.rn.splashscreen.SplashScreen; // here
 
 public class  MainActivity extends ReactActivity {
+
+  private static Activity mCurrentActivity = null;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     // Set the theme to AppTheme BEFORE onCreate to support
@@ -45,6 +52,7 @@ public class  MainActivity extends ReactActivity {
 
 
     super.onCreate(savedInstanceState);
+    mCurrentActivity = this;
   }
 
   @Override
@@ -121,6 +129,13 @@ public class  MainActivity extends ReactActivity {
       // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).
       // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+    }
+
+    //method written by Sungyu to get the current activity
+    public static Activity getActivity(){
+      Activity activity = new Activity();
+      activity = mCurrentActivity;
+      return activity;
     }
   }
 }

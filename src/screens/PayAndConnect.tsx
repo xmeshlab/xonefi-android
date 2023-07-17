@@ -77,6 +77,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   }, [currentConnectedSSID]);*/
 
 
+  //half circle should be min of (mbps/200) or 180-max of bar
+
+
   //An interval that will run each second. It will get the current wifi network ssid and check if it has changed. 
   //We do this since the user must manually change to the xonefi wifi. Check if there are event listeners we can use instead
   useEffect(() => {
@@ -137,11 +140,14 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
       //debug code to check that our native module WifiModule.java is working
+
+      
       //WifiModule.logEvent(res => console.log(res));
 
       //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
       //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
       await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
+      WifiModule.ShowNotification(SSID);
 
       //We do not change currentConnectedSSID here, since we have an interval that does that for us every second. 
 

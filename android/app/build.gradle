@@ -323,6 +323,12 @@ dependencies {
         }
     }
 
+    //for notifications
+    def core_version = "1.6.0"
+    implementation "androidx.core:core:$core_version"
+
+    implementation 'com.google.android.material:material:1.1.0'
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'

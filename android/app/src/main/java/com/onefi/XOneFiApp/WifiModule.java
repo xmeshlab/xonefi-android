@@ -1,7 +1,9 @@
 package com.onefi.XOneFiApp;
+import android.app.NotificationManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
@@ -29,7 +31,17 @@ import android.content.Context;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
+import android.os.Build;
+import android.app.NotificationChannel;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.Notification;
+
+import com.google.android.material.snackbar.Snackbar;
+import android.app.Activity;
 
 public class WifiModule extends ReactContextBaseJavaModule {
 
@@ -39,6 +51,9 @@ public class WifiModule extends ReactContextBaseJavaModule {
         super(context);
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         //mConnectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        //create channel for notification
+        createNotificationChannel(context);
     }
 
     @NonNull
@@ -77,19 +92,55 @@ public class WifiModule extends ReactContextBaseJavaModule {
 
     private ConnectivityManager.NetworkCallback mNetworkCallback = new ConnectivityManager.NetworkCallback();
 
+    private void createNotificationChannel(Context context){
+        String CHANNEL_ID = "some_channel_id";
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //CharSequence name = context.getString(R.string.channel_name);
+            CharSequence name = "Test Channel";
+            //String description = context.getString(R.string.channel_description);
+            String description = "Test Notification";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            channel.setShowBadge(true);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            channel.enableVibration(true);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @ReactMethod
+    public void ShowNotification(final String ssid) {
+        ReactApplicationContext context = getReactApplicationContext();
+
+        CharSequence text = "Click and Connect To :  " + ssid;
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
+                .setSmallIcon(R.drawable.ic_notification_icon)
+                .setContentTitle("XOneFi")
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+                //.setChannelId("some_channel_id");
+
+        /*//show notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 1;
+        notificationManager.notify(notificationId, builder.build());*/
+
+        Notification buildNotification = builder.build();
+        NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(001, buildNotification);
+    }
+
     @ReactMethod
     public void connectToWifi2(final String ssid, final String password) {
-        /*NetworkSpecifier networkSpecifier  = new WifiNetworkSpecifier.Builder()
-                .setSsid(ssid)
-                .setWpa2Passphrase(password)
-                .setIsHiddenSsid(true) //specify if the network does not broadcast itself and OS must perform a forced scan in order to connect
-                .build();*/
-
-        /*NetworkRequest networkRequest  = new NetworkRequest.Builder()
-                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-                .setNetworkSpecifier(networkSpecifier)
-                .build();
-        mConnectivityManager.requestNetwork(networkRequest, mNetworkCallback);*/
 
         Log.d("WifiModule", "ssid : " + ssid);
         Log.d("WifiModule", "password : " + password);
@@ -103,13 +154,6 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 .build();
 
         final PasspointConfiguration passpointConfig = new PasspointConfiguration();
-        // configure passpointConfig to include a valid Passpoint configuration
-
-        /*final List<WifiNetworkSuggestion> suggestionsList =
-                new ArrayList<WifiNetworkSuggestion>{{
-                    add(networkSuggestion);
-        }};*/
-        //suggestionsList.add(networkSuggestion);
         List<WifiNetworkSuggestion> suggestionsList =
                 new ArrayList<WifiNetworkSuggestion>();
         suggestionsList.add(networkSuggestion);
@@ -129,12 +173,47 @@ public class WifiModule extends ReactContextBaseJavaModule {
             context.startActivity(wifiIntent);
 
             //Toast to show to the user
-            CharSequence text = "Connect To :  " + ssid;
+            CharSequence text = "Click and Connect To :  " + ssid;
             int duration = Toast.LENGTH_LONG;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            /*Toast toast = Toast.makeText(context, text, duration);
+            toast.show();*/
+            //CoordinatorLayout layout = getCurrentActivity().getView();
+            //CoordinatorLayout layout = MainActivity.getActivity().getView();
 
+            //Has the application Context now
+            //Activity activity = (Activity) context.getApplicationContext();
+            //CoordinatorLayout layout = activity.getView();
+
+            //Activity activity = (Activity) getContext();
+            //CoordinatorLayout layout = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+            //View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+
+            /*View parentLayout = getCurrentActivity().findViewById(android.R.id.content);
+
+            Snackbar snackbar = Snackbar.make(parentLayout, text, Snackbar.LENGTH_INDEFINITE).setAction("UNDO",
+                    new View.OnClickListener(){
+                @Override
+                        public void onClick(View view){
+                    Toast.makeText(context, text, duration).show();
+                }
+            });
+            snackbar.show();*/
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
+                    .setSmallIcon(R.drawable.ic_notification_icon)
+                    .setContentTitle("My notification")
+                    .setContentText("Much longer text that cannot fit one line...")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Much longer text that cannot fit one line..."))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setChannelId("some_channel_id");
+
+            //show notification
+            //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            // notificationId is a unique int for each notification that you must define
+            //int notificationId = 1;
+            //notificationManager.notify(notificationId, builder.build());
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
