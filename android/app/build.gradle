@@ -143,8 +143,8 @@ android {
 
     defaultConfig {
         applicationId 'com.vidy.XOneFiApp'
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion 29
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
@@ -322,6 +322,12 @@ dependencies {
             implementation "com.facebook.fresco:animated-webp:${frescoVersion}"
         }
     }
+
+    //for notifications
+    def core_version = "1.6.0"
+    implementation "androidx.core:core:$core_version"
+
+    implementation 'com.google.android.material:material:1.1.0'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

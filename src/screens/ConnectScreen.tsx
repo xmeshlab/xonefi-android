@@ -102,6 +102,7 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
           navigation.navigate("PayAndConnect", {
             BSSID: item.BSSID,
             SSID: item.SSID,
+            frequency: item.frequency
           })
         }
       >

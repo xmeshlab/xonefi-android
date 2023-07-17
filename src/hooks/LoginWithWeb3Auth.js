@@ -50,8 +50,8 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -91,8 +91,8 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -131,8 +131,8 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });
@@ -171,8 +171,8 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
 
-      console.log(`info acct: ${JSON.stringify(info)}`);
-      console.log(`config_json2: ${JSON.stringify(config_json2)}`);
+      //console.log(`info acct: ${JSON.stringify(info)}`);
+      //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
       write_default_config(config_json2, () => {
         console.log("XLOG: Config is successfully initialized (2).");
       });

@@ -4,8 +4,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import AssetGain from "../../assets/AssetGainLogo.png";
 
-//Via props you can even pass React components as well
 
+/**
+ * This component is used to display the various cryptocurrencies on the WalletScreen
+ */
 export default function Asset({
   AssetName,
   AssetAmount,

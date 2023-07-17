@@ -48,6 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
       packages.add(new XOneFiWiFiPackage());
+      packages.add(new MyAppPackage());
       //splash screen code
       //packages.add(new SplashScreenReactPackage());
 

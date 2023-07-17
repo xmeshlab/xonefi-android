@@ -1,6 +1,9 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
+/**
+ * A Component for the View b
+ */
 export default function ViewButton({ OnPressFunction }) {
   return (
     <TouchableOpacity
