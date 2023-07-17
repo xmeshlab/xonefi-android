@@ -47,12 +47,18 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
   const [ssid, setSSID] = useState();
+
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
   const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
 
+  //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
+  //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
+  const [isConnected, setIsConnected] = useState(0)
+
   read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
+    setIsConnected(config_json.client_session.status)
   });
 
 
@@ -222,7 +228,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Status
           </Text>
-          <Text style={style.descriptionItem}>Connected</Text>
+          <Text style={style.descriptionItem}>{isConnected ? "Connected" : "Not Connected"}</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
