@@ -47,6 +47,9 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
   const [ssid, setSSID] = useState();
+  //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
+  //There is another max usage variable created by the developer. Might need to delte previous variable
+  const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
 
   read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
@@ -188,16 +191,18 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <Slider
               style={{width: "100%", height: 80}}
               minimumValue={0}
-              maximumValue={1}
+              maximumValue={100}
               minimumTrackTintColor="#2B3FF2"
               maximumTrackTintColor="#000000"
               thumbTintColor="#FFFFFF"
+              onSlidingComplete={(value)=>{setmaxUsageSliderValue(Math.round(value))}}
             />
 
           </View>
           <View style={style.maxUsage}>
             <Text style={style.summaryItemValue}>
-              {connectStatus?.maxUsage}GB
+              {/*{connectStatus?.maxUsage}GB*/}
+              {maxUsageSliderValue} GB
             </Text>
             <Text style={style.maxUsageDesc}>MAX USAGE</Text>
           </View>
