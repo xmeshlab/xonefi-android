@@ -47,7 +47,7 @@ export default function ProviderScreen({ navigation }) {
           refreshing={isLoading}
           ListEmptyComponent={
             <PrimaryBtn onPress={()=>{getWifiList(setIsLoading, setWifiList)}}>
-              View Available Connection
+              View Providers
             </PrimaryBtn>
           }
           renderItem={flatListRenderItem}
