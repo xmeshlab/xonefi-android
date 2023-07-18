@@ -64,8 +64,7 @@ function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, ro
 
   message.signature = signature_json.signature;
 
-//Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-  //console.log("XLOG2: call_hello()::message: " + JSON.stringify(message));
+  console.log("XLOG2: call_hello()::message: " + JSON.stringify(message));
 
     const send_rest = require('./send_rest');
 

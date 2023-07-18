@@ -1,6 +1,4 @@
 import NetInfo from "@react-native-community/netinfo";
-
-import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
 import {
     Platform,
     PermissionsAndroid
@@ -31,27 +29,24 @@ async function getPermission() {
     }
   }
 
-  //A function to check if the client is connected to a XOneFi Router
-  //This function will find out what wifi network the client is currently connected to,
-  //and return true if that client is a XOneFi Router
-  //It should return False if the client is not connected to an XOneFi router or if it is not connected to wifi at all
-export const isClientConnectedToXoneFi = async () => {
+//This function returns the SSID of the current connect wifi network.
+//It will return a string "Not Connected" if the client is not connected to wifi
+//Returns a string Error in case of error
+export const getCurrentConnectedSSID = async () => {
     try {
       await getPermission();
 
       NetInfo.fetch().then(state => {
         if(state.isConnected === false){
-            return false
+            return "Not Connected"
         }else{
-            //debug code
-            console.log("state.details.ssid : " + state.details.ssid)
-            const isOnefi = is_onefi_ssid(state.details.ssid)
-            return isOnefi;
+            return state.details.ssid
         }
        })
     }catch(e){
         console.log(e)
-        return false
-
+        return "Error"
     }   
 }
+
+

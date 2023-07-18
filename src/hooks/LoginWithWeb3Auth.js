@@ -30,16 +30,10 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-    //console.log("Web3Auth object");
-    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.GOOGLE,
       redirectUrl: resolvedRedirectUrl,
     });
-    //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-    //console.log("Info returned from Web3Auth");
-    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);

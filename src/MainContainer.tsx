@@ -87,7 +87,7 @@ function HomeTab() {
   useEffect(() => {
     (async () => {
       setTimeout(() => {
-        //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+        //Logging Native Modules causes error
         //console.log("NativeModules", NativeModules);
         // console.dir(NativeModules);
         // NativeModules.startScan();

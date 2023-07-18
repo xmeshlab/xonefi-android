@@ -103,8 +103,7 @@ async function main() {
 
     config_json = config.read_default_config();
 
-     //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-    //console.log(`config_json: ${JSON.stringify(config_json)}`);
+    console.log(`config_json: ${JSON.stringify(config_json)}`);
 
     if (config_json.client_on === true) {
 

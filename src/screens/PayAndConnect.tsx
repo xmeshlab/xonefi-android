@@ -138,12 +138,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       let ssid_json = deserialize_ssid(SSID);
 
-      //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-      //console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
+      console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       //debug code to check that our native module WifiModule.java is working
-
-      
       //WifiModule.logEvent(res => console.log(res));
 
       //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password

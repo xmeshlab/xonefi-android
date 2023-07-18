@@ -44,10 +44,9 @@ function send_next_sack(config_json, user_password, private_key, callback) {
   //const process_mgmt = require("../xonefi-api-client/process_mgmt");
 
   const Web3 = require("web3");
-//Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-  /*console.log(
+  console.log(
       `Calling send_next_sack() with config_json = ${JSON.stringify(config_json)}`
-  );*/
+  );
   let current_sack_amount =
       config_json.client_session.sack_amount *
       (config_json.client_session.sack_number + 1) *
@@ -79,8 +78,7 @@ function send_next_sack(config_json, user_password, private_key, callback) {
                   private_key
               ),
               (response2) => {
-                //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
-                //console.log(`SACK SENT. RESPONSE2: ${response2}`);
+                console.log(`SACK SENT. RESPONSE2: ${response2}`);
 
                 let response2_json = {};
 

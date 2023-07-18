@@ -18,6 +18,9 @@ import {
   read_default_config,
 } from "../../xonefi-api-client/config";
 
+import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
+import { getCurrentConnectedSSID } from "../hooks/GetConnectedSSID";
+
 type ConnectStatusDetail = {
   ofiTokens: number;
   gbData: number;
@@ -46,7 +49,7 @@ const lineChartEenARGBColor = "rgba(43,63,242, 0.4)";
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
-  const [ssid, setSSID] = useState();
+  const [ssid, setSSID] = useState<string | number>();
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -54,12 +57,33 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
-  const [isConnected, setIsConnected] = useState(0)
+  const [isConnected, setIsConnected] = useState<boolean>()
 
-  read_default_config((config_json) => {
+  useEffect(() => {
+    const getConnectionStatus = async () => {
+      let ret = await isClientConnectedToXoneFi().then(value=>{
+        console.log("Value in isClientConnectedToXoneFi : " + value)
+        console.log(value)
+        return value
+      })
+      //debug code
+      console.log("ret from isClientConnectedToXoneFi : ")
+      console.log(ret)
+      setIsConnected(ret)
+      if(ret === true){
+        const currentSSID = await getCurrentConnectedSSID()
+        setSSID(currentSSID)
+      }
+
+    }
+    getConnectionStatus()
+
+  }, []);
+
+  /*read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
     setIsConnected(config_json.client_session.status)
-  });
+  });*/
 
 
   // const {BSSID, SSID} = props.route.params ?? {BSSID: undefined, SSID: undefined};
@@ -222,7 +246,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Name
           </Text>
-          <Text style={style.descriptionItem}>{SSID}</Text>
+          <Text style={style.descriptionItem}>{isConnected ? ssid : ""}</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
