@@ -23,6 +23,7 @@ export default function ProviderScreen({ navigation }) {
     getWifiList(setIsLoading, setWifiList);
   }, []);
 
+  //pass SSID as prop to ProviderDetails Screen
   const flatListRenderItem = useCallback(
     ({ item }) => (
         <Provider
@@ -30,7 +31,7 @@ export default function ProviderScreen({ navigation }) {
         UsersConnectedNumber={5}
         TokenGenNumber={230}
         Status={true}
-        navigationFunction={() => navigation.navigate("ProviderDetails")}
+        navigationFunction={() => navigation.navigate("ProviderDetails", {SSID: item.SSID})}
       />
 
     ),
