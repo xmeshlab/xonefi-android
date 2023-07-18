@@ -63,7 +63,6 @@ function initiate_connection(
 
 
   const Web3 = require("web3");
-
   console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
 
   console.log(`chosen_ssid: ${chosen_ssid}`);
@@ -230,7 +229,6 @@ function initiate_connection(
                   console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 
                   let response_json = response;
-
                   console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
                   console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
 
@@ -383,6 +381,7 @@ function initiate_connection(
                                                       private_key
                                                   ),
                                                   (response2) => {
+                                                    
                                                       console.log(`SACK SENT. RESPONSE2: ${response2}`);
 
                                                       let response2_json = response2;

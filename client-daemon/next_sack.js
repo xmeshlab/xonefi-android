@@ -44,7 +44,6 @@ function send_next_sack(config_json, user_password, private_key, callback) {
   //const process_mgmt = require("../xonefi-api-client/process_mgmt");
 
   const Web3 = require("web3");
-
   console.log(
       `Calling send_next_sack() with config_json = ${JSON.stringify(config_json)}`
   );

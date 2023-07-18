@@ -68,7 +68,7 @@ export default function WalletScreen({ navigation }) {
         //the res.json() seems to be doing all of the parsing for us
         .then((res) => res.json())
         .then((resJSON) => {
-          console.log(resJSON);
+          //console.log(resJSON);
           setPriceJson(resJSON);
         });
 

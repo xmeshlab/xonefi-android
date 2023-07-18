@@ -174,8 +174,8 @@ function initiate_handover(
       });
 
       config_json = config.read_default_config();
-
       console.log(
+        
         `CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`
       );
       console.log(`Handover stage initiated.`);
@@ -189,6 +189,7 @@ function initiate_handover(
         config_json.client_session.session_id,
         config_json.client_session.sackok,
         (response) => {
+          
           console.log(`PROVIDER'S RESPONSE: ${response}`);
 
           let response_json = {};

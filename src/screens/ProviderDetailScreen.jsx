@@ -4,6 +4,8 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 
+import { useLocation } from "react-router-dom";
+
 //import providor component
 import Provider from "../Components/Provider";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
@@ -12,7 +14,10 @@ import GreyBackgroundBox from "../Components/GreyBackgroundBox";
  * This screen displays additional information about a specific XOneFi Provider. 
  * A User is routed to this page after clicking on a Provider displayed on the Provider Screen. 
  */
-export default function ProviderDetailScreen({ navigation }) {
+export default function ProviderDetailScreen({ route, navigation }) {
+
+  const {SSID} = route.params;
+
   return (
     <ScrollView>
       <GreyBackgroundBox
@@ -21,7 +26,7 @@ export default function ProviderDetailScreen({ navigation }) {
           <>
             <GreyBackgroundBar
               LeftText={"Router Name"}
-              RightSideComponent={<Text>Insert</Text>}
+              RightSideComponent={<Text className="text-white">{SSID}</Text>}
             />
             <GreyBackgroundBar
               LeftText={"IP Address"}

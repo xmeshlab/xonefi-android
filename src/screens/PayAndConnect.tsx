@@ -33,7 +33,7 @@ import {useNetInfo} from "@react-native-community/netinfo";
 
 const {WifiModule} = NativeModules;
 //Takes a callback as a param
-WifiModule.logEvent(res => console.log(res));
+//WifiModule.logEvent(res => console.log(res));
 
 /**
  * This Component handles the functionality of allowing a user to Connect or 
@@ -139,9 +139,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       let ssid_json = deserialize_ssid(SSID);
 
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
-      //debug code to check that our native module WifiModule.java is working
 
-      
+      //debug code to check that our native module WifiModule.java is working
       //WifiModule.logEvent(res => console.log(res));
 
       //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password

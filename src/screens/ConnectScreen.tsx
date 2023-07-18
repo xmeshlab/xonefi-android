@@ -29,70 +29,21 @@ import { globalStyle } from "../constants/globalStyle";
 
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
 
-async function getPermission() {
-  if (Platform.OS === "android") {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: "Location permission is required for WiFi connections",
-        message:
-          "This app needs location permission as this is required  " +
-          "to scan for wifi networks.",
-        buttonNegative: "DENY",
-        buttonPositive: "ALLOW",
-      }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      return Promise.resolve();
-      // You can now use react-native-wifi-reborn
-    } else {
-      return Promise.reject("permission deny");
-      // Permission denied
-    }
-  }
-}
+import { getWifiList } from "../hooks/getOnefiRouters";
+
+
 
 const tabBtnList = ["Hourly", "Data Usage", "Private"];
-console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
+//console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
 
 const ConnectScreen: RouteComponent<"Connect"> = () => {
   const navigation = useNavigation<NavigationProp<GlobalRoute>>();
   const [wifiList, setWifiList] = useState<WifiWithSignalLevel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentActive, setCurrentActive] = useState("Hourly");
-  const getWifiList = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      await getPermission();
-      const ret = await WifiManager.reScanAndLoadWifiList();
 
-      console.log("XLOG: Got list of WiFi networks as follows...");
-
-      for (let x of ret.values()) {
-        console.log("XLOG Entry: " + x.SSID);
-      }
-
-      console.log("XLOG: >>>");
-
-      const wifiList = ret
-        .filter((item) => is_onefi_ssid(item.SSID))
-        .map<WifiWithSignalLevel>((item) => {
-          return {
-            ...item,
-            signalLevel: Math.round(5 - Math.abs(item.level / 20)) as WiFiLevel,
-          };
-        });
-      setWifiList(wifiList);
-
-      for (let x of wifiList) {
-        console.log(`XLOG wifilist item: ${x.SSID}`);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
   useEffect(() => {
-    getWifiList();
+    getWifiList(setIsLoading, setWifiList);
   }, []);
 
   const flatListRenderItem = useCallback(
@@ -141,10 +92,10 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
       <View style={style.mgnTop}>
         <FlatList<WifiEntry>
           data={wifiList}
-          onRefresh={getWifiList}
+          onRefresh={()=>{getWifiList(setIsLoading, setWifiList)}}
           refreshing={isLoading}
           ListEmptyComponent={
-            <PrimaryBtn style={style.connectBtn} onPress={getWifiList}>
+            <PrimaryBtn style={style.connectBtn} onPress={()=>{getWifiList(setIsLoading, setWifiList)}}>
               View Available Connection
             </PrimaryBtn>
           }
