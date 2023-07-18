@@ -16,7 +16,6 @@ import ProviderDetailScreen from "./screens/ProviderDetailScreen";
 import AccountInformationScreen from "./screens/AccountInformationScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
 import PayAndConnectScreen from "./screens/PayAndConnect";
-import AddNewPaymentScreen from "./screens/AddNewPaymentCard";
 import { useCallback, useEffect, useState } from "react";
 import BarIcon from "./icons/bars_icon";
 import CardIcon from "./icons/card_icon";
