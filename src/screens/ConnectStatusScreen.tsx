@@ -309,7 +309,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <UploadGradientBg style={style.smallCardChartBg} />
         </Card>
       </View>
-      <Card style={[style.card, style.lineChartCard]}>
+      {/*<Card style={[style.card, style.lineChartCard]}>
         <View style={[style.lineChartInfo, globalStyle.row]}>
           <View style={[globalStyle.col1, globalStyle.column]}>
             <Text style={[style.descriptionItem]}>340.12 OFI</Text>
@@ -391,8 +391,8 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             onSelect={(e) => console.log("select", e)}
             onChange={(event) => console.log(event.nativeEvent)}
           />
-        </View>
-      </Card>
+          </View>
+      </Card>*/}
     </ScrollView>
   );
 };
