@@ -174,10 +174,11 @@ function initiate_handover(
       });
 
       config_json = config.read_default_config();
-
-      console.log(
+//Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+      /*console.log(
+        
         `CLIENT SESSION: ${JSON.stringify(client_session.get_client_session())}`
-      );
+      );*/
       console.log(`Handover stage initiated.`);
       console.log(`Saying HANDOVER to provider...`);
 
@@ -189,7 +190,8 @@ function initiate_handover(
         config_json.client_session.session_id,
         config_json.client_session.sackok,
         (response) => {
-          console.log(`PROVIDER'S RESPONSE: ${response}`);
+          //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+          //console.log(`PROVIDER'S RESPONSE: ${response}`);
 
           let response_json = {};
 

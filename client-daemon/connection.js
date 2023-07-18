@@ -63,8 +63,8 @@ function initiate_connection(
 
 
   const Web3 = require("web3");
-
-  console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
+  //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+  //console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
 
   console.log(`chosen_ssid: ${chosen_ssid}`);
 
@@ -227,12 +227,13 @@ function initiate_connection(
               deserealized_ssid.prefix,
               deserealized_ssid.port,
               (response) => {
-                  console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
+                  //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+                  //console.log(`XLOG2: PROVIDER'S RESPONSE: ${JSON.stringify(response)}`);
 
                   let response_json = response;
-
-                  console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
-                  console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
+                  //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+                  //console.log(`XLOG2: RESPONSE_JSON: ${response_json}`);
+                  //console.log(`XLOG2: STRINGIGIED RESPONSE_JSON: ${JSON.stringify(response_json)}`);
 
                   if (response_json.command.arguments.answer === "HELLO-OK") {
 
@@ -286,7 +287,8 @@ function initiate_connection(
                                   private_key
                               ),
                               (response1) => {
-                                  console.log(`PAFREN sent. RESPONSE1: ${response1}`);
+                                //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+                                  //console.log(`PAFREN sent. RESPONSE1: ${response1}`);
                                   let response1_json = response1;
 
                                   if (
@@ -383,7 +385,8 @@ function initiate_connection(
                                                       private_key
                                                   ),
                                                   (response2) => {
-                                                      console.log(`SACK SENT. RESPONSE2: ${response2}`);
+                                                    //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+                                                      //console.log(`SACK SENT. RESPONSE2: ${response2}`);
 
                                                       let response2_json = response2;
 
@@ -440,7 +443,8 @@ function initiate_connection(
 
 
           } catch(error) {
-              console.log(`XLOG2: CAUGHT ERROR: ${error}`);
+            //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+              //console.log(`XLOG2: CAUGHT ERROR: ${error}`);
               return callback();
           }
       });

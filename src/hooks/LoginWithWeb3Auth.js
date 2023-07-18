@@ -30,14 +30,16 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("Web3Auth object");
-    console.log(web3auth);
+    //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+    //console.log("Web3Auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.GOOGLE,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("Info returned from Web3Auth");
-    console.log(info);
+    //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+    //console.log("Info returned from Web3Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -71,14 +73,14 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("Web3Auth object");
-    console.log(web3auth);
+    //console.log("Web3Auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.FACEBOOK,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("Info returned from Web3Auth");
-    console.log(info);
+    //console.log("Info returned from Web3Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -111,14 +113,14 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("Web3Auth object");
-    console.log(web3auth);
+    //console.log("Web3Auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.WECHAT,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("Info returned from Web3Auth");
-    console.log(info);
+   // console.log("Info returned from Web3Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);
@@ -151,14 +153,14 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
       clientId,
       network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
-    console.log("Web3Auth object");
-    console.log(web3auth);
+    //console.log("Web3Auth object");
+    //console.log(web3auth);
     const info = await web3auth.login({
       loginProvider: LOGIN_PROVIDER.TWITTER,
       redirectUrl: resolvedRedirectUrl,
     });
-    console.log("Info returned from Web3Auth");
-    console.log(info);
+    //console.log("Info returned from Web3Auth");
+    //console.log(info);
 
     setUserInfo(info);
     setKey(info.privKey);

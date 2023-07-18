@@ -42,7 +42,8 @@ module.exports = async taskData => {
 
         read_default_config((config_json1) => {
             //console.log(`config_json: ${JSON.stringify(config_json)}`);
-            console.log(`config_json1: ${JSON.stringify(config_json1)}`);
+            //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+            //console.log(`config_json1: ${JSON.stringify(config_json1)}`);
 
             decrypted_private_key = config_json1.account.dpk;
 

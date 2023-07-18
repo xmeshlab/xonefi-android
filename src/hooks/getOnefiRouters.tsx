@@ -37,6 +37,7 @@ async function getPermission() {
   }
 
 //Gets the list of active XOneFi Routers. returns it 
+//The function takes two state changing functions as parameters. 
 export const getWifiList = async (setIsLoading, setWifiList) => {
     setIsLoading(true);
     try {

@@ -33,7 +33,7 @@ import {useNetInfo} from "@react-native-community/netinfo";
 
 const {WifiModule} = NativeModules;
 //Takes a callback as a param
-WifiModule.logEvent(res => console.log(res));
+//WifiModule.logEvent(res => console.log(res));
 
 /**
  * This Component handles the functionality of allowing a user to Connect or 
@@ -138,7 +138,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       let ssid_json = deserialize_ssid(SSID);
 
-      console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
+      //Removing log to try fix "There was a problem sending log messages to your develoopment enviroment error"
+      //console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
+
       //debug code to check that our native module WifiModule.java is working
 
       
