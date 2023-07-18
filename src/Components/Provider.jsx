@@ -29,6 +29,39 @@ export default function Provider({
   return (
     <TouchableOpacity onPress={navigationFunction}>
       <View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2">
+        <View className="flex flex-row justify-start pb-1">
+            <Text className="text-white ml-3">{ProviderName}</Text>
+        </View>
+        <View className="flex flex-row justify-start ml-3">
+            {Status ? (
+              <>
+                <Text className="text-green-400 mt-1">Active</Text>
+                <Image source={WifiGreen} />
+              </>
+            ) : (
+              <>
+                <Text className="text-neutral-600 mt-1">Inactive</Text>
+                <Image source={WifiWhite} />
+              </>
+            )}
+          </View>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+
+{/*
+export default function Provider({
+  ProviderName,
+  UsersConnectedNumber,
+  TokenGenNumber,
+  Status,
+  navigationFunction,
+}) {
+  return (
+    <TouchableOpacity onPress={navigationFunction}>
+      <View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2">
         <View className="flex flex-row justify-between pb-1">
           <View className="flex flex-row justify-start">
             <Image source={Bars} />
@@ -59,3 +92,5 @@ export default function Provider({
     </TouchableOpacity>
   );
 }
+
+*/}

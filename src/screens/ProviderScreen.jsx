@@ -40,7 +40,7 @@ export default function ProviderScreen({ navigation }) {
 
   return (
     <View className="flex-1">
-      <View>
+      <View className="m-2">
         <FlatList
           data={wifiList}
           onRefresh={()=>{getWifiList(setIsLoading, setWifiList)}}
