@@ -23,10 +23,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
         titleText={"Router Information"}
         children={
           <>
-            <GreyBackgroundBar
-              LeftText={"Router Name"}
-              RightSideComponent={<Text className="text-white">{SSID}</Text>}
-            />
+            <Text className="text-orange-500 mb-5 text-base">{SSID}</Text>
             <GreyBackgroundBar
               LeftText={"IP Address"}
               RightSideComponent={<ViewButton
