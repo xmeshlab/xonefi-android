@@ -78,7 +78,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
         }
       />
 
-      <GreyBackgroundBox
+      {/*<GreyBackgroundBox
         titleText={"Connected Clients"}
         children={
           <>
@@ -90,7 +90,8 @@ export default function ProviderDetailScreen({ route, navigation }) {
             </View>
           </>
         }
-      />
-    </ScrollView>
+      />*/}
+      <Text className="text-white text-3xl mt-6 mb-8 mx-6">Connected Clients</Text>
+      </ScrollView>
   );
 }
