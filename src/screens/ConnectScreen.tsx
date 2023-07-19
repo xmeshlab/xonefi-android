@@ -29,7 +29,7 @@ import { globalStyle } from "../constants/globalStyle";
 
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
 
-import { getWifiList } from "../hooks/getOnefiRouters";
+import { getOneFiRouterList } from "../hooks/getOnefiRouters";
 
 
 
@@ -43,7 +43,7 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
   const [currentActive, setCurrentActive] = useState("Hourly");
 
   useEffect(() => {
-    getWifiList(setIsLoading, setWifiList);
+    getOneFiRouterList(setIsLoading, setWifiList);
   }, []);
 
   const flatListRenderItem = useCallback(
@@ -92,10 +92,10 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
       <View style={style.mgnTop}>
         <FlatList<WifiEntry>
           data={wifiList}
-          onRefresh={()=>{getWifiList(setIsLoading, setWifiList)}}
+          onRefresh={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}
           refreshing={isLoading}
           ListEmptyComponent={
-            <PrimaryBtn style={style.connectBtn} onPress={()=>{getWifiList(setIsLoading, setWifiList)}}>
+            <PrimaryBtn style={style.connectBtn} onPress={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}>
               View Available Connection
             </PrimaryBtn>
           }

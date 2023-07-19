@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 //import providor component
 import Provider from "../Components/Provider";
-import { getWifiList } from "../hooks/getOnefiRouters";
+import { getOneFiRouterList } from "../hooks/getOnefiRouters";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 
@@ -20,7 +20,7 @@ export default function ProviderScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getWifiList(setIsLoading, setWifiList);
+    getOneFiRouterList(setIsLoading, setWifiList);
   }, []);
 
   //pass SSID as prop to ProviderDetails Screen
@@ -44,10 +44,10 @@ export default function ProviderScreen({ navigation }) {
       <View className="m-2">
         <FlatList
           data={wifiList}
-          onRefresh={()=>{getWifiList(setIsLoading, setWifiList)}}
+          onRefresh={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}
           refreshing={isLoading}
           ListEmptyComponent={
-            <PrimaryBtn onPress={()=>{getWifiList(setIsLoading, setWifiList)}}>
+            <PrimaryBtn onPress={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}>
               View Providers
             </PrimaryBtn>
           }
