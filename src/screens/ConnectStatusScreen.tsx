@@ -95,100 +95,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
     const detail = getStatusDetail();
     setConnectStatus(detail);
   }, []);
-  let dataSets = useMemo(() => {
-    return [
-      {
-        values: [
-          {
-            y: 11,
-            x: 0,
-            marker: "65 kg",
-          },
-          {
-            y: 17,
-            x: 1,
-            marker: "77 kg",
-          },
-          {
-            y: 33,
-            x: 2,
-            marker: "76 kg",
-          },
-          {
-            y: 44,
-            x: 3,
-            marker: "74 kg",
-          },
-          {
-            y: 55,
-            x: 4,
-            marker: "76 kg",
-          },
-          {
-            y: 65,
-            x: 5,
-            marker: "Today: 65 kg",
-          },
-          {
-            y: 58,
-            x: 6,
-            marker: "65 kg",
-          },
-          {
-            y: 44,
-            x: 7,
-            marker: "77 kg",
-          },
-          {
-            y: 76,
-            x: 8,
-            marker: "76 kg",
-          },
-          {
-            y: 74,
-            x: 9,
-            marker: "74 kg",
-          },
-          {
-            y: 76,
-            x: 10,
-            marker: "76 kg",
-          },
-          {
-            y: 33,
-            x: 11,
-            marker: "Today: 65 kg",
-          },
-        ],
-        label: "",
-        config: {
-          lineWidth: 2,
-          mode: "CUBIC_BEZIER",
-          drawValues: false,
-          color: processColor("#2B3FF2"),
-          drawCircles: false,
-          circleColor: processColor(lineChartStartARGBColor),
-          drawCircleHole: true,
-          circleRadius: 5,
-          highlightColor: processColor("transparent"),
-          // color: processColor(lineChartStartARGBColor),
-          drawFilled: true,
-          fillGradient: {
-            colors: [
-              processColor(lineChartStartARGBColor),
-              processColor(lineChartEenARGBColor),
-            ],
-            positions: [0, 0.2],
-            angle: 90,
-            // orientation: "TOP_BOTTOM"
-            orientation: "BOTTOM_TOP",
-          },
-          fillAlpha: 1000,
-          valueTextSize: 15,
-        },
-      },
-    ];
-  }, []);
+ 
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
       <Card style={style.card}>
@@ -212,11 +119,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         </View>
         <View style={style.percentContainer}>
           <View style={{ height: 8, flex: 1 }}>
-            {/*<Slider
-              style={{ width: "100%" }}
-              value={connectStatus?.dataUsage ?? 0}
-              maxiumValue={connectStatus?.maxUsage ?? 10}
-              />*/}
 
             <Slider
               style={{width: "100%", height: 80}}
@@ -237,9 +139,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <Text style={style.maxUsageDesc}>MAX USAGE</Text>
           </View>
         </View>
-        {/*<Text style={{color: 'red', marginTop: 300}}>*/}
-        {/*    status*/}
-        {/*</Text>*/}
       </Card>
       <Card style={style.card}>
         <View style={style.routerName}>
@@ -309,90 +208,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <UploadGradientBg style={style.smallCardChartBg} />
         </Card>
       </View>
-      {/*<Card style={[style.card, style.lineChartCard]}>
-        <View style={[style.lineChartInfo, globalStyle.row]}>
-          <View style={[globalStyle.col1, globalStyle.column]}>
-            <Text style={[style.descriptionItem]}>340.12 OFI</Text>
-            <View style={[globalStyle.row, globalStyle.verticalCenter]}>
-              <Text
-                style={[
-                  style.descriptionItem,
-                  { fontSize: 12, flex: null, color: colors.inActiveColor },
-                ]}
-              >
-                2.4 OFI
-              </Text>
-              <ExchangeIcon />
-              <Text
-                style={[
-                  style.descriptionItem,
-                  { fontSize: 12, flex: null, color: colors.inActiveColor },
-                ]}
-              >
-                $1.00 USD
-              </Text>
-            </View>
-          </View>
-          <View
-            style={[
-              globalStyle.col1,
-              globalStyle.verticalCenter,
-              style.lineChartSuccessText,
-            ]}
-          >
-            <Text style={globalStyle.successText}>+13%</Text>
-          </View>
-        </View>
-        <View style={style.lineChart}>
-          <Text style={style.chartTitle}>LAST 30 DAYS</Text>
-          <LineChart
-            style={{ flex: 1 }}
-            data={{
-              dataSets,
-            }}
-            drawBorders={false}
-            chartDescription={{ text: "" }}
-            legend={{
-              enabled: false,
-            }}
-            marker={{
-              enabled: true,
-              markerColor: processColor("white"),
-              textColor: processColor("black"),
-            }}
-            xAxis={{
-              enabled: false,
-            }}
-            yAxis={{
-              left: {
-                enabled: false,
-              },
-              right: {
-                enabled: false,
-              },
-            }}
-            autoScaleMinMaxEnabled={true}
-            animation={{
-              durationX: 0,
-              durationY: 1500,
-              easingY: "EaseInOutQuart",
-            }}
-            drawGridBackground={false}
-            touchEnabled={true}
-            dragEnabled={false}
-            scaleEnabled={false}
-            scaleXEnabled={false}
-            scaleYEnabled={false}
-            pinchZoom={false}
-            doubleTapToZoomEnabled={false}
-            dragDecelerationEnabled={true}
-            dragDecelerationFrictionCoef={0.99}
-            keepPositionOnRotation={false}
-            onSelect={(e) => console.log("select", e)}
-            onChange={(event) => console.log(event.nativeEvent)}
-          />
-          </View>
-      </Card>*/}
     </ScrollView>
   );
 };
