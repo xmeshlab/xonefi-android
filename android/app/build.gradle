@@ -142,7 +142,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId 'com.vidy.XOneFiApp'
+        applicationId 'com.onefi.XOneFiApp'
         minSdkVersion 29
         targetSdkVersion 33
         versionCode 1
