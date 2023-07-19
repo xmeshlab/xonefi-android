@@ -3,12 +3,9 @@ import { View, Text, Image, ImageBackground } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
-
-import { useLocation } from "react-router-dom";
-
-//import providor component
-import Provider from "../Components/Provider";
+import {GreyTextInputBarNoMargin} from "../Components/GreyTextInputBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
+import { useState } from "react";
 
 /**
  * This screen displays additional information about a specific XOneFi Provider. 
@@ -17,6 +14,8 @@ import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 export default function ProviderDetailScreen({ route, navigation }) {
 
   const {SSID} = route.params;
+
+  const [shareTimeDaily, setShareTimeDaily] = useState(0);
 
   return (
     <ScrollView>
@@ -30,11 +29,19 @@ export default function ProviderDetailScreen({ route, navigation }) {
             />
             <GreyBackgroundBar
               LeftText={"IP Address"}
-              RightSideComponent={<Text>Insert</Text>}
+              RightSideComponent={<ViewButton
+                OnPressFunction={() => {
+                  alert("Button Pressed");
+                }}
+              />}
             />
             <GreyBackgroundBar
               LeftText={"Wifi-Speed"}
-              RightSideComponent={<Text>Insert</Text>}
+              RightSideComponent={<ViewButton
+                OnPressFunction={() => {
+                  alert("Button Pressed");
+                }}
+              />}
             />
           </>
         }
@@ -45,7 +52,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
         children={
           <>
             <GreyBackgroundBar
-              LeftText={"OFI/GB"}
+              LeftText={"OFI/Minute"}
               RightSideComponent={
                 <ViewButton
                   OnPressFunction={() => {
@@ -67,11 +74,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
             <GreyBackgroundBar
               LeftText={"Share Time/Daily"}
               RightSideComponent={
-                <ViewButton
-                  OnPressFunction={() => {
-                    alert("Share Times/Daily");
-                  }}
-                />
+                <GreyTextInputBarNoMargin placeholder_text={""} state_function={setShareTimeDaily}/>
               }
             />
           </>
