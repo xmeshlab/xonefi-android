@@ -43,9 +43,6 @@ const getStatusDetail = (): ConnectStatusDetail => {
   };
 };
 
-const lineChartStartARGBColor = "rgba(43,63,242, 0.25)";
-const lineChartEenARGBColor = "rgba(43,63,242, 0.4)";
-
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
@@ -53,7 +50,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
-  const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
+  //const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
 
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
@@ -110,14 +107,14 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{connectStatus?.gbData}</Text>
-            <Text style={style.summaryDesc}>GB DATA</Text>
+            <Text style={style.summaryDesc}>Minutes</Text>
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{connectStatus?.usdCost}</Text>
             <Text style={style.summaryDesc}>USD COST</Text>
           </View>
         </View>
-        <View style={style.percentContainer}>
+        {/*<View style={style.percentContainer}>
           <View style={{ height: 8, flex: 1 }}>
 
             <Slider
@@ -133,12 +130,12 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </View>
           <View style={style.maxUsage}>
             <Text style={style.summaryItemValue}>
-              {/*{connectStatus?.maxUsage}GB*/}
+              {//connectStatus?.maxUsage}GB}
               {maxUsageSliderValue} GB
             </Text>
             <Text style={style.maxUsageDesc}>MAX USAGE</Text>
           </View>
-        </View>
+        </View>*/}
       </Card>
       <Card style={style.card}>
         <View style={style.routerName}>
