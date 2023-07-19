@@ -16,6 +16,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
   const {SSID} = route.params;
 
   const [shareTimeDaily, setShareTimeDaily] = useState(0);
+  const [oFIMinute, setOFIMinute] = useState(0);
 
   return (
     <ScrollView>
@@ -51,11 +52,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
             <GreyBackgroundBar
               LeftText={"OFI/Minute"}
               RightSideComponent={
-                <ViewButton
-                  OnPressFunction={() => {
-                    alert("Button Pressed");
-                  }}
-                />
+                <GreyTextInputBarNoMargin placeholder_text={""} state_function={setOFIMinute}/>
               }
             />
             <GreyBackgroundBar
