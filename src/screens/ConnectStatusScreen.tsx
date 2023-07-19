@@ -152,10 +152,10 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
-            Data Cost
+            Time Cost
           </Text>
           <Text style={style.descriptionItem}>
-            {connectStatus?.dataCost} OFI/GB
+            {connectStatus?.dataCost} OFI/Hour
           </Text>
         </View>
         <View style={style.description}>
@@ -164,14 +164,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </Text>
           <Text style={style.descriptionItem}>
             {connectStatus?.usageTime} min
-          </Text>
-        </View>
-        <View style={[style.description, { marginBottom: 0 }]}>
-          <Text style={[style.descriptionItem, { width: "69%" }]}>
-            Data Usage
-          </Text>
-          <Text style={style.descriptionItem}>
-            {connectStatus?.dataUsage?.toFixed(2)} gb
           </Text>
         </View>
       </Card>
