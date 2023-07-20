@@ -7,7 +7,8 @@ import ArrowUpIcon from "../icons/arrow_up_icon";
 import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
-
+import { useIsFocused, useFocusEffect } from "@react-navigation/native";
+import NetInfo from "@react-native-community/netinfo";
 
 import Slider from '@react-native-community/slider';
 
@@ -54,29 +55,53 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [isConnected, setIsConnected] = useState<boolean>()
 
   //maybe use events to change this code
-  useEffect(() => {
-    const getConnectionStatus = async () => {
-      //debug coomment : according to logs isClientConnectedToXoneFi is working properly
-      const ret = await isClientConnectedToXoneFi();
 
-      //debug code
-      //console.log("ret from isClientConnectedToXoneFi : ")
-      //console.log(ret)
-      console.log("Value in isClientConnectedToXoneFi : " + ret)
-      console.log(ret)
-      console.log("type of ret : " + typeof(ret))
+  const getConnectionStatus = async () => {
+    //debug coomment : according to logs isClientConnectedToXoneFi is working properly
+    const ret = await isClientConnectedToXoneFi();
 
-      setIsConnected(ret)
-      if(ret === true){
-        const currentSSID = await getCurrentConnectedSSID()
-        setSSID(currentSSID)
-      }
+    //debug code
+    //console.log("ret from isClientConnectedToXoneFi : ")
+    //console.log(ret)
+    console.log("Value in isClientConnectedToXoneFi : " + ret)
+    console.log(ret)
+    console.log("type of ret : " + typeof(ret))
 
+    setIsConnected(ret)
+    if(ret === true){
+      const currentSSID = await getCurrentConnectedSSID()
+      setSSID(currentSSID)
     }
-    //(async ()=>{await getConnectionStatus()})()
-    getConnectionStatus()
+  }
 
-  }, []);
+  /*const unsubscribe = props.navigation.addListener('didFocus', () => {
+    getConnectionStatus()
+  });
+  unsubscribe();*/
+
+  //Like useEffect but called whenever the screen is focused. UseEffect does not run when renavigated to
+  useFocusEffect(()=>{
+    getConnectionStatus()
+  });
+
+  // Subscribe
+/*const unsubscribe = NetInfo.addEventListener(state => {
+  getConnectionStatus()
+});
+
+// Unsubscribe
+unsubscribe();*/
+
+
+
+
+  /*useEffect(() => {
+    let interval = setInterval(getConnectionStatus, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);*/
 
 
   /*read_default_config((config_json) => {
