@@ -3,14 +3,11 @@ import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../Components/Card";
 import { RouteComponent } from "../types/global";
 import { colors } from "../constants/colors";
-//import { Slider } from "../Components/Slider";
 import ArrowUpIcon from "../icons/arrow_up_icon";
 import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
-import { LineChart } from "react-native-charts-wrapper";
-import ExchangeIcon from "../icons/ExchangeIcon";
-import { deserialize_ssid } from "../../xonefi-api-client/ssid";
+
 
 import Slider from '@react-native-community/slider';
 
@@ -56,16 +53,19 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
   const [isConnected, setIsConnected] = useState<boolean>()
 
+  //maybe use events to change this code
   useEffect(() => {
     const getConnectionStatus = async () => {
-      let ret = await isClientConnectedToXoneFi().then(value=>{
-        console.log("Value in isClientConnectedToXoneFi : " + value)
-        console.log(value)
-        return value
-      })
+      //debug coomment : according to logs isClientConnectedToXoneFi is working properly
+      const ret = await isClientConnectedToXoneFi();
+
       //debug code
-      console.log("ret from isClientConnectedToXoneFi : ")
+      //console.log("ret from isClientConnectedToXoneFi : ")
+      //console.log(ret)
+      console.log("Value in isClientConnectedToXoneFi : " + ret)
       console.log(ret)
+      console.log("type of ret : " + typeof(ret))
+
       setIsConnected(ret)
       if(ret === true){
         const currentSSID = await getCurrentConnectedSSID()
@@ -73,9 +73,11 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       }
 
     }
+    //(async ()=>{await getConnectionStatus()})()
     getConnectionStatus()
 
   }, []);
+
 
   /*read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
