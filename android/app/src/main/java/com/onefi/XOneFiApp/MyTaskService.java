@@ -23,12 +23,11 @@ public class MyTaskService extends HeadlessJsTaskService {
         10000 // Delay between each retry attempt
       );
 
-
       return new HeadlessJsTaskConfig(
           "bgtask",
           Arguments.fromBundle(extras),
           10000000, // timeout in milliseconds for the task
-          false, // optional: defines whether or not the task is allowed in foreground. Default is false
+          true, // optional: defines whether or not the task is allowed in foreground. Default is false
           retryPolicy
         );
     }
