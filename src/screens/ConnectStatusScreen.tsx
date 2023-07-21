@@ -179,7 +179,7 @@ unsubscribe();*/
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
-            Time Cost
+            Usage Cost
           </Text>
           <Text style={style.descriptionItem}>
             {connectStatus?.dataCost} OFI/Hour
