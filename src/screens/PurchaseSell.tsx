@@ -15,7 +15,7 @@ import BigBlueButton from "../Components/BigBlueButton";
 import { CashLogoSVG } from "../icons/crypto_icons";
 import { OneFiLogoSVG } from "../icons/crypto_icons";
 
-const backgroundImage = require("../../assets/background.png");
+const backgroundImage = require("../../assets/backgroundSquare.png");
 interface OwnProps {}
 
 type Props = OwnProps;

@@ -3,14 +3,12 @@ import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../Components/Card";
 import { RouteComponent } from "../types/global";
 import { colors } from "../constants/colors";
-//import { Slider } from "../Components/Slider";
 import ArrowUpIcon from "../icons/arrow_up_icon";
 import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
-import { LineChart } from "react-native-charts-wrapper";
-import ExchangeIcon from "../icons/ExchangeIcon";
-import { deserialize_ssid } from "../../xonefi-api-client/ssid";
+import { useIsFocused, useFocusEffect } from "@react-navigation/native";
+import NetInfo from "@react-native-community/netinfo";
 
 import Slider from '@react-native-community/slider';
 
@@ -43,9 +41,6 @@ const getStatusDetail = (): ConnectStatusDetail => {
   };
 };
 
-const lineChartStartARGBColor = "rgba(43,63,242, 0.25)";
-const lineChartEenARGBColor = "rgba(43,63,242, 0.4)";
-
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
@@ -53,32 +48,61 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
-  const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
+  //const [maxUsageSliderValue, setmaxUsageSliderValue] = useState(0)
 
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
   const [isConnected, setIsConnected] = useState<boolean>()
 
-  useEffect(() => {
-    const getConnectionStatus = async () => {
-      let ret = await isClientConnectedToXoneFi().then(value=>{
-        console.log("Value in isClientConnectedToXoneFi : " + value)
-        console.log(value)
-        return value
-      })
-      //debug code
-      console.log("ret from isClientConnectedToXoneFi : ")
-      console.log(ret)
-      setIsConnected(ret)
-      if(ret === true){
-        const currentSSID = await getCurrentConnectedSSID()
-        setSSID(currentSSID)
-      }
+  //maybe use events to change this code
 
+  const getConnectionStatus = async () => {
+    //debug coomment : according to logs isClientConnectedToXoneFi is working properly
+    const ret = await isClientConnectedToXoneFi();
+
+    //debug code
+    //console.log("ret from isClientConnectedToXoneFi : ")
+    //console.log(ret)
+    console.log("Value in isClientConnectedToXoneFi : " + ret)
+    console.log(ret)
+    console.log("type of ret : " + typeof(ret))
+
+    setIsConnected(ret)
+    if(ret === true){
+      const currentSSID = await getCurrentConnectedSSID()
+      setSSID(currentSSID)
     }
-    getConnectionStatus()
+  }
 
-  }, []);
+  /*const unsubscribe = props.navigation.addListener('didFocus', () => {
+    getConnectionStatus()
+  });
+  unsubscribe();*/
+
+  //Like useEffect but called whenever the screen is focused. UseEffect does not run when renavigated to
+  useFocusEffect(()=>{
+    getConnectionStatus()
+  });
+
+  // Subscribe
+/*const unsubscribe = NetInfo.addEventListener(state => {
+  getConnectionStatus()
+});
+
+// Unsubscribe
+unsubscribe();*/
+
+
+
+
+  /*useEffect(() => {
+    let interval = setInterval(getConnectionStatus, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);*/
+
 
   /*read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
@@ -95,100 +119,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
     const detail = getStatusDetail();
     setConnectStatus(detail);
   }, []);
-  let dataSets = useMemo(() => {
-    return [
-      {
-        values: [
-          {
-            y: 11,
-            x: 0,
-            marker: "65 kg",
-          },
-          {
-            y: 17,
-            x: 1,
-            marker: "77 kg",
-          },
-          {
-            y: 33,
-            x: 2,
-            marker: "76 kg",
-          },
-          {
-            y: 44,
-            x: 3,
-            marker: "74 kg",
-          },
-          {
-            y: 55,
-            x: 4,
-            marker: "76 kg",
-          },
-          {
-            y: 65,
-            x: 5,
-            marker: "Today: 65 kg",
-          },
-          {
-            y: 58,
-            x: 6,
-            marker: "65 kg",
-          },
-          {
-            y: 44,
-            x: 7,
-            marker: "77 kg",
-          },
-          {
-            y: 76,
-            x: 8,
-            marker: "76 kg",
-          },
-          {
-            y: 74,
-            x: 9,
-            marker: "74 kg",
-          },
-          {
-            y: 76,
-            x: 10,
-            marker: "76 kg",
-          },
-          {
-            y: 33,
-            x: 11,
-            marker: "Today: 65 kg",
-          },
-        ],
-        label: "",
-        config: {
-          lineWidth: 2,
-          mode: "CUBIC_BEZIER",
-          drawValues: false,
-          color: processColor("#2B3FF2"),
-          drawCircles: false,
-          circleColor: processColor(lineChartStartARGBColor),
-          drawCircleHole: true,
-          circleRadius: 5,
-          highlightColor: processColor("transparent"),
-          // color: processColor(lineChartStartARGBColor),
-          drawFilled: true,
-          fillGradient: {
-            colors: [
-              processColor(lineChartStartARGBColor),
-              processColor(lineChartEenARGBColor),
-            ],
-            positions: [0, 0.2],
-            angle: 90,
-            // orientation: "TOP_BOTTOM"
-            orientation: "BOTTOM_TOP",
-          },
-          fillAlpha: 1000,
-          valueTextSize: 15,
-        },
-      },
-    ];
-  }, []);
+ 
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
       <Card style={style.card}>
@@ -203,20 +134,15 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{connectStatus?.gbData}</Text>
-            <Text style={style.summaryDesc}>GB DATA</Text>
+            <Text style={style.summaryDesc}>Minutes</Text>
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{connectStatus?.usdCost}</Text>
             <Text style={style.summaryDesc}>USD COST</Text>
           </View>
         </View>
-        <View style={style.percentContainer}>
+        {/*<View style={style.percentContainer}>
           <View style={{ height: 8, flex: 1 }}>
-            {/*<Slider
-              style={{ width: "100%" }}
-              value={connectStatus?.dataUsage ?? 0}
-              maxiumValue={connectStatus?.maxUsage ?? 10}
-              />*/}
 
             <Slider
               style={{width: "100%", height: 80}}
@@ -231,15 +157,12 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </View>
           <View style={style.maxUsage}>
             <Text style={style.summaryItemValue}>
-              {/*{connectStatus?.maxUsage}GB*/}
+              {//connectStatus?.maxUsage}GB}
               {maxUsageSliderValue} GB
             </Text>
             <Text style={style.maxUsageDesc}>MAX USAGE</Text>
           </View>
-        </View>
-        {/*<Text style={{color: 'red', marginTop: 300}}>*/}
-        {/*    status*/}
-        {/*</Text>*/}
+        </View>*/}
       </Card>
       <Card style={style.card}>
         <View style={style.routerName}>
@@ -256,10 +179,10 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
-            Data Cost
+            Usage Cost
           </Text>
           <Text style={style.descriptionItem}>
-            {connectStatus?.dataCost} OFI/GB
+            {connectStatus?.dataCost} OFI/Hour
           </Text>
         </View>
         <View style={style.description}>
@@ -268,14 +191,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           </Text>
           <Text style={style.descriptionItem}>
             {connectStatus?.usageTime} min
-          </Text>
-        </View>
-        <View style={[style.description, { marginBottom: 0 }]}>
-          <Text style={[style.descriptionItem, { width: "69%" }]}>
-            Data Usage
-          </Text>
-          <Text style={style.descriptionItem}>
-            {connectStatus?.dataUsage?.toFixed(2)} gb
           </Text>
         </View>
       </Card>
@@ -309,90 +224,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <UploadGradientBg style={style.smallCardChartBg} />
         </Card>
       </View>
-      {/*<Card style={[style.card, style.lineChartCard]}>
-        <View style={[style.lineChartInfo, globalStyle.row]}>
-          <View style={[globalStyle.col1, globalStyle.column]}>
-            <Text style={[style.descriptionItem]}>340.12 OFI</Text>
-            <View style={[globalStyle.row, globalStyle.verticalCenter]}>
-              <Text
-                style={[
-                  style.descriptionItem,
-                  { fontSize: 12, flex: null, color: colors.inActiveColor },
-                ]}
-              >
-                2.4 OFI
-              </Text>
-              <ExchangeIcon />
-              <Text
-                style={[
-                  style.descriptionItem,
-                  { fontSize: 12, flex: null, color: colors.inActiveColor },
-                ]}
-              >
-                $1.00 USD
-              </Text>
-            </View>
-          </View>
-          <View
-            style={[
-              globalStyle.col1,
-              globalStyle.verticalCenter,
-              style.lineChartSuccessText,
-            ]}
-          >
-            <Text style={globalStyle.successText}>+13%</Text>
-          </View>
-        </View>
-        <View style={style.lineChart}>
-          <Text style={style.chartTitle}>LAST 30 DAYS</Text>
-          <LineChart
-            style={{ flex: 1 }}
-            data={{
-              dataSets,
-            }}
-            drawBorders={false}
-            chartDescription={{ text: "" }}
-            legend={{
-              enabled: false,
-            }}
-            marker={{
-              enabled: true,
-              markerColor: processColor("white"),
-              textColor: processColor("black"),
-            }}
-            xAxis={{
-              enabled: false,
-            }}
-            yAxis={{
-              left: {
-                enabled: false,
-              },
-              right: {
-                enabled: false,
-              },
-            }}
-            autoScaleMinMaxEnabled={true}
-            animation={{
-              durationX: 0,
-              durationY: 1500,
-              easingY: "EaseInOutQuart",
-            }}
-            drawGridBackground={false}
-            touchEnabled={true}
-            dragEnabled={false}
-            scaleEnabled={false}
-            scaleXEnabled={false}
-            scaleYEnabled={false}
-            pinchZoom={false}
-            doubleTapToZoomEnabled={false}
-            dragDecelerationEnabled={true}
-            dragDecelerationFrictionCoef={0.99}
-            keepPositionOnRotation={false}
-            onSelect={(e) => console.log("select", e)}
-            onChange={(event) => console.log(event.nativeEvent)}
-          />
-          </View>
-      </Card>*/}
     </ScrollView>
   );
 };

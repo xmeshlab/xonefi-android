@@ -9,8 +9,6 @@ import {
   ActivityIndicator,
   Platform,
 } from "react-native";
-//for wifi
-import { PermissionsAndroid, NativeModules } from "react-native";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 
 import ChevronRight from "../icons/chevron_right";
@@ -27,23 +25,17 @@ import WifiLevelIcon from "../icons/WifiLevelIcon";
 import LockICon from "../icons/LockIcon";
 import { globalStyle } from "../constants/globalStyle";
 
-import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
-
-import { getWifiList } from "../hooks/getOnefiRouters";
-
-
-
-const tabBtnList = ["Hourly", "Data Usage", "Private"];
-//console.log("NativeModules.XOneFiWiFiModule", NativeModules.XOneFiWiFiModule);
+import { getOneFiRouterList } from "../hooks/getOnefiRouters";
 
 const ConnectScreen: RouteComponent<"Connect"> = () => {
   const navigation = useNavigation<NavigationProp<GlobalRoute>>();
   const [wifiList, setWifiList] = useState<WifiWithSignalLevel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentActive, setCurrentActive] = useState("Hourly");
 
+  //A useEffect which calls the getOneFiRouterList hook when the page first loads
+  //This gets us a list of available XOneFi routers
   useEffect(() => {
-    getWifiList(setIsLoading, setWifiList);
+    getOneFiRouterList(setIsLoading, setWifiList);
   }, []);
 
   const flatListRenderItem = useCallback(
@@ -69,44 +61,24 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={style.tabBar}>
-        <View style={style.tabBarInner}>
-          {tabBtnList.map((tab) => {
-            const tabStyle = [
-              style.tabBtn,
-              currentActive === tab ? style.tabBtnActive : null,
-            ];
-            return (
-              <TouchableOpacity
-                key={tab}
-                style={tabStyle}
-                onPress={() => setCurrentActive(tab)}
-              >
-                <Text style={style.tabBtnText}>{tab}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
-      <View style={style.mgnTop}>
+      <View className="flex flex-col">
         <FlatList<WifiEntry>
           data={wifiList}
-          onRefresh={()=>{getWifiList(setIsLoading, setWifiList)}}
+          onRefresh={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}
           refreshing={isLoading}
           ListEmptyComponent={
-            <PrimaryBtn style={style.connectBtn} onPress={()=>{getWifiList(setIsLoading, setWifiList)}}>
+            <PrimaryBtn style={style.connectBtn} onPress={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}>
               View Available Connection
             </PrimaryBtn>
           }
           renderItem={flatListRenderItem}
         />
       </View>
-    </View>
   );
 };
 export default ConnectScreen;
 
+//A Component for the available XOneFi Routers icons displayed on the ConnectScreen
 const WifiItem = ({
   SSID,
   frequency,
@@ -131,39 +103,9 @@ const WifiItem = ({
     </View>
   );
 };
+
+
 const style = StyleSheet.create({
-  mgnTop: { marginTop: 80 },
-  tabBar: {
-    marginTop: 18,
-    height: 51,
-    backgroundColor: "rgba(40, 40, 40, 0.48)", //
-    position: "absolute",
-    left: 15,
-    right: 15, // alignItems: 'center',
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  tabBarInner: {
-    paddingLeft: 12,
-    paddingRight: 12,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  tabBtn: {
-    color: "#fff",
-    width: 97,
-    height: 33,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 15.6,
-    fontSize: 14,
-  },
-  tabBtnText: {
-    color: "#fff",
-  },
-  tabBtnActive: {
-    backgroundColor: "rgba(153, 153, 153, 0.42)",
-  },
   wifiItem: {
     flexDirection: "row",
     height: 78,

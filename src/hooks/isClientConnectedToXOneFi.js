@@ -39,16 +39,22 @@ export const isClientConnectedToXoneFi = async () => {
     try {
       await getPermission();
 
-      NetInfo.fetch().then(state => {
+      //your error was that
+
+      const isConnectedToOnefi = await NetInfo.fetch().then(state => {
         if(state.isConnected === false){
             return false
         }else{
             //debug code
             console.log("state.details.ssid : " + state.details.ssid)
             const isOnefi = is_onefi_ssid(state.details.ssid)
+            //debug code
+            console.log("isOnefi : " + isOnefi);
             return isOnefi;
         }
        })
+
+       return isConnectedToOnefi
     }catch(e){
         console.log(e)
         return false

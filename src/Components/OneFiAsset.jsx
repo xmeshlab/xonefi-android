@@ -4,11 +4,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import AssetGain from "../../assets/AssetGainLogo.png";
 
+/**
+ * A Component for displaying the XOnefi token information on top of the walletScreen
+ */
 export default function OneFiAsset({ AssetAmount, AssetPrice, AssetChange }) {
   return (
     <View className="flex flex-col bg-gray-600 m-2 rounded-lg p-2">
       <Text className="text-white">XOneFi</Text>
-      <Text className="text-white">XFI</Text>
+      <Text className="text-white">OFI</Text>
       <View className="flex flex-row justify-center">
         <Text className="text-white text-4xl mb-2 mt-2">{AssetAmount}</Text>
       </View>

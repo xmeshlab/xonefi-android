@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageBackground, ImageBackgroundProps } from "react-native";
-import backgroundImage2 from "../../assets/background.png";
+import backgroundImage from "../../assets/backgroundSquare.png";
 
 export const WithMainBg = ({
   children,
@@ -9,7 +9,7 @@ export const WithMainBg = ({
   return (
     <ImageBackground
       resizeMode={"cover"}
-      source={backgroundImage2}
+      source={backgroundImage}
       {...otherProps}
       style={otherProps.style}
     >

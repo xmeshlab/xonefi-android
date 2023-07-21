@@ -36,13 +36,15 @@ export const getCurrentConnectedSSID = async () => {
     try {
       await getPermission();
 
-      NetInfo.fetch().then(state => {
+      const currentSSID = NetInfo.fetch().then(state => {
         if(state.isConnected === false){
             return "Not Connected"
         }else{
             return state.details.ssid
         }
        })
+
+       return currentSSID
     }catch(e){
         console.log(e)
         return "Error"
