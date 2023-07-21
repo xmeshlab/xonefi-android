@@ -171,13 +171,13 @@ unsubscribe();*/
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Name
           </Text>
-          <Text style={style.descriptionItem}>{isConnected ? ssid : ""}</Text>
+          <Text style={style.descriptionItemConnected}>{isConnected ? ssid : ""}</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Status
           </Text>
-          <Text style={style.descriptionItem}>{isConnected ? "Connected" : "Not Connected"}</Text>
+          <Text style={isConnected ? style.descriptionItemConnected : style.descriptionItem}>{isConnected ? "Connected" : "Not Connected"}</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
@@ -325,6 +325,12 @@ const style = StyleSheet.create({
   },
   descriptionItem: {
     color: colors.light,
+    fontSize: 16,
+    lineHeight: 16,
+    flex: 1,
+  },
+  descriptionItemConnected: {
+    color: colors.successColor,
     fontSize: 16,
     lineHeight: 16,
     flex: 1,
