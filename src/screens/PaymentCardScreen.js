@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, ImageBackground } from "react-native";
 
-import backgroundImage from "../../assets/background.png";
+import backgroundImage from "../../assets/backgroundSquare.png";
 
 export default function PaymentCardScreen({ navigation }) {
   return (
