@@ -206,7 +206,7 @@ unsubscribe();*/
           <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
             <View style={globalStyle.col1}>
               <Text style={style.speed}>Download</Text>
-              <Text style={style.speed}>107 mbs</Text>
+              <Text style={style.speed}>107 Mbps</Text>
             </View>
             <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
           </View>
@@ -217,7 +217,7 @@ unsubscribe();*/
           <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
             <View style={globalStyle.col1}>
               <Text style={style.speed}>Upload</Text>
-              <Text style={style.speed}>107 mbs</Text>
+              <Text style={style.speed}>91 Mbps</Text>
             </View>
             <ArrowUpIcon />
           </View>
