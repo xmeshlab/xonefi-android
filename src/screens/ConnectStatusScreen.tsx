@@ -18,12 +18,13 @@ import {
 
 import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
 import { getCurrentConnectedSSID } from "../hooks/GetConnectedSSID";
+import { getCurrentLinkpeed } from "../hooks/GetLinkSpeed";
 
 
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
-  //Here we create a state for SSID. Then we read the ssid in from SQLite and display that information
   const [ssid, setSSID] = useState<string | number>();
+  const [linkSpeeds, setLinkSpeeds] = useState<any []>([]);
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -75,6 +76,11 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       if(ret === true){
         const currentSSID = await getCurrentConnectedSSID()
         setSSID(currentSSID)
+        const linkArray = await getCurrentLinkpeed()
+        //debug code
+        console.log("download : " + linkArray[1])
+        console.log("download : " + linkArray[2])
+        setLinkSpeeds(linkArray)
       }
     }
     getConnectionStatus()
@@ -209,7 +215,7 @@ unsubscribe();*/
           <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
             <View style={globalStyle.col1}>
               <Text style={style.speed}>Download</Text>
-              <Text style={style.speed}>107 Mbps</Text>
+              <Text style={style.speed}>{linkSpeeds[1]}</Text>
             </View>
             <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
           </View>
@@ -224,7 +230,7 @@ unsubscribe();*/
           <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
             <View style={globalStyle.col1}>
               <Text style={style.speed}>Upload</Text>
-              <Text style={style.speed}>91 Mbps</Text>
+              <Text style={style.speed}>{linkSpeeds[2]}</Text>
             </View>
             <ArrowUpIcon />
           </View>
