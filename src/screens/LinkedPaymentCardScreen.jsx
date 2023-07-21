@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-
-import backgroundImage from "../../assets/background.png";
 import BigBlueButton from "../Components/BigBlueButton";
 import GreyTextInputBar from "../Components/GreyTextInputBar";
 

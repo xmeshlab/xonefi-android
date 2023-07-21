@@ -33,7 +33,7 @@ function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <RootSiblingParent>
           <UserContextProvider>
-            <WithMainBg style={{ flex: 1 }}>
+            <WithMainBg style={{ flex: 1}}>
               <StatusBar style="light" />
               <MainContainer />
             </WithMainBg>
