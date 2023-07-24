@@ -7,6 +7,7 @@ import {
   NativeModules,
   ScrollView,
   PermissionsAndroid,
+  Platform
 } from "react-native";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
@@ -32,6 +33,8 @@ import {useNetInfo} from "@react-native-community/netinfo";
 const {WifiModule} = NativeModules;
 //Takes a callback as a param
 //WifiModule.logEvent(res => console.log(res));
+
+const OsVer = Platform.constants['Release'];
 
 /**
  * This Component handles the functionality of allowing a user to Connect or 
@@ -140,10 +143,22 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       //debug code to check that our native module WifiModule.java is working
       //WifiModule.logEvent(res => console.log(res));
 
-      //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
-      //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
-      await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
-      WifiModule.ShowNotification(SSID);
+      if (OsVer >= 10){
+        //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
+        //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
+        await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
+        WifiModule.ShowNotification(SSID);
+      }else{
+        WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
+          () => {
+            console.log("XLOG: Connected successfully!");
+            //setIsConnected(true)
+            //setCurrentConnectSSID(SSID)
+          },
+          () => {
+            console.log("XLOG: Connection failed!");
+          });
+      }
 
       //We do not change currentConnectedSSID here, since we have an interval that does that for us every second. 
 
@@ -154,6 +169,42 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       );
     }
 
+  }
+
+
+  //Function to disconnect from OneFi Provider on Android 9 and below
+  const disconnectFromOnefi = async () => {
+    console.log("XLOG: DisconnectFromOnefi Callback Activated");
+
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title:
+          "Location permission is required to disconnect from WiFi connections",
+        message:
+          "This app needs location permission as this is required  " +
+          "to scan for wifi networks.",
+        buttonNegative: "DENY",
+        buttonPositive: "ALLOW",
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      // You can now use react-native-wifi-reborn
+      console.log("XLOG: You can now use react-native-wifi-reborn");
+
+      let ssid_json = deserialize_ssid(SSID);
+
+      console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
+
+      WifiManager.isRemoveWifiNetwork(SSID);
+      //setIsConnected(false)
+
+    } else {
+      // Permission denied
+      console.log(
+        "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
+      );
+    }
   }
 
   //right now fill is always 80 when connected. fix this
@@ -235,9 +286,10 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
       </View>
 
+      {OsVer >= 10 ? <>
       {isConnected ?
       <PrimaryBtnGrey style={style.connectBtn}>
-        {"Pay and Connect"}
+        <Text>Pay and Connect</Text>
       </PrimaryBtnGrey>
       :
       <PrimaryBtn
@@ -245,7 +297,14 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         style={style.connectBtn} 
       >
         {isConnected ? "Disconnect" : "Pay and Connect"}
-      </PrimaryBtn>}
+      </PrimaryBtn>} 
+      </>:
+      <PrimaryBtn
+        onPress={isConnected ? disconnectFromOnefi : payAndConnect}
+        style={style.connectBtn} 
+      >
+        {isConnected ? "Disconnect" : "Pay and Connect"}
+        </PrimaryBtn>}
     </ScrollView>
   );
 };
