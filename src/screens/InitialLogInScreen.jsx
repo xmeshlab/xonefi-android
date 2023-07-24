@@ -10,7 +10,8 @@ import {
   FacebookLogo3,
   TwitterLogo,
   EmailLogo,
-  WeChatLogo
+  WeChatIcon, 
+  WhatsAppIcon
 } from "../icons/sign_in_icon";
 import { useContext } from "react";
 import { useUserContext } from "../context/UserContext";
@@ -37,6 +38,15 @@ const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={()=>{loginTwitter(userContext_array[1], userContext_array[3])}} testID="Twitter Login">
             <TwitterLogo />
+          </TouchableOpacity>
+        </View>
+        <View className="flex flex-row justify-evenly mt-5 mx-5">
+          <TouchableOpacity onPress={()=>{logInFunction(userContext_array[1], userContext_array[3])}} testID="Google Login">
+            <WeChatIcon/>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={()=>{logInFunction(userContext_array[1], userContext_array[3])}} testID="Google Login">
+            <WhatsAppIcon/>
           </TouchableOpacity>
         </View>
       </View>
