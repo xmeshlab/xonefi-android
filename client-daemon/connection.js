@@ -217,7 +217,7 @@ function initiate_connection(
           try {
 
           call_hello.call_hello(
-              "137.184.213.75",
+              "137.184.243.11",
               3000,
               new Web3(),
               private_key,
@@ -268,7 +268,7 @@ function initiate_connection(
 
                       try {
                           call_pafren.call_pafren(
-                              "137.184.213.75",
+                              "137.184.243.11",
                               3000,
                               new Web3(),
                               private_key,
@@ -365,7 +365,7 @@ function initiate_connection(
                                               console.log("XLOG: Calling call_sack...");
 
                                               call_sack.call_sack(
-                                                  "137.184.213.75",
+                                                  "137.184.243.11",
                                                   3000,
                                                   new Web3(),
                                                   private_key,

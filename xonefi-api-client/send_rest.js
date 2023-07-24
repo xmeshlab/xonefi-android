@@ -83,7 +83,7 @@ function send_rest(ip, port, msg, callback) {
     console.log(`XLOG2: calling send_rest()`);
     console.log(`XLOG2: send_rest()::msg: ${msg}`);
 
-    fetch('http://137.184.213.75:3000/client', {
+    fetch('http://137.184.243.11:3000/client', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
