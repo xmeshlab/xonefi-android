@@ -140,7 +140,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-    //26 needed for notifications api
+    // midSdkVersion configured for notification api
     defaultConfig {
         applicationId 'com.onefi.XOneFiApp'
         minSdkVersion 26
