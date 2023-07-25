@@ -206,20 +206,6 @@ public class WifiModule extends ReactContextBaseJavaModule {
             });
             snackbar.show();*/
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
-                    .setSmallIcon(R.drawable.ic_notification_icon)
-                    .setContentTitle("My notification")
-                    .setContentText("Much longer text that cannot fit one line...")
-                    .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Much longer text that cannot fit one line..."))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setChannelId("some_channel_id");
-
-            //show notification
-            //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            // notificationId is a unique int for each notification that you must define
-            //int notificationId = 1;
-            //notificationManager.notify(notificationId, builder.build());
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
