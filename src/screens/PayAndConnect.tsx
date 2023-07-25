@@ -294,10 +294,10 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       :
       <PrimaryBtn
         onPress={payAndConnect}
-        style={style.connectBtn} 
+        style={style.connectBtn}
       >
         {isConnected ? "Disconnect" : "Pay and Connect"}
-      </PrimaryBtn>} 
+      </PrimaryBtn>}
       </>:
       <PrimaryBtn
         onPress={isConnected ? disconnectFromOnefi : payAndConnect}
