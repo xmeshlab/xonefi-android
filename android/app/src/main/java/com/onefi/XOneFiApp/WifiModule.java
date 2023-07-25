@@ -119,16 +119,17 @@ public class WifiModule extends ReactContextBaseJavaModule {
             ReactApplicationContext context = getReactApplicationContext();
 
             CharSequence text = "Click and Connect To :  " + ssid;
-            //Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(context, MainActivity.class);
 
-            /*PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                    PendingIntent.FLAG_IMMUTABLE);*/
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
                     .setSmallIcon(R.mipmap.ic_launcher_round)
                     .setContentText(text)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                    .setContentIntent(pendingIntent)
                     .setChannelId("some_channel_id");
             //.setContentIntent(pendingIntent);
 
