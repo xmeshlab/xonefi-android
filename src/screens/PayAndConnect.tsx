@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   StyleSheet,
+  ActivityIndicator,
   Text,
   View,
   NativeModules,
-  TextInput,
   ScrollView,
   PermissionsAndroid,
-  Linking
+  Platform
 } from "react-native";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
@@ -16,7 +16,6 @@ import { globalStyle } from "../constants/globalStyle";
 import { RouteComponent } from "../types/global";
 import WifiManager from "react-native-wifi-reborn";
 import { useAsync } from "../hooks/useAsync";
-import BackgroundTimer from "react-native-background-timer";
 import {
   read_default_config,
   write_default_config,
@@ -35,6 +34,8 @@ const {WifiModule} = NativeModules;
 //Takes a callback as a param
 //WifiModule.logEvent(res => console.log(res));
 
+const OsVer = Platform.constants['Release'];
+
 /**
  * This Component handles the functionality of allowing a user to Connect or 
  * Disconnect from an XOneFi Provider
@@ -47,7 +48,6 @@ const {WifiModule} = NativeModules;
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
   const { SSID, BSSID, signalLevel, frequency } = props.route.params;
-  const [password, setPassword] = useState("seitlab123!@");
 
   //Functions for setting currentConnectedSSID
   const {
@@ -66,15 +66,15 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   //useEffect to set the isConnected state variable whenever the currently connected wifi network changes
   useEffect(() => {
     setIsConnected(currentConnectedSSID === SSID)
-    NetInfo.fetch().then(state => {
-      console.log("Wifi Speed : " + state.details.linkSpeed);
-      setNetworkSpeed(state.details.linkSpeed);
-
-    });
+    if(isConnected){
+      //replace with hook
+      NetInfo.fetch().then(state => {
+        console.log("Wifi Speed : " + state.details.linkSpeed);
+        setNetworkSpeed(state.details.linkSpeed);
+  
+      });
+    }
   }, [currentConnectedSSID]);
-  /*onst isConnected = useMemo(() => {
-    return currentConnectedSSID === SSID;
-  }, [currentConnectedSSID]);*/
 
 
   //half circle should be min of (mbps/200) or 180-max of bar
@@ -143,10 +143,22 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       //debug code to check that our native module WifiModule.java is working
       //WifiModule.logEvent(res => console.log(res));
 
-      //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
-      //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
-      await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
-      WifiModule.ShowNotification(SSID);
+      if (OsVer >= 10){
+        //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
+        //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
+        await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
+        WifiModule.ShowNotification(SSID);
+      }else{
+        WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
+          () => {
+            console.log("XLOG: Connected successfully!");
+            //setIsConnected(true)
+            //setCurrentConnectSSID(SSID)
+          },
+          () => {
+            console.log("XLOG: Connection failed!");
+          });
+      }
 
       //We do not change currentConnectedSSID here, since we have an interval that does that for us every second. 
 
@@ -159,7 +171,8 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
   }
 
-  //Function to disconnect from OneFi Provider
+
+  //Function to disconnect from OneFi Provider on Android 9 and below
   const disconnectFromOnefi = async () => {
     console.log("XLOG: DisconnectFromOnefi Callback Activated");
 
@@ -184,7 +197,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       console.log(`XLOG: deserialized ssid: ${JSON.stringify(ssid_json)}`);
 
       WifiManager.isRemoveWifiNetwork(SSID);
-      setIsConnected(false)
+      //setIsConnected(false)
 
     } else {
       // Permission denied
@@ -194,31 +207,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     }
   }
 
-  WifiManager.getCurrentWifiSSID().then(
-    async (ssid) => {
-      console.log("XLOG: Your current connected wifi SSID is " + ssid);
-      console.log("XLOG: The SSID we want to connect to is: " + SSID);
-      if (ssid === SSID) {
-        console.log("XLOG: The device is already connected to: " + SSID);
-
-        console.log("XLOG: Background timer will start in here.");
-      } else {
-        console.log(
-          "XLOG: Before using XOneFi, the device must connect to: " + SSID
-        );
-
-        console.log("XLOG: Background timer will start in here.");
-
-        console.log(
-          "XLOG: Confirming that the background timer doesn't block the main thread."
-        );
-      }
-    },
-    () => {
-      console.log("XLOG: Cannot get current SSID!");
-    }
-  );
-
+  //right now fill is always 80 when connected. fix this
   return (
     <ScrollView className="flex-1 flex-col">
       <View style={[globalStyle.row, { marginLeft: 37, marginTop: 23 }]}>
@@ -247,14 +236,10 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           onAnimationComplete={() => console.log("onAnimationComplete")}
           backgroundColor="#051e2a"
         >
-          
-          {(v) => (
+           {(v) => (
             <View>
-              {/*frequency is the speed in MHz*/}
-              {/*<Text style={globalStyle.light}>{frequency}</Text>*/}
               <Text style={globalStyle.light}>{isConnected ? networkSpeed + " mbps": ""}</Text>
-            </View>
-          )}
+            </View>)}
         </AnimatedCircularProgress>
          :
         <AnimatedCircularProgress
@@ -270,14 +255,10 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           onAnimationComplete={() => console.log("onAnimationComplete")}
           backgroundColor="#051e2a"
         >
-          
-          {(v) => (
+           {(v) => (
             <View>
-              {/*frequency is the speed in MHz*/}
-              {/*<Text style={globalStyle.light}>{frequency}</Text>*/}
               <Text style={globalStyle.light}>{isConnected ? networkSpeed : ""}</Text>
-            </View>
-          )}
+            </View>)}
         </AnimatedCircularProgress>}
       </View>
       <View style={[globalStyle.row, style.statusView]}>
@@ -305,12 +286,25 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
       </View>
 
+      {OsVer >= 10 ? <>
+      {isConnected ?
+      <PrimaryBtnGrey style={style.connectBtn}>
+        <Text>Pay and Connect</Text>
+      </PrimaryBtnGrey>
+      :
       <PrimaryBtn
-        onPress={isConnected ? disconnectFromOnefi : payAndConnect}
+        onPress={payAndConnect}
         style={style.connectBtn}
       >
         {isConnected ? "Disconnect" : "Pay and Connect"}
-      </PrimaryBtn>
+      </PrimaryBtn>}
+      </>:
+      <PrimaryBtn
+        onPress={isConnected ? disconnectFromOnefi : payAndConnect}
+        style={style.connectBtn} 
+      >
+        {isConnected ? "Disconnect" : "Pay and Connect"}
+        </PrimaryBtn>}
     </ScrollView>
   );
 };
@@ -350,6 +344,64 @@ const style = StyleSheet.create({
     marginLeft: 24 + 23,
     marginRight: 24 + 23,
     marginBottom: 18,
+    alignItems: "center",
+  },
+});
+
+
+
+
+
+
+
+
+const PrimaryBtnGrey = ({
+  style, children
+}) => {
+  return (
+    <View
+      style={[defaultStyle.primaryBtn, style]}
+    >
+      {typeof children === "string" ? (
+        <Text style={defaultStyle.text}>{children}</Text>
+      ) : (
+        children
+      )}
+    </View>
+  );
+};
+
+const defaultStyle = StyleSheet.create({
+  primaryBtn: {
+    height: 50,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#404040",
+    shadowColor: "rgba(0, 0, 0, 1.0)",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    flexDirection: "row",
+    shadowRadius: 4,
+    shadowOpacity: 1,
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "#404040",
+  },
+  text: {
+    color: 	"#000000",
+    fontSize: 16,
+  },
+  loading: {
+    position: "absolute",
+    left: 1,
+    right: 1,
+    bottom: 1,
+    top: 1,
+    backgroundColor: "rgba(255,255,255,0.1)",
+    justifyContent: "center",
     alignItems: "center",
   },
 });

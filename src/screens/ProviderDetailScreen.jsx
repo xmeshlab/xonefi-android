@@ -6,7 +6,7 @@ import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import {GreyTextInputBarNoMargin} from "../Components/GreyTextInputBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useState } from "react";
-
+import {Calendar,CalendarList} from 'react-native-calendars';
 /**
  * This screen displays additional information about a specific XOneFi Provider. 
  * A User is routed to this page after clicking on a Provider displayed on the Provider Screen. 
@@ -68,9 +68,14 @@ export default function ProviderDetailScreen({ route, navigation }) {
             <GreyBackgroundBar
               LeftText={"Share Time/Daily"}
               RightSideComponent={
-                <GreyTextInputBarNoMargin placeholder_text={""} state_function={setShareTimeDaily}/>
+                <></>
               }
             />
+            <Calendar
+                onDayPress={day => {
+                  console.log('selected day', day);
+                }}
+                  />
           </>
         }
       />

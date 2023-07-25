@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, Text, Image} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import AssetGain from "../../assets/AssetGainLogo.png";

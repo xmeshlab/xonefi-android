@@ -10,7 +10,8 @@ import {
   FacebookLogo3,
   TwitterLogo,
   EmailLogo,
-  WeChatLogo
+  WeChatIcon, 
+  WhatsAppIcon
 } from "../icons/sign_in_icon";
 import { useContext } from "react";
 import { useUserContext } from "../context/UserContext";

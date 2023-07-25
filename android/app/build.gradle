@@ -141,9 +141,10 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    // midSdkVersion configured for notification api
     defaultConfig {
         applicationId 'com.onefi.XOneFiApp'
-        minSdkVersion 29
+        minSdkVersion 26
         targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
@@ -250,6 +251,9 @@ android {
             signingConfig signingConfigs.release
             //minifyEnabled enableProguardInReleaseBuilds
             //proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 

@@ -39,8 +39,8 @@ import android.os.Build;
 import android.app.NotificationChannel;
 import androidx.core.app.NotificationManagerCompat;
 import android.app.Notification;
+import android.app.PendingIntent;
 
-import com.google.android.material.snackbar.Snackbar;
 import android.app.Activity;
 
 public class WifiModule extends ReactContextBaseJavaModule {
@@ -116,27 +116,33 @@ public class WifiModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void ShowNotification(final String ssid) {
-        ReactApplicationContext context = getReactApplicationContext();
+            ReactApplicationContext context = getReactApplicationContext();
 
-        CharSequence text = "Click and Connect To :  " + ssid;
+            CharSequence text = "Click and Connect To :  " + ssid;
+            Intent intent = new Intent(context, MainActivity.class);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
-                .setSmallIcon(R.drawable.ic_notification_icon)
-                .setContentTitle("XOneFi")
-                .setContentText(text)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-                //.setChannelId("some_channel_id");
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE);
 
-        /*//show notification
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        // notificationId is a unique int for each notification that you must define
-        int notificationId = 1;
-        notificationManager.notify(notificationId, builder.build());*/
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "some_channel_id")
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentText(text)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                    .setContentIntent(pendingIntent)
+                    .setChannelId("some_channel_id");
+            //.setContentIntent(pendingIntent);
 
-        Notification buildNotification = builder.build();
-        NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotifyMgr.notify(001, buildNotification);
+            /*//show notification
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            // notificationId is a unique int for each notification that you must define
+            int notificationId = 1;
+            notificationManager.notify(notificationId, builder.build());*/
+
+            Notification buildNotification = builder.build();
+            NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(001, buildNotification);
+
     }
 
     @ReactMethod
