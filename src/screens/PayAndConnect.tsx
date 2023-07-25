@@ -149,7 +149,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
         WifiModule.ShowNotification(SSID);
       }else{
-        WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false).then(
+        WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false, false).then(
           () => {
             console.log("XLOG: Connected successfully!");
             //setIsConnected(true)

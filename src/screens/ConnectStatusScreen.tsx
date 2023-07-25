@@ -65,9 +65,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       //debug coomment : according to logs isClientConnectedToXoneFi is working properly
       const ret = await isClientConnectedToXoneFi();
   
-      //debug code
-      //console.log("ret from isClientConnectedToXoneFi : ")
-      //console.log(ret)
       console.log("Value in isClientConnectedToXoneFi : " + ret)
       console.log(ret)
       console.log("type of ret : " + typeof(ret))
@@ -77,9 +74,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         const currentSSID = await getCurrentConnectedSSID()
         setSSID(currentSSID)
         const linkArray = await getCurrentLinkpeed()
-        //debug code
-        console.log("download : " + linkArray[1])
-        console.log("download : " + linkArray[2])
         setLinkSpeeds(linkArray)
       }
     }

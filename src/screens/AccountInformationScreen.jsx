@@ -3,12 +3,10 @@ import {
   View,
   Text,
   TextInput,
-  ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import Modal from "react-native-modal";
 
-import { useContext } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
 import ViewButton from "../Components/ViewButton";
@@ -16,7 +14,6 @@ import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useUserContext } from "../context/UserContext";
 
-//var web3 = require("web3");
 import Web3 from 'web3';
 //@TODO check what the local host param is doing
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
@@ -44,7 +41,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
   return (
     <ScrollView>
       <GreyBackgroundBox
-        titleText={"Account Informtion"}
+        titleText={"Account Information"}
         children={
           <>
             <GreyBackgroundBar

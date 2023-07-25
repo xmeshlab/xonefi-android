@@ -45,11 +45,7 @@ export const isClientConnectedToXoneFi = async () => {
         if(state.isConnected === false){
             return false
         }else{
-            //debug code
-            console.log("state.details.ssid : " + state.details.ssid)
             const isOnefi = is_onefi_ssid(state.details.ssid)
-            //debug code
-            console.log("isOnefi : " + isOnefi);
             return isOnefi;
         }
        })
