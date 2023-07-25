@@ -40,15 +40,6 @@ const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
             <TwitterLogo />
           </TouchableOpacity>
         </View>
-        <View className="flex flex-row justify-evenly mt-5 mx-5">
-          <TouchableOpacity onPress={()=>{logInFunction(userContext_array[1], userContext_array[3])}} testID="Google Login">
-            <WeChatIcon/>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={()=>{logInFunction(userContext_array[1], userContext_array[3])}} testID="Google Login">
-            <WhatsAppIcon/>
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );
