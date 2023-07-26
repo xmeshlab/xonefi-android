@@ -55,7 +55,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
             <GreyBackgroundBar
               LeftText={"OFI/Minute"}
               RightSideComponent={
-                <GreyTextInputBarNoMargin placeholder_text={""} state_function={setOFIMinute}/>
+                <View style={{ transform: [{ scaleX: 1 }, { scaleY: .8 }] }}>
+                  <GreyTextInputBarNoMargin placeholder_text={""} state_function={setOFIMinute}/>
+                </View>
               }
             />
             <GreyBackgroundBar
