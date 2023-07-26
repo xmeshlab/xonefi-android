@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, Text, Switch} from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
@@ -17,6 +17,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
 
   const [shareTimeDaily, setShareTimeDaily] = useState(0);
   const [oFIMinute, setOFIMinute] = useState(0);
+
+  const [isPrivate, setIsPrivate] = useState(false);
+  const toggleSwitch = () => setIsPrivate(previousState => !previousState);
 
   return (
     <ScrollView>
@@ -58,11 +61,14 @@ export default function ProviderDetailScreen({ route, navigation }) {
             <GreyBackgroundBar
               LeftText={"Private Connection"}
               RightSideComponent={
-                <ViewButton
-                  OnPressFunction={() => {
-                    alert("Button Pressed");
-                  }}
-                />
+                <Switch
+                style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] }}
+                trackColor={{false: '#767577', true: '#0E60FF'}}
+                thumbColor={'#2B3FF2'}
+                onValueChange={toggleSwitch}
+                value={isPrivate}
+              />
+               
               }
             />
             <GreyBackgroundBar
