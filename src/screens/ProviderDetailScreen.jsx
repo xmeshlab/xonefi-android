@@ -16,7 +16,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
   const {SSID} = route.params;
 
   const [shareTimeDaily, setShareTimeDaily] = useState(0);
-  const [oFIMinute, setOFIMinute] = useState(0);
+
+  //value here might have to come from persistent storage, or cloud, so the user does not have to reset the value everytime app loads
+  const [OFIMinute, setOFIMinute] = useState(0);
 
   const [isPrivate, setIsPrivate] = useState(false);
   const toggleSwitch = () => setIsPrivate(previousState => !previousState);

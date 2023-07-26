@@ -7,10 +7,10 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { SearchIcon } from "../icons/search_icon";
+import { SearchIcon } from "../../icons/search_icon";
 
 //componets
-import TextInputEntry from "../Components/TextInputEntry";
+import TextInputEntry from "../../Components/TextInputEntry";
 interface OwnProps {}
 
 type Props = OwnProps;

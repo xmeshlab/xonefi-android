@@ -8,10 +8,10 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { SearchIcon } from "../icons/search_icon";
+import { SearchIcon } from "../../icons/search_icon";
 //componets
-import TextInputEntry from "../Components/TextInputEntry";
-import BigBlueButton from "../Components/BigBlueButton";
+import TextInputEntry from "../../Components/TextInputEntry";
+import BigBlueButton from "../../Components/BigBlueButton";
 
 interface OwnProps {}
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { RouteProp } from "@react-navigation/native";
-import { WithMainBg } from "../Components/WithMainBg";
+import { WithMainBg } from "../../Components/WithMainBg";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 //icons
-import AddIcon from "../icons/add_icon";
+import AddIcon from "../../icons/add_icon";
 
 interface OwnProps {}
 
