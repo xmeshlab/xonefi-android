@@ -7,7 +7,7 @@ import {
   NativeModules,
   ScrollView,
   PermissionsAndroid,
-  Platform
+  Platform,
 } from "react-native";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
@@ -28,22 +28,22 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Circle } from "react-native-svg";
 
 import NetInfo from "@react-native-community/netinfo";
-import {useNetInfo} from "@react-native-community/netinfo";
+import { useNetInfo } from "@react-native-community/netinfo";
 
-const {WifiModule} = NativeModules;
+const { WifiModule } = NativeModules;
 //Takes a callback as a param
 //WifiModule.logEvent(res => console.log(res));
 
-const OsVer = Platform.constants['Release'];
+const OsVer = Platform.constants["Release"];
 
 /**
- * This Component handles the functionality of allowing a user to Connect or 
+ * This Component handles the functionality of allowing a user to Connect or
  * Disconnect from an XOneFi Provider
- * 
+ *
  * A User is routed to this page after clicking on a WifiItem that is rendered on the ConnectScreen
- * 
+ *
  * It is passed in the Provider's SSID and BSSID as props
- * 
+ *
  */
 const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   console.log("XLOG: Pay and Connect Component Activated");
@@ -65,34 +65,32 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   //maybe change back to useMemo?
   //useEffect to set the isConnected state variable whenever the currently connected wifi network changes
   useEffect(() => {
-    setIsConnected(currentConnectedSSID === SSID)
-    if(isConnected){
+    setIsConnected(currentConnectedSSID === SSID);
+    if (isConnected) {
       //replace with hook
-      NetInfo.fetch().then(state => {
+      NetInfo.fetch().then((state) => {
         console.log("Wifi Speed : " + state.details.linkSpeed);
         setNetworkSpeed(state.details.linkSpeed);
-  
       });
     }
   }, [currentConnectedSSID]);
 
-
   //half circle should be min of (mbps/200) or 180-max of bar
 
-
-  //An interval that will run each second. It will get the current wifi network ssid and check if it has changed. 
+  //An interval that will run each second. It will get the current wifi network ssid and check if it has changed.
   //We do this since the user must manually change to the xonefi wifi. Check if there are event listeners we can use instead
   useEffect(() => {
     let interval = setInterval(() => {
-      WifiManager.getCurrentWifiSSID().then(_ssid =>{
-        if(_ssid != currentConnectedSSID){
-          setCurrentConnectSSID(_ssid);
-
+      WifiManager.getCurrentWifiSSID().then(
+        (_ssid) => {
+          if (_ssid != currentConnectedSSID) {
+            setCurrentConnectSSID(_ssid);
+          }
+        },
+        () => {
+          console.log("Cannot get current SSID!");
         }
-      }, () => {
-        console.log("Cannot get current SSID!");
-      })
-      
+      );
     }, 1000);
 
     return () => {
@@ -117,7 +115,7 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   });
 
   //function to connect to OneFi Provider
-  const payAndConnect = async ()=> {
+  const payAndConnect = async () => {
     console.log("XLOG: Pay and Connect Callback Activated");
 
     //Ask Android Permission to use Location Access. Thi is required for react native wifi reborn
@@ -143,13 +141,18 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       //debug code to check that our native module WifiModule.java is working
       //WifiModule.logEvent(res => console.log(res));
 
-      if (OsVer >= 10){
+      if (OsVer >= 10) {
         //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
         //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
         await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
         WifiModule.ShowNotification(SSID);
-      }else{
-        WifiManager.connectToProtectedSSID(SSID, ssid_json.prefix, false, false).then(
+      } else {
+        WifiManager.connectToProtectedSSID(
+          SSID,
+          ssid_json.prefix,
+          false,
+          false
+        ).then(
           () => {
             console.log("XLOG: Connected successfully!");
             //setIsConnected(true)
@@ -157,20 +160,18 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
           },
           () => {
             console.log("XLOG: Connection failed!");
-          });
+          }
+        );
       }
 
-      //We do not change currentConnectedSSID here, since we have an interval that does that for us every second. 
-
+      //We do not change currentConnectedSSID here, since we have an interval that does that for us every second.
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
     }
-
-  }
-
+  };
 
   //Function to disconnect from OneFi Provider on Android 9 and below
   const disconnectFromOnefi = async () => {
@@ -198,14 +199,13 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
 
       WifiManager.isRemoveWifiNetwork(SSID);
       //setIsConnected(false)
-
     } else {
       // Permission denied
       console.log(
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
     }
-  }
+  };
 
   //right now fill is always 80 when connected. fix this
   return (
@@ -223,43 +223,51 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </Text>
       </View>
       <View style={style.chart}>
-      {isConnected ? <AnimatedCircularProgress
-          size={120}
-          width={10}
-          fill={80}
-          arcSweepAngle={180}
-          rotation={270}
-          renderCap={({ center }) => (
-            <Circle cx={center.x} cy={center.y} r="6" fill="#00B2FF" />
-          )}
-          tintColor="#18384D"
-          onAnimationComplete={() => console.log("onAnimationComplete")}
-          backgroundColor="#051e2a"
-        >
-           {(v) => (
-            <View>
-              <Text style={globalStyle.light}>{isConnected ? networkSpeed + " mbps": ""}</Text>
-            </View>)}
-        </AnimatedCircularProgress>
-         :
-        <AnimatedCircularProgress
-          size={120}
-          width={10}
-          fill={0}
-          arcSweepAngle={180}
-          rotation={270}
-          renderCap={({ center }) => (
-            <Circle cx={center.x} cy={center.y} r="6" fill="#00B2FF" />
-          )}
-          tintColor="#18384D"
-          onAnimationComplete={() => console.log("onAnimationComplete")}
-          backgroundColor="#051e2a"
-        >
-           {(v) => (
-            <View>
-              <Text style={globalStyle.light}>{isConnected ? networkSpeed : ""}</Text>
-            </View>)}
-        </AnimatedCircularProgress>}
+        {isConnected ? (
+          <AnimatedCircularProgress
+            size={120}
+            width={10}
+            fill={80}
+            arcSweepAngle={180}
+            rotation={270}
+            renderCap={({ center }) => (
+              <Circle cx={center.x} cy={center.y} r="6" fill="#00B2FF" />
+            )}
+            tintColor="#18384D"
+            onAnimationComplete={() => console.log("onAnimationComplete")}
+            backgroundColor="#051e2a"
+          >
+            {(v) => (
+              <View>
+                <Text style={globalStyle.light}>
+                  {isConnected ? networkSpeed + " mbps" : ""}
+                </Text>
+              </View>
+            )}
+          </AnimatedCircularProgress>
+        ) : (
+          <AnimatedCircularProgress
+            size={120}
+            width={10}
+            fill={0}
+            arcSweepAngle={180}
+            rotation={270}
+            renderCap={({ center }) => (
+              <Circle cx={center.x} cy={center.y} r="6" fill="#00B2FF" />
+            )}
+            tintColor="#18384D"
+            onAnimationComplete={() => console.log("onAnimationComplete")}
+            backgroundColor="#051e2a"
+          >
+            {(v) => (
+              <View>
+                <Text style={globalStyle.light}>
+                  {isConnected ? networkSpeed : ""}
+                </Text>
+              </View>
+            )}
+          </AnimatedCircularProgress>
+        )}
       </View>
       <View style={[globalStyle.row, style.statusView]}>
         <View style={globalStyle.row}>
@@ -274,7 +282,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
-          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
+          <Text className="text-white text-base my-1">
+            {deserialize_ssid(SSID).cost} OFI
+          </Text>
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per GB</Text>
@@ -282,29 +292,32 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         </View>
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base mt-1">Total</Text>
-          <Text className="text-white text-base my-1">{deserialize_ssid(SSID).cost} OFI</Text>
+          <Text className="text-white text-base my-1">
+            {deserialize_ssid(SSID).cost} OFI
+          </Text>
         </View>
       </View>
 
-      {OsVer >= 10 ? <>
-      {isConnected ?
-      <PrimaryBtnGrey style={style.connectBtn}>
-        <Text>Pay and Connect</Text>
-      </PrimaryBtnGrey>
-      :
-      <PrimaryBtn
-        onPress={payAndConnect}
-        style={style.connectBtn}
-      >
-        {isConnected ? "Disconnect" : "Pay and Connect"}
-      </PrimaryBtn>}
-      </>:
-      <PrimaryBtn
-        onPress={isConnected ? disconnectFromOnefi : payAndConnect}
-        style={style.connectBtn} 
-      >
-        {isConnected ? "Disconnect" : "Pay and Connect"}
-        </PrimaryBtn>}
+      {OsVer >= 10 ? (
+        <>
+          {isConnected ? (
+            <PrimaryBtnGrey style={style.connectBtn}>
+              <Text>Pay and Connect</Text>
+            </PrimaryBtnGrey>
+          ) : (
+            <PrimaryBtn onPress={payAndConnect} style={style.connectBtn}>
+              {isConnected ? "Disconnect" : "Pay and Connect"}
+            </PrimaryBtn>
+          )}
+        </>
+      ) : (
+        <PrimaryBtn
+          onPress={isConnected ? disconnectFromOnefi : payAndConnect}
+          style={style.connectBtn}
+        >
+          {isConnected ? "Disconnect" : "Pay and Connect"}
+        </PrimaryBtn>
+      )}
     </ScrollView>
   );
 };
@@ -348,20 +361,9 @@ const style = StyleSheet.create({
   },
 });
 
-
-
-
-
-
-
-
-const PrimaryBtnGrey = ({
-  style, children
-}) => {
+const PrimaryBtnGrey = ({ style, children }) => {
   return (
-    <View
-      style={[defaultStyle.primaryBtn, style]}
-    >
+    <View style={[defaultStyle.primaryBtn, style]}>
       {typeof children === "string" ? (
         <Text style={defaultStyle.text}>{children}</Text>
       ) : (
@@ -391,7 +393,7 @@ const defaultStyle = StyleSheet.create({
     borderColor: "#404040",
   },
   text: {
-    color: 	"#000000",
+    color: "#000000",
     fontSize: 16,
   },
   loading: {

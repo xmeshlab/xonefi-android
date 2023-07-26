@@ -17,8 +17,7 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import uuid from 'react-native-uuid';
-
+import uuid from "react-native-uuid";
 
 /**
  * Call OneFi provider to request session handover.

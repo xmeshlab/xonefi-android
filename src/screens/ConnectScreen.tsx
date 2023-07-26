@@ -45,7 +45,7 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
           navigation.navigate("PayAndConnect", {
             BSSID: item.BSSID,
             SSID: item.SSID,
-            frequency: item.frequency
+            frequency: item.frequency,
           })
         }
       >
@@ -61,19 +61,26 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
   );
 
   return (
-      <View className="flex flex-col">
-        <FlatList<WifiEntry>
-          data={wifiList}
-          onRefresh={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}
-          refreshing={isLoading}
-          ListEmptyComponent={
-            <PrimaryBtn style={style.connectBtn} onPress={()=>{getOneFiRouterList(setIsLoading, setWifiList)}}>
-              View Available Connection
-            </PrimaryBtn>
-          }
-          renderItem={flatListRenderItem}
-        />
-      </View>
+    <View className="flex flex-col">
+      <FlatList<WifiEntry>
+        data={wifiList}
+        onRefresh={() => {
+          getOneFiRouterList(setIsLoading, setWifiList);
+        }}
+        refreshing={isLoading}
+        ListEmptyComponent={
+          <PrimaryBtn
+            style={style.connectBtn}
+            onPress={() => {
+              getOneFiRouterList(setIsLoading, setWifiList);
+            }}
+          >
+            View Available Connection
+          </PrimaryBtn>
+        }
+        renderItem={flatListRenderItem}
+      />
+    </View>
   );
 };
 export default ConnectScreen;
@@ -103,7 +110,6 @@ const WifiItem = ({
     </View>
   );
 };
-
 
 const style = StyleSheet.create({
   wifiItem: {

@@ -9,7 +9,7 @@ import GreyButton from "../../src/Components/GreyButton";
 it("Renders", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");
 
-  const {getByText, getAllByText, getByTestId} = render(
+  const { getByText, getAllByText, getByTestId } = render(
     <GreyButton
       imageSource={AssetGain}
       textInput={"Test"}
@@ -29,7 +29,7 @@ it("Renders", () => {
 it("Renders with Different Text", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");
 
-  const {getByText, getAllByText, getByTestId} = render(
+  const { getByText, getAllByText, getByTestId } = render(
     <GreyButton
       imageSource={AssetGain}
       textInput={"Button Text"}
@@ -49,7 +49,7 @@ it("Renders with Different Text", () => {
 it("Renders with Different Image", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");
 
-  const {getByText, getAllByText, getByTestId} = render(
+  const { getByText, getAllByText, getByTestId } = render(
     <GreyButton
       imageSource={RightArrow}
       textInput={"Button Text"}

@@ -6,7 +6,7 @@ import {
 } from "../xonefi-api-client/config";
 
 import BackgroundFetch from "react-native-background-fetch";
-import {set_min_downlink_tier} from "../xonefi-api-client/speedtier";
+import { set_min_downlink_tier } from "../xonefi-api-client/speedtier";
 
 const worker = require("./worker");
 
@@ -36,28 +36,31 @@ export async function startClientDaemon() {
 
   let timer_started = false;
 
-  let status = await BackgroundFetch.configure({
-    minimumFetchInterval: 15
-  }, async (taskId) => {  // <-- Event callback
-    // This is the fetch-event callback.
-    console.log("[BackgroundFetch] taskId: ", taskId);
-    let intervalID = setInterval(function() {
-      // Use a switch statement to route task-handling.
-      console.log("XLOG: startClientDaemon 5");
+  let status = await BackgroundFetch.configure(
+    {
+      minimumFetchInterval: 15,
+    },
+    async (taskId) => {
+      // <-- Event callback
+      // This is the fetch-event callback.
+      console.log("[BackgroundFetch] taskId: ", taskId);
+      let intervalID = setInterval(function () {
+        // Use a switch statement to route task-handling.
+        console.log("XLOG: startClientDaemon 5");
 
-      read_default_config((config_json1) => {
-        //console.log(`config_json: ${JSON.stringify(config_json)}`);
-        console.log(`config_json1: ${JSON.stringify(config_json1)}`);
+        read_default_config((config_json1) => {
+          //console.log(`config_json: ${JSON.stringify(config_json)}`);
+          console.log(`config_json1: ${JSON.stringify(config_json1)}`);
 
-        decrypted_private_key = config_json1.account.dpk;
+          decrypted_private_key = config_json1.account.dpk;
 
-        if (config_json1.client_on === true) {
-          console.log("XLOG: startClientDaemon 7");
-          console.log(
+          if (config_json1.client_on === true) {
+            console.log("XLOG: startClientDaemon 7");
+            console.log(
               "XLOG: config_json.client_session.status pre: " +
-              config_json1.client_session.status
-          );
-          worker.client_worker(
+                config_json1.client_session.status
+            );
+            worker.client_worker(
               config_json1,
               user_password,
               decrypted_private_key,
@@ -65,28 +68,31 @@ export async function startClientDaemon() {
                 console.log(`${global_counter}: Client is on`);
                 global_counter++;
                 console.log(
-                    "XLOG: config_json.client_session.status post: " +
+                  "XLOG: config_json.client_session.status post: " +
                     config_json.client_session.status
                 );
               }
-          );
-        } else {
-          console.log(`${global_counter}: Client is off`);
-          global_counter++;
-        }
-      });
-    }, 5000);
-    // Finish, providing received taskId.
-    BackgroundFetch.finish(taskId);
-  }, async (taskId) => {  // <-- Task timeout callback
-    BackgroundFetch.finish(taskId);
-  });
+            );
+          } else {
+            console.log(`${global_counter}: Client is off`);
+            global_counter++;
+          }
+        });
+      }, 5000);
+      // Finish, providing received taskId.
+      BackgroundFetch.finish(taskId);
+    },
+    async (taskId) => {
+      // <-- Task timeout callback
+      BackgroundFetch.finish(taskId);
+    }
+  );
 
-// Step 2:  Schedule a custom "oneshot" task to execute 3000ms from now.
+  // Step 2:  Schedule a custom "oneshot" task to execute 3000ms from now.
   BackgroundFetch.scheduleTask({
     taskId: "com.foo.clientdaemon",
     forceAlarmManager: true,
-    delay: 1000  // <-- milliseconds
+    delay: 1000, // <-- milliseconds
   });
 }
 

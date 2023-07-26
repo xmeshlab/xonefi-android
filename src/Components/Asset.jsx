@@ -1,9 +1,8 @@
 import * as React from "react";
-import { View, Text, Image} from "react-native";
+import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import AssetGain from "../../assets/AssetGainLogo.png";
-
 
 /**
  * This component is used to display the various cryptocurrencies on the WalletScreen

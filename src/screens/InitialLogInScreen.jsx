@@ -10,14 +10,14 @@ import {
   FacebookLogo3,
   TwitterLogo,
   EmailLogo,
-  WeChatIcon, 
-  WhatsAppIcon
+  WeChatIcon,
+  WhatsAppIcon,
 } from "../icons/sign_in_icon";
 import { useContext } from "react";
 import { useUserContext } from "../context/UserContext";
 
 const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
-  const userContext_array = useUserContext()
+  const userContext_array = useUserContext();
 
   return (
     <View className="h-screen">
@@ -30,13 +30,28 @@ const InitialLogInScreen = ({ logInFunction, loginFacebook, loginTwitter }) => {
           Login
         </Text>
         <View className="flex flex-row justify-around">
-          <TouchableOpacity onPress={()=>{logInFunction(userContext_array[1], userContext_array[3])}} testID="Google Login">
-            <GoogleIcon2/>
+          <TouchableOpacity
+            onPress={() => {
+              logInFunction(userContext_array[1], userContext_array[3]);
+            }}
+            testID="Google Login"
+          >
+            <GoogleIcon2 />
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{loginFacebook(userContext_array[1], userContext_array[3])}} testID="Facebook Login">
+          <TouchableOpacity
+            onPress={() => {
+              loginFacebook(userContext_array[1], userContext_array[3]);
+            }}
+            testID="Facebook Login"
+          >
             <FacebookLogo3 />
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{loginTwitter(userContext_array[1], userContext_array[3])}} testID="Twitter Login">
+          <TouchableOpacity
+            onPress={() => {
+              loginTwitter(userContext_array[1], userContext_array[3]);
+            }}
+            testID="Twitter Login"
+          >
             <TwitterLogo />
           </TouchableOpacity>
         </View>

@@ -1,12 +1,8 @@
-
-
 import "react-native-gesture-handler";
 import "./global";
 import { registerRootComponent } from "expo";
 
-
-import {AppRegistry} from 'react-native';
-
+import { AppRegistry } from "react-native";
 
 import App from "./App";
 
@@ -15,7 +11,4 @@ import App from "./App";
 // the environment is set up appropriately
 registerRootComponent(App);
 
-
-AppRegistry.registerHeadlessTask('bgtask', () =>
-    require('./bgtask'),
-);
+AppRegistry.registerHeadlessTask("bgtask", () => require("./bgtask"));

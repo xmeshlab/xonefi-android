@@ -49,9 +49,9 @@ default_json = {
 };
 
 /**
- * This Screen showcases the prices of various cryptocurrencies. 
+ * This Screen showcases the prices of various cryptocurrencies.
  * The Price information is gathered using CoinGecko's Free API.
- * 
+ *
  */
 export default function WalletScreen({ navigation }) {
   const [priceJson, setPriceJson] = useState(default_json);
@@ -72,12 +72,11 @@ export default function WalletScreen({ navigation }) {
           setPriceJson(resJSON);
         });
 
-        //backgroundFlash state should only be true for half a second
-        setBackgroundFlash(true)
-        setTimeout(function(){
-          setBackgroundFlash(false)
-      },50);
-
+      //backgroundFlash state should only be true for half a second
+      setBackgroundFlash(true);
+      setTimeout(function () {
+        setBackgroundFlash(false);
+      }, 50);
     }, 10000);
 
     return () => {
@@ -95,7 +94,7 @@ export default function WalletScreen({ navigation }) {
           AssetChange={"0.00%"}
           AssetPrice="$0.00 USD"
         />
-        <ScrollView style={{backgroundColor: "transparent" }}>
+        <ScrollView style={{ backgroundColor: "transparent" }}>
           <Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"

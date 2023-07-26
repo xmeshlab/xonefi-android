@@ -5,7 +5,9 @@ import BigBlueButton from "../../src/Components/BigBlueButton";
 it("Renders", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");
 
-  const {getByText, getAllByText, getByTestId} = render(<BigBlueButton text={"Testing"} onPressFunction={mockButtonPress}/>);
+  const { getByText, getAllByText, getByTestId } = render(
+    <BigBlueButton text={"Testing"} onPressFunction={mockButtonPress} />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Testing")).not.toBeNull();
@@ -19,7 +21,12 @@ it("Renders", () => {
 it("Renders with Different Button Name", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");
 
-  const {getByText, getAllByText, getByTestId} = render(<BigBlueButton text={"Button that is blue"} onPressFunction={mockButtonPress}/>);
+  const { getByText, getAllByText, getByTestId } = render(
+    <BigBlueButton
+      text={"Button that is blue"}
+      onPressFunction={mockButtonPress}
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Button that is blue")).not.toBeNull();

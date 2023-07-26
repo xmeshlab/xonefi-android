@@ -22,7 +22,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @returns {string} Unique ID string.
  */
 
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 
 function generate_unique_id() {
   //const uuidv4 = require("react-native-uuid");
