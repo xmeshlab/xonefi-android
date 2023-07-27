@@ -19,12 +19,17 @@ This project consists of several main sections:
 - The `App.tsx` file serves as the entry point of the application.
 - The `assets` folder includes all images and other assets used in the program.
 - The `src` folder encompasses the application's source code.
+- The `android` folder is the React Native Android folder. Inside android/app/src/main/java/com/onefi/XOneFi  you will find custom native code written for this application
 
 #### Within the `src` folder, we have:
 
 - The `Components` folder, which includes all the components for the mobile application.
 - The `screens` folder, which contains all the screen components used in the application.
 - The `icons` folder, which comprises all iconography used throughout the application.
+- The `constants` folder, which contains the constant values used throughout our application.
+- The `context` folder, which contains the react native context values and functionaily for our application. 
+- The `hooks` folder, which contains javascript functions which are used throughout our application. 
+- The `types` folder, which contains the typescript types required throughout our application. 
 - The `MainContainer.tsx` file, which manages the application's navigation, importing all screen components and integrating them to facilitate navigation.
 
 # Important Details Concerning Project Structure
@@ -106,6 +111,18 @@ The component takes in the following props :
 - **placeholder_text** : The default text to show on the input bar
 - **state_function** : The function that is used to change a state variable.
 
+**`OneFiAsset.jsx`**\ 
+This component is used to display a user's onefi balance. 
+
+**`PageHeader.tsx`**\
+This component displays the header shown throughout the application.
+
+**`PrimaryBtn.tsx`**\
+This component displays the blue buttons found throughout the application. The BigBlueButton component is built using this component. 
+
+**`Provider.jsx`**\
+This component is used to display the avaialbe providers on the ProviderScreen. When pressed, the component navigates the user to the ProviderDetails screen for the appropriate provider. 
+
 **`ViewButton.jsx`**\
 This component is used to display the View Buuttons found throughout the application.
 
@@ -144,6 +161,12 @@ This screen handles the functionality of allowing the user to either connect or 
 **`ConnectStatusScreen.tsx`**\
 This screen offers connection status.
 
+**`ProviderScreen`**\
+This Screen displays all the avaialble Providers in the area
+
+**`ProviderDetailScreen`**\
+This screen displays information regarding a speficic provider. This screen also allows the configuration of a Provider. The user is routed to this page after clicking on an avaialble provider on the ProviderScreen. 
+
 # icons
 
 The `icons` folder contains a multitude of icons used throughout the application. Many of these icons are SVG assets generated using Figma's SVG to JSX plugin.
@@ -165,5 +188,18 @@ This file standardizes the colors that are used throughout the XOneFi applicatio
 This file contains the global styles that are used throughout the XOneFi application.
 
 # hooks
-
 This folder contains the custom hooks found within the XOneFi application
+
+**`GetConnectedSSID.js`**\
+
+**`GetLinkSpeed.js`**\
+
+**`getOnefiRouter.tsx`**\
+
+**`is_onefi_ssid.tsx`**\
+
+**`isClientConnectedToXOneFi`**\
+
+**`LoginWithWeb3Auth.js`**\
+
+**`useAsync.tsx`**\

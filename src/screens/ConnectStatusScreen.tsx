@@ -29,6 +29,8 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
   const [isConnected, setIsConnected] = useState<boolean>();
+  const [lastSackTimestamp, setLastSackTimestap] = useState(0);
+  const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
 
   //maybe use events to change this code
 
@@ -56,7 +58,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   unsubscribe();*/
 
   //Like useEffect but called whenever the screen is focused. UseEffect does not run when renavigated to
-  useFocusEffect(() => {
+  useFocusEffect(() => { //This is running too often if you start the device already connected to the xonefiprovider
     const getConnectionStatus = async () => {
       //debug coomment : according to logs isClientConnectedToXoneFi is working properly
       const ret = await isClientConnectedToXoneFi();
@@ -71,9 +73,29 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         setSSID(currentSSID);
         const linkArray = await getCurrentLinkpeed();
         setLinkSpeeds(linkArray);
+
+        read_default_config((config_json) => {
+          const lastSackTime = config_json.client_session.last_sack_timestamp
+          setLastSackTimestap(lastSackTime)
+    
+          if(lastSackTime > 0){
+            const initalTimestamp = config_json.client_session.started_timestamp
+            setInitialSackTimestamp(initalTimestamp)
+          }
+        });
       }
     };
     getConnectionStatus();
+
+    /*read_default_config((config_json) => {
+      const lastSackTime = config_json.client_session.last_sack_timestamp
+      setLastSackTimestap(lastSackTime)
+
+      if(lastSackTime > 0){
+        const initalTimestamp = config_json.client_session.started_timestamp
+        setInitialSackTimestamp(initalTimestamp)
+      }
+    });*/
   });
 
   // Subscribe
@@ -110,7 +132,6 @@ unsubscribe();*/
     setIsConnected(config_json.client_session.status)
   });*/
 
-  // const {BSSID, SSID} = props.route.params ?? {BSSID: undefined, SSID: undefined};
   const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
 
   return (
@@ -188,7 +209,7 @@ unsubscribe();*/
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Usage Time
           </Text>
-          <Text style={style.descriptionItem}>{0} min</Text>
+          <Text style={style.descriptionItem}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)} min</Text>
         </View>
       </Card>
       <View
