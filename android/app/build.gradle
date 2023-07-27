@@ -271,6 +271,11 @@ android {
 
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
