@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 
 /**
  * Call OneFi provider to provide partial freeze endorsement (PAFREN) of the tokens in the smart contract.
@@ -76,14 +76,14 @@ function call_pafren(
 
   message.signature = signature_json.signature;
 
-    try {
-      const send_rest = require('./send_rest');
-      send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-          return callback(result);
-      });
-    } catch(e) {
-      console.log(`@call_pafren: ERROR: send_rest failed: ${e}`);
-    }
+  try {
+    const send_rest = require("./send_rest");
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+      return callback(result);
+    });
+  } catch (e) {
+    console.log(`@call_pafren: ERROR: send_rest failed: ${e}`);
+  }
 }
 
 module.exports = { call_pafren };

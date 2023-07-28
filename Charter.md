@@ -1,11 +1,10 @@
-# XOneFi Project Charter 
+# XOneFi Project Charter
 
 ## XOneFi - Global Decentralized Wireless Connectivity
 
 <p align="center">
 <img width="320" src="/app/logo-v3.png">
 </p>
-
 
 **Last Updated: April 14, 2023**
 
@@ -21,10 +20,9 @@ Our mission is to democratize Internet access by harnessing satellite and blockc
 
 XOneFi proudly acknowledges and embraces the diverse talents and backgrounds of our community, which includes both full-time employees and dedicated volunteers. We recognize the importance of various roles that constitute our project community, such as software engineers, network specialists, blockchain developers, satellite communication experts, cybersecurity experts, designers, system administrators, app developers, and more.
 
-
 ## Licensing Approach
 
-We adopt copyleft License (GPL stack). 
+We adopt copyleft License (GPL stack).
 
 ## Code of Conduct
 

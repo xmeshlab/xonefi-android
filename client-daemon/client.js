@@ -20,7 +20,6 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 let global_counter = 0;
 let last_counter = 0;
 
-
 const ssid = require("../api/ssid");
 const fhs = require("../api/fast_hotspot_selection");
 const client_session = require("../api/client_session");
@@ -54,7 +53,6 @@ if (!process_mgmt.save_pid(process_mgmt.get_client_pid_path())) {
 }
 
 async function main() {
-
   // const config = require("../xonefi-api-client/config");
   //
   // config.read_default_config((config_json) => {
@@ -65,7 +63,6 @@ async function main() {
   //     return callback(res);
   //   });
   // });
-
 
   console.log("XLOG4: Calling main.");
 
@@ -106,15 +103,12 @@ async function main() {
     console.log(`config_json: ${JSON.stringify(config_json)}`);
 
     if (config_json.client_on === true) {
-
-      await worker.client_worker(
-        config_json,
-        user_password,
-        decrypted_private_key).then(() =>
-      {
-        console.log(`${global_counter}: Client is on`);
-        global_counter++;
-      });
+      await worker
+        .client_worker(config_json, user_password, decrypted_private_key)
+        .then(() => {
+          console.log(`${global_counter}: Client is on`);
+          global_counter++;
+        });
 
       //     ,
       //   () => {

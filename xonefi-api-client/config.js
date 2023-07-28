@@ -231,8 +231,8 @@ export function starter_config() {
 
 export function read_default_config(callback) {
   try {
-    AsyncStorage.getItem('config').then((value) => {
-      if(value !== null) {
+    AsyncStorage.getItem("config").then((value) => {
+      if (value !== null) {
         return callback(JSON.parse(value));
       } else {
         return callback(starter_config());
@@ -243,7 +243,6 @@ export function read_default_config(callback) {
     return callback(null);
   }
 }
-
 
 // export function read_default_config(callback) {
 //   let db = SQLite.openDatabase(
@@ -281,11 +280,10 @@ export function read_default_config(callback) {
 //   );
 // }
 
-
 export function write_default_config(config_json, callback) {
   try {
     const jsonValue = JSON.stringify(config_json);
-    AsyncStorage.setItem('config', jsonValue).then(() => {
+    AsyncStorage.setItem("config", jsonValue).then(() => {
       return callback(true);
     });
   } catch (e) {
@@ -293,7 +291,6 @@ export function write_default_config(config_json, callback) {
     return callback(false);
   }
 }
-
 
 // export function write_default_config(config_json, callback) {
 //   let db = SQLite.openDatabase(
@@ -550,5 +547,5 @@ export function write_default_config(config_json, callback) {
 module.exports = {
   read_default_config,
   write_default_config,
-  starter_config
+  starter_config,
 };

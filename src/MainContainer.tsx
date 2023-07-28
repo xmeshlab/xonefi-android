@@ -27,10 +27,7 @@ import {
   RouteConfig,
 } from "@react-navigation/core/lib/typescript/src/types";
 import ConnectStatusScreen from "./screens/ConnectStatusScreen";
-import {
-  TabPageHeader,
-  WithBackBtnPageHeader,
-} from "./Components/PageHeader";
+import { TabPageHeader, WithBackBtnPageHeader } from "./Components/PageHeader";
 import { colors } from "./constants/colors";
 import { WifiWithSignalLevel } from "./types/global";
 import InitialLogInScreen from "./screens/InitialLogInScreen";
@@ -142,7 +139,7 @@ function HomeTab() {
       screenOptions={tabNavigatorScreenOptions}
     >
       <TabScreen
-        options={{ ...tabOptions, title: connectName  }}
+        options={{ ...tabOptions, title: connectName }}
         name={connectName}
         component={ConnectScreen}
       />
@@ -197,76 +194,75 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
 
-
-
 export default function MainContainer() {
-  const context_array = useUserContext()
-  if(context_array[0] == ""){
-    return(
-    <InitialLogInScreen
-          logInFunction={loginWithWeb3Auth}
-          loginFacebook={loginWithWeb3AuthFacebook}
-          loginTwitter={loginWithWeb3AuthTwitter}
-        />)
-  }else{
-      return (
-              <NavigationContainer theme={MyTheme}>
-                <Stack.Navigator initialRouteName={"HomeTab"}>
-                  <Stack.Screen
-                    options={{ header: () => null }}
-                    name={"HomeTab"}
-                    component={HomeTab}
-                  />
-                  {/*({ navigation }) =>({...stackNavigatorScreenOptions, title: "Connect", navFunction: ()=>navigation.navigate("Status")})*/}
-                  <Stack.Screen
-                    options={{...stackNavigatorScreenOptions, title: "Connect"}}
-                    name={"PayAndConnect"}
-                    component={PayAndConnectScreen}
-                  />
-                  <Stack.Screen
-                    options={{
-                      ...stackNavigatorScreenOptions,
-                      title: "ConnectStatus",
-                    }}
-                    name={"ConnectStatus"}
-                    component={ConnectStatusScreen}
-                  />
-                  <Stack.Screen
-                    options={{ ...stackNavigatorScreenOptions, title: "Provider" }}
-                    name="Provider"
-                    component={ProviderScreen}
-                  />
-                  <Stack.Screen
-                    options={{
-                      ...stackNavigatorScreenOptions,
-                      title: "Provider",
-                    }}
-                    name="ProviderDetails"
-                    component={ProviderDetailScreen}
-                  />
-                  <Stack.Screen
-                    options={{ ...stackNavigatorScreenOptions, title: "Account" }}
-                    name="Account"
-                    component={LinkedAccountScreen}
-                  />
-                  <Stack.Screen
-                    name="Linked Payment Card"
-                    options={{
-                      ...stackNavigatorScreenOptions,
-                      title: "Linked Payment Card",
-                    }}
-                    component={LinkedPaymentCardScreen}
-                  />
-                  <Stack.Screen
-                    name="Account Information"
-                    options={{
-                      ...stackNavigatorScreenOptions,
-                      title: "Account Information",
-                    }}
-                    component={AccountInformationScreen}
-                  />
-                </Stack.Navigator>
-              </NavigationContainer>
-      );  
-}
+  const context_array = useUserContext();
+  if (context_array[0] == "") {
+    return (
+      <InitialLogInScreen
+        logInFunction={loginWithWeb3Auth}
+        loginFacebook={loginWithWeb3AuthFacebook}
+        loginTwitter={loginWithWeb3AuthTwitter}
+      />
+    );
+  } else {
+    return (
+      <NavigationContainer theme={MyTheme}>
+        <Stack.Navigator initialRouteName={"HomeTab"}>
+          <Stack.Screen
+            options={{ header: () => null }}
+            name={"HomeTab"}
+            component={HomeTab}
+          />
+          {/*({ navigation }) =>({...stackNavigatorScreenOptions, title: "Connect", navFunction: ()=>navigation.navigate("Status")})*/}
+          <Stack.Screen
+            options={{ ...stackNavigatorScreenOptions, title: "Connect" }}
+            name={"PayAndConnect"}
+            component={PayAndConnectScreen}
+          />
+          <Stack.Screen
+            options={{
+              ...stackNavigatorScreenOptions,
+              title: "ConnectStatus",
+            }}
+            name={"ConnectStatus"}
+            component={ConnectStatusScreen}
+          />
+          <Stack.Screen
+            options={{ ...stackNavigatorScreenOptions, title: "Provider" }}
+            name="Provider"
+            component={ProviderScreen}
+          />
+          <Stack.Screen
+            options={{
+              ...stackNavigatorScreenOptions,
+              title: "Provider",
+            }}
+            name="ProviderDetails"
+            component={ProviderDetailScreen}
+          />
+          <Stack.Screen
+            options={{ ...stackNavigatorScreenOptions, title: "Account" }}
+            name="Account"
+            component={LinkedAccountScreen}
+          />
+          <Stack.Screen
+            name="Linked Payment Card"
+            options={{
+              ...stackNavigatorScreenOptions,
+              title: "Linked Payment Card",
+            }}
+            component={LinkedPaymentCardScreen}
+          />
+          <Stack.Screen
+            name="Account Information"
+            options={{
+              ...stackNavigatorScreenOptions,
+              title: "Account Information",
+            }}
+            component={AccountInformationScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }

@@ -5,8 +5,17 @@ import GreyTextInputBar from "../../src/Components/GreyTextInputBar";
 it("Renders", () => {
   const mockButtonPress = jest.fn().mockReturnValue("State Function");
 
-  const {getByText, getAllByText, getByTestId, getAllByPlaceholderText, getByPlaceholderText} = render(
-    <GreyTextInputBar placeholder_text={"Testing"} state_function={mockButtonPress} />
+  const {
+    getByText,
+    getAllByText,
+    getByTestId,
+    getAllByPlaceholderText,
+    getByPlaceholderText,
+  } = render(
+    <GreyTextInputBar
+      placeholder_text={"Testing"}
+      state_function={mockButtonPress}
+    />
   );
 
   //Check that the correct outputs are displayed

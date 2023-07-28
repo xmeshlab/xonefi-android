@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View} from "react-native";
+import { View } from "react-native";
 import LinkedPaymentCardIcon from "../../assets/LinkedPaymentCardIcon.png";
 import UserIcon from "../../assets/UserIcon.png";
 import LogoutIcon from "../../assets/LogoutIcon.png";

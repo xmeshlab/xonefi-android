@@ -10,21 +10,17 @@ import UploadGradientBg from "../icons/UploadGradientBg";
 import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 import NetInfo from "@react-native-community/netinfo";
 
-import Slider from '@react-native-community/slider';
+import Slider from "@react-native-community/slider";
 
-import {
-  read_default_config,
-} from "../../xonefi-api-client/config";
+import { read_default_config } from "../../xonefi-api-client/config";
 
 import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
 import { getCurrentConnectedSSID } from "../hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "../hooks/GetLinkSpeed";
 
-
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
-
   const [ssid, setSSID] = useState<string | number>();
-  const [linkSpeeds, setLinkSpeeds] = useState<any []>([]);
+  const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -32,7 +28,9 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
-  const [isConnected, setIsConnected] = useState<boolean>()
+  const [isConnected, setIsConnected] = useState<boolean>();
+  const [lastSackTimestamp, setLastSackTimestap] = useState(0);
+  const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
 
   //maybe use events to change this code
 
@@ -60,42 +58,53 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   unsubscribe();*/
 
   //Like useEffect but called whenever the screen is focused. UseEffect does not run when renavigated to
-  useFocusEffect(()=>{
+  useFocusEffect(() => { //This is running too often if you start the device already connected to the xonefiprovider
     const getConnectionStatus = async () => {
       //debug coomment : according to logs isClientConnectedToXoneFi is working properly
       const ret = await isClientConnectedToXoneFi();
-  
-      //debug code
-      //console.log("ret from isClientConnectedToXoneFi : ")
-      //console.log(ret)
-      console.log("Value in isClientConnectedToXoneFi : " + ret)
-      console.log(ret)
-      console.log("type of ret : " + typeof(ret))
-  
-      setIsConnected(ret)
-      if(ret === true){
-        const currentSSID = await getCurrentConnectedSSID()
-        setSSID(currentSSID)
-        const linkArray = await getCurrentLinkpeed()
-        //debug code
-        console.log("download : " + linkArray[1])
-        console.log("download : " + linkArray[2])
-        setLinkSpeeds(linkArray)
+
+      console.log("Value in isClientConnectedToXoneFi : " + ret);
+      console.log(ret);
+      console.log("type of ret : " + typeof ret);
+
+      setIsConnected(ret);
+      if (ret === true) {
+        const currentSSID = await getCurrentConnectedSSID();
+        setSSID(currentSSID);
+        const linkArray = await getCurrentLinkpeed();
+        setLinkSpeeds(linkArray);
+
+        read_default_config((config_json) => {
+          const lastSackTime = config_json.client_session.last_sack_timestamp
+          setLastSackTimestap(lastSackTime)
+    
+          if(lastSackTime > 0){
+            const initalTimestamp = config_json.client_session.started_timestamp
+            setInitialSackTimestamp(initalTimestamp)
+          }
+        });
       }
-    }
-    getConnectionStatus()
+    };
+    getConnectionStatus();
+
+    /*read_default_config((config_json) => {
+      const lastSackTime = config_json.client_session.last_sack_timestamp
+      setLastSackTimestap(lastSackTime)
+
+      if(lastSackTime > 0){
+        const initalTimestamp = config_json.client_session.started_timestamp
+        setInitialSackTimestamp(initalTimestamp)
+      }
+    });*/
   });
 
   // Subscribe
-/*const unsubscribe = NetInfo.addEventListener(state => {
+  /*const unsubscribe = NetInfo.addEventListener(state => {
   getConnectionStatus()
 });
 
 // Unsubscribe
 unsubscribe();*/
-
-
-
 
   /*useEffect(() => {
     const getConnectionStatus = async () => {
@@ -118,16 +127,13 @@ unsubscribe();*/
     getConnectionStatus()
   }, []);*/
 
-
   /*read_default_config((config_json) => {
     setSSID(config_json.client_session.ssid)
     setIsConnected(config_json.client_session.status)
   });*/
 
+  const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
 
-  // const {BSSID, SSID} = props.route.params ?? {BSSID: undefined, SSID: undefined};
-  const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid};
- 
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
       <Card style={style.card}>
@@ -135,9 +141,7 @@ unsubscribe();*/
           <View
             style={[style.summaryItem, style.summaryItemValueWithoutBorder]}
           >
-            <Text style={style.summaryItemValue}>
-              {0}
-            </Text>
+            <Text style={style.summaryItemValue}>{0}</Text>
             <Text style={style.summaryDesc}>OFI TOKENS</Text>
           </View>
           <View style={style.summaryItem}>
@@ -177,29 +181,35 @@ unsubscribe();*/
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Name
           </Text>
-          <Text style={style.descriptionItemConnected}>{isConnected ? ssid : ""}</Text>
+          <Text style={style.descriptionItemConnected}>
+            {isConnected ? ssid : ""}
+          </Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Router Status
           </Text>
-          <Text style={isConnected ? style.descriptionItemConnected : style.descriptionItem}>{isConnected ? "Connected" : "Not Connected"}</Text>
+          <Text
+            style={
+              isConnected
+                ? style.descriptionItemConnected
+                : style.descriptionItem
+            }
+          >
+            {isConnected ? "Connected" : "Not Connected"}
+          </Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Usage Cost
           </Text>
-          <Text style={style.descriptionItem}>
-            {0} OFI/Hour
-          </Text>
+          <Text style={style.descriptionItem}>{0} OFI/Hour</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Usage Time
           </Text>
-          <Text style={style.descriptionItem}>
-            {0} min
-          </Text>
+          <Text style={style.descriptionItem}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)} min</Text>
         </View>
       </Card>
       <View
@@ -210,33 +220,37 @@ unsubscribe();*/
           marginBottom: 8.5,
         }}
       >
-        {isConnected ?
-        <Card style={style.smallCard}>
-          <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
-            <View style={globalStyle.col1}>
-              <Text style={style.speed}>Download</Text>
-              <Text style={style.speed}>{linkSpeeds[1]}</Text>
+        {isConnected ? (
+          <Card style={style.smallCard}>
+            <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
+              <View style={globalStyle.col1}>
+                <Text style={style.speed}>Download</Text>
+                <Text style={style.speed}>{linkSpeeds[1]}</Text>
+              </View>
+              <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
             </View>
-            <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
-          </View>
-          <DownLoadLinearGradient style={style.smallCardChartBg} />
-        </Card> 
-        : <></>}
+            <DownLoadLinearGradient style={style.smallCardChartBg} />
+          </Card>
+        ) : (
+          <></>
+        )}
 
         <View style={{ width: 3.48 }}></View>
 
-        {isConnected ?
-        <Card style={style.smallCard}>
-          <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
-            <View style={globalStyle.col1}>
-              <Text style={style.speed}>Upload</Text>
-              <Text style={style.speed}>{linkSpeeds[2]}</Text>
+        {isConnected ? (
+          <Card style={style.smallCard}>
+            <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
+              <View style={globalStyle.col1}>
+                <Text style={style.speed}>Upload</Text>
+                <Text style={style.speed}>{linkSpeeds[2]}</Text>
+              </View>
+              <ArrowUpIcon />
             </View>
-            <ArrowUpIcon />
-          </View>
-          <UploadGradientBg style={style.smallCardChartBg} />
-        </Card> 
-        : <></>}
+            <UploadGradientBg style={style.smallCardChartBg} />
+          </Card>
+        ) : (
+          <></>
+        )}
       </View>
     </ScrollView>
   );

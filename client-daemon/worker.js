@@ -152,10 +152,10 @@ function client_worker(config_json, user_password, private_key, callback) {
                       config_json,
                       user_password,
                       private_key,
-                        (result11) => {
-                            console.log("XLOG3: Successful SACK round completed");
-                            return callback();
-                        }
+                      (result11) => {
+                        console.log("XLOG3: Successful SACK round completed");
+                        return callback();
+                      }
                     );
                   });
                 } else {
@@ -203,9 +203,9 @@ function client_worker(config_json, user_password, private_key, callback) {
         user_password,
         private_key,
         config_json,
-          () => {
-            return callback();
-          }
+        () => {
+          return callback();
+        }
       );
     } else if (config_json.client_session.scan_counter >= 15) {
       console.log("Trying to scan again");

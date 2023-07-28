@@ -15,7 +15,6 @@ import SplashScreen from "react-native-splash-screen";
 import { WithMainBg } from "./src/Components/WithMainBg";
 import { StatusBar } from "expo-status-bar";
 
-
 function App() {
   console.log("XLOG: App.tsx");
 
@@ -23,23 +22,21 @@ function App() {
     SplashScreen.hide();
   }, []);
 
-
-
   // startClientDaemon().then(() => {
   //   console.log("Client Daemon Started..")
   // });
 
   return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <RootSiblingParent>
-          <UserContextProvider>
-            <WithMainBg style={{ flex: 1 }}>
-              <StatusBar style="light" />
-              <MainContainer />
-            </WithMainBg>
-          </UserContextProvider>
-        </RootSiblingParent>
-      </GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootSiblingParent>
+        <UserContextProvider>
+          <WithMainBg style={{ flex: 1 }}>
+            <StatusBar style="light" />
+            <MainContainer />
+          </WithMainBg>
+        </UserContextProvider>
+      </RootSiblingParent>
+    </GestureHandlerRootView>
   );
 }
 

@@ -57,13 +57,15 @@ function EthLogoSVG(props) {
 }
 
 it("render", () => {
-  const {getByText, getAllByText, getByTestId} = render(<Asset
-    AssetName="Eth Wallet"
-    AssetAmount="1.23 Eth"
-    AssetPrice={"12"}
-    AssetLogo={() => <EthLogoSVG />}
-    AssetChange="10"
-  />);
+  const { getByText, getAllByText, getByTestId } = render(
+    <Asset
+      AssetName="Eth Wallet"
+      AssetAmount="1.23 Eth"
+      AssetPrice={"12"}
+      AssetLogo={() => <EthLogoSVG />}
+      AssetChange="10"
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Eth Wallet")).not.toBeNull();
@@ -73,13 +75,15 @@ it("render", () => {
 });
 
 it("render test 2", () => {
-  const {getByText, getAllByText, getByTestId} = render(<Asset
-    AssetName="Eth Wallet"
-    AssetAmount="77 Eth"
-    AssetPrice={"85"}
-    AssetLogo={() => <EthLogoSVG />}
-    AssetChange="45"
-  />);
+  const { getByText, getAllByText, getByTestId } = render(
+    <Asset
+      AssetName="Eth Wallet"
+      AssetAmount="77 Eth"
+      AssetPrice={"85"}
+      AssetLogo={() => <EthLogoSVG />}
+      AssetChange="45"
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Eth Wallet")).not.toBeNull();
@@ -89,13 +93,15 @@ it("render test 2", () => {
 });
 
 it("render with 5 digit price", () => {
-  const {getByText, getAllByText, getByTestId} = render(<Asset
-    AssetName="Eth Wallet"
-    AssetAmount="9 Eth"
-    AssetPrice={"12345"}
-    AssetLogo={() => <EthLogoSVG />}
-    AssetChange="5.89"
-  />);
+  const { getByText, getAllByText, getByTestId } = render(
+    <Asset
+      AssetName="Eth Wallet"
+      AssetAmount="9 Eth"
+      AssetPrice={"12345"}
+      AssetLogo={() => <EthLogoSVG />}
+      AssetChange="5.89"
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Eth Wallet")).not.toBeNull();
@@ -105,13 +111,15 @@ it("render with 5 digit price", () => {
 });
 
 it("render test with negative Asset Change", () => {
-  const {getByText, getAllByText, getByTestId} = render(<Asset
-    AssetName="Eth Wallet"
-    AssetAmount="17 Eth"
-    AssetPrice={"4345"}
-    AssetLogo={() => <EthLogoSVG />}
-    AssetChange="-5.66"
-  />);
+  const { getByText, getAllByText, getByTestId } = render(
+    <Asset
+      AssetName="Eth Wallet"
+      AssetAmount="17 Eth"
+      AssetPrice={"4345"}
+      AssetLogo={() => <EthLogoSVG />}
+      AssetChange="-5.66"
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Eth Wallet")).not.toBeNull();
@@ -121,13 +129,15 @@ it("render test with negative Asset Change", () => {
 });
 
 it("render test with Different Asset Name", () => {
-  const {getByText, getAllByText, getByTestId} = render(<Asset
-    AssetName="Cryptocurrency"
-    AssetAmount="80 Cryptocurrency"
-    AssetPrice={"4345"}
-    AssetLogo={() => <EthLogoSVG />}
-    AssetChange="-5.66"
-  />);
+  const { getByText, getAllByText, getByTestId } = render(
+    <Asset
+      AssetName="Cryptocurrency"
+      AssetAmount="80 Cryptocurrency"
+      AssetPrice={"4345"}
+      AssetLogo={() => <EthLogoSVG />}
+      AssetChange="-5.66"
+    />
+  );
 
   //Check that the correct outputs are displayed
   expect(getByText("Cryptocurrency")).not.toBeNull();

@@ -19,11 +19,9 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
 
 //const { symlinkSync } = require('fs');
 
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from "react-native-device-info";
 
-import uuid from 'react-native-uuid';
-
-
+import uuid from "react-native-uuid";
 
 /**
  * Call OneFi provider to request a new session.
@@ -34,7 +32,17 @@ import uuid from 'react-native-uuid';
  * @param {string} session - UUID of the current session.
  * @param {function} callback - Return status: true - success, false - failure.
  */
-function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, router_no, callback) {
+function call_hello(
+  ip,
+  port,
+  web3,
+  prk,
+  session,
+  client_ip,
+  provider_prefix,
+  router_no,
+  callback
+) {
   console.log(`XLOG2: calling call_hello()`);
   //var uuid = require('uuid');
 
@@ -66,16 +74,16 @@ function call_hello(ip, port, web3, prk, session, client_ip, provider_prefix, ro
 
   console.log("XLOG2: call_hello()::message: " + JSON.stringify(message));
 
-    const send_rest = require('./send_rest');
+  const send_rest = require("./send_rest");
 
-    try {
-      send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
-          console.log(`XLOG2: call_hello() post send_rest()`);
-          return callback(result);
-      });
-    } catch(e) {
-      console.log(`@call_hello: ERROR: send_rest failed: ${e}`);
-    }
+  try {
+    send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
+      console.log(`XLOG2: call_hello() post send_rest()`);
+      return callback(result);
+    });
+  } catch (e) {
+    console.log(`@call_hello: ERROR: send_rest failed: ${e}`);
+  }
 }
 
 /**

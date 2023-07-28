@@ -10,9 +10,9 @@ import Bars from "../../assets/ProviderBars.png";
 import arrow from "../../assets/RightArrowIcon.png";
 
 /**
- * This is a component for displaying the Provider Information on the Provider Screen. 
- * 
- * The Provider takes the various props : 
+ * This is a component for displaying the Provider Information on the Provider Screen.
+ *
+ * The Provider takes the various props :
  * ProviderName - The name of the provider to be displayed
  * UsersConnectedNumber - The number of users which are currently connected to the Provider
  * TokenGenNumber - The number of tokens that were generated
@@ -30,28 +30,28 @@ export default function Provider({
     <TouchableOpacity onPress={navigationFunction}>
       <View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2">
         <View className="flex flex-row justify-start pb-1">
-            <Text className="text-white ml-3">{ProviderName}</Text>
+          <Text className="text-white ml-3">{ProviderName}</Text>
         </View>
         <View className="flex flex-row justify-start ml-3">
-            {Status ? (
-              <>
-                <Text className="text-green-400 mt-1">Active</Text>
-                <Image source={WifiGreen} />
-              </>
-            ) : (
-              <>
-                <Text className="text-neutral-600 mt-1">Inactive</Text>
-                <Image source={WifiWhite} />
-              </>
-            )}
-          </View>
+          {Status ? (
+            <>
+              <Text className="text-green-400 mt-1">Active</Text>
+              <Image source={WifiGreen} />
+            </>
+          ) : (
+            <>
+              <Text className="text-neutral-600 mt-1">Inactive</Text>
+              <Image source={WifiWhite} />
+            </>
+          )}
+        </View>
       </View>
     </TouchableOpacity>
   );
 }
 
-
-{/*
+{
+  /*
 export default function Provider({
   ProviderName,
   UsersConnectedNumber,
@@ -93,4 +93,5 @@ export default function Provider({
   );
 }
 
-*/}
+*/
+}

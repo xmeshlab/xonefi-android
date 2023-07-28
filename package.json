@@ -24,6 +24,9 @@
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
     "@web3auth/react-native-sdk": "^3.5.0",
+    "appcenter": "^4.4.5",
+    "appcenter-analytics": "^4.4.5",
+    "appcenter-crashes": "^4.4.5",
     "chai": "^4.3.7",
     "expo": "~47.0.12",
     "expo-community-flipper": "^47.0.2",
@@ -83,7 +86,7 @@
     "jest-fetch-mock": "^3.0.3",
     "postcss": "^8.4.19",
     "prettier": "2.8.8",
-    "tailwindcss": "^3.2.4",
+    "tailwindcss": "3.3.2",
     "ts-jest": "^29.1.0"
   },
   "jest": {

@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.vidy.XOneFiApp",
+  "applicationId": "com.onefi.XOneFiApp",
   "variantName": "release",
   "elements": [
     {

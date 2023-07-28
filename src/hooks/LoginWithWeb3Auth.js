@@ -113,7 +113,7 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
       loginProvider: LOGIN_PROVIDER.WECHAT,
       redirectUrl: resolvedRedirectUrl,
     });
-   // console.log("Info returned from Web3Auth");
+    // console.log("Info returned from Web3Auth");
     //console.log(info);
 
     setUserInfo(info);
