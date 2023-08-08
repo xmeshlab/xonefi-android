@@ -236,4 +236,48 @@ public class WifiModule extends ReactContextBaseJavaModule {
         };
         context.registerReceiver(broadcastReceiver, intentFilter);
     }
+
+    @ReactMethod
+    public void connectToWifiSpecifier(final String ssid, final String password) {
+
+        WifiNetworkSpecifier wifiNetworkSpecifier = new WifiNetworkSpecifier.Builder()
+                .setSsid(ssid)
+                .setWpa2Passphrase(password)
+                .build();
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .setNetworkSpecifier(wifiNetworkSpecifier)
+                .build();
+
+        ReactApplicationContext context = getReactApplicationContext();
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(networkRequest, new ConnectivityManager.NetworkCallback());
+
+        }
+
+    @ReactMethod
+    public void connectToWifiRequest(final String ssid, final String password) {
+
+        ReactApplicationContext context = getReactApplicationContext();
+
+        //Added our wifi to the system to consider
+
+        WifiNetworkSpecifier wifiNetworkSpecifier = new WifiNetworkSpecifier.Builder()
+                    .setSsid(ssid)
+                    .setWpa2Passphrase(password)
+                    .build();
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                    .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                    .setNetworkSpecifier(wifiNetworkSpecifier)
+                    .build();
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(networkRequest, new ConnectivityManager.NetworkCallback());
+
+
+    }
 }
