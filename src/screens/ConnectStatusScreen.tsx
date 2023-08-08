@@ -224,7 +224,7 @@ unsubscribe();*/
           <Card style={style.smallCard}>
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
-                <Text style={style.speed}>Download</Text>
+                <Text style={style.speed}>Download (mbps)</Text>
                 <Text style={style.speed}>{linkSpeeds[1]}</Text>
               </View>
               <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
@@ -241,7 +241,7 @@ unsubscribe();*/
           <Card style={style.smallCard}>
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
-                <Text style={style.speed}>Upload</Text>
+                <Text style={style.speed}>Upload (mbps)</Text>
                 <Text style={style.speed}>{linkSpeeds[2]}</Text>
               </View>
               <ArrowUpIcon />
