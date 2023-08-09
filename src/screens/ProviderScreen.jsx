@@ -45,8 +45,7 @@ export default function ProviderScreen({ navigation }) {
   );
 
   return (
-    <View className="flex-1">
-      <View className="m-2">
+      <View className="flex flex-col flex-grow m-2">
         <FlatList
           data={wifiList}
           onRefresh={() => {
@@ -65,6 +64,5 @@ export default function ProviderScreen({ navigation }) {
           renderItem={flatListRenderItem}
         />
       </View>
-    </View>
   );
 }

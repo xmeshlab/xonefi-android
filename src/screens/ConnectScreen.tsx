@@ -6,8 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  ActivityIndicator,
-  Platform,
+  RefreshControl,
 } from "react-native";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 
@@ -61,7 +60,7 @@ const ConnectScreen: RouteComponent<"Connect"> = () => {
   );
 
   return (
-    <View className="flex flex-col">
+    <View className="flex flex-col flex-grow">
       <FlatList<WifiEntry>
         data={wifiList}
         onRefresh={() => {

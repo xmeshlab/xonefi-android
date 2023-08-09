@@ -144,8 +144,9 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
       if (OsVer >= 10) {
         //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
         //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
-        await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
-        WifiModule.ShowNotification(SSID);
+        //await WifiModule.connectToWifi2(SSID, ssid_json.prefix);
+        WifiModule.connectToWifiRequest(SSID, ssid_json.prefix);
+        //WifiModule.ShowNotification(SSID);
       } else {
         WifiManager.connectToProtectedSSID(
           SSID,
