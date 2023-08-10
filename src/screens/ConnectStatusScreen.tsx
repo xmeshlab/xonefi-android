@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../Components/Card";
 import { RouteComponent } from "../types/global";
@@ -8,9 +8,6 @@ import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
 import { useIsFocused, useFocusEffect } from "@react-navigation/native";
-import NetInfo from "@react-native-community/netinfo";
-
-import Slider from "@react-native-community/slider";
 
 import { read_default_config } from "../../xonefi-api-client/config";
 
@@ -18,9 +15,14 @@ import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
 import { getCurrentConnectedSSID } from "../hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "../hooks/GetLinkSpeed";
 
+import { GlobalRoute } from "../MainContainer";
+import { NavigationProp } from "@react-navigation/core/src/types";
+import { useNavigation } from "@react-navigation/native";
+
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [ssid, setSSID] = useState<string | number>();
   const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
+  const navigation = props.navigation
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -28,109 +30,84 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
-  const [isConnected, setIsConnected] = useState<boolean>();
+  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [lastSackTimestamp, setLastSackTimestap] = useState(0);
   const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
 
-  //maybe use events to change this code
-
-  /*const getConnectionStatus = async () => {
+  const getConnectionStatus1 = async () => {
     //debug coomment : according to logs isClientConnectedToXoneFi is working properly
     const ret = await isClientConnectedToXoneFi();
 
     //debug code
-    //console.log("ret from isClientConnectedToXoneFi : ")
-    //console.log(ret)
-    console.log("Value in isClientConnectedToXoneFi : " + ret)
-    console.log(ret)
-    console.log("type of ret : " + typeof(ret))
+    console.log("Value in isClientConnectedToXoneFi : " + ret);
+    //alert(ret)
 
-    setIsConnected(ret)
-    if(ret === true){
-      const currentSSID = await getCurrentConnectedSSID()
-      setSSID(currentSSID)
-    }
-  }*/
-
-  /*const unsubscribe = props.navigation.addListener('didFocus', () => {
-    getConnectionStatus()
-  });
-  unsubscribe();*/
-
-  //Like useEffect but called whenever the screen is focused. UseEffect does not run when renavigated to
-  useFocusEffect(() => { //This is running too often if you start the device already connected to the xonefiprovider
-    const getConnectionStatus = async () => {
-      //debug coomment : according to logs isClientConnectedToXoneFi is working properly
-      const ret = await isClientConnectedToXoneFi();
-
-      console.log("Value in isClientConnectedToXoneFi : " + ret);
-      console.log(ret);
-      console.log("type of ret : " + typeof ret);
-
+    if (ret != isConnected){
       setIsConnected(ret);
-      if (ret === true) {
-        const currentSSID = await getCurrentConnectedSSID();
-        setSSID(currentSSID);
-        const linkArray = await getCurrentLinkpeed();
-        setLinkSpeeds(linkArray);
-
-        read_default_config((config_json) => {
-          const lastSackTime = config_json.client_session.last_sack_timestamp
-          setLastSackTimestap(lastSackTime)
-    
-          if(lastSackTime > 0){
-            const initalTimestamp = config_json.client_session.started_timestamp
-            setInitialSackTimestamp(initalTimestamp)
-          }
-        });
-      }
-    };
-    getConnectionStatus();
-
-    /*read_default_config((config_json) => {
-      const lastSackTime = config_json.client_session.last_sack_timestamp
-      setLastSackTimestap(lastSackTime)
-
-      if(lastSackTime > 0){
-        const initalTimestamp = config_json.client_session.started_timestamp
-        setInitialSackTimestamp(initalTimestamp)
-      }
-    });*/
-  });
-
-  // Subscribe
-  /*const unsubscribe = NetInfo.addEventListener(state => {
-  getConnectionStatus()
-});
-
-// Unsubscribe
-unsubscribe();*/
-
-  /*useEffect(() => {
-    const getConnectionStatus = async () => {
-      //debug coomment : according to logs isClientConnectedToXoneFi is working properly
-      const ret = await isClientConnectedToXoneFi();
-  
-      //debug code
-      //console.log("ret from isClientConnectedToXoneFi : ")
-      //console.log(ret)
-      console.log("Value in isClientConnectedToXoneFi : " + ret)
-      console.log(ret)
-      console.log("type of ret : " + typeof(ret))
-  
-      setIsConnected(ret)
-      if(ret === true){
-        const currentSSID = await getCurrentConnectedSSID()
-        setSSID(currentSSID)
-      }
+      //alert("isConnected after change: " + isConnected)
     }
-    getConnectionStatus()
-  }, []);*/
+    //alert("isConnected : " + isConnected)
 
-  /*read_default_config((config_json) => {
-    setSSID(config_json.client_session.ssid)
-    setIsConnected(config_json.client_session.status)
-  });*/
+    if (ret == true) {
+      const currentSSID = await getCurrentConnectedSSID();
+      setSSID(currentSSID);
+      
+      //const linkArray = await getCurrentLinkpeed();
+      //debug code
+      //console.log("Above setLinkSpeeds")
+      //setLinkSpeeds(linkArray);
+
+      read_default_config((config_json) => {
+        const lastSackTime = config_json.client_session.last_sack_timestamp
+        setLastSackTimestap(lastSackTime)
+  
+        if(lastSackTime > 0){
+          const initalTimestamp = config_json.client_session.started_timestamp
+          setInitialSackTimestamp(initalTimestamp)
+        }
+      });
+    }else{
+      setSSID(0)
+    }
+  };
+  const getLinkSpeeds = async () => {
+    if (isConnected === true) {
+      const linkArray = await getCurrentLinkpeed();
+      setLinkSpeeds(linkArray);
+      //debug code
+      console.log("Link Speed : " + linkSpeeds[0])
+      console.log("Download Speed : " + linkSpeeds[1])
+      console.log("Upload Speed : " + linkSpeeds[2])
+    }
+  }
+
+
+
+  //This works for being called on render and bottom bar navigation
+  //The interval is set up, and constantly runs
+  useEffect(() => {
+    
+    const unsubscribe = navigation.addListener("focus", async () => {
+      console.log("useEffect called")
+      await getConnectionStatus1()
+      
+    });
+
+    let interval = setInterval(async () => {
+      //debug code
+      alert("Inside linkspeed interval")
+      console.log("Interval value of isConnected: " + isConnected)
+      await getLinkSpeeds()
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+      return unsubscribe;
+    };
+
+    //return unsubscribe;
+  }, [navigation, ssid]);
+
 
   const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
 
