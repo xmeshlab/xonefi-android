@@ -10,6 +10,8 @@ import Web3Auth, {
   OPENLOGIN_NETWORK,
 } from "@web3auth/react-native-sdk";
 
+import storePrivteKey from "./StorePrivateKey"
+
 //web3Auth Code
 const scheme = "web3authrnexample"; // Or your desired app redirection scheme
 const resolvedRedirectUrl = `${scheme}://openlogin`;
@@ -38,6 +40,8 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
     setUserInfo(info);
     setKey(info.privKey);
 
+    storePrivteKey(info.privKey)
+
     read_default_config((config_json2) => {
       config_json2.account.dpk = info.privKey;
       config_json2.account_set = true;
@@ -45,6 +49,7 @@ export const loginWithWeb3Auth = async (setKey, setUserInfo) => {
       let web3 = new Web3();
       let account = web3.eth.accounts.privateKeyToAccount(info.privKey);
       config_json2.account.address = account.address;
+      //alert(JSON.stringify(config_json2))
 
       //console.log(`info acct: ${JSON.stringify(info)}`);
       //console.log(`config_json2: ${JSON.stringify(config_json2)}`);
@@ -78,6 +83,7 @@ export const loginWithWeb3AuthFacebook = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+    storePrivteKey(info.privKey)
 
     read_default_config((config_json2) => {
       config_json2.account.dpk = info.privKey;
@@ -118,6 +124,7 @@ export const loginWithWeb3AuthWECHAT = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+    storePrivteKey(info.privKey)
 
     read_default_config((config_json2) => {
       config_json2.account.dpk = info.privKey;

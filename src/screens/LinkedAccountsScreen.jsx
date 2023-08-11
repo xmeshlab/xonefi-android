@@ -10,6 +10,7 @@ import { useContext } from "react";
 
 import { useCallback } from "react";
 import { useUserContext } from "../context/UserContext";
+import storePrivteKey from "../hooks/StorePrivateKey"
 
 export default function LinkedAccountScreen({ navigation }) {
   const userContext_array = useUserContext();
@@ -39,6 +40,7 @@ export default function LinkedAccountScreen({ navigation }) {
         imageSource={LogoutIcon}
         textInput={"Logout"}
         onPressFunction={() => {
+          storePrivteKey("")  //storing null in async storage for private key
           userContext_array[1]("");
           userContext_array[3]({});
         }}
