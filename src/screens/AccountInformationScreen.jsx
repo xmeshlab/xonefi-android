@@ -17,12 +17,12 @@ const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 //functions for opening links
 const openPrivacyPoligy = async () => {
   // Checking if the link is supported for links with custom URL scheme.
-  const supported = await Linking.canOpenURL("https://app.termly.io/document/privacy-policy/91a73555-e6c8-4e46-86f9-8f3e23fd1a65");
+  const supported = await Linking.canOpenURL("https://xmesh.org/PrivacyPolicy");
 
   if (supported) {
     // Opening the link with some app, if the URL scheme is "http" the web link should be opened
     // by some browser in the mobile
-    await Linking.openURL("https://app.termly.io/document/privacy-policy/91a73555-e6c8-4e46-86f9-8f3e23fd1a65");
+    await Linking.openURL("https://xmesh.org/PrivacyPolicy");
   } else {
     Alert.alert("Failed to Open Privacy Policy");
   }
@@ -31,12 +31,12 @@ const openPrivacyPoligy = async () => {
 //functions for opening links
 const openTermsAndConditions = async () => {
   // Checking if the link is supported for links with custom URL scheme.
-  const supported = await Linking.canOpenURL("https://app.termly.io/document/terms-of-service/7fbdfe09-aaa4-495c-a70a-ac2131a72168");
+  const supported = await Linking.canOpenURL("https://xmesh.org/TermsAndConditions");
 
   if (supported) {
     // Opening the link with some app, if the URL scheme is "http" the web link should be opened
     // by some browser in the mobile
-    await Linking.openURL("https://app.termly.io/document/terms-of-service/7fbdfe09-aaa4-495c-a70a-ac2131a72168");
+    await Linking.openURL("https://xmesh.org/TermsAndConditions");
   } else {
     Alert.alert("Failed to Open Terms and Conditions");
   }
