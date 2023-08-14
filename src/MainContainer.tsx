@@ -38,6 +38,8 @@ import { loginWithWeb3AuthFacebook } from "./hooks/LoginWithWeb3Auth";
 import { loginWithWeb3AuthTwitter } from "./hooks/LoginWithWeb3Auth";
 
 import { useUserContext } from "./context/UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { read_default_config } from "../xonefi-api-client/config";
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -194,8 +196,30 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
 
+//This is a function to read the private key from async storage
+//If the User has previously logged into the app, their Private key should be stored in persistant storage
+const readData = async(setPrivateKey) => {
+  try{
+    const value = await AsyncStorage.getItem("privateKey")
+
+    if (value !== null){
+      setPrivateKey(value)
+    }
+
+  }catch(e){
+    alert(e)
+    console.log(e)
+  }
+}
+
 export default function MainContainer() {
   const context_array = useUserContext();
+
+  //Checking to see if the user has previously logged in and the private key is stored
+  useEffect(() => {
+    readData(context_array[1])
+  }, []);
+
   if (context_array[0] == "") {
     return (
       <InitialLogInScreen
@@ -205,6 +229,7 @@ export default function MainContainer() {
       />
     );
   } else {
+    //getAccountSet() //accountset is true here
     return (
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator initialRouteName={"HomeTab"}>
