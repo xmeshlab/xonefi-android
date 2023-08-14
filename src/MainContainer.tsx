@@ -196,7 +196,8 @@ const stackNavigatorScreenOptions: DefaultNavigatorOptions<
   header: (props) => <WithBackBtnPageHeader {...props} />,
 };
 
-//function to read the private key from async storage
+//This is a function to read the private key from async storage
+//If the User has previously logged into the app, their Private key should be stored in persistant storage
 const readData = async(setPrivateKey) => {
   try{
     const value = await AsyncStorage.getItem("privateKey")
@@ -214,8 +215,8 @@ const readData = async(setPrivateKey) => {
 export default function MainContainer() {
   const context_array = useUserContext();
 
+  //Checking to see if the user has previously logged in and the private key is stored
   useEffect(() => {
-    //getAccountSet(context_array[1])
     readData(context_array[1])
   }, []);
 
