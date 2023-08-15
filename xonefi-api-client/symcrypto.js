@@ -23,7 +23,7 @@ along with OneFi Router.  If not, see <https://www.gnu.org/licenses/>.
  * @param {string} password - password used for symmetric encryption (and decryption)
  * @returns {string} Base64-encoded cipher.
  */
-function encrypt_aes256ctr_base64(data, password) {
+export function encrypt_aes256ctr_base64(data, password) {
   const crypto = require("crypto");
   var key = crypto.createHash("sha256").update(password).digest();
   var cipher = crypto.createCipheriv("aes-256-ctr", key, "00000000000onefi");
@@ -38,7 +38,7 @@ function encrypt_aes256ctr_base64(data, password) {
  * @param {string} password - password for decryption
  * @returns {string} Decrypted and decoded plaintext.
  */
-function decrypt_aes256ctr(base64_cipher, password) {
+export function decrypt_aes256ctr(base64_cipher, password) {
   const crypto = require("crypto");
   var key = crypto.createHash("sha256").update(password).digest();
   var decipher = crypto.createDecipheriv(
