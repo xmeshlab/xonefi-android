@@ -40,6 +40,11 @@ import { loginWithWeb3AuthTwitter } from "./hooks/LoginWithWeb3Auth";
 import { useUserContext } from "./context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { read_default_config } from "../xonefi-api-client/config";
+import DeviceInfo from "react-native-device-info";
+
+
+import { decrypt_aes256ctr } from "../xonefi-api-client/symcrypto";
+
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -203,7 +208,13 @@ const readData = async(setPrivateKey) => {
     const value = await AsyncStorage.getItem("privateKey")
 
     if (value !== null){
-      setPrivateKey(value)
+      let uniqueId = DeviceInfo.getDeviceId();
+      // console.log(`DEVICE ID (retrieval): ${uniqueId}`);
+      // console.log(`private key before decryption: ${value}`);
+
+      let decrypted_value = decrypt_aes256ctr(value, uniqueId);
+      // console.log(`decrypted private key: ${decrypted_value}`);
+      setPrivateKey(decrypted_value);
     }
 
   }catch(e){
