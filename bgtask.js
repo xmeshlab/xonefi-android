@@ -5,6 +5,10 @@ import {
   write_default_config,
   starter_config,
 } from "./xonefi-api-client/config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DeviceInfo from "react-native-device-info";
+import {decrypt_aes256ctr} from "./xonefi-api-client/symcrypto";
+import Web3 from "web3";
 
 const worker = require("./client-daemon/worker");
 
@@ -16,18 +20,38 @@ module.exports = async (taskData) => {
 
   console.log("XLOG: startClientDaemon 2");
   let config_json = starter_config();
-  config_json.client_mac = "48:2c:a0:73:fa:9f";
   config_json.client_on = false;
   config_json.pft = true;
   config_json.cft = true;
   config_json.loop_started = false;
   config_json.account_set = false;
-  //config_json.account.address = "0x0221B57Cc38C0360f1CAf638e1671243870C0424";
 
   console.log("XLOG: startClientDaemon 3");
 
   write_default_config(config_json, () => {
     console.log("XLOG: Config is successfully initialized.");
+    read_default_config((config_json1) => {
+      console.log(`config_json1: ${JSON.stringify(config_json1)}`);
+
+      const value = AsyncStorage.getItem("privateKey").then(value1 => {
+        console.log(`VALUE: ${value1}`);
+        if (value1 !== null) {
+          let uniqueId = DeviceInfo.getDeviceId();
+          decrypted_private_key = decrypt_aes256ctr(value1, uniqueId);
+
+          let Web3 = require("web3");
+          let web3 = new Web3();
+          let account = web3.eth.accounts.privateKeyToAccount(decrypted_private_key);
+
+          config_json1.account.address = account.address;
+          config_json1.account_set = true;
+
+          write_default_config(config_json1, () => {
+            console.log("XLOG: Config is successfully written.");
+          });
+        }
+      });
+    });
   });
 
   console.log("XLOG: startClientDaemon 4");
@@ -42,9 +66,7 @@ module.exports = async (taskData) => {
     read_default_config((config_json1) => {
       console.log(`config_json1: ${JSON.stringify(config_json1)}`);
 
-      decrypted_private_key = config_json1.account.dpk;
-
-      if (config_json1.client_on === true) {
+      if(config_json1.client_on === true) {
         console.log("XLOG: startClientDaemon 7");
         console.log(
           "XLOG: config_json.client_session.status pre: " +

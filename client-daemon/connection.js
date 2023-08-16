@@ -71,6 +71,7 @@ function initiate_connection(
   console.log(`Successfully connected to ${chosen_ssid}`);
 
   console.log(`Initiating the handshake stage`);
+  console.log(`connection.js private key: ${private_key}`);
 
   let hotspot_type_json = hotspot_type.decode_hotspot_type(
     deserealized_ssid.hotspot_type
@@ -267,6 +268,7 @@ function initiate_connection(
                   console.log(`)DEB=`);
 
                   try {
+                    console.log(`private_key before call_pafren: ${private_key}`);
                     call_pafren.call_pafren(
                       "137.184.243.11",
                       3000,
@@ -281,7 +283,7 @@ function initiate_connection(
                         response_json.command.from,
                         current_amount,
                         current_timestamp + pafren_length,
-                        private_key
+                          private_key
                       ),
                       (response1) => {
                         console.log(`PAFREN sent. RESPONSE1: ${response1}`);

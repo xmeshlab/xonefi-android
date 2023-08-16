@@ -89,7 +89,6 @@ async function main() {
     config_json.account.encrypted_prk,
     user_password
   );
-  console.log(`decrypted prk: ${decrypted_private_key}`);
 
   while (true) {
     try {
