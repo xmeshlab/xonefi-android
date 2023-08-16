@@ -96,11 +96,22 @@ export default function ProviderDetailScreen({ route, navigation }) {
             />
             <GreyBackgroundBar
               LeftText={"Share Time/Daily"}
-              RightSideComponent={<ViewButton
+              RightSideComponent={
+              <View className="flex flex-row">
+              <DateButton
                 OnPressFunction={
                   ()=>{openCalender()}
                 }
-              />}
+                Date={"Nov 11"}
+              />
+              <Text className="text-white mx-1">-</Text>
+              <DateButton
+                OnPressFunction={
+                  ()=>{openCalender()}
+                }
+                Date={"Nov 11"}
+              />
+              </View>}
             />
             <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  />
           </>
@@ -140,5 +151,16 @@ function CalenderModal({modalIsOpen, closeModal }) {
               }}
             />
     </Modal>
+  );
+}
+
+function DateButton({ OnPressFunction, Date }) {
+  return (
+    <TouchableOpacity
+      className="rounded-md border-slate-600 bg-slate-600 px-1 py-1"
+      onPress={OnPressFunction}
+    >
+      <Text className="text-white">{Date}</Text>
+    </TouchableOpacity>
   );
 }
