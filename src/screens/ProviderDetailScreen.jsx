@@ -7,6 +7,8 @@ import { GreyTextInputBarNoMargin } from "../Components/GreyTextInputBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useState } from "react";
 import { Calendar, CalendarList } from "react-native-calendars";
+import Modal from "react-native-modal";
+
 /**
  * This screen displays additional information about a specific XOneFi Provider.
  * A User is routed to this page after clicking on a Provider displayed on the Provider Screen.
@@ -21,6 +23,18 @@ export default function ProviderDetailScreen({ route, navigation }) {
 
   const [isPrivate, setIsPrivate] = useState(false);
   const toggleSwitch = () => setIsPrivate((previousState) => !previousState);
+
+  //Calender State
+  const [isCalenderOpen, setIsCalenderOpen] = useState(false);
+
+  function openCalender() {
+    setIsCalenderOpen(true);
+  }
+
+  function closeCalender() {
+    setIsCalenderOpen(false);
+  }
+
 
   return (
     <ScrollView>
@@ -82,13 +96,13 @@ export default function ProviderDetailScreen({ route, navigation }) {
             />
             <GreyBackgroundBar
               LeftText={"Share Time/Daily"}
-              RightSideComponent={<></>}
+              RightSideComponent={<ViewButton
+                OnPressFunction={
+                  ()=>{openCalender()}
+                }
+              />}
             />
-            <Calendar
-              onDayPress={(day) => {
-                console.log("selected day", day);
-              }}
-            />
+            <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  />
           </>
         }
       />
@@ -110,5 +124,21 @@ export default function ProviderDetailScreen({ route, navigation }) {
         Connected Clients
       </Text>
     </ScrollView>
+  );
+}
+
+
+//Modals
+function CalenderModal({modalIsOpen, closeModal }) {
+  return (
+    <Modal visible={modalIsOpen}
+    onBackdropPress={() => closeModal()}
+    >
+            <Calendar
+              onDayPress={(day) => {
+                console.log("selected day", day);
+              }}
+            />
+    </Modal>
   );
 }
