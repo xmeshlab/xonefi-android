@@ -96,4 +96,28 @@ function send_rest(ip, port, msg, callback) {
     });
 }
 
-module.exports = { send_rest };
+
+function send_rest_provider(ip, port, msg, callback) {
+  console.log(`XLOG2: calling send_rest_provider()`);
+  console.log(`XLOG2: send_rest_provider()::msg: ${msg}`);
+
+  fetch("http://137.184.243.11:3000/provider", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: msg,
+  })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("XLOG2: send_rest_provider(): then->json");
+        return callback(json);
+      })
+      .catch((error) => {
+        console.log("XLOG2: send_rest_provider(): ERROR: CANNOT FETCH");
+      });
+}
+
+
+module.exports = { send_rest, send_rest_provider };
