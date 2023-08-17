@@ -209,11 +209,7 @@ const readData = async(setPrivateKey) => {
 
     if (value !== null){
       let uniqueId = DeviceInfo.getDeviceId();
-      // console.log(`DEVICE ID (retrieval): ${uniqueId}`);
-      // console.log(`private key before decryption: ${value}`);
-
       let decrypted_value = decrypt_aes256ctr(value, uniqueId);
-      // console.log(`decrypted private key: ${decrypted_value}`);
       setPrivateKey(decrypted_value);
     }
 
