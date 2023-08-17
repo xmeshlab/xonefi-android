@@ -7,6 +7,7 @@ import { GreyTextInputBarNoMargin } from "../Components/GreyTextInputBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useState } from "react";
 import { Calendar, CalendarList } from "react-native-calendars";
+import CalendarPicker from 'react-native-calendar-picker';
 import Modal from "react-native-modal";
 
 /**
@@ -34,6 +35,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
   function closeCalender() {
     setIsCalenderOpen(false);
   }
+
+  const [startDate, setStartDate] = useState("")
+  const [endDate, setEndDate] = useState("")
 
 
   return (
@@ -102,18 +106,18 @@ export default function ProviderDetailScreen({ route, navigation }) {
                 OnPressFunction={
                   ()=>{openCalender()}
                 }
-                Date={"Nov 11"}
+                Date={startDate === "" ? "start date": DateToString(startDate)}
               />
               <Text className="text-white mx-1">-</Text>
               <DateButton
                 OnPressFunction={
                   ()=>{openCalender()}
                 }
-                Date={"Nov 11"}
+                Date={endDate === "" ? "End date":DateToString(endDate)}
               />
               </View>}
             />
-            <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  />
+            <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  setStartDate={setStartDate} setEndDate={setEndDate}/>
           </>
         }
       />
@@ -140,16 +144,33 @@ export default function ProviderDetailScreen({ route, navigation }) {
 
 
 //Modals
-function CalenderModal({modalIsOpen, closeModal }) {
+function CalenderModal({modalIsOpen, closeModal, setStartDate, setEndDate }) {
+  function onDateChange(date, type){
+    //debug code
+    console.log("Date from Calender Module")
+    console.log(typeof(date)) //object
+    console.log(date)
+    if (type === 'END_DATE') {
+      setEndDate(date);
+    } else {
+      setStartDate(date);
+    }
+  }
+
   return (
     <Modal visible={modalIsOpen}
     onBackdropPress={() => closeModal()}
     >
-            <Calendar
-              onDayPress={(day) => {
-                console.log("selected day", day);
-              }}
-            />
+      <View className="bg-white">
+            <CalendarPicker
+          startFromMonday={true}
+          allowRangeSelection={true}
+          todayBackgroundColor="#f2e6ff"
+          selectedDayColor="#7300e6"
+          selectedDayTextColor="#FFFFFF"
+          onDateChange={onDateChange}
+        />
+        </View>
     </Modal>
   );
 }
@@ -157,10 +178,20 @@ function CalenderModal({modalIsOpen, closeModal }) {
 function DateButton({ OnPressFunction, Date }) {
   return (
     <TouchableOpacity
-      className="rounded-md border-slate-600 bg-slate-600 px-1 py-1"
+      className="rounded-md border-slate-600 bg-slate-600 px-1 py-1 w-30 h-7 overflow-hidden"
       onPress={OnPressFunction}
     >
       <Text className="text-white">{Date}</Text>
     </TouchableOpacity>
   );
+}
+
+function DateToString(date){
+  date = date.toString()
+  //alert("String Date : " + date)
+  const dateArray = date.split(" ")
+  //alert(dateArray)
+  const output = dateArray[1]+" "+dateArray[2]
+  return output
+
 }
