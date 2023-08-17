@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Switch } from "react-native";
+import { View, Text, Switch, Button } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
 import GreyBackgroundBar from "../Components/GreyBackgroundBar";
@@ -9,6 +9,8 @@ import { useState } from "react";
 import { Calendar, CalendarList } from "react-native-calendars";
 import CalendarPicker from 'react-native-calendar-picker';
 import Modal from "react-native-modal";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 /**
  * This screen displays additional information about a specific XOneFi Provider.
@@ -117,6 +119,14 @@ export default function ProviderDetailScreen({ route, navigation }) {
               />
               </View>}
             />
+            <Button onPress={()=>{showMode('time');}} title="Show time picker!" />
+              {/*<DateTimePicker
+          testID="dateTimePicker"
+          value={new Date(1598051730000)}
+          mode={'date'}
+          is24Hour={true}
+          onChange={()=>{}}
+              />*/}
             <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  setStartDate={setStartDate} setEndDate={setEndDate}/>
           </>
         }
@@ -195,3 +205,13 @@ function DateToString(date){
   return output
 
 }
+
+const showMode = (currentMode) => {
+  DateTimePickerAndroid.open({
+    value: new Date(1598051730000),
+    onChange: ()=>{console.log("onChange")},
+    mode: currentMode,
+    is24Hour: false,
+    display: "spinner"
+  });
+};
