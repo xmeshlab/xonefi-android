@@ -119,7 +119,7 @@ export default function ProviderDetailScreen({ route, navigation }) {
               />
               </View>}
             />
-            <Button onPress={()=>{showMode('time');}} title="Show time picker!" />
+            <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  setStartDate={setStartDate} setEndDate={setEndDate}/>
               {/*<DateTimePicker
           testID="dateTimePicker"
           value={new Date(1598051730000)}
@@ -127,7 +127,6 @@ export default function ProviderDetailScreen({ route, navigation }) {
           is24Hour={true}
           onChange={()=>{}}
               />*/}
-            <CalenderModal modalIsOpen={isCalenderOpen} closeModal={closeCalender}  setStartDate={setStartDate} setEndDate={setEndDate}/>
           </>
         }
       />
@@ -172,7 +171,7 @@ function CalenderModal({modalIsOpen, closeModal, setStartDate, setEndDate }) {
     onBackdropPress={() => closeModal()}
     >
       <View className="bg-white">
-            <CalendarPicker
+            <CalendarPicker 
           startFromMonday={true}
           allowRangeSelection={true}
           todayBackgroundColor="#f2e6ff"
@@ -180,6 +179,11 @@ function CalenderModal({modalIsOpen, closeModal, setStartDate, setEndDate }) {
           selectedDayTextColor="#FFFFFF"
           onDateChange={onDateChange}
         />
+        <View className="flex flex-row justify-evenly p-5">
+        <Button onPress={()=>{showMode('time');}} title="Start Time"/>
+        <Text className="text-black text-3xl">-</Text>
+        <Button onPress={()=>{showMode('time');}} title=" End Time " />
+        </View>
         </View>
     </Modal>
   );
