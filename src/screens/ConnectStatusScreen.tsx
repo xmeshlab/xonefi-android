@@ -95,7 +95,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
     let interval = setInterval(async () => {
       //debug code
-      alert("Inside linkspeed interval")
+      //alert("Inside linkspeed interval")
       console.log("Interval value of isConnected: " + isConnected)
       await getLinkSpeeds()
     }, 2000);
