@@ -243,8 +243,14 @@ export default function MainContainer() {
     //This is currently working. The ret value is accurate
     if (ret === true) {
       const linkArray = await getCurrentLinkpeed();
-      linkSpeeds.push(linkArray)
-      setLinkSpeeds(linkArray)
+      if(linkSpeeds.length < 10){
+        linkSpeeds.push(linkArray)
+        setLinkSpeeds(linkSpeeds)
+      }else{
+        linkSpeeds.shift()
+        linkSpeeds.push(linkArray)
+        setLinkSpeeds(linkSpeeds)
+      }
       //const linkSpeedObject = Promise.resolve(linkArray)
       alert(linkSpeeds.length)
     }
