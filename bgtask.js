@@ -1,5 +1,8 @@
 import BackgroundTimer from "react-native-background-timer";
 
+
+import { test_call_provider_newprice } from "./xonefi-api-client/call_provider_newprice";
+
 import {
   read_default_config,
   write_default_config,
@@ -25,6 +28,11 @@ module.exports = async (taskData) => {
   config_json.cft = true;
   config_json.loop_started = false;
   config_json.account_set = false;
+
+
+  // test_call_provider_newprice((ret) => {
+  //   console.log(`Successfully called test_call_provider_newprice: ${ret}`);
+  // });
 
   console.log("XLOG: startClientDaemon 3");
 
