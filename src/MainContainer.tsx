@@ -42,9 +42,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { read_default_config } from "../xonefi-api-client/config";
 import DeviceInfo from "react-native-device-info";
 
-
 import { decrypt_aes256ctr } from "../xonefi-api-client/symcrypto";
+import NetInfo from "@react-native-community/netinfo";
+import { is_onefi_ssid } from "./hooks/is_onefi_ssid";
 
+import { isClientConnectedToXoneFi, getPermission } from "./hooks/isClientConnectedToXOneFi";
+import { getCurrentConnectedSSID } from "./hooks/GetConnectedSSID";
+import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
+import {useNetInfo} from "@react-native-community/netinfo";
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -219,13 +224,56 @@ const readData = async(setPrivateKey) => {
   }
 }
 
+
+
+
+
+
 export default function MainContainer() {
   const context_array = useUserContext();
+  //const netInfo = useNetInfo();
+
+  const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
+
+  const getLinkSpeeds = async () => {
+    let isConnectedToOnefi2 = false
+
+    const ret = await isClientConnectedToXoneFi(); 
+
+    //This is currently working. The ret value is accurate
+    if (ret === true) {
+      const linkArray = await getCurrentLinkpeed();
+      if(linkSpeeds.length < 10){
+        linkSpeeds.push(linkArray)
+        setLinkSpeeds(linkSpeeds)
+      }else{
+        linkSpeeds.shift()
+        linkSpeeds.push(linkArray)
+        setLinkSpeeds(linkSpeeds)
+      }
+      //const linkSpeedObject = Promise.resolve(linkArray)
+      alert(linkSpeeds.length)
+    }
+  }
+
 
   //Checking to see if the user has previously logged in and the private key is stored
   useEffect(() => {
     readData(context_array[1])
+
+    //code for link speeds
+    let interval = setInterval(async () => {
+      //debug code
+      //alert("Inside linkspeed interval")
+      await getLinkSpeeds()
+    }, 12000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
+
+
 
   if (context_array[0] == "") {
     return (

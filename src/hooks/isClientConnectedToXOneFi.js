@@ -5,7 +5,7 @@ import { Platform, PermissionsAndroid } from "react-native";
 
 //Function for getting location Permission from Android.
 //Location Permission is required to scan and connect to wifi
-async function getPermission() {
+export async function getPermission() {
   if (Platform.OS === "android") {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -39,16 +39,23 @@ export const isClientConnectedToXoneFi = async () => {
     //your error was that
 
     const isConnectedToOnefi = await NetInfo.fetch().then((state) => {
+      //alert(state)
       if (state.isConnected === false) {
         return false;
       } else {
+        //alert("Inside isCCXF ssid : "+state.details.ssid)
         const isOnefi = is_onefi_ssid(state.details.ssid);
+        //alert("is Onefi resutlt : " + isOnefi)   //This shows up when connected to netgear but not xonefi. Sometimes does not show up at all. 
         return isOnefi;
       }
     });
 
+    //This alert is only reached half the time
+    //alert("isConnectedToOnefi in isCCTCF : " + Promise.resolve(isConnectedToOnefi))
+
     return isConnectedToOnefi;
   } catch (e) {
+    alert("Error : " + e)
     console.log(e);
     return false;
   }

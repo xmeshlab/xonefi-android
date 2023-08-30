@@ -45,7 +45,7 @@ export const getCurrentLinkpeed = async () => {
       }
     });
 
-    return linkspeeds;
+    return Promise.resolve(linkspeeds);
   } catch (e) {
     console.log(e);
     return [];

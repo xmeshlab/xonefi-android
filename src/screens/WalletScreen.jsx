@@ -90,7 +90,6 @@ export default function WalletScreen({ navigation }) {
     <View className="flex-1">
       <React.Fragment>
         <OneFiAsset
-          AssetAmount="1,000,000"
           AssetChange={"0.00%"}
           AssetPrice="$0.00 USD"
         />
