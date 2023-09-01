@@ -35,9 +35,9 @@ module.exports = async (taskData) => {
   //   console.log(`Successfully called test_call_provider_newprice: ${ret}`);
   // });
 
-  test_call_provider_update((ret) => {
-    console.log(`Successfully called test_call_provider_update: ${JSON.stringify(ret)}`);
-  });
+  // test_call_provider_update((ret) => {
+  //   console.log(`Successfully called test_call_provider_update: ${JSON.stringify(ret)}`);
+  // });
 
   console.log("XLOG: startClientDaemon 3");
 
