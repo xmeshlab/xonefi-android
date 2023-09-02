@@ -1,5 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useContext} from "react";
 import { processColor, ScrollView, StyleSheet, Text, View } from "react-native";
+
+import {linkSpeedContext} from "../MainContainer"
+
 import Card from "../Components/Card";
 import { RouteComponent } from "../types/global";
 import { colors } from "../constants/colors";
@@ -19,10 +22,13 @@ import { GlobalRoute } from "../MainContainer";
 import { NavigationProp } from "@react-navigation/core/src/types";
 import { useNavigation } from "@react-navigation/native";
 
+import { useLinkSpeedContext } from "../context/LinkSpeedContext";
+
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [ssid, setSSID] = useState<string | number>();
   const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
   const navigation = props.navigation
+  const linkspeed_list = useLinkSpeedContext();
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -93,7 +99,8 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       
     });
 
-    let interval = setInterval(async () => {
+    //commented out cause we have context for linkspeed
+    /*let interval = setInterval(async () => {
       //debug code
       //alert("Inside linkspeed interval")
       console.log("Interval value of isConnected: " + isConnected)
@@ -103,7 +110,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
     return () => {
       clearInterval(interval);
       return unsubscribe;
-    };
+    };*/
 
     //return unsubscribe;
   }, [navigation, ssid]);
@@ -202,7 +209,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Download (mbps)</Text>
-                <Text style={style.speed}>{linkSpeeds[1]}</Text>
+                <Text style={style.speed}>{isConnected ? linkspeed_list[-1][1] : ""}</Text>
               </View>
               <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
             </View>
@@ -219,7 +226,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Upload (mbps)</Text>
-                <Text style={style.speed}>{linkSpeeds[2]}</Text>
+                <Text style={style.speed}>{isConnected ? linkspeed_list[-1][2] : ""}</Text>
               </View>
               <ArrowUpIcon />
             </View>

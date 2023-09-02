@@ -4,6 +4,7 @@
  * @returns {boolean} true: matches, false: doesn't match.
  */
 export function is_onefi_ssid(ssid: string) {
+  try{
   if (ssid.length > 2) {
     if (ssid[0] === "O" && ssid[1] === "F") {
       let base64_part = ssid.substring(2);
@@ -11,6 +12,8 @@ export function is_onefi_ssid(ssid: string) {
       return decoded_str.length === 42;
     }
   }
-
   return false;
+}catch(e){
+  alert(e)
+}
 }
