@@ -247,7 +247,7 @@ export default function MainContainer() {
 
     //This is currently working. The ret value is accurate
     if (ret === true) {
-      const linkArray = await getCurrentLinkpeed();
+      /*const linkArray = await getCurrentLinkpeed();
       if(linkspeed_array[0].length < 10){
         //let new_array =  [...linkspeed_array[0]]
         //new_array.push(linkArray)
@@ -257,7 +257,7 @@ export default function MainContainer() {
         new_array.shift()
         new_array.push(linkArray)
         setLinkspeed(new_array)
-      }
+      }*/
       //const linkSpeedObject = Promise.resolve(linkArray)
       //alert(linkspeed_array[0].length)
     }
@@ -269,7 +269,7 @@ export default function MainContainer() {
     readData(context_array[1])
 
     //code for link speeds
-    let interval = setInterval(async () => {
+    /*let interval = setInterval(async () => {
       //debug code
       //alert("Inside linkspeed interval")
       await getLinkSpeeds(linkspeed_array[1])
@@ -277,7 +277,7 @@ export default function MainContainer() {
 
     return () => {
       clearInterval(interval);
-    };
+    };*/
   }, []);
 
 
