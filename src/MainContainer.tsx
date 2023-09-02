@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, NativeModules } from "react-native";
+import {createContext, useContext} from 'react'
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -50,6 +51,8 @@ import { isClientConnectedToXoneFi, getPermission } from "./hooks/isClientConnec
 import { getCurrentConnectedSSID } from "./hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
+
+import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -227,15 +230,17 @@ const readData = async(setPrivateKey) => {
 
 
 
-
+export const linkSpeedContext = createContext([]);
 
 export default function MainContainer() {
   const context_array = useUserContext();
   //const netInfo = useNetInfo();
+  const linkspeed_array = useLinkSpeedContext();
 
-  const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
+//  const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
+  //context for the link speeds
 
-  const getLinkSpeeds = async () => {
+  const getLinkSpeeds = async (setLinkspeed) => {
     let isConnectedToOnefi2 = false
 
     const ret = await isClientConnectedToXoneFi(); 
@@ -243,16 +248,18 @@ export default function MainContainer() {
     //This is currently working. The ret value is accurate
     if (ret === true) {
       const linkArray = await getCurrentLinkpeed();
-      if(linkSpeeds.length < 10){
-        linkSpeeds.push(linkArray)
-        setLinkSpeeds(linkSpeeds)
+      if(linkspeed_array[0].length < 10){
+        //let new_array =  [...linkspeed_array[0]]
+        //new_array.push(linkArray)
+        setLinkspeed([...linkspeed_array[0], linkArray])
       }else{
-        linkSpeeds.shift()
-        linkSpeeds.push(linkArray)
-        setLinkSpeeds(linkSpeeds)
+        let new_array =  [...linkspeed_array[0]]
+        new_array.shift()
+        new_array.push(linkArray)
+        setLinkspeed(new_array)
       }
       //const linkSpeedObject = Promise.resolve(linkArray)
-      alert(linkSpeeds.length)
+      //alert(linkspeed_array[0].length)
     }
   }
 
@@ -265,7 +272,7 @@ export default function MainContainer() {
     let interval = setInterval(async () => {
       //debug code
       //alert("Inside linkspeed interval")
-      await getLinkSpeeds()
+      await getLinkSpeeds(linkspeed_array[1])
     }, 12000);
 
     return () => {
