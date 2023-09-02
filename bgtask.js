@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DeviceInfo from "react-native-device-info";
 import {decrypt_aes256ctr} from "./xonefi-api-client/symcrypto";
 import Web3 from "web3";
+import { test_call_provider_update } from "./xonefi-api-client/call_provider_update";
 
 const worker = require("./client-daemon/worker");
 
@@ -32,6 +33,10 @@ module.exports = async (taskData) => {
 
   // test_call_provider_newprice((ret) => {
   //   console.log(`Successfully called test_call_provider_newprice: ${ret}`);
+  // });
+
+  // test_call_provider_update((ret) => {
+  //   console.log(`Successfully called test_call_provider_update: ${JSON.stringify(ret)}`);
   // });
 
   console.log("XLOG: startClientDaemon 3");
