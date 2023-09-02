@@ -9,6 +9,7 @@ import {
   starter_config,
 } from "./xonefi-api-client/config";
 import { UserContextProvider } from "./src/context/UserContext";
+import { LinkSpeedProvider } from "./src/context/LinkSpeedContext";
 import { startClientDaemon } from "./client-daemon/start-client-daemon";
 
 import SplashScreen from "react-native-splash-screen";
@@ -30,10 +31,12 @@ function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <RootSiblingParent>
         <UserContextProvider>
+          <LinkSpeedProvider>
           <WithMainBg style={{ flex: 1 }}>
             <StatusBar style="light" />
             <MainContainer />
           </WithMainBg>
+          </LinkSpeedProvider>
         </UserContextProvider>
       </RootSiblingParent>
     </GestureHandlerRootView>
