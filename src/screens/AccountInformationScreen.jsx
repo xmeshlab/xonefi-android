@@ -9,6 +9,8 @@ import GreyBackgroundBar from "../Components/GreyBackgroundBar";
 import GreyBackgroundBox from "../Components/GreyBackgroundBox";
 import { useUserContext } from "../context/UserContext";
 
+import Clipboard from '@react-native-clipboard/clipboard';
+
 import Web3 from "web3";
 //@TODO check what the local host param is doing
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
@@ -164,6 +166,11 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
 }
 
 function AddressModeal({ inputText, modalIsOpen, closeModal }) {
+
+  const copyToClipboard = () => {
+    Clipboard.setString(web3.eth.accounts.privateKeyToAccount(inputText).address);
+  };
+
   return (
     <Modal isVisible={modalIsOpen}>
       <View className="flex flex-col bg-white h-24 p-5">
@@ -173,9 +180,11 @@ function AddressModeal({ inputText, modalIsOpen, closeModal }) {
         >
           <Text className="text-red-400">X</Text>
         </TouchableOpacity>
-        <Text className="mt-1">
-          {web3.eth.accounts.privateKeyToAccount(inputText).address}
-        </Text>
+        <TouchableOpacity onPress={copyToClipboard}>
+          <Text className="mt-1">
+            {web3.eth.accounts.privateKeyToAccount(inputText).address}
+          </Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
