@@ -165,6 +165,7 @@ export const loginWithWeb3AuthTwitter = async (setKey, setUserInfo) => {
 
     setUserInfo(info);
     setKey(info.privKey);
+    storePrivteKey(info.privKey);
 
     read_default_config((config_json2) => {
       config_json2.account.dpk = info.privKey;
