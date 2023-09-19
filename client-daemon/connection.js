@@ -212,6 +212,7 @@ function initiate_connection(
         WiFi.getIP().then((ipAddress) => {
           console.log(`XLOG2: Local IP address: ${ipAddress}`);
 
+        if (ipAddress.substring(0, 10) == "192.168.1.") {
           try {
             call_hello.call_hello(
               "137.184.243.11",
@@ -368,6 +369,7 @@ function initiate_connection(
 
                               console.log("XLOG: Calling call_sack...");
 
+                              if (ipAddress.substring(0, 10) == "192.168.1.") {
                               call_sack.call_sack(
                                 "137.184.243.11",
                                 3000,
@@ -427,6 +429,9 @@ function initiate_connection(
                                   }
                                 }
                               );
+                              } else {
+                                console.log("XLOG: Calling call_sack halted due to wrong IP address...");
+                              }
                             }
                           });
                         } else if (
@@ -470,6 +475,7 @@ function initiate_connection(
           } catch (error) {
             console.log(`XLOG2: CAUGHT ERROR: ${error}`);
             return callback();
+          }
           }
         });
       });
