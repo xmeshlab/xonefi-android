@@ -209,7 +209,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Download (mbps)</Text>
-                <Text style={style.speed}>{isConnected ? linkspeed_list[-1][1] : ""}</Text>
               </View>
               <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
             </View>
@@ -226,7 +225,6 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Upload (mbps)</Text>
-                <Text style={style.speed}>{isConnected ? linkspeed_list[-1][2] : ""}</Text>
               </View>
               <ArrowUpIcon />
             </View>
