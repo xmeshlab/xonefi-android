@@ -62,6 +62,11 @@ function initiate_connection(
   //const process_mgmt = require("../xonefi-api-client/process_mgmt");
 
   const Web3 = require("web3");
+
+  WiFi.getIP().then((ipAddress) => {
+      console.log(`XLOG2: Local IP address: ${ipAddress}`);
+      if (ipAddress.substring(0, 10) == "192.168.1.") {
+
   console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
 
   console.log(`chosen_ssid: ${chosen_ssid}`);
@@ -481,6 +486,10 @@ function initiate_connection(
       });
     }
   );
+  } else {
+    console.log(`Connection to: ${JSON.stringify(deserealized_ssid)} has not been established!`);
+  }
+  });
 }
 
 module.exports = { initiate_connection };
