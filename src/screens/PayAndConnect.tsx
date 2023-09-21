@@ -29,6 +29,7 @@ import { Circle } from "react-native-svg";
 
 import NetInfo from "@react-native-community/netinfo";
 import { useNetInfo } from "@react-native-community/netinfo";
+import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
 
 const { WifiModule } = NativeModules;
 //Takes a callback as a param
@@ -62,14 +63,11 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
   //The Speed of the internet in MBPS
   const [networkSpeed, setNetworkSpeed] = useState();
 
-  //maybe change back to useMemo?
-  //useEffect to set the isConnected state variable whenever the currently connected wifi network changes
   useEffect(() => {
     setIsConnected(currentConnectedSSID === SSID);
-    if (isConnected) {
-      //replace with hook
+    if (currentConnectedSSID === SSID) {
       NetInfo.fetch().then((state) => {
-        console.log("Wifi Speed : " + state.details.linkSpeed);
+        //alert(("Wifi Speed : " + state.details.linkSpeed));
         setNetworkSpeed(state.details.linkSpeed);
       });
     }
