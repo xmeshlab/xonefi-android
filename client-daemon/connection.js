@@ -62,6 +62,11 @@ function initiate_connection(
   //const process_mgmt = require("../xonefi-api-client/process_mgmt");
 
   const Web3 = require("web3");
+
+  WiFi.getIP().then((ipAddress) => {
+      console.log(`XLOG2: Local IP address: ${ipAddress}`);
+      if (ipAddress.substring(0, 10) == "192.168.1.") {
+
   console.log(`Initiating connection to: ${JSON.stringify(deserealized_ssid)}`);
 
   console.log(`chosen_ssid: ${chosen_ssid}`);
@@ -212,6 +217,7 @@ function initiate_connection(
         WiFi.getIP().then((ipAddress) => {
           console.log(`XLOG2: Local IP address: ${ipAddress}`);
 
+        if (ipAddress.substring(0, 10) == "192.168.1.") {
           try {
             call_hello.call_hello(
               "137.184.243.11",
@@ -368,6 +374,7 @@ function initiate_connection(
 
                               console.log("XLOG: Calling call_sack...");
 
+                              if (ipAddress.substring(0, 10) == "192.168.1.") {
                               call_sack.call_sack(
                                 "137.184.243.11",
                                 3000,
@@ -427,6 +434,9 @@ function initiate_connection(
                                   }
                                 }
                               );
+                              } else {
+                                console.log("XLOG: Calling call_sack halted due to wrong IP address...");
+                              }
                             }
                           });
                         } else if (
@@ -471,10 +481,15 @@ function initiate_connection(
             console.log(`XLOG2: CAUGHT ERROR: ${error}`);
             return callback();
           }
+          }
         });
       });
     }
   );
+  } else {
+    console.log(`Connection to: ${JSON.stringify(deserealized_ssid)} has not been established!`);
+  }
+  });
 }
 
 module.exports = { initiate_connection };

@@ -29,7 +29,8 @@ export default function OneFiAsset({AssetPrice, AssetChange }) {
         if(resJSON == -1){
           setUserBalance("Error");
         }else{
-          setUserBalance(resJSON);
+          const normalized_balance = resJSON / 10**18
+          setUserBalance(normalized_balance);
         }
         });
 

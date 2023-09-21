@@ -66,7 +66,7 @@ function decode_hotspot_type(hotspot_type) {
   while (hts.length < 8) {
     hts = "0" + hts;
   }
-  console.log(hts);
+  //console.log(hts);
 
   let f1 = parseInt(hts.substr(0, 1), 2);
   let f2 = parseInt(hts.substr(1, 2), 2);

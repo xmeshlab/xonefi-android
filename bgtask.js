@@ -79,6 +79,8 @@ module.exports = async (taskData) => {
     read_default_config((config_json1) => {
       console.log(`config_json1: ${JSON.stringify(config_json1)}`);
 
+    decrypted_private_key = config_json1.account.dpk;
+
       if(config_json1.client_on === true) {
         console.log("XLOG: startClientDaemon 7");
         console.log(
