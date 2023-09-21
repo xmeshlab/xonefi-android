@@ -36,22 +36,19 @@ export const isClientConnectedToXoneFi = async () => {
   try {
     await getPermission();
 
-    //your error was that
-
+    //Netinfo seems to return an undefined ssid at times. Work around this by using WifiManager
     const isConnectedToOnefi = await NetInfo.fetch().then((state) => {
-      //alert(state)
       if (state.isConnected === false) {
         return false;
       } else {
-        //alert("Inside isCCXF ssid : "+state.details.ssid)
-        const isOnefi = is_onefi_ssid(state.details.ssid);
-        //alert("is Onefi resutlt : " + isOnefi)   //This shows up when connected to netgear but not xonefi. Sometimes does not show up at all. 
-        return isOnefi;
+        if(state.details.ssid != undefined){
+          const isOnefi = is_onefi_ssid(state.details.ssid);
+          return isOnefi;
+        }else{
+          return false
+        }
       }
     });
-
-    //This alert is only reached half the time
-    //alert("isConnectedToOnefi in isCCTCF : " + Promise.resolve(isConnectedToOnefi))
 
     return isConnectedToOnefi;
   } catch (e) {
