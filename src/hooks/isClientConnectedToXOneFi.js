@@ -44,8 +44,8 @@ export const isClientConnectedToXoneFi = async () => {
         if(state.details.ssid != undefined){
           const isOnefi = is_onefi_ssid(state.details.ssid);
           return isOnefi;
-        }else{
-          return false
+        } else {
+          return false;
         }
       }
     });
