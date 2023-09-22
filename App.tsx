@@ -10,7 +10,7 @@ import {
 } from "./xonefi-api-client/config";
 import { UserContextProvider } from "./src/context/UserContext";
 import { LinkSpeedProvider } from "./src/context/LinkSpeedContext";
-import { startClientDaemon } from "./client-daemon/start-client-daemon";
+//import { startClientDaemon } from "./client-daemon/start-client-daemon";
 
 import SplashScreen from "react-native-splash-screen";
 import { WithMainBg } from "./src/Components/WithMainBg";
