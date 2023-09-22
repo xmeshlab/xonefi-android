@@ -40,7 +40,10 @@ import { loginWithWeb3AuthTwitter } from "./hooks/LoginWithWeb3Auth";
 
 import { useUserContext } from "./context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { read_default_config } from "../xonefi-api-client/config";
+import {
+  read_default_config,
+  write_default_config,
+} from "../xonefi-api-client/config";
 import DeviceInfo from "react-native-device-info";
 
 import { decrypt_aes256ctr } from "../xonefi-api-client/symcrypto";
@@ -219,8 +222,20 @@ const readData = async(setPrivateKey) => {
       let uniqueId = DeviceInfo.getDeviceId();
       let decrypted_value = decrypt_aes256ctr(value, uniqueId);
       setPrivateKey(decrypted_value);
-    }
 
+      read_default_config((config_json2) => {
+        config_json2.account.dpk = decrypted_value;
+        config_json2.account_set = true;
+        let Web3 = require("web3");
+        let web3 = new Web3();
+        let account = web3.eth.accounts.privateKeyToAccount(decrypted_value);
+        config_json2.account.address = account.address;
+
+        write_default_config(config_json2, () => {
+          console.log("XLOG: Config is successfully initialized in Bypass Login mode.");
+        });
+      });
+    }
   }catch(e){
     alert(e)
     console.log(e)
