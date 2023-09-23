@@ -22,50 +22,57 @@ module.exports = async (taskData) => {
   const user_password = "seitlab123!@";
   let decrypted_private_key = "";
 
-  console.log("XLOG: startClientDaemon 2");
-  let config_json = starter_config();
-  config_json.client_on = false;
-  config_json.pft = true;
-  config_json.cft = true;
-  config_json.loop_started = false;
-  config_json.account_set = false;
+  // Check local config file, if it's empty, create a new one
+  try {
+    AsyncStorage.getItem("config").then((value) => {
+      if (value === null) {
+          console.log("XLOG: startClientDaemon 2");
+          let config_json = starter_config();
+          config_json.client_on = false;
+          config_json.pft = true;
+          config_json.cft = true;
+          config_json.loop_started = false;
+          config_json.account_set = false;
+          // test_call_provider_newprice((ret) => {
+          //   console.log(`Successfully called test_call_provider_newprice: ${ret}`);
+          // });
 
+          // test_call_provider_update((ret) => {
+          //   console.log(`Successfully called test_call_provider_update: ${JSON.stringify(ret)}`);
+          // });
 
-  // test_call_provider_newprice((ret) => {
-  //   console.log(`Successfully called test_call_provider_newprice: ${ret}`);
-  // });
+          console.log("XLOG: startClientDaemon 3");
 
-  // test_call_provider_update((ret) => {
-  //   console.log(`Successfully called test_call_provider_update: ${JSON.stringify(ret)}`);
-  // });
+          write_default_config(config_json, () => {
+            console.log("XLOG: Config is successfully initialized.");
+            read_default_config((config_json1) => {
+              console.log(`config_json1: ${JSON.stringify(config_json1)}`);
 
-  console.log("XLOG: startClientDaemon 3");
+              const value = AsyncStorage.getItem("privateKey").then(value1 => {
+                console.log(`VALUE: ${value1}`);
+                if (value1 !== null) {
+                  let uniqueId = DeviceInfo.getDeviceId();
+                  decrypted_private_key = decrypt_aes256ctr(value1, uniqueId);
 
-  write_default_config(config_json, () => {
-    console.log("XLOG: Config is successfully initialized.");
-    read_default_config((config_json1) => {
-      console.log(`config_json1: ${JSON.stringify(config_json1)}`);
+                  let Web3 = require("web3");
+                  let web3 = new Web3();
+                  let account = web3.eth.accounts.privateKeyToAccount(decrypted_private_key);
 
-      const value = AsyncStorage.getItem("privateKey").then(value1 => {
-        console.log(`VALUE: ${value1}`);
-        if (value1 !== null) {
-          let uniqueId = DeviceInfo.getDeviceId();
-          decrypted_private_key = decrypt_aes256ctr(value1, uniqueId);
+                  config_json1.account.address = account.address;
+                  config_json1.account_set = true;
 
-          let Web3 = require("web3");
-          let web3 = new Web3();
-          let account = web3.eth.accounts.privateKeyToAccount(decrypted_private_key);
-
-          config_json1.account.address = account.address;
-          config_json1.account_set = true;
-
-          write_default_config(config_json1, () => {
-            console.log("XLOG: Config is successfully written.");
+                  write_default_config(config_json1, () => {
+                    console.log("XLOG: Config is successfully written.");
+                  });
+                }
+              });
+            });
           });
         }
       });
-    });
-  });
+    } catch (e) {
+      console.log(`AsyncStorage get initial config: ERROR: ${e}`);
+    }
 
   console.log("XLOG: startClientDaemon 4");
 
@@ -96,7 +103,7 @@ module.exports = async (taskData) => {
             global_counter++;
             console.log(
               "XLOG: config_json.client_session.status post: " +
-                config_json.client_session.status
+                config_json1.client_session.status
             );
           }
         );
