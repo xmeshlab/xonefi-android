@@ -104,17 +104,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   }
 
-
-
-  //This works for being called on render and bottom bar navigation
-  //The interval is set up, and constantly runs
   useEffect(() => {
-    
-    /*const unsubscribe = navigation.addListener("focus", async () => {
-      console.log("useEffect called")
-      await getConnectionStatus1()
-      
-    });*/
 
     let interval = setInterval(() => {
       WifiManager.getCurrentWifiSSID().then(
@@ -131,7 +121,12 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       );
     }, 3000);
   }, []);
-  //}, [navigation, ssid]);
+
+  useEffect(()=>{
+    if(isConnected == true){
+      getLinkSpeeds()
+    }
+  }, [isConnected]);
 
 
   const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
@@ -227,6 +222,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Download (mbps)</Text>
+                <Text style={style.speed}>{linkSpeeds[1]}</Text>
               </View>
               <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
             </View>
@@ -243,6 +239,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
               <View style={globalStyle.col1}>
                 <Text style={style.speed}>Upload (mbps)</Text>
+                <Text style={style.speed}>{linkSpeeds[2]}</Text>
               </View>
               <ArrowUpIcon />
             </View>
