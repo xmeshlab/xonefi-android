@@ -57,6 +57,10 @@ function send_next_sack(config_json, user_password, private_key, callback) {
   session.expiration_timestamp = config_json.client_session.pafren_timestamp;
   session.sack_number = session.sack_number + 1;
   client_session.set_client_session(session, () => {
+
+    config_json.client_session = session;
+    config.write_default_config(config_json);
+
     console.log("XLOG: Client session updated.");
     sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
       config.read_default_config((config_json) => {

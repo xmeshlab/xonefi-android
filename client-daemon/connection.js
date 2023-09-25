@@ -311,6 +311,8 @@ function initiate_connection(
                           session.status = session_status.status.ACTIVE;
                           client_session.set_client_session(session, () => {
                             config_json.client_session = session;
+                            config.write_default_config(config_json);
+
                             console.log("Calling the first sack");
 
                             console.log(
@@ -415,6 +417,8 @@ function initiate_connection(
                                       session,
                                       () => {
                                         config_json.client_session = session;
+                                        config.write_default_config(config_json);
+
                                         sack_timestamp.set_last_sack_timestamp(
                                           response2_json.command.timestamp,
                                           () => {
@@ -452,6 +456,9 @@ function initiate_connection(
                             current_timestamp + 3600 * 24 * 365;
                           session.sack_number = 1;
                           client_session.set_client_session(session, () => {
+                            config_json.client_session = session;
+                            config.write_default_config(config_json);
+
                             sack_timestamp.set_last_sack_timestamp(
                               current_timestamp + 3600 * 24 * 365
                             );

@@ -153,8 +153,19 @@ function client_worker(config_json, user_password, private_key, callback) {
                       user_password,
                       private_key,
                       (result11) => {
+                      if (result11.command.arguments.answer === "SACK-FAIL") {
+                        let session = config_json.client_session;
+                        session.status = session_status.status.CLOSED;
+                        client_session.set_client_session(session);
+
+                        console.log("XLOG: Writing config for SACK-FAIL");
+                        config_json.client_session.status = session.status;
+                        config.write_default_config(config_json);
+                        console.log("SACK-FAIL: Session is closed");
+                      } else{
                         console.log("XLOG3: Successful SACK round completed");
-                        return callback();
+                      }
+                      return callback();
                       }
                     );
                   });
@@ -185,6 +196,10 @@ function client_worker(config_json, user_password, private_key, callback) {
       //client_session.set_client_session(session);
 
       client_session.set_client_session(session, (res) => {
+        console.log("XLOG: Writing config for status.EXPIRED");
+        config_json.client_session.status = session.status;
+        config.write_default_config(config_json);
+
         console.log("XLOG: Session declared as expired");
         return callback();
       });
@@ -207,6 +222,7 @@ function client_worker(config_json, user_password, private_key, callback) {
           return callback();
         }
       );
+    // The following scan_counter condition branches are deprecated
     } else if (config_json.client_session.scan_counter >= 15) {
       console.log("Trying to scan again");
       scan_counter.set_scan_counter(0, () => {
