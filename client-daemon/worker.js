@@ -211,35 +211,35 @@ function client_worker(config_json, user_password, private_key, callback) {
     console.log(
       "INFO: The session is neither active, nor in the handshake mode."
     );
-    if (config_json.client_session.scan_counter === 0) {
-      connection.initiate_connection(
-        deserealized_ssid,
-        chosen_ssid,
-        user_password,
-        private_key,
-        config_json,
-        () => {
-          return callback();
-        }
-      );
-    // The following scan_counter condition branches are deprecated
-    } else if (config_json.client_session.scan_counter >= 15) {
-      console.log("Trying to scan again");
-      scan_counter.set_scan_counter(0, () => {
-        console.log("XLOG: Scan counter set to 0.");
+    //if (config_json.client_session.scan_counter === 0) {
+    connection.initiate_connection(
+      deserealized_ssid,
+      chosen_ssid,
+      user_password,
+      private_key,
+      config_json,
+      () => {
         return callback();
-      });
-    } else {
-      console.log("Wait for previous scan to complete");
+      }
+    );
+    // The following scan_counter condition branches are deprecated
+    //} else if (config_json.client_session.scan_counter >= 15) {
+    //  console.log("Trying to scan again");
+    //  scan_counter.set_scan_counter(0, () => {
+    //    console.log("XLOG: Scan counter set to 0.");
+    //    return callback();
+    //  });
+    //} else {
+    //  console.log("Wait for previous scan to complete");
       //scan_counter.set_scan_counter(config_json.client_session.scan_counter + 1);
-      scan_counter.set_scan_counter(
-        config_json.client_session.scan_counter + 1,
-        () => {
-          console.log("XLOG: Scan counter incremented");
-          return callback();
-        }
-      );
-    }
+    //  scan_counter.set_scan_counter(
+    //    config_json.client_session.scan_counter + 1,
+    //    () => {
+    //      console.log("XLOG: Scan counter incremented");
+    //      return callback();
+    //    }
+    //  );
+    //}
   }
 
   return callback();
