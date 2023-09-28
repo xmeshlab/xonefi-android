@@ -55,7 +55,7 @@ import { getCurrentConnectedSSID } from "./hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
 
-import { useLinkSpeedContext } from "./context/LinkSpeedContext";
+//import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
 //screen names
 const connectName = "Connect" as keyof RootStackParamList;
@@ -245,12 +245,12 @@ const readData = async(setPrivateKey) => {
 
 
 
-export const linkSpeedContext = createContext([]);
+//export const linkSpeedContext = createContext([]);
 
 export default function MainContainer() {
   const context_array = useUserContext();
   //const netInfo = useNetInfo();
-  const linkspeed_array = useLinkSpeedContext();
+  //const linkspeed_array = useLinkSpeedContext();
 
 //  const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
   //context for the link speeds
