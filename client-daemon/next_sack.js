@@ -62,9 +62,8 @@ function send_next_sack(config_json, user_password, private_key, callback) {
     config.write_default_config(config_json);
 
     console.log("XLOG: Client session updated.");
-    sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
+    //sack_timestamp.set_last_sack_timestamp(current_timestamp, () => {
       config.read_default_config((config_json) => {
-        console.log("XLOG: Last sack timestamp set to the current timestamp.");
         call_sack.call_sack(
           config_json.client_session.ip,
           config_json.client_session.port,
@@ -105,6 +104,8 @@ function send_next_sack(config_json, user_password, private_key, callback) {
                 // session.sack_number = session.sack_number + 1;
                 // client_session.set_client_session(session);
                 // sack_timestamp.set_last_sack_timestamp(response2_json.command.timestamp);
+              } else {
+                return callback(response2);
               }
             } catch (e) {
               console.log(`ERROR[be6da098a5]: unable to parse JSON: ${e}`);
@@ -112,7 +113,7 @@ function send_next_sack(config_json, user_password, private_key, callback) {
           }
         );
       });
-    });
+    //});
   });
 
   let current_timestamp = timestamp.get_current_timestamp();

@@ -87,17 +87,22 @@ function call_sack(
 
   try {
     read_default_config((config_json1) => {
-      if (!"last_sack_timestamp" in config_json1) {
-        config_json1.last_sack_timestamp = 0;
-      }
+      //if (!"last_sack_timestamp" in config_json1) {
+      //  config_json1.client_session.last_sack_timestamp = 0;
+      //}
+
+      console.log("last_sack_timestamp: "+config_json1.client_session.last_sack_timestamp);
+      console.log("current_timestamp in call sack: "+current_timestamp);
 
       if (
         current_timestamp <=
-        config_json1.last_sack_timestamp + enforced_sack_delay
+        config_json1.client_session.last_sack_timestamp + enforced_sack_delay
       ) {
         console.log(`WARNING: Attempt to send multiple SACKS. SKIPPING!`);
       } else {
-        config_json1.last_sack_timestamp = current_timestamp;
+        config_json1.client_session.last_sack_timestamp = current_timestamp;
+        console.log("XLOG: call sack: Last sack timestamp set to the current timestamp.");
+
         write_default_config(config_json1, () => {
           send_rest.send_rest(ip, port, JSON.stringify(message), (result) => {
             return callback(result);

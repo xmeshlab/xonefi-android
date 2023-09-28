@@ -27,6 +27,7 @@ function client_worker(config_json, user_password, private_key, callback) {
   const scan_counter = require("../xonefi-api-client/scan_counter");
   const config = require("../xonefi-api-client/config");
   const sack_number = require("../xonefi-api-client/sack_number");
+  const sack_timestamp = require("../xonefi-api-client/sack-timestamp");
 
   console.log(
     `XLOG: @DEB5 config_json.client_session.initiated_sack_number: ${config_json.client_session.initiated_sack_number}`
@@ -152,13 +153,23 @@ function client_worker(config_json, user_password, private_key, callback) {
                       config_json,
                       user_password,
                       private_key,
-                      (result11) => {
-                      if (result11.command.arguments.answer === "SACK-FAIL") {
+                      (response1) => {
+                      console.log(
+                        `XLOG3: PROVIDER'S RESPONSE: ${JSON.stringify(response1)}`
+                      );
+
+                      let response1_json = response1;
+
+                      if (response1_json.command.arguments.answer === "SACK-FAIL") {
                         let session = config_json.client_session;
                         session.status = session_status.status.CLOSED;
+                        sack_timestamp.set_last_sack_timestamp(0, () => {
+                          console.log("XLOG3: Set last sack timestamp to 0 for closed session");
+                        });
+
                         client_session.set_client_session(session);
 
-                        console.log("XLOG: Writing config for SACK-FAIL");
+                        console.log("XLOG3: Writing config for SACK-FAIL");
                         config_json.client_session.status = session.status;
                         config.write_default_config(config_json);
                         console.log("SACK-FAIL: Session is closed");
