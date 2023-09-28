@@ -8,7 +8,6 @@ import ArrowUpIcon from "../icons/arrow_up_icon";
 import { globalStyle } from "../constants/globalStyle";
 import DownLoadLinearGradient from "../icons/linear_gradient";
 import UploadGradientBg from "../icons/UploadGradientBg";
-import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 
 import { read_default_config } from "../../xonefi-api-client/config";
 
@@ -21,13 +20,11 @@ import { NavigationProp } from "@react-navigation/core/src/types";
 import { useNavigation } from "@react-navigation/native";
 import WifiManager from "react-native-wifi-reborn";
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
-//import { useLinkSpeedContext } from "../context/LinkSpeedContext";
 
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [ssid, setSSID] = useState<string | number>();
   const [linkSpeeds, setLinkSpeeds] = useState<any[]>([]);
   const navigation = props.navigation
-  //const linkspeed_list = useLinkSpeedContext();
 
   //creating a second value of maxUsage that uses state. This value is changed whenever the sliding is complete.
   //There is another max usage variable created by the developer. Might need to delte previous variable
@@ -39,71 +36,13 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [lastSackTimestamp, setLastSackTimestap] = useState(0);
   const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
 
-  const getConnectionStatus1 = async () => {
-    const ret = await isClientConnectedToXoneFi();
-
-    if (ret != isConnected){
-      setIsConnected(ret);
-    }
-
-    if (ret == true) {
-      const currentSSID = await getCurrentConnectedSSID();
-      setSSID(currentSSID);
-      getLinkSpeeds()
-
-      read_default_config((config_json) => {
-        const lastSackTime = config_json.client_session.last_sack_timestamp
-        setLastSackTimestap(lastSackTime)
   
-        if(lastSackTime > 0){
-          const initalTimestamp = config_json.client_session.started_timestamp
-          setInitialSackTimestamp(initalTimestamp)
-        }
-      });
-    }else{
-      setSSID(0)
-    }
-  };
   const getLinkSpeeds = async () => {
-    //if (isConnected === true) {
     const linkArray = await getCurrentLinkpeed();
     setLinkSpeeds(linkArray);
-      //debug code
-    //console.log("Link Speed : " + linkSpeeds[0])
-    //console.log("Download Speed : " + linkSpeeds[1])
-    //console.log("Upload Speed : " + linkSpeeds[2])
-    //}
   }
 
-  const getConnectionStatus2 = async () => {
-    const ret = await isClientConnectedToXoneFi();
-    alert(ret)
-
-      if (ret != isConnected){
-        setIsConnected(ret);
-      }
-  
-      if (ret == true) {
-        const currentSSID = await getCurrentConnectedSSID();
-        //alert("Current SSID : " + currentSSID + "    Prev SSID : " + ssid)
-        if(currentSSID != ssid){
-          setSSID(currentSSID);
-          getLinkSpeeds()
-        }
-  
-        read_default_config((config_json) => {
-          const lastSackTime = config_json.client_session.last_sack_timestamp
-          setLastSackTimestap(lastSackTime)
-    
-          if(lastSackTime > 0){
-            const initalTimestamp = config_json.client_session.started_timestamp
-            setInitialSackTimestamp(initalTimestamp)
-          }
-        });
-      }
-
-  }
-
+  //Creates an interval that continuously checks if the app is connected to XOneFi
   useEffect(() => {
 
     let interval = setInterval(() => {
@@ -120,13 +59,41 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
         }
       );
     }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
   }, []);
 
+  //If the connection status changes, we update the linkspeeds. If we go from not connected to connected, we get the linkspeeds
   useEffect(()=>{
     if(isConnected == true){
       getLinkSpeeds()
     }
   }, [isConnected]);
+
+  //Sets up an interval that updates the amount of time the user has been using the service depending on the sack timestamps
+  useEffect(()=>{
+    let interval = setInterval(() => {
+      if(isConnected == true){
+        read_default_config((config_json) => {
+          const lastSackTime = config_json.client_session.last_sack_timestamp
+          setLastSackTimestap(lastSackTime)
+
+          if(lastSackTime > 0){
+            const initalTimestamp = config_json.client_session.started_timestamp
+            setInitialSackTimestamp(initalTimestamp)
+          }
+        });
+    }
+  }, 60000);
+
+  return () => {
+    clearInterval(interval);
+  };
+
+  }, [isConnected])
 
 
   const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
@@ -142,7 +109,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
             <Text style={style.summaryDesc}>OFI TOKENS</Text>
           </View>
           <View style={style.summaryItem}>
-            <Text style={style.summaryItemValue}>{0}</Text>
+            <Text style={style.summaryItemValue}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)}</Text>
             <Text style={style.summaryDesc}>Minutes</Text>
           </View>
           <View style={style.summaryItem}>
