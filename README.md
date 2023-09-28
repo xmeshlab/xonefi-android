@@ -188,7 +188,7 @@ This file standardizes the colors that are used throughout the XOneFi applicatio
 This file contains the global styles that are used throughout the XOneFi application.
 
 # hooks
-This folder contains the custom hooks found within the XOneFi application
+This folder contains the custom hooks found within the XOneFi application.
 
 **`GetConnectedSSID.js`**\
 
