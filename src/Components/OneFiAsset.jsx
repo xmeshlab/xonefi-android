@@ -41,7 +41,7 @@ export default function OneFiAsset({AssetPrice, AssetChange }) {
       <Text className="text-white">XOneFi</Text>
       <Text className="text-white">OFI</Text>
       <View className="flex flex-row justify-center">
-        <Text className="text-white text-4xl mb-2 mt-2">{userBalance}</Text>
+        <Text className="text-white text-4xl mb-2 mt-2">{Number(userBalance).toFixed(3)}</Text>
       </View>
 
       <View className="flex flex-row justify-around">
