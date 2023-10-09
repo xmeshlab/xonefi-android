@@ -161,6 +161,21 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           </>
         }
       />
+  <View className="mb-5">
+    <GreyBackgroundBox
+          titleText={"App Information"}
+          children={
+              <GreyBackgroundBar
+                LeftText={"Current Version"}
+                RightSideComponent={
+                  <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
+                    <Text className="text-white">0.1.1</Text>
+                </View>
+                }
+              />
+          }
+        />
+      </View>
     </ScrollView>
   );
 }
