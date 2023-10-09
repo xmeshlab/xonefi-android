@@ -4,6 +4,8 @@ import React, {
   useCallback,
   useContext,
   useMemo,
+  useEffect,
+  useState
 } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
@@ -16,6 +18,10 @@ import { useNavigation } from "@react-navigation/native";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
+
+import WifiManager from "react-native-wifi-reborn";
+import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
+
 
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
 //Use professor Nick's client status
@@ -92,6 +98,33 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
   };
   const navigation = useNavigation<RootStackParamList>();
 */
+
+const [isConnected, setIsConnected] = useState(false);
+  const [ssid, setSSID] = useState<String>();
+
+  useEffect(() => {
+
+    let interval = setInterval(() => {
+      WifiManager.getCurrentWifiSSID().then(
+        (_ssid) => {
+          if (_ssid != ssid) {
+            setSSID(_ssid);
+            const isOnefi = is_onefi_ssid(_ssid);
+            setIsConnected(isOnefi)
+          }
+        },
+        () => {
+          console.log("Cannot get current SSID!");
+        }
+      );
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
+  }, []);
+
   return (
     <PageHeader
       {...otherProps}
@@ -115,7 +148,8 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
             }}
           >
             {/*color={clientStatus.isActive ? colors.successColor : colors.light}*/}
-            <WifiIcon color={0 ? colors.successColor : colors.light} />
+            {isConnected ? <WifiIcon color={colors.successColor} /> : 
+            <WifiIcon color={colors.inActiveColor} />}
           </View>
         </TouchableOpacity>
       }
