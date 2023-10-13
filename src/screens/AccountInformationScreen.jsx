@@ -66,7 +66,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
 
   return (
     <ScrollView>
-      <GreyBackgroundBox
+      {/*<GreyBackgroundBox
         titleText={"Account Information"}
         children={
           <>
@@ -92,7 +92,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
             />
           </>
         }
-      />
+      />*/}
 
       <GreyBackgroundBox
         titleText={"Legal"}
@@ -138,7 +138,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
               }
             />
 
-            <GreyBackgroundBar
+            {/*<GreyBackgroundBar
               LeftText={"Private Key"}
               RightSideComponent={
                 <ViewButton
@@ -147,7 +147,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
                   }}
                 />
               }
-            />
+            />*/}
             <PrivateKeyModal
               inputText={"Private Key"}
               modalIsOpen={pkModalIsOpen}
