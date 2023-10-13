@@ -1,7 +1,8 @@
 import * as React from "react";
 import Svg, { SvgProps, Path } from "react-native-svg";
 
-const UserIcon = (props: SvgProps) => (
+//Original height weight was 24
+export const UserIcon = (props: SvgProps) => (
   <Svg
     width={24}
     height={24}
@@ -18,5 +19,25 @@ const UserIcon = (props: SvgProps) => (
     />
   </Svg>
 );
+
+export function UserIcon36(props) {
+  return (
+    <Svg
+      width={37}
+      height={37}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M30.421 32v-3a6 6 0 00-6-6h-12a6 6 0 00-6 6v3M18.421 17a6 6 0 100-12 6 6 0 000 12z"
+        stroke={props.color ?? "#fff"}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
 
 export default UserIcon;

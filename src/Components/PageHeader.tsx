@@ -12,7 +12,7 @@ import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs/lib/typescri
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { colors } from "../constants/colors";
 import BuggerIcon from "../icons/bugger_icon";
-import WifiIcon from "../icons/wifi_icon";
+import {WifiIcon} from "../icons/wifi_icon";
 import ChevronRight from "../icons/chevron_right";
 import { useNavigation } from "@react-navigation/native";
 

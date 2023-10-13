@@ -18,10 +18,10 @@ import AccountInformationScreen from "./screens/AccountInformationScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
 import PayAndConnectScreen from "./screens/PayAndConnect";
 import { useCallback, useEffect, useState } from "react";
-import BarIcon from "./icons/bars_icon";
-import CardIcon from "./icons/card_icon";
-import WifiIcon from "./icons/wifi_icon";
-import UserIcon from "./icons/user_icon";
+import {BarIcon, BarIcon36} from "./icons/bars_icon";
+import {CardIcon, CardIcon36} from "./icons/card_icon";
+import {WifiIcon, WifiIcon36} from "./icons/wifi_icon";
+import {UserIcon, UserIcon36} from "./icons/user_icon";
 import CircleIcon from "./icons/circles_icon";
 import {
   DefaultNavigatorOptions,
@@ -119,6 +119,7 @@ function HomeTab() {
     any,
     any
   >["screenOptions"] = useCallback(({ route }) => {
+    //Changing icon size in the sivg only changes the size of the background, not the image portion
     return {
       tabBarIcon: (param) => {
         const { focused, color, size } = param;
@@ -126,24 +127,25 @@ function HomeTab() {
         let rn = route.name;
         const iconColor = focused ? colors.light : colors.inActiveColor;
         if (rn === connectName) {
-          return <BarIcon color={iconColor} />;
+          return <BarIcon36 color={iconColor} />;
         } else if (rn === linkedAccountName) {
-          return <UserIcon color={iconColor} />;
+          return <UserIcon36 color={iconColor} />;
         } else if (rn === StatusName) {
-          return <WifiIcon color={iconColor} />;
+          return <WifiIcon36 color={iconColor} />;
         } else if (rn === ProviderName) {
           return <CircleIcon color={iconColor} />;
         } else if (rn === cardName) {
-          return <CardIcon color={iconColor} />;
+          return <CardIcon36 color={iconColor} />;
         }
         return null;
       },
+      //height here changes the size of the background black in the tab bar
       tabBarStyle: {
         borderTopWidth: 0,
-        height: 81,
+        height: 75,
         backgroundColor: colors.tabBarBackgroundColor,
-        borderTopLeftRadius: 4,
-        borderTopRightRadius: 4,
+        borderTopLeftRadius: 2,
+        borderTopRightRadius: 2,
       },
       style: {
         padding: 10,
@@ -223,19 +225,19 @@ const readData = async(setPrivateKey) => {
       let decrypted_value = decrypt_aes256ctr(value, uniqueId);
       setPrivateKey(decrypted_value);
 
-      read_default_config((config_json2) => {
-        config_json2.account.dpk = decrypted_value;
-        config_json2.account_set = true;
-        let Web3 = require("web3");
-        let web3 = new Web3();
-        let account = web3.eth.accounts.privateKeyToAccount(decrypted_value);
-        config_json2.account.address = account.address;
+        read_default_config((config_json2) => {
+          config_json2.account.dpk = decrypted_value;
+          config_json2.account_set = true;
+          let Web3 = require("web3");
+          let web3 = new Web3();
+          let account = web3.eth.accounts.privateKeyToAccount(decrypted_value);
+          config_json2.account.address = account.address;
 
-        write_default_config(config_json2, () => {
-          console.log("XLOG: Config is successfully initialized in Bypass Login mode.");
+          write_default_config(config_json2, () => {
+            console.log("XLOG: Config is successfully initialized in Bypass Login mode.");
+          });
         });
-      });
-    }
+      }
   }catch(e){
     alert(e)
     console.log(e)
