@@ -8,6 +8,7 @@ import {
   ScrollView,
   PermissionsAndroid,
   Platform,
+  Alert,
 } from "react-native";
 import { PrimaryBtn } from "../Components/PrimaryBtn";
 import { colors } from "../constants/colors";
@@ -20,6 +21,13 @@ import {
   read_default_config,
   write_default_config,
 } from "../../xonefi-api-client/config";
+
+//Web3 for balance information
+import Web3 from "web3";
+//@TODO check what the local host param is doing
+const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
+import { useUserContext } from "../context/UserContext";
 
 //API used to get information regarding the Provider. The information is encoded into the SSID
 import { deserialize_ssid } from "../../xonefi-api-client/ssid";
@@ -112,8 +120,38 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
     console.log("XLOG: CLIENT SESSION: " + JSON.stringify(res));
   });
 
+
+const context_array = useUserContext();
+const user_address = web3.eth.accounts.privateKeyToAccount(context_array[0]).address
+const [userBalance, setUserBalance] = useState(-1);
+
+useEffect(() => {
+    const token = ""
+    const url = "http://137.184.243.11:3000/quickservice?op=ofibalance&token=c916b36&address=" + user_address
+    fetch(url).then((res) => res.json())
+    .then((resJSON) => {
+       console.log("resJson : ")
+       console.log(resJSON)
+       if(resJSON == -1){
+         setUserBalance("Error");
+       }else{
+         const normalized_balance = resJSON / 10**18
+         setUserBalance(normalized_balance);
+       }
+       });
+
+}, []);
+
+
+
+
   //function to connect to OneFi Provider
   const payAndConnect = async () => {
+
+    console.log("@DEBUG: BALANCE" , userBalance)
+
+    if (userBalance > 0){
+
     console.log("XLOG: Pay and Connect Callback Activated");
 
     //Ask Android Permission to use Location Access. Thi is required for react native wifi reborn
@@ -169,8 +207,14 @@ const PayAndConnect: RouteComponent<"PayAndConnect"> = (props) => {
         "XLOG: You CANNOT use react-native-wifi-reborn (permissions denied)"
       );
     }
+    }
+    else{
+    console.log("@DEBUG: Balance is 0")
+    Alert.alert('Low Balance', 'Please deposit OFI tokens', [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]);
+    }
   };
-
   //Function to disconnect from OneFi Provider on Android 9 and below
   const disconnectFromOnefi = async () => {
     console.log("XLOG: DisconnectFromOnefi Callback Activated");
