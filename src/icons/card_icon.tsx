@@ -1,7 +1,8 @@
 import * as React from "react";
 import Svg, { SvgProps, G, Path, Defs, ClipPath } from "react-native-svg";
 
-const CardIcon = (props: SvgProps) => (
+//Original is 26w 24H
+export const CardIcon = (props: SvgProps) => (
   <Svg
     width={26}
     height={24}
@@ -26,4 +27,22 @@ const CardIcon = (props: SvgProps) => (
   </Svg>
 );
 
-export default CardIcon;
+export function CardIcon36(props: SvgProps) {
+  return (
+    <Svg
+      width={36}
+      height={37}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M31.5 6.5h-27a3 3 0 00-3 3v18a3 3 0 003 3h27a3 3 0 003-3v-18a3 3 0 00-3-3zM1.5 15.5h33"
+        stroke={props.color ?? "#fff"}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}

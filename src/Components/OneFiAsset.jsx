@@ -16,7 +16,7 @@ export default function OneFiAsset({AssetPrice, AssetChange }) {
   const context_array = useUserContext();
   const user_address = web3.eth.accounts.privateKeyToAccount(context_array[0]).address
 
-  const [userBalance, setUserBalance] = useState(-1);
+  const [userBalance, setUserBalance] = useState(0);
 
   useEffect(() => {
     const token = ""

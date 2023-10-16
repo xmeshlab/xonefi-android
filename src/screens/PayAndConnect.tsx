@@ -318,10 +318,10 @@ useEffect(() => {
         </View>
       </View>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
-        <View className="flex flex-row justify-between">
+        {/*<View className="flex flex-row justify-between">
           <Text className="text-white text-base mb-1">Private</Text>
           <Text className="text-white text-base mb-1">0 OFI</Text>
-        </View>
+            </View>*/}
         <View className="flex flex-row justify-between">
           <Text className="text-white text-base my-1">Per Hour</Text>
           <Text className="text-white text-base my-1">
