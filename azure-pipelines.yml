@@ -19,6 +19,9 @@ steps:
     publishJUnitResults: false
     tasks: 'assembleRelease'
 
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'my-upload-key.keystore'
 - task: AndroidSigning@3
   displayName: 'Sign APK'
   inputs:
