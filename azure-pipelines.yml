@@ -16,5 +16,18 @@ steps:
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleRelease'
+
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '''android/app/build/outputs/apk/release/*.apk'''
+    apksignerKeystoreFile: 'my-upload-key.keystore'
+    apksignerKeystorePassword: 'password'
+    apksignerKeystoreAlias: 'my-key-alias'
+    apksignerKeyPassword: 'password'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Build'
+    publishLocation: 'Container'
