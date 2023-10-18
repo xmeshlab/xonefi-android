@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: Gradle@2
+  displayName: 'Build APK'
   inputs:
     workingDirectory: '$(system.defaultWorkingDirectory)/android'
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
@@ -19,6 +20,7 @@ steps:
     tasks: 'assembleRelease'
 
 - task: AndroidSigning@3
+  displayName: 'Sign APK'
   inputs:
     apkFiles: '''android/app/build/outputs/apk/release/*.apk'''
     apksignerKeystoreFile: 'my-upload-key.keystore'
@@ -27,6 +29,7 @@ steps:
     apksignerKeyPassword: 'password'
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Pusblish APK to artifacts'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'Build'
