@@ -435,6 +435,24 @@ function initiate_connection(
                                         );
                                       }
                                     );
+                                  } else {
+                                    console.log(
+                                        `SACK IS NOT SENT DUE TO POSSIBLE PROVIDER ERROR. CONTINUE SESSION!`
+                                    );
+                                    let session = config_json.client_session;
+                                    session.status =
+                                      session_status.status.ACTIVE;
+                                    session.expiration_timestamp =
+                                      current_timestamp + pafren_length;
+                                    session.sack_number = 1;
+                                    client_session.set_client_session(
+                                      session,
+                                      () => {
+                                        config_json.client_session = session;
+                                        config.write_default_config(config_json);
+                                        return callback(response2);
+                                      }
+                                    );
                                   }
                                 }
                               );
