@@ -35,6 +35,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [lastSackTimestamp, setLastSackTimestap] = useState(0);
   const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
+  const [usageCost, setUsageCost] = useState(25);
 
   
   const getLinkSpeeds = async () => {
@@ -105,12 +106,12 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <View
             style={[style.summaryItem, style.summaryItemValueWithoutBorder]}
           >
-            <Text style={style.summaryItemValue}>{0}</Text>
+            <Text style={style.summaryItemValue}>{(Math.floor((lastSackTimestamp-initialSackTimestamp)/60)) * (usageCost/60)}</Text>
             <Text style={style.summaryDesc}>OFI TOKENS</Text>
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)}</Text>
-            <Text style={style.summaryDesc}>Minutes</Text>
+            <Text style={style.summaryDesc}>MINUTES</Text>
           </View>
           <View style={style.summaryItem}>
             <Text style={style.summaryItemValue}>{0}</Text>
@@ -167,7 +168,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Usage Cost
           </Text>
-          <Text style={style.descriptionItem}>{0} OFI/Hour</Text>
+          <Text style={style.descriptionItem}>{usageCost} OFI/Hour</Text>
         </View>
         <View style={style.description}>
           <Text style={[style.descriptionItem, { width: "69%" }]}>
