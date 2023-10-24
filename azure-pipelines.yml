@@ -11,7 +11,23 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+  
 steps:
+#Checkout the code from the repo
+- checkout: self
+  persistCredentials: true
+  clean: true
+
+#Install node on the device that is building
+- task: NodeTool@0
+  displayName: 'Install Node'
+  inputs:
+    versionSpec: '18.16.0' # you can use your desired version here
+
+#Install our package dependencies
+- script: yarn install
+  displayName: Install Dependencies
+
 - task: Gradle@2
   displayName: 'Build APK'
   inputs:
