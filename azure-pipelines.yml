@@ -3,9 +3,11 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
+#Trigger tells pipeline when to do a build. Right now it is on changes to the main branch
 trigger:
 - main
 
+#Tells pipeline to build the app using a mac enviroment
 pool:
   vmImage: 'macos-latest'
 
