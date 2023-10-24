@@ -50,7 +50,7 @@ steps:
 - task: AndroidSigning@3
   displayName: 'Sign APK'
   inputs:
-    apkFiles: '''android/app/build/outputs/apk/release/*.apk'''
+    apkFiles: '''android/*.apk'''
     apksignerKeystoreFile: 'my-upload-key.keystore'
     apksignerKeystorePassword: 'password'
     apksignerKeystoreAlias: 'my-key-alias'
