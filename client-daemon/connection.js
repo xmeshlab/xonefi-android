@@ -374,90 +374,111 @@ function initiate_connection(
                               );
                               console.log(`XLOG: private_key: ${private_key}`);
 
-                              console.log("XLOG: Calling call_sack...");
+                              try {
+                                  console.log("XLOG: Calling call_sack...");
 
-                              if (ipAddress.substring(0, 10) == "192.168.1.") {
-                              call_sack.call_sack(
-                                "137.184.243.11",
-                                3000,
-                                new Web3(),
-                                private_key,
-                                response1_json.command.session,
-                                response1_json.command.uuid,
-                                current_sack_amount,
-                                current_timestamp,
-                                encode_sack.encode_sack(
-                                  config_json.account.address,
-                                  response_json.command.from,
-                                  current_sack_amount,
-                                  current_timestamp,
-                                  private_key
-                                ),
-                                (response2) => {
-                                  console.log(
-                                    `SACK SENT. RESPONSE2: ${response2}`
-                                  );
+                                  if (ipAddress.substring(0, 10) == "192.168.1.") {
+                                  call_sack.call_sack(
+                                    "137.184.243.11",
+                                    3000,
+                                    new Web3(),
+                                    private_key,
+                                    response1_json.command.session,
+                                    response1_json.command.uuid,
+                                    current_sack_amount,
+                                    current_timestamp,
+                                    encode_sack.encode_sack(
+                                      config_json.account.address,
+                                      response_json.command.from,
+                                      current_sack_amount,
+                                      current_timestamp,
+                                      private_key
+                                    ),
+                                    (response2) => {
+                                      console.log(
+                                        `SACK SENT. RESPONSE2: ${response2}`
+                                      );
 
-                                  let response2_json = response2;
+                                      let response2_json = response2;
 
-                                  if (
-                                    response2_json.command.arguments.answer ===
-                                    "SACK-OK"
-                                  ) {
-                                    console.log(
-                                      "SACK is accepted by provider! Session is active."
-                                    );
-                                    let session = config_json.client_session;
-                                    session.status =
-                                      session_status.status.ACTIVE;
-                                    session.expiration_timestamp =
-                                      current_timestamp + pafren_length;
-                                    session.sack_number = 1;
-                                    client_session.set_client_session(
-                                      session,
-                                      () => {
-                                        config_json.client_session = session;
-                                        config.write_default_config(config_json);
-
-                                        sack_timestamp.set_last_sack_timestamp(
-                                          response2_json.command.timestamp,
+                                      if (
+                                        response2_json.command.arguments.answer ===
+                                        "SACK-OK"
+                                      ) {
+                                        console.log(
+                                          "SACK is accepted by provider! Session is active."
+                                        );
+                                        let session = config_json.client_session;
+                                        session.status =
+                                          session_status.status.ACTIVE;
+                                        session.expiration_timestamp =
+                                          current_timestamp + pafren_length;
+                                        session.sack_number = 1;
+                                        client_session.set_client_session(
+                                          session,
                                           () => {
-                                            sackok.set_sackok(
-                                              response2_json,
+                                            config_json.client_session = session;
+                                            config.write_default_config(config_json);
+
+                                            sack_timestamp.set_last_sack_timestamp(
+                                              response2_json.command.timestamp,
                                               () => {
-                                                console.log(
-                                                  "XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete."
+                                                sackok.set_sackok(
+                                                  response2_json,
+                                                  () => {
+                                                    console.log(
+                                                      "XLOG: set_client_session -> set_last_sack_timestamp -> set_sackok Sequence complete."
+                                                    );
+                                                    return callback();
+                                                  }
                                                 );
-                                                return callback();
                                               }
                                             );
                                           }
                                         );
+                                      } else {
+                                        console.log(
+                                            "SACK IS NOT SENT DUE TO POSSIBLE PROVIDER ERROR. CONTINUE SESSION!"
+                                        );
+                                        let session = config_json.client_session;
+                                        session.status =
+                                          session_status.status.ACTIVE;
+                                        session.expiration_timestamp =
+                                          current_timestamp + pafren_length;
+                                        session.sack_number = 1;
+                                        client_session.set_client_session(
+                                          session,
+                                          () => {
+                                            config_json.client_session = session;
+                                            config.write_default_config(config_json);
+                                            return callback(response2);
+                                          }
+                                        );
                                       }
-                                    );
+                                    }
+                                  );
                                   } else {
-                                    console.log(
-                                        `SACK IS NOT SENT DUE TO POSSIBLE PROVIDER ERROR. CONTINUE SESSION!`
-                                    );
-                                    let session = config_json.client_session;
-                                    session.status =
-                                      session_status.status.ACTIVE;
-                                    session.expiration_timestamp =
-                                      current_timestamp + pafren_length;
-                                    session.sack_number = 1;
-                                    client_session.set_client_session(
-                                      session,
-                                      () => {
-                                        config_json.client_session = session;
-                                        config.write_default_config(config_json);
-                                        return callback(response2);
-                                      }
-                                    );
+                                    console.log("XLOG: Calling call_sack halted due to wrong IP address...");
                                   }
-                                }
-                              );
-                              } else {
-                                console.log("XLOG: Calling call_sack halted due to wrong IP address...");
+                              } catch (error) {
+                                console.log(`XLOG2: CALL SACK CAUGHT ERROR: ${error}`);
+                                 console.log(
+                                   "SACK IS NOT SENT DUE TO POSSIBLE PROVIDER ERROR. CONTINUE SESSION!"
+                                 );
+                                let session = config_json.client_session;
+                                session.status =
+                                  session_status.status.ACTIVE;
+                                session.expiration_timestamp =
+                                  current_timestamp + pafren_length;
+                                session.sack_number = 1;
+                                client_session.set_client_session(
+                                  session,
+                                  () => {
+                                    config_json.client_session = session;
+                                    config.write_default_config(config_json);
+                                    return callback();
+                                  }
+                                );
                               }
                             }
                           });
