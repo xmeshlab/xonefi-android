@@ -28,6 +28,13 @@ steps:
 - script: yarn install
   displayName: Install Dependencies
 
+#Install Java 11 for our Android Build
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
 - task: Gradle@2
   displayName: 'Build APK'
   inputs:
