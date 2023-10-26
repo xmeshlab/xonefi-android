@@ -38,8 +38,8 @@ steps:
 - task: Gradle@2
   displayName: 'Build APK'
   inputs:
-    workingDirectory: '$(system.defaultWorkingDirectory)/android'
-    gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
+    workingDirectory: '/android'
+    gradleWrapperFile: '/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
     tasks: 'assembleRelease'
