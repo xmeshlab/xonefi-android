@@ -11,6 +11,8 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+variables:
+  system.debug: 'true'
   
 steps:
 #Checkout the code from the repo
@@ -38,8 +40,8 @@ steps:
 - task: Gradle@2
   displayName: 'Build APK'
   inputs:
-    workingDirectory: '/android'
-    gradleWrapperFile: '/android/gradlew'
+    workingDirectory: ''
+    gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
     tasks: 'assembleRelease'
@@ -50,7 +52,7 @@ steps:
 - task: AndroidSigning@3
   displayName: 'Sign APK'
   inputs:
-    apkFiles: '''/android/app/build/outputs/apk/release/*.apk'''
+    apkFiles: '''$**\*.apk'''
     apksignerKeystoreFile: 'my-upload-key.keystore'
     apksignerKeystorePassword: 'password'
     apksignerKeystoreAlias: 'my-key-alias'
