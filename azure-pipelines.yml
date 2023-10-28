@@ -24,7 +24,7 @@ steps:
 - task: NodeTool@0
   displayName: 'Install Node'
   inputs:
-    versionSpec: '18.16.0' # you can use your desired version here
+    versionSpec: '16.18.0' # you can use your desired version here
 
 #Install our package dependencies
 - script: yarn install
