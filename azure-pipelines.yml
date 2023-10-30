@@ -20,6 +20,13 @@ steps:
   persistCredentials: true
   clean: true
 
+#Install Java 11 for our Android Build
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+    
 #Install node on the device that is building
 - task: NodeTool@0
   displayName: 'Install Node'
@@ -29,13 +36,6 @@ steps:
 #Install our package dependencies
 - script: yarn install
   displayName: Install Dependencies
-
-#Install Java 11 for our Android Build
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '11'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
 
 
 - task: Gradle@2
