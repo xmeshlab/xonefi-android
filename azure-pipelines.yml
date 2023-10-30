@@ -26,12 +26,12 @@ steps:
     versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
-    
+
 #Install node on the device that is building
 - task: NodeTool@0
   displayName: 'Install Node'
   inputs:
-    versionSpec: '16.18.0' # you can use your desired version here
+    versionSpec: '18.16.0' # you can use your desired version here
 
 #Install our package dependencies
 - script: yarn install
