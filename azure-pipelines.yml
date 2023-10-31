@@ -34,7 +34,7 @@ steps:
     versionSpec: '18.16.0' # you can use your desired version here
 
 #Install our package dependencies
-- script: yarn install
+- script: yarn install --ignore-engines
   displayName: Install Dependencies
 
 
