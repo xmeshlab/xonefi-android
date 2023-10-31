@@ -20,22 +20,22 @@ steps:
   persistCredentials: true
   clean: true
 
-#Install node on the device that is building
-- task: NodeTool@0
-  displayName: 'Install Node'
-  inputs:
-    versionSpec: '16.18.0' # you can use your desired version here
-
-#Install our package dependencies
-- script: yarn install
-  displayName: Install Dependencies
-
 #Install Java 11 for our Android Build
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
+
+#Install node on the device that is building
+- task: NodeTool@0
+  displayName: 'Install Node'
+  inputs:
+    versionSpec: '18.16.0' # you can use your desired version here
+
+#Install our package dependencies
+- script: yarn install --ignore-engines
+  displayName: Install Dependencies
 
 
 - task: Gradle@2
