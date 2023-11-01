@@ -41,7 +41,7 @@ steps:
 - task: DeleteFiles@1
   inputs:
     SourceFolder: '$(system.defaultWorkingDirectory)'
-    Contents: '/android/app/build/intermediates/signing_config/debug/out/signing-config.json'
+    Contents: '/android/app/build/intermediates/signing_config'
 
 - task: Gradle@2
   displayName: 'Build APK'
