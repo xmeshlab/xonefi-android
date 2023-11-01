@@ -42,6 +42,10 @@ steps:
   inputs:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/android/app/build'
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(system.defaultWorkingDirectory)'
+    Contents: '/android/build'
 
 - task: Gradle@2
   displayName: 'Build APK'
