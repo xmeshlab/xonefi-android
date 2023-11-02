@@ -38,10 +38,6 @@ steps:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/node_modules'
 
-#Install our package dependencies
-- script: yarn install --ignore-engines
-  displayName: Install Dependencies
-
 #Deleting File which may be causing the "Unable to determine the current character" Error
 - task: DeleteFiles@1
   inputs:
@@ -56,6 +52,10 @@ steps:
   inputs:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/node_modules/@react-native-community/cli/build/config'
+
+#Install our package dependencies
+- script: yarn install --ignore-engines
+  displayName: Install Dependencies
 
 - task: Gradle@2
   displayName: 'Build APK'
