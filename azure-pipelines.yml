@@ -64,7 +64,7 @@ steps:
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
-    tasks: 'clean assembleRelease'
+    tasks: '--stop clean assembleRelease'
 
 - task: DownloadSecureFile@1
   inputs:
