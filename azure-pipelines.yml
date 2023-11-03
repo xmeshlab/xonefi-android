@@ -72,7 +72,7 @@ steps:
 - task: AndroidSigning@3
   displayName: 'Sign APK'
   inputs:
-    apkFiles: '/**/a/*.apk'
+    apkFiles: '/Users/runner/work/1/a/*.apk'
     apksignerKeystoreFile: 'my-upload-key.keystore'
     apksignerKeystorePassword: 'password'
     apksignerKeystoreAlias: 'my-key-alias'
