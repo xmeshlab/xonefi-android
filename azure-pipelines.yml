@@ -48,10 +48,10 @@ steps:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/android/build'
 
-- task: DeleteFiles@1
-  inputs:
-    SourceFolder: '$(system.defaultWorkingDirectory)'
-    Contents: '/node_modules/@react-native-community/cli/build/config'
+#- task: DeleteFiles@1
+#  inputs:
+#    SourceFolder: '$(system.defaultWorkingDirectory)'
+#    Contents: '/node_modules/@react-native-community/cli/build/config'
 
 #Install our package dependencies
 - script: yarn install --ignore-engines
