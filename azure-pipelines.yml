@@ -58,28 +58,16 @@ steps:
   displayName: Install Dependencies
 
 - task: Gradle@2
-  displayName: 'Build APK'
+  displayName: 'Build AAB'
   inputs:
     workingDirectory: '$(system.defaultWorkingDirectory)/android'
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
-    tasks: '--stop clean assembleRelease'
-
-- task: DownloadSecureFile@1
-  inputs:
-    secureFile: 'my-upload-key.keystore'
-- task: AndroidSigning@3
-  displayName: 'Sign APK'
-  inputs:
-    apkFiles: '$(system.defaultWorkingDirectory)/android/**/*.apk'
-    apksignerKeystoreFile: 'my-upload-key.keystore'
-    apksignerKeystorePassword: 'password'
-    apksignerKeystoreAlias: 'my-key-alias'
-    apksignerKeyPassword: 'password'
+    tasks: '--stop clean bundleRelease'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Pusblish APK to artifacts'
+  displayName: 'Pusblish AAB to artifacts'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'Build'
