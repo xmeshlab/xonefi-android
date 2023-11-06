@@ -38,16 +38,6 @@ steps:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/node_modules'
 
-#Deleting File which may be causing the "Unable to determine the current character" Error
-- task: DeleteFiles@1
-  inputs:
-    SourceFolder: '$(system.defaultWorkingDirectory)'
-    Contents: '/android/app/build'
-- task: DeleteFiles@1
-  inputs:
-    SourceFolder: '$(system.defaultWorkingDirectory)'
-    Contents: '/android/build'
-
 #- task: DeleteFiles@1
 #  inputs:
 #    SourceFolder: '$(system.defaultWorkingDirectory)'
@@ -70,7 +60,7 @@ steps:
   displayName: 'Copy AAB to Artifact Staging Directory'
   inputs:
     SourceFolder: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/'
-    Contents: '**/*.aab'
+    Contents: '/*.aab'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
