@@ -38,6 +38,16 @@ steps:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/node_modules'
 
+#Deleting File which may be causing the "Unable to determine the current character" Error
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(system.defaultWorkingDirectory)'
+    Contents: '/android/app/build'
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(system.defaultWorkingDirectory)'
+    Contents: '/android/build'
+
 #- task: DeleteFiles@1
 #  inputs:
 #    SourceFolder: '$(system.defaultWorkingDirectory)'
@@ -48,23 +58,20 @@ steps:
   displayName: Install Dependencies
 
 - task: Gradle@2
-  displayName: 'Build AAB'
+  displayName: 'Build APK'
   inputs:
     workingDirectory: '$(system.defaultWorkingDirectory)/android'
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
     tasks: 'clean bundleRelease'
-
-
+    
 - script: |
     ls -R $(System.DefaultWorkingDirectory)
   displayName: 'List Directory Contents'
-
-- task: DownloadBuildArtifacts@1
+- task: PublishBuildArtifacts@1
+  displayName: 'Pusblish APK to artifacts'
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'Build'
-    itemPattern: 
-    downloadPath: '$(System.ArtifactsDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Build'
+    publishLocation: 'Container'
