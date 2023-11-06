@@ -54,7 +54,7 @@ steps:
 #    Contents: '/node_modules/@react-native-community/cli/build/config'
 
 #Install our package dependencies
-- script: yarn install --ignore-engines
+- script: npm install
   displayName: Install Dependencies
 
 - task: Gradle@2
