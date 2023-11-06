@@ -66,8 +66,15 @@ steps:
     publishJUnitResults: false
     tasks: '--stop clean bundleRelease'
 
+- task: CopyFiles@2
+  displayName: 'Copy AAB to Artifact Staging Directory'
+  inputs:
+    SourceFolder: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/'
+    Contents: '*.aab'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: PublishBuildArtifacts@1
-  displayName: 'Pusblish AAB to artifacts'
+  displayName: 'Publish AAB to artifacts'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'Build'
