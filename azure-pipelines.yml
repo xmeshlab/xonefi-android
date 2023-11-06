@@ -54,7 +54,7 @@ steps:
 #    Contents: '/node_modules/@react-native-community/cli/build/config'
 
 #Install our package dependencies
-- script: npm install
+- script: npm install --legacy-peer-deps
   displayName: Install Dependencies
 
 - task: Gradle@2
