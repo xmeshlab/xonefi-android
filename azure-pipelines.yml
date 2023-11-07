@@ -77,7 +77,7 @@ steps:
     jarsign: true 
     jarsignerKeystoreFile: '$(RELEASE_KEYSTORE_FILE)'
     jarsignerKeystorePassword: '$(RELEASE_KEYSTORE_PASSWORD)'
-    jarsignerKeystoreAlias: '$(RELEASE_KEY_ALIAS))'
+    jarsignerKeystoreAlias: '$(RELEASE_KEY_ALIAS)'
     jarsignerKeyPassword: '$(RELEASE_KEY_PASSWORD)'
     jarsignerArguments: '-sigalg SHA256withRSA -digestalg SHA-256'
     zipalign: true
