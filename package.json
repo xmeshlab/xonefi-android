@@ -45,7 +45,7 @@
     "react": "18.1.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
-    "react-native": "0.70.5",
+    "react-native": "0.70.0",
     "react-native-background-actions": "2.6.9",
     "react-native-background-fetch": "4.1.10",
     "react-native-background-timer": "2.4.1",
