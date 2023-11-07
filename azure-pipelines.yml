@@ -69,6 +69,19 @@ steps:
 - script: |
     ls -R $(System.DefaultWorkingDirectory)
   displayName: 'List Directory Contents'
+
+- task: AndroidSigning@2
+  displayName: 'Sign APK'
+  inputs:
+    apkFiles: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/*.abb'
+    jarsign: true 
+    jarsignerKeystoreFile: '$(RELEASE_KEYSTORE_FILE)'
+    jarsignerKeystorePassword: '$(RELEASE_KEYSTORE_PASSWORD)'
+    jarsignerKeystoreAlias: '$(RELEASE_KEY_ALIAS))'
+    jarsignerKeyPassword: '$(RELEASE_KEY_PASSWORD)'
+    jarsignerArguments: '-sigalg SHA256withRSA -digestalg SHA-256'
+    zipalign: true
+
 - task: PublishBuildArtifacts@1
   displayName: 'Pusblish APK to artifacts'
   inputs:
