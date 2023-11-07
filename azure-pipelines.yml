@@ -72,6 +72,6 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Pusblish APK to artifacts'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/'
     ArtifactName: 'Build'
     publishLocation: 'Container'
