@@ -56,9 +56,6 @@ steps:
 #Install our package dependencies
 - script: yarn install --ignore-engines
   displayName: Install Dependencies
-  
-- script: yarn add --save @react-native-community/cli-platform-android
-  displayName: 'Install @react-native-community/cli-platform-android'
 
 - task: Gradle@2
   displayName: 'Build APK'
