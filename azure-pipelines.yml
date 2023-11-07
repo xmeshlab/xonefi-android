@@ -76,7 +76,7 @@ steps:
   inputs:
     apkFiles: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/*.abb'
     jarsign: true 
-    jarsignerKeystoreFile: '$(RELEASE_KEYSTORE_FILE)'
+    jarsignerKeystoreFile: 'xonefi-release-key.keystore'
     jarsignerKeystorePassword: '$(RELEASE_KEYSTORE_PASSWORD)'
     jarsignerKeystoreAlias: '$(RELEASE_KEY_ALIAS)'
     jarsignerKeyPassword: '$(RELEASE_KEY_PASSWORD)'
