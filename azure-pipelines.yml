@@ -74,7 +74,7 @@ steps:
 - task: AndroidSigning@2
   displayName: 'Sign APK'
   inputs:
-    apkFiles: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/*.abb'
+    apkFiles: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/*.aab'
     jarsign: true 
     jarsignerKeystoreFile: 'xonefi-release-key.keystore'
     jarsignerKeystorePassword: '$(RELEASE_KEYSTORE_PASSWORD)'
@@ -84,7 +84,7 @@ steps:
     zipalign: true
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Pusblish APK to artifacts'
+  displayName: 'Publish APK to artifacts'
   inputs:
     PathtoPublish: '$(system.defaultWorkingDirectory)/android/app/build/outputs/bundle/release/'
     ArtifactName: 'Build'
