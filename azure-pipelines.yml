@@ -69,7 +69,6 @@ steps:
 - script: |
     ls -R $(System.DefaultWorkingDirectory)
   displayName: 'List Directory Contents'
-  
 
 - task: AndroidSigning@2
   displayName: 'Sign APK'
