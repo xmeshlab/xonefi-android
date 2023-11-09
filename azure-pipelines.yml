@@ -31,7 +31,7 @@ steps:
 - task: NodeTool@0
   displayName: 'Install Node'
   inputs:
-    versionSpec: '16.13.1' # you can use your desired version here
+    versionSpec: '18.16.1' # you can use your desired version here
 
 - task: DeleteFiles@1
   inputs:
@@ -48,17 +48,12 @@ steps:
     SourceFolder: '$(system.defaultWorkingDirectory)'
     Contents: '/android/build'
 
-#- task: DeleteFiles@1
-#  inputs:
-#    SourceFolder: '$(system.defaultWorkingDirectory)'
-#    Contents: '/node_modules/@react-native-community/cli/build/config'
-
 #Install our package dependencies
 - script: npm install --legacy-peer-deps
   displayName: Install Dependencies
 
 - task: Gradle@2
-  displayName: 'Build APK'
+  displayName: 'Build AAB'
   inputs:
     workingDirectory: '$(system.defaultWorkingDirectory)/android'
     gradleWrapperFile: '$(system.defaultWorkingDirectory)/android/gradlew'
