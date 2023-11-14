@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { View, Text, Switch, Button } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
@@ -11,7 +12,12 @@ import CalendarPicker from 'react-native-calendar-picker';
 import Modal from "react-native-modal";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import {
+  read_default_config,
+  write_default_config,
+} from "../../xonefi-api-client/config";
 
+import ProviderPasswordScreen from "./ProviderPasswordScreen";
 /**
  * This screen displays additional information about a specific XOneFi Provider.
  * A User is routed to this page after clicking on a Provider displayed on the Provider Screen.
@@ -23,9 +29,26 @@ export default function ProviderDetailScreen({ route, navigation }) {
 
   //value here might have to come from persistent storage, or cloud, so the user does not have to reset the value everytime app loads
   const [OFIMinute, setOFIMinute] = useState(0);
+  
+  //Function for changine the value of price_of_ofi in the database 
+  function changeOFIMinute(newValue){
+    read_default_config((config_json2) => {
+      if (config_json2.cft) {
+        //alert("Setting ofi to : " + newValue)
+        config_json2.price_ofi_hr = newValue
+        write_default_config(config_json2, () => {
+          console.log("XLOG: Config is successfully initialized (2).");
+        });
+        setOFIMinute(config_json.price_ofi_hr) 
+      }
+    });
+
+
+  }
 
   const [isPrivate, setIsPrivate] = useState(false);
   const toggleSwitch = () => setIsPrivate((previousState) => !previousState);
+  const [validPasswordProvided, setValidPasswordProvided] = useState(false)
 
   //Calender State
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
@@ -41,7 +64,18 @@ export default function ProviderDetailScreen({ route, navigation }) {
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
 
+  useEffect(() => {
+    read_default_config((config_json) => {
+      if (config_json.cft) {
+        //alert("Reading price ofi from config")
+        setOFIMinute(config_json.price_ofi_hr) 
+      }
+    });
 
+  }, [])
+
+
+  if (validPasswordProvided === true){
   return (
     <ScrollView>
       <GreyBackgroundBox
@@ -82,8 +116,8 @@ export default function ProviderDetailScreen({ route, navigation }) {
               RightSideComponent={
                 <View style={{ transform: [{ scaleX: 1 }, { scaleY: 0.8 }] }}>
                   <GreyTextInputBarNoMargin
-                    placeholder_text={""}
-                    state_function={setOFIMinute}
+                    placeholder_text={""+OFIMinute}
+                    state_function={changeOFIMinute}
                   />
                 </View>
               }
@@ -148,7 +182,11 @@ export default function ProviderDetailScreen({ route, navigation }) {
         Connected Clients
       </Text>
     </ScrollView>
-  );
+    );
+
+  }else{
+    return <ProviderPasswordScreen setValidPasswordProvided={setValidPasswordProvided}/>
+  }
 }
 
 
@@ -218,4 +256,5 @@ const showMode = (currentMode) => {
     is24Hour: false,
     display: "spinner"
   });
-};
+}
+
