@@ -149,7 +149,7 @@ const [isConnected, setIsConnected] = useState(false);
           >
             {/*color={clientStatus.isActive ? colors.successColor : colors.light}*/}
             {isConnected ? <WifiIcon color={colors.successColor} /> : 
-            <WifiIcon color={colors.inActiveColor} />}
+            <WifiIcon color={colors.inActiveWifiIconColor} />}
           </View>
         </TouchableOpacity>
       }

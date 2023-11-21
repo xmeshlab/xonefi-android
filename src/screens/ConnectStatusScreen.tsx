@@ -106,7 +106,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <View
             style={[style.summaryItem, style.summaryItemValueWithoutBorder]}
           >
-            <Text style={style.summaryItemValue}>{(Math.floor((lastSackTimestamp-initialSackTimestamp)/60)) * (usageCost/60)}</Text>
+            <Text style={style.summaryItemValue}>{Number((Math.floor((lastSackTimestamp-initialSackTimestamp)/60)) * (usageCost/60)).toFixed(2)}</Text>
             <Text style={style.summaryDesc}>OFI TOKENS</Text>
           </View>
           <View style={style.summaryItem}>
