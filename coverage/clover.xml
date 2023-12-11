@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1702283603276" clover="3.2.0">
-  <project timestamp="1702283603276" name="All files">
-    <metrics statements="182" coveredstatements="32" conditionals="33" coveredconditionals="8" methods="53" coveredmethods="13" elements="268" coveredelements="53" complexity="0" loc="182" ncloc="182" packages="2" files="17" classes="17"/>
+<coverage generated="1702318288941" clover="3.2.0">
+  <project timestamp="1702318288941" name="All files">
+    <metrics statements="182" coveredstatements="37" conditionals="33" coveredconditionals="8" methods="53" coveredmethods="14" elements="268" coveredelements="59" complexity="0" loc="182" ncloc="182" packages="2" files="17" classes="17"/>
     <package name="Components">
-      <metrics statements="105" coveredstatements="32" conditionals="19" coveredconditionals="8" methods="34" coveredmethods="13"/>
+      <metrics statements="105" coveredstatements="37" conditionals="19" coveredconditionals="8" methods="34" coveredmethods="14"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Asset.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="17" count="12" type="stmt"/>
@@ -147,12 +147,12 @@
         <line num="8" count="3" type="stmt"/>
       </file>
       <file name="WithMainBg.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/WithMainBg.tsx">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
       </file>
     </package>
     <package name="screens">
