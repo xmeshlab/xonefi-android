@@ -5,5 +5,5 @@ import { render, fireEvent } from "@testing-library/react-native";
 import ProviderScreen from "../../src/screens/ProviderScreen";
 
 it("renders", () => {
-  render(<ProviderScreen />);
+  render(<ProviderScreen/>);
 });
