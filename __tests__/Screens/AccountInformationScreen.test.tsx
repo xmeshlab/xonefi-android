@@ -26,11 +26,8 @@ it("renders", () => {
     />
   );
 
-  //There should be 4 View Buttons
-  expect(getAllByText("View").length).toBe(4);
-
-  expect(getByText("Account Informtion")).not.toBeNull();
-  expect(getAllByText("Account Informtion").length).toBe(1);
+  //There should be 3 View Buttons
+  expect(getAllByText("View").length).toBe(3);
 
   expect(getByText("Legal")).not.toBeNull();
   expect(getAllByText("Legal").length).toBe(1);
@@ -43,6 +40,9 @@ it("renders", () => {
   expect(getAllByText("Wallet Address").length).toBe(1);
   expect(getByText("Address")).not.toBeNull();
   expect(getAllByText("Address").length).toBe(1);
-  expect(getByText("Private Key")).not.toBeNull();
-  expect(getAllByText("Private Key").length).toBe(1);
+
+  expect(getByText("App Information")).not.toBeNull();
+  expect(getAllByText("App Information").length).toBe(1);
+  expect(getByText("Current Version")).not.toBeNull();
+  expect(getAllByText("Current Version").length).toBe(1);
 });
