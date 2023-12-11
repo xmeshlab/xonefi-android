@@ -27,7 +27,7 @@ export default function Provider({
   navigationFunction,
 }) {
   return (
-    <TouchableOpacity onPress={navigationFunction}>
+    <TouchableOpacity onPress={navigationFunction}  testID="Provider Button">
       <View className="flex flew-col bg-gray-800 m-2 rounded-2xl p-2">
         <View className="flex flex-row justify-start pb-1">
           <Text className="text-white ml-3">{ProviderName}</Text>

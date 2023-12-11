@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import React from 'react'
 
 //ReactNode is just what you give the children property in react
 type UserContextProviderProps = {
