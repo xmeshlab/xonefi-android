@@ -2,11 +2,24 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react-native";
 
 import LinkedAccountScreen from "../../src/screens/LinkedAccountsScreen";
+import { UserContextProvider } from "../../src/context/UserContext";
+//import storePrivteKey from "../../src/hooks/StorePrivateKey";
+//jest.mock("../../src/hooks/StorePrivateKey", ()=>({storePrivteKey: jest.fn()}));
+//jest.mock("../../src/hooks/StorePrivateKey")
 
 it("renders", () => {
+  //const storePrivateKeySpy = jest.spyOn(storePrivteKey, 'storePrivteKey').mockResolvedValue()
+  //storePrivteKey.storePrivteKey.mockResolvedValue(0)
+  //storePrivteKey.mockImplementation(() => 42)
+
   const { getByText, getAllByText, getByTestId } = render(
-    <LinkedAccountScreen />
+    <UserContextProvider>
+      <LinkedAccountScreen />
+    </UserContextProvider>
   );
+
+  //need to mock storePrivateKey
+  
 
   //Check that the correct outputs are displayed
   expect(getByText("Linked Payment Card")).not.toBeNull();
@@ -15,6 +28,8 @@ it("renders", () => {
   expect(getAllByText("Account Information").length).toBe(1);
   expect(getByText("Logout")).not.toBeNull();
   expect(getAllByText("Logout").length).toBe(1);
+
+  //storePrivateKeySpy.mockRestore();
 });
 
 //Navigation is not defined

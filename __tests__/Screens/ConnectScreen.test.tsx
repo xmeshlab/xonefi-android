@@ -1,19 +1,11 @@
 import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
-
-import {
-    RouteComponent,
-  } from "../../src/types/global";
 import ConnectScreen from "../../src/screens/ConnectScreen";
+import * as getOnefiRouters from "../../src/hooks/getOnefiRouters";
+
+jest.spyOn(getOnefiRouters, 'getOneFiRouterList').mockResolvedValue();
 
 it("renders", ()=>{
-    const pushMock = jest.fn();
-    
-    RouteComponent instance = new RouteComponet
-    interface GlobalRoute{
-        Connect : "Connect"
-
-    }
-    const {getByText} = render(<ConnectScreen navigation={{push: pushMock}}  route={RouteProp<GlobalRoute, "Connect">}/>)
+    render(<ConnectScreen route={{key:"Key", name:"Connect"}} navigation={{}}/>)
 })

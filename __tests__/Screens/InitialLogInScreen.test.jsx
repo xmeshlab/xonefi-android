@@ -3,6 +3,7 @@ import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
 
 import InitialLogInScreen from "../../src/screens/InitialLogInScreen";
+import { UserContextProvider } from "../../src/context/UserContext";
 
 it("renders", () => {
   const GoogleLoginMock = jest.fn();
@@ -10,11 +11,13 @@ it("renders", () => {
   const TwitterLoginMock = jest.fn();
 
   const { getByText, getAllByText, getByTestId } = render(
-    <InitialLogInScreen
-      logInFunction={GoogleLoginMock}
-      loginFacebook={FacebookLoginMock}
-      loginTwitter={TwitterLoginMock}
-    />
+    <UserContextProvider>
+      <InitialLogInScreen
+        logInFunction={GoogleLoginMock}
+        loginFacebook={FacebookLoginMock}
+        loginTwitter={TwitterLoginMock}
+      />
+    </UserContextProvider>
   );
 
   //Only One place on the screen with the text LogIn

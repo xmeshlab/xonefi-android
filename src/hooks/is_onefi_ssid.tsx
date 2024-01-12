@@ -14,6 +14,6 @@ export function is_onefi_ssid(ssid: string) {
   }
   return false;
 }catch(e){
-  alert(e)
+  alert("is_onefi_ssid : " + e)
 }
 }

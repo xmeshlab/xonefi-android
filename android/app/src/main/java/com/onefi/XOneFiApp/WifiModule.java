@@ -1,5 +1,6 @@
 package com.onefi.XOneFiApp;
 import android.app.NotificationManager;
+import android.net.Network;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -153,63 +154,56 @@ public class WifiModule extends ReactContextBaseJavaModule {
 
         ReactApplicationContext context = getReactApplicationContext();
 
+        //Logs to figure out what is causing the delay
+        Long tsLong = System.currentTimeMillis();
+        String ts = tsLong.toString();
+        Log.d("WifiModule", "Timestamp before creating new WifiNetworkSuggestion : " + ts);
+
         final WifiNetworkSuggestion networkSuggestion  = new WifiNetworkSuggestion.Builder()
                 .setSsid(ssid)
                 .setWpa2Passphrase(password)
-                .setIsAppInteractionRequired(true)
                 .build();
+        //.setIsAppInteractionRequired(true)
 
-        final PasspointConfiguration passpointConfig = new PasspointConfiguration();
+        tsLong = System.currentTimeMillis();
+        ts = tsLong.toString();
+        Log.d("WifiModule", "Timestamp After creating new WifiNetworkSuggestion : " + ts);
+
+        //final PasspointConfiguration passpointConfig = new PasspointConfiguration();
+
         List<WifiNetworkSuggestion> suggestionsList =
                 new ArrayList<WifiNetworkSuggestion>();
         suggestionsList.add(networkSuggestion);
 
+        tsLong = System.currentTimeMillis();
+        ts = tsLong.toString();
+        Log.d("WifiModule", "Timestamp before addNetworkSuggestions : " + ts);
         final int status = wifiManager.addNetworkSuggestions(suggestionsList);
+
+        tsLong = System.currentTimeMillis();
+        ts = tsLong.toString();
+        Log.d("WifiModule", "Timestamp after addNetworkSuggestions : " + ts);
+
         Log.d("WifiModule", "status from wifiManager.addNetworkSuggestion : " + status);
         if (status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS) {
         // do error handling here…
             Log.d("WifiModule", "status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS");
         }else{
 
-            //Add logic to check if your already connected
+            tsLong = System.currentTimeMillis();
+            ts = tsLong.toString();
+            Log.d("WifiModule", "Timestamp before starting wifiIntent : " + ts);
 
             //Go to Wifi Page - works
+            //if PERMIS
             Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
             wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(wifiIntent);
 
-            //Toast to show to the user
-            CharSequence text = "Click and Connect To :  " + ssid;
-            int duration = Toast.LENGTH_LONG;
-
-            /*Toast toast = Toast.makeText(context, text, duration);
-            toast.show();*/
-            //CoordinatorLayout layout = getCurrentActivity().getView();
-            //CoordinatorLayout layout = MainActivity.getActivity().getView();
-
-            //Has the application Context now
-            //Activity activity = (Activity) context.getApplicationContext();
-            //CoordinatorLayout layout = activity.getView();
-
-            //Activity activity = (Activity) getContext();
-            //CoordinatorLayout layout = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-            //View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-
-            /*View parentLayout = getCurrentActivity().findViewById(android.R.id.content);
-
-            Snackbar snackbar = Snackbar.make(parentLayout, text, Snackbar.LENGTH_INDEFINITE).setAction("UNDO",
-                    new View.OnClickListener(){
-                @Override
-                        public void onClick(View view){
-                    Toast.makeText(context, text, duration).show();
-                }
-            });
-            snackbar.show();*/
-
         }
 
         // Optional (Wait for post connection broadcast to one of your suggestions)
-        final IntentFilter intentFilter =
+        /*final IntentFilter intentFilter =
                 new IntentFilter(WifiManager.ACTION_WIFI_NETWORK_SUGGESTION_POST_CONNECTION);
 
         final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -221,6 +215,9 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 }
                 Log.d("WifiModule", "connectByWifiNetworkSuggestion: onReceive: ");
                 // do post connect processing here...
+                Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(wifiIntent);
 
                 /*Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
                 wifiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -231,10 +228,10 @@ public class WifiModule extends ReactContextBaseJavaModule {
                 int duration = Toast.LENGTH_LONG;
 
                 Toast toast = Toast.makeText(context, text, duration);
-                toast.show();*/
+                toast.show();
             }
         };
-        context.registerReceiver(broadcastReceiver, intentFilter);
+        context.registerReceiver(broadcastReceiver, intentFilter);*/
     }
 
     @ReactMethod
@@ -276,7 +273,24 @@ public class WifiModule extends ReactContextBaseJavaModule {
                     .build();
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        connectivityManager.requestNetwork(networkRequest, new ConnectivityManager.NetworkCallback());
+        connectivityManager.requestNetwork(networkRequest, new ConnectivityManager.NetworkCallback(){
+            @Override
+            public void onUnavailable() {
+                final WifiNetworkSuggestion networkSuggestion  = new WifiNetworkSuggestion.Builder()
+                        .setSsid(ssid)
+                        .setWpa2Passphrase(password)
+                        .setIsAppInteractionRequired(true)
+                        .build();
+
+                List<WifiNetworkSuggestion> suggestionsList =
+                        new ArrayList<WifiNetworkSuggestion>();
+                suggestionsList.add(networkSuggestion);
+
+                final int status = wifiManager.addNetworkSuggestions(suggestionsList);
+
+
+            }
+        });
 
 
     }
