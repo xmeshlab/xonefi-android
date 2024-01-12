@@ -1,5 +1,7 @@
 //import Web3 from "web3";
 
+const { Input } = require("postcss");
+
 //we just directly override the global.fetch function, which is what our app leverages to make remote requests.
 global.fetch = require("jest-fetch-mock");
 
@@ -27,13 +29,21 @@ jest.mock("web3", () =>{
             accounts: {
                 privateKeyToAccount: jest.fn().mockReturnValueOnce({
                     address: 1
-                })
+                }),
             }
         }
     }))
 });
 
-jest.mock('web3');
+/*jest.mock("@react-native-community/netinfo", ()=>{
+    fetch: jest.fn().mockReturnValueOnce({
+        details:{
+            linkSpeed: 0
+        }
+    })
+})*/
+
+//jest.mock('web3');
 
 
 
@@ -46,4 +56,34 @@ Web3.mockImplementation((input)=>{
 })*/
 /*jest.mock("web3", () =>({
     Web3: jest.fn().mockImplementation((input)=>{})
+}));*/
+
+const mockedNavigate = jest.fn();
+
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockedNavigate,
+    }),
+  };
+});
+//async (setIsLoading, setWifiList) => { }
+/*jest.mock("./src/hooks/getOnefiRouters", ()=>{
+    return jest.fn()
+})*/
+
+/*jest.mock("react-native-wifi-reborn", () =>{
+    // Returns a function
+    return jest.fn().mockImplementation(() => ({
+        reScanAndLoadWifiList: jest.fn().mockReturnValueOnce({})
+    }))
+});*/
+
+
+/*jest.mock('react-native-wifi-reborn', () =>({
+    WifiManager: jest.fn().mockImplementation(() => ({
+        reScanAndLoadWifiList: jest.fn().mockReturnValueOnce({})
+    }))
 }));*/
