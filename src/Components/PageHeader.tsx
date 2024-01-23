@@ -21,6 +21,7 @@ import { RouteProp } from "@react-navigation/native";
 
 import WifiManager from "react-native-wifi-reborn";
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
+import { read_default_config } from "../../xonefi-api-client/config";
 
 
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
@@ -110,7 +111,18 @@ const [isConnected, setIsConnected] = useState(false);
           if (_ssid != ssid) {
             setSSID(_ssid);
             const isOnefi = is_onefi_ssid(_ssid);
-            setIsConnected(isOnefi)
+            if (isOnefi == true){
+
+              read_default_config((config_json) => {
+                if(config_json.client_session.sack_amount == 0){
+                  setIsConnected(false)
+                }else{
+                  setIsConnected(true)
+                }
+              });
+            }else{
+              setIsConnected(false)
+            }
           }
         },
         () => {
