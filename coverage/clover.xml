@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1702318288941" clover="3.2.0">
-  <project timestamp="1702318288941" name="All files">
-    <metrics statements="182" coveredstatements="37" conditionals="33" coveredconditionals="8" methods="53" coveredmethods="14" elements="268" coveredelements="59" complexity="0" loc="182" ncloc="182" packages="2" files="17" classes="17"/>
+<coverage generated="1706219993380" clover="3.2.0">
+  <project timestamp="1706219993380" name="All files">
+    <metrics statements="174" coveredstatements="103" conditionals="37" coveredconditionals="13" methods="52" coveredmethods="26" elements="263" coveredelements="142" complexity="0" loc="174" ncloc="174" packages="2" files="16" classes="16"/>
     <package name="Components">
-      <metrics statements="105" coveredstatements="37" conditionals="19" coveredconditionals="8" methods="34" coveredmethods="14"/>
+      <metrics statements="97" coveredstatements="47" conditionals="23" coveredconditionals="8" methods="33" coveredmethods="18"/>
       <file name="Asset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Asset.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="17" count="12" type="stmt"/>
@@ -13,31 +13,14 @@
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="12" count="6" type="stmt"/>
       </file>
-      <file name="BlurModall.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/BlurModall.tsx">
-        <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-      </file>
       <file name="Card.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Card.tsx">
-        <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
       <file name="GreyBackgroundBar.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/GreyBackgroundBar.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -53,13 +36,13 @@
         <line num="10" count="6" type="stmt"/>
       </file>
       <file name="GreyTextInputBar.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/GreyTextInputBar.jsx">
-        <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
-        <line num="11" count="7" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="15" count="7" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
       </file>
       <file name="OneFiAsset.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/OneFiAsset.jsx">
         <metrics statements="15" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="3"/>
@@ -80,7 +63,7 @@
         <line num="39" count="2" type="stmt"/>
       </file>
       <file name="PageHeader.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/PageHeader.tsx">
-        <metrics statements="34" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="40" coveredstatements="0" conditionals="11" coveredconditionals="0" methods="13" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -89,47 +72,53 @@
         <line num="16" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
         <line num="103" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
         <line num="108" count="0" type="stmt"/>
-        <line num="110" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="111" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="111" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="112" count="0" type="stmt"/>
         <line num="113" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
+        <line num="114" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
         <line num="135" count="0" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="160" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
       </file>
       <file name="PrimaryBtn.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/PrimaryBtn.tsx">
         <metrics statements="12" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
-        <line num="1" count="7" type="stmt"/>
-        <line num="9" count="7" type="stmt"/>
-        <line num="10" count="7" type="stmt"/>
-        <line num="15" count="7" type="stmt"/>
-        <line num="21" count="9" type="stmt"/>
-        <line num="22" count="9" type="stmt"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="33" count="9" type="stmt"/>
-        <line num="54" count="7" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
       </file>
       <file name="Provider.jsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/Components/Provider.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -156,76 +145,76 @@
       </file>
     </package>
     <package name="screens">
-      <metrics statements="77" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="19" coveredmethods="0"/>
+      <metrics statements="77" coveredstatements="56" conditionals="14" coveredconditionals="5" methods="19" coveredmethods="8"/>
       <file name="ConnectScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ConnectScreen.tsx">
-        <metrics statements="26" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
+        <metrics statements="26" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
       </file>
       <file name="ConnectStatusScreen.tsx" path="/Users/sungyukwon/Downloads/xonefi-mobile-js/src/screens/ConnectStatusScreen.tsx">
-        <metrics statements="51" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <metrics statements="51" coveredstatements="35" conditionals="14" coveredconditionals="5" methods="12" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="52" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="72" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="73" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
         <line num="80" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="81" count="0" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
@@ -233,12 +222,12 @@
         <line num="85" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="86" count="0" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
-        <line num="227" count="0" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="224" count="1" type="stmt"/>
+        <line num="227" count="1" type="stmt"/>
       </file>
     </package>
   </project>
