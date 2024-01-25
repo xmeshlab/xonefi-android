@@ -146,8 +146,8 @@ android {
         applicationId 'com.onefi.XOneFiApp'
         minSdkVersion 26
         targetSdkVersion 33
-        versionCode 3
-        versionName "1.0.4"
+        versionCode 4
+        versionName "1.0.5"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         multiDexEnabled true
 
