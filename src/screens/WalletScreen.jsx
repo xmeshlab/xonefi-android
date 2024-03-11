@@ -21,7 +21,7 @@ import { EthLogoSVG } from "../icons/crypto_icons";
 import { BitcoinLogoSVG } from "../icons/crypto_icons";
 import { CashLogoSVG } from "../icons/crypto_icons";
 import { BianaceLogoSVG } from "../icons/crypto_icons";
-import { NeoLogoSVG } from "../icons/crypto_icons";
+//import { NeoLogoSVG } from "../icons/crypto_icons";
 import { SolanaLogoSVG } from "../icons/crypto_icons";
 import { MaticLogoSVG } from "../icons/crypto_icons";
 
@@ -77,7 +77,7 @@ export default function WalletScreen({ navigation }) {
       setTimeout(function () {
         setBackgroundFlash(false);
       }, 50);
-    }, 10000);
+    }, 20000);
 
     return () => {
       clearInterval(interval);
@@ -97,16 +97,16 @@ export default function WalletScreen({ navigation }) {
           <Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"
-            AssetPrice={priceJson.ethereum.usd}
+            AssetPrice={priceJson.ethereum?.usd || 'N/A'}
             AssetLogo={() => <EthLogoSVG />}
-            AssetChange={Number(priceJson.ethereum.usd_24h_change).toFixed(2)}
+            AssetChange={Number(priceJson.ethereum?.usd_24h_change || 0).toFixed(2)}
           />
           <Asset
             AssetName="BTC Wallet"
             AssetAmount={"0 BTC"}
-            AssetPrice={priceJson.bitcoin.usd}
+            AssetPrice={priceJson.bitcoin?.usd || 'N/A'}
             AssetLogo={() => <BitcoinLogoSVG />}
-            AssetChange={Number(priceJson.bitcoin.usd_24h_change).toFixed(2)}
+            AssetChange={Number(priceJson.bitcoin?.usd_24h_change || 0).toFixed(2)}
           />
           <Asset
             AssetName="Cash (USD)"
@@ -118,33 +118,26 @@ export default function WalletScreen({ navigation }) {
           <Asset
             AssetName="Binance Wallet"
             AssetAmount="0 BNB"
-            AssetPrice={priceJson.binancecoin.usd}
+            AssetPrice={priceJson.binancecoin?.usd || 'N/A'}
             AssetLogo={() => <BianaceLogoSVG />}
-            AssetChange={Number(priceJson.binancecoin.usd_24h_change).toFixed(
+            AssetChange={Number(priceJson.binancecoin?.usd_24h_change || 0).toFixed(
               2
             )}
           />
           <Asset
-            AssetName="Neo Wallet"
-            AssetAmount="0 NEO"
-            AssetPrice={38.91}
-            AssetLogo={() => <NeoLogoSVG />}
-            AssetChange={7.0}
-          />
-          <Asset
             AssetName="Solana Wallet"
             AssetAmount="0 SOL"
-            AssetPrice={priceJson.solana.usd}
+            AssetPrice={priceJson.solana?.usd || 'N/A'}
             AssetLogo={() => <SolanaLogoSVG />}
-            AssetChange={Number(priceJson.solana.usd_24h_change).toFixed(2)}
+            AssetChange={Number(priceJson.solana?.usd_24h_change || 0).toFixed(2)}
           />
           <Asset
             AssetName="Matic Wallet"
             AssetAmount="0 MATIC"
-            AssetPrice={priceJson["matic-network"].usd}
+            AssetPrice={priceJson["matic-network"]?.usd || 'N/A'}
             AssetLogo={() => <MaticLogoSVG />}
             AssetChange={Number(
-              priceJson["matic-network"].usd_24h_change
+              priceJson["matic-network"]?.usd_24h_change || 0
             ).toFixed(2)}
           />
         </ScrollView>
