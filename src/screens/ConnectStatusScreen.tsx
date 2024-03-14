@@ -33,8 +33,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   //This is a state variable for if the User is connected to a Provider. This variable is gotten by reading the default config
   //The devolper has a connectStatus object which holds information form the dummy data. Might need to delte this
   const [isConnected, setIsConnected] = useState<boolean>(false);
-  const [lastSackTimestamp, setLastSackTimestap] = useState(0);
-  const [initialSackTimestamp, setInitialSackTimestamp] = useState(0);
+  const [lastSackNum, setLastSackNum] = useState(0);
   const [usageCost, setUsageCost] = useState(25);
 
   
@@ -79,16 +78,11 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
     let interval = setInterval(() => {
       if(isConnected == true){
         read_default_config((config_json) => {
-          const lastSackTime = config_json.client_session.last_sack_timestamp
-          setLastSackTimestap(lastSackTime)
-
-          if(lastSackTime > 0){
-            const initalTimestamp = config_json.client_session.started_timestamp
-            setInitialSackTimestamp(initalTimestamp)
-          }
+          const lastSackNum = config_json.client_session.sack_number
+          setLastSackNum(lastSackNum)
         });
     }
-  }, 60000);
+  }, 30000);
 
   return () => {
     clearInterval(interval);
@@ -106,11 +100,11 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <View
             style={[style.summaryItem, style.summaryItemValueWithoutBorder]}
           >
-            <Text style={style.summaryItemValue}>{Number((Math.floor((lastSackTimestamp-initialSackTimestamp)/60)) * (usageCost/60)).toFixed(2)}</Text>
+            <Text style={style.summaryItemValue}>{Number(lastSackNum * (usageCost/60)).toFixed(2)}</Text>
             <Text style={style.summaryDesc}>OFI TOKENS</Text>
           </View>
           <View style={style.summaryItem}>
-            <Text style={style.summaryItemValue}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)}</Text>
+            <Text style={style.summaryItemValue}>{lastSackNum}</Text>
             <Text style={style.summaryDesc}>MINUTES</Text>
           </View>
           <View style={style.summaryItem}>
@@ -174,7 +168,7 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
           <Text style={[style.descriptionItem, { width: "69%" }]}>
             Usage Time
           </Text>
-          <Text style={style.descriptionItem}>{Math.floor((lastSackTimestamp-initialSackTimestamp)/60)} min</Text>
+          <Text style={style.descriptionItem}>{lastSackNum} min</Text>
         </View>
       </Card>
       <View
