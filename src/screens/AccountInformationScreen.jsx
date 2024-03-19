@@ -16,34 +16,6 @@ import Web3 from "web3";
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 
-//functions for opening links
-const openPrivacyPoligy = async () => {
-  // Checking if the link is supported for links with custom URL scheme.
-  const supported = await Linking.canOpenURL("https://xmesh.org/PrivacyPolicy");
-
-  if (supported) {
-    // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-    // by some browser in the mobile
-    await Linking.openURL("https://xmesh.org/PrivacyPolicy");
-  } else {
-    Alert.alert("Failed to Open Privacy Policy");
-  }
-}
-
-//functions for opening links
-const openTermsAndConditions = async () => {
-  // Checking if the link is supported for links with custom URL scheme.
-  const supported = await Linking.canOpenURL("https://xmesh.org/TermsAndConditions");
-
-  if (supported) {
-    // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-    // by some browser in the mobile
-    await Linking.openURL("https://xmesh.org/TermsAndConditions");
-  } else {
-    Alert.alert("Failed to Open Terms and Conditions");
-  }
-}
-
 export function AccountInformationScreen({ navigation, userContext_array }) {
   const [pkModalIsOpen, setPKModalIsOpen] = useState(false);
   const [addressModalIsOpen, setAddressModalIsOpen] = useState(false);
@@ -93,35 +65,6 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           </>
         }
       />*/}
-
-      <GreyBackgroundBox
-        titleText={"Legal"}
-        children={
-          <>
-            <GreyBackgroundBar
-              LeftText={"Terms"}
-              RightSideComponent={
-                <ViewButton
-                  OnPressFunction={
-                    openTermsAndConditions
-                  }
-                />
-              }
-            />
-
-            <GreyBackgroundBar
-              LeftText={"Privacy Policy"}
-              RightSideComponent={
-                <ViewButton
-                  OnPressFunction={
-                    openPrivacyPoligy
-                  }
-                />
-              }
-            />
-          </>
-        }
-      />
 
       <GreyBackgroundBox
         titleText={"Wallet Address"}
