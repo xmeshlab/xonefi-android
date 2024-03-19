@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Text, Image, NativeModules } from "react-native";
 import {createContext, useContext} from 'react'
 
@@ -15,6 +15,7 @@ import ProviderScreen from "./screens/ProviderScreen";
 import WalletScreen from "./screens/WalletScreen";
 import ProviderDetailScreen from "./screens/ProviderDetailScreen";
 import AccountInformationScreen from "./screens/AccountInformationScreen";
+import { LegalScreen } from "./screens/LegalScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
 import PayAndConnectScreen from "./screens/PayAndConnect";
 import { useCallback, useEffect, useState } from "react";
@@ -54,6 +55,11 @@ import { isClientConnectedToXoneFi, getPermission } from "./hooks/isClientConnec
 import { getCurrentConnectedSSID } from "./hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
+import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+
+//button onclick growth
+import {Animated, Easing, StyleSheet} from 'react-native';
+import type {EasingFunction} from 'react-native';
 
 //import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
@@ -81,6 +87,7 @@ export type GlobalRoute = {
   ["Linked Payment Card"]: undefined;
   ["Create New Account"]: undefined;
   ["Account Information"]: undefined;
+  ["Legal"]: undefined;
   Logout: undefined;
   PayAndConnect: Partial<WifiWithSignalLevel>;
   ConnectStatus: undefined;
@@ -113,6 +120,22 @@ function HomeTab() {
     console.log("start scan");
     console.log("after scan");
   }, []);
+  let opacity = new Animated.Value(0);
+
+const animate = () => {
+  opacity.setValue(0);
+  Animated.timing(opacity, {
+    toValue: 1,
+    duration: 600,
+    easing: Easing.elastic(4),
+    useNativeDriver: true,
+  }).start();
+  console.log("Animate Called")
+};
+//const Animatedbars = Animated.createAnimatedComponent(<BarIcon36 />)
+const bars = useRef(new Animated.Value(0)).current;
+
+
   const tabNavigatorScreenOptions: DefaultNavigatorOptions<
     any,
     any,
@@ -123,19 +146,19 @@ function HomeTab() {
     return {
       tabBarIcon: (param) => {
         const { focused, color, size } = param;
-        let iconPath;
         let rn = route.name;
         const iconColor = focused ? colors.light : colors.inActiveColor;
+        const strokeWidth = focused ? 4 : 2;
         if (rn === connectName) {
-          return <BarIcon36 color={iconColor} />;
+          return <TouchableOpacity onPress={() => animate()}><Animated.View><BarIcon36 color={iconColor} strokeWidth={strokeWidth}/></Animated.View></TouchableOpacity>;
         } else if (rn === linkedAccountName) {
-          return <UserIcon36 color={iconColor} />;
+          return <Animated.View><UserIcon36 color={iconColor} strokeWidth={strokeWidth}/></Animated.View>;
         } else if (rn === StatusName) {
-          return <WifiIcon36 color={iconColor} />;
+          return < TouchableHighlight><WifiIcon36 color={iconColor} strokeWidth={strokeWidth}/></TouchableHighlight>;
         } else if (rn === ProviderName) {
-          return <CircleIcon color={iconColor} />;
+          return  < TouchableHighlight><CircleIcon color={iconColor} strokeWidth={strokeWidth}/></TouchableHighlight>;
         } else if (rn === cardName) {
-          return <CardIcon36 color={iconColor} />;
+          return <CardIcon36 color={iconColor} strokeWidth={strokeWidth}/>;
         }
         return null;
       },
@@ -364,6 +387,14 @@ export default function MainContainer() {
               title: "Account Information",
             }}
             component={AccountInformationScreen}
+          />
+          <Stack.Screen
+            name="Legal"
+            options={{
+              ...stackNavigatorScreenOptions,
+              title: "Legal",
+            }}
+            component={LegalScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

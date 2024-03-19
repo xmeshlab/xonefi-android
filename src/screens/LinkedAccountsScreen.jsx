@@ -34,7 +34,7 @@ export default function LinkedAccountScreen({ navigation }) {
       <GreyButton
         imageSource={UserIcon}
         textInput={"Legal"}
-        onPressFunction={() => navigation.navigate("Account Information")}
+        onPressFunction={() => navigation.navigate("Legal")}
       />
       <GreyButton
         imageSource={LogoutIcon}
