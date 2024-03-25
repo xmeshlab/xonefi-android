@@ -43,7 +43,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
                 LeftText={"Current Version"}
                 RightSideComponent={
                   <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
-                    <Text className="text-white">1.0.7</Text>
+                    <Text className="text-white">1.0.8</Text>
                 </View>
                 }
               />
