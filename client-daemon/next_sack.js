@@ -50,7 +50,7 @@ function send_next_sack(config_json, user_password, private_key, callback) {
   let current_sack_amount =
     config_json.client_session.sack_amount *
     (config_json.client_session.sack_number + 1) *
-    Math.pow(10, 12);
+    Math.pow(10, 18);
 
   let session = config_json.client_session;
   session.status = session_status.status.ACTIVE;

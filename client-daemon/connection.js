@@ -110,7 +110,7 @@ function initiate_connection(
 
   if (hotspot_type_json.access_method === "pft") {
     calculated_pafren_amount =
-      deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 60;
+      deserealized_ssid.cost * deserealized_ssid.pafren * 0.01;
   } else if (hotspot_type_json.access_method === "pfd") {
     calculated_pafren_amount =
       deserealized_ssid.cost * deserealized_ssid.pafren * 0.01 * 64;
@@ -139,7 +139,7 @@ function initiate_connection(
 
   if (hotspot_type_json.access_method === "pft") {
     calculated_number_of_sacks =
-      calculated_pafren_amount / (calculated_sack_amount * 60);
+      calculated_pafren_amount / calculated_sack_amount;
   } else if (hotspot_type_json.access_method === "pfd") {
     calculated_number_of_sacks =
       calculated_pafren_amount / (calculated_sack_amount * 64);
@@ -246,7 +246,7 @@ function initiate_connection(
                   //let current_amount = deserealized_ssid.pafren * 0.01 * deserealized_ssid.cost * Math.pow(10, 12);
 
                   let current_amount =
-                    calculated_pafren_amount * Math.pow(10, 12);
+                    calculated_pafren_amount * Math.pow(10, 18);
                   console.log(`CALCULATED current_amount: ${current_amount}`);
 
                   let current_timestamp = timestamp.get_current_timestamp();
@@ -325,7 +325,7 @@ function initiate_connection(
                             let current_sack_amount =
                               config_json.client_session.sack_amount *
                               (config_json.client_session.sack_number + 1) *
-                              Math.pow(10, 12);
+                              Math.pow(10, 18);
                             console.log(
                               `XLOG: config_json.client_session.sack_amount: ${config_json.client_session.sack_amount}`
                             );
