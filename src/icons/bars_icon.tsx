@@ -20,11 +20,33 @@ export const BarIcon = (props: SvgProps) => (
   </Svg>
 );
 
+//stpleWidth = 4
+//width height = 37
 export function BarIcon36(props: SvgProps) {
   return (
     <Svg
       width={37}
       height={37}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+        stroke={props.color ?? "#fff"}
+        strokeWidth={props.strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+//need to pass as params
+//      width={37}
+//height={37}
+export function BarIconCustomSize(props: SvgProps) {
+  return (
+    <Svg
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

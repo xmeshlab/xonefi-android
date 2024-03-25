@@ -15,11 +15,6 @@ import storePrivteKey from "../hooks/StorePrivateKey"
 export default function LinkedAccountScreen({ navigation }) {
   const userContext_array = useUserContext();
 
-  const onTouchableOpacityPress = useCallback(
-    () => navigation.navigate("Account Information"),
-    []
-  );
-
   return (
     //<View className="flex-1 flex-col bg-black pt-5">
     <View
@@ -34,7 +29,12 @@ export default function LinkedAccountScreen({ navigation }) {
       <GreyButton
         imageSource={UserIcon}
         textInput={"Account Information"}
-        onPressFunction={onTouchableOpacityPress}
+        onPressFunction={() => navigation.navigate("Account Information")}
+      />
+      <GreyButton
+        imageSource={UserIcon}
+        textInput={"Legal"}
+        onPressFunction={() => navigation.navigate("Legal")}
       />
       <GreyButton
         imageSource={LogoutIcon}

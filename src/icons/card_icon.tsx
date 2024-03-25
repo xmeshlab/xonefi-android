@@ -39,7 +39,7 @@ export function CardIcon36(props: SvgProps) {
       <Path
         d="M31.5 6.5h-27a3 3 0 00-3 3v18a3 3 0 003 3h27a3 3 0 003-3v-18a3 3 0 00-3-3zM1.5 15.5h33"
         stroke={props.color ?? "#fff"}
-        strokeWidth={2}
+        strokeWidth={props.strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
