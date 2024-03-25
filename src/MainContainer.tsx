@@ -57,10 +57,6 @@ import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 
-//button onclick growth
-import {Animated, Easing, StyleSheet} from 'react-native';
-import type {EasingFunction} from 'react-native';
-
 //import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
 //screen names
@@ -120,21 +116,6 @@ function HomeTab() {
     console.log("start scan");
     console.log("after scan");
   }, []);
-  let opacity = new Animated.Value(0);
-
-const animate = () => {
-  opacity.setValue(0);
-  Animated.timing(opacity, {
-    toValue: 1,
-    duration: 600,
-    easing: Easing.elastic(4),
-    useNativeDriver: true,
-  }).start();
-  console.log("Animate Called")
-};
-//const Animatedbars = Animated.createAnimatedComponent(<BarIcon36 />)
-const bars = useRef(new Animated.Value(0)).current;
-
 
   const tabNavigatorScreenOptions: DefaultNavigatorOptions<
     any,
@@ -150,13 +131,13 @@ const bars = useRef(new Animated.Value(0)).current;
         const iconColor = focused ? colors.light : colors.inActiveColor;
         const strokeWidth = focused ? 4 : 2;
         if (rn === connectName) {
-          return <TouchableOpacity onPress={() => animate()}><Animated.View><BarIcon36 color={iconColor} strokeWidth={strokeWidth}/></Animated.View></TouchableOpacity>;
+          return <BarIcon36 color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === linkedAccountName) {
-          return <Animated.View><UserIcon36 color={iconColor} strokeWidth={strokeWidth}/></Animated.View>;
+          return <UserIcon36 color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === StatusName) {
-          return < TouchableHighlight><WifiIcon36 color={iconColor} strokeWidth={strokeWidth}/></TouchableHighlight>;
+          return <WifiIcon36 color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === ProviderName) {
-          return  < TouchableHighlight><CircleIcon color={iconColor} strokeWidth={strokeWidth}/></TouchableHighlight>;
+          return <CircleIcon color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === cardName) {
           return <CardIcon36 color={iconColor} strokeWidth={strokeWidth}/>;
         }
