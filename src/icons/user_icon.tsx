@@ -32,7 +32,7 @@ export function UserIcon36(props) {
       <Path
         d="M30.421 32v-3a6 6 0 00-6-6h-12a6 6 0 00-6 6v3M18.421 17a6 6 0 100-12 6 6 0 000 12z"
         stroke={props.color ?? "#fff"}
-        strokeWidth={2}
+        strokeWidth={props.strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />

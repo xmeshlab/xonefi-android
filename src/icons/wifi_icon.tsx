@@ -31,7 +31,7 @@ export function WifiIcon36(props: SvgProps) {
       <Path
         d="M5.667 16.083a12.75 12.75 0 0112.75 12.75M5.667 6.167a22.667 22.667 0 0122.666 22.667M7.083 28.833a1.417 1.417 0 100-2.833 1.417 1.417 0 000 2.833z"
         stroke={props.color ?? "#fff"}
-        strokeWidth={2}
+        strokeWidth={props.strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
