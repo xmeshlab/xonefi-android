@@ -57,6 +57,8 @@ import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 
+import { BarIconAnimated } from "./icons/bar_icon_animated";
+
 //import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
 //screen names
@@ -131,7 +133,7 @@ function HomeTab() {
         const iconColor = focused ? colors.light : colors.inActiveColor;
         const strokeWidth = focused ? 4 : 2;
         if (rn === connectName) {
-          return <BarIcon36 color={iconColor} strokeWidth={strokeWidth}/>
+          return <BarIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === linkedAccountName) {
           return <UserIcon36 color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === StatusName) {
