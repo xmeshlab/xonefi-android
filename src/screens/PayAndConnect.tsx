@@ -125,21 +125,23 @@ const context_array = useUserContext();
 const user_address = web3.eth.accounts.privateKeyToAccount(context_array[0]).address
 const [userBalance, setUserBalance] = useState(-1);
 
+// Fetch user balance using coingecko API
 useEffect(() => {
-    const token = ""
-    const url = "http://137.184.243.11:3000/quickservice?op=ofibalance&token=c916b36&address=" + user_address
-    fetch(url).then((res) => res.json())
+  const token = ""
+  const url = "http://137.184.243.11:3000/quickservice?op=ofibalance&token=c916b36&address=" + user_address
+  fetch(url).then((res) => res.json())
     .then((resJSON) => {
-       console.log("resJson : ")
-       console.log(resJSON)
-       if(resJSON == -1){
-         setUserBalance("Error");
-       }else{
-         const normalized_balance = resJSON / 10**18
-         setUserBalance(normalized_balance);
-       }
-       });
-
+      console.log("resJson : ")
+      console.log(resJSON)
+      if(resJSON == -1){
+        //Error
+        //alert("DEBUG : API FAIL")
+        setUserBalance(-1);
+      }else{
+        const normalized_balance = resJSON / 10**18
+        setUserBalance(normalized_balance);
+      }
+  });
 }, []);
 
 
@@ -149,6 +151,27 @@ useEffect(() => {
   const payAndConnect = async () => {
 
     console.log("@DEBUG: BALANCE" , userBalance)
+
+    //userBalance will be -1 only if the original CoinGecko API call failed
+    //Retry API request otherwise show message that API is down
+    if (userBalance == -1){
+      const token = ""
+      const url = "http://137.184.243.11:3000/quickservice?op=ofibalance&token=c916b36&address=" + user_address
+      fetch(url).then((res) => res.json())
+        .then((resJSON) => {
+          console.log("resJson : ")
+          console.log(resJSON)
+          if(resJSON == -1){
+            //Error
+            Alert.alert('API ERROR', 'Please try again', [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ]);
+          }else{
+            const normalized_balance = resJSON / 10**18
+            setUserBalance(normalized_balance);
+          }
+      });
+    } 
 
     if (userBalance > 0){
 
@@ -180,10 +203,13 @@ useEffect(() => {
       if (OsVer >= 10) {
         //Call the connectToWifi function in our native module WifiModule.java. This will use Suggestions API so the user does not have to input the password
         //Then it will route the user to the wifi options page and tell them to switch to the XOneFi Provider API
+        console.log("Calling Native Modules");
+        console.log("provided prefix for password : " + ssid_json.prefix);
         WifiModule.connectToWifi2(SSID, ssid_json.prefix);
         //WifiModule.connectToWifiRequest(SSID, ssid_json.prefix);
         //WifiModule.ShowNotification(SSID);
       } else {
+        console.log("Calling wifi manager");
         WifiManager.connectToProtectedSSID(
           SSID,
           ssid_json.prefix,
@@ -208,7 +234,7 @@ useEffect(() => {
       );
     }
     }
-    else{
+    else if(userBalance == 0){
     console.log("@DEBUG: Balance is 0")
     Alert.alert('Low Balance', 'Please deposit OFI tokens', [
           {text: 'OK', onPress: () => console.log('OK Pressed')},
