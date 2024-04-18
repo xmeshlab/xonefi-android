@@ -9,10 +9,14 @@ function delay(milliseconds){
     });
 }
 
-export function BarIconAnimated(props: SvgProps) {
+//stpleWidth = 4
+//width height = 37
+//d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+//change v value for animation
+export function CardIconAnimated(props: SvgProps) {
 
     const strokeWidth = useState(new Animated.Value(0))[0];// Initial 
-    const [extraStrokeWidth, setExtraStrokeWidth] = useState(props.strokeWidth);
+    const [extraStokeWidth, setExtraStrokeWidth] = useState(props.strokeWidth);
 
     async function GrowAndShrink(setExtraStrokeWidth){
         let initial: number = +props.strokeWidth;
@@ -36,16 +40,16 @@ export function BarIconAnimated(props: SvgProps) {
     return (
         <TouchableOpacity className="w-37 h-37" onPress={()=>{GrowAndShrink(setExtraStrokeWidth)}}>
             <Svg
-            width={37}
+            width={36}
             height={37}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             {...props}
-            >
+        >
                 <Path
-                d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+                d="M31.5 6.5h-27a3 3 0 00-3 3v18a3 3 0 003 3h27a3 3 0 003-3v-18a3 3 0 00-3-3zM1.5 15.5h33"
                 stroke={props.color ?? "#fff"}
-                strokeWidth={extraStrokeWidth}
+                strokeWidth={extraStokeWidth}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 />

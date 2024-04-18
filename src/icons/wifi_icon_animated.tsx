@@ -9,24 +9,28 @@ function delay(milliseconds){
     });
 }
 
-export function BarIconAnimated(props: SvgProps) {
+//stpleWidth = 4
+//width height = 37
+//d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+//change v value for animation
+export function WifiIconAnimated(props: SvgProps) {
 
-    const strokeWidth = useState(new Animated.Value(0))[0];// Initial 
-    const [extraStrokeWidth, setExtraStrokeWidth] = useState(props.strokeWidth);
+    const stokeWidth = useState(new Animated.Value(0))[0];// Initial 
+    const [extraStrokeWidth, setExtraStokeWidth] = useState(props.strokeWidth);
 
-    async function GrowAndShrink(setExtraStrokeWidth){
+    async function GrowAndShrink(setExtraStokeWidth){
         let initial: number = +props.strokeWidth;
-        strokeWidth.addListener((value) => {
+        stokeWidth.addListener((value) => {
             //console.log(value);
-            setExtraStrokeWidth(value.value);
+            setExtraStokeWidth(value.value);
           });
-        Animated.timing(strokeWidth, {
+        Animated.timing(stokeWidth, {
             toValue: initial+ 2,
             duration: 150, 
             useNativeDriver: false
         }).start()
         await delay(150);
-        Animated.timing(strokeWidth, {
+        Animated.timing(stokeWidth, {
             toValue: initial,
             duration: 150, 
             useNativeDriver: false
@@ -34,16 +38,16 @@ export function BarIconAnimated(props: SvgProps) {
     }
 
     return (
-        <TouchableOpacity className="w-37 h-37" onPress={()=>{GrowAndShrink(setExtraStrokeWidth)}}>
+        <TouchableOpacity className="w-37 h-37" onPress={()=>{GrowAndShrink(setExtraStokeWidth)}}>
             <Svg
-            width={37}
-            height={37}
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            {...props}
+                width={34}
+                height={35}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                {...props}
             >
                 <Path
-                d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+                d="M5.667 16.083a12.75 12.75 0 0112.75 12.75M5.667 6.167a22.667 22.667 0 0122.666 22.667M7.083 28.833a1.417 1.417 0 100-2.833 1.417 1.417 0 000 2.833z"
                 stroke={props.color ?? "#fff"}
                 strokeWidth={extraStrokeWidth}
                 strokeLinecap="round"
