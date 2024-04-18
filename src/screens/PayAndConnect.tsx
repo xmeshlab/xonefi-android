@@ -163,7 +163,7 @@ useEffect(() => {
           console.log(resJSON)
           if(resJSON == -1){
             //Error
-            Alert.alert('API ERROR', 'Please try again', [
+            Alert.alert('API ERROR', '', [
               {text: 'OK', onPress: () => console.log('OK Pressed')},
               ]);
           }else{
