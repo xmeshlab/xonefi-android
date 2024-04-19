@@ -19,11 +19,6 @@ import { LegalScreen } from "./screens/LegalScreen";
 import LinkedPaymentCardScreen from "./screens/LinkedPaymentCardScreen";
 import PayAndConnectScreen from "./screens/PayAndConnect";
 import { useCallback, useEffect, useState } from "react";
-import {BarIcon, BarIcon36} from "./icons/bars_icon";
-import {CardIcon, CardIcon36} from "./icons/card_icon";
-import {WifiIcon, WifiIcon36} from "./icons/wifi_icon";
-import {UserIcon, UserIcon36} from "./icons/user_icon";
-import CircleIcon from "./icons/circles_icon";
 import {
   DefaultNavigatorOptions,
   RouteConfig,
@@ -56,6 +51,12 @@ import { getCurrentConnectedSSID } from "./hooks/GetConnectedSSID";
 import { getCurrentLinkpeed } from "./hooks/GetLinkSpeed";
 import {useNetInfo} from "@react-native-community/netinfo";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+
+import { BarIconAnimated } from "./icons/bar_icon_animated";
+import { CardIconAnimated } from "./icons/card_icon_animated";
+import { WifiIconAnimated } from "./icons/wifi_icon_animated";
+import { UserIconAnimated } from "./icons/user_icon_animated";
+import { CircleIconAnimated } from "./icons/circle_icon_animated";
 
 //import { useLinkSpeedContext } from "./context/LinkSpeedContext";
 
@@ -129,17 +130,17 @@ function HomeTab() {
         const { focused, color, size } = param;
         let rn = route.name;
         const iconColor = focused ? colors.light : colors.inActiveColor;
-        const strokeWidth = focused ? 4 : 2;
+        const strokeWidth = focused ? 3 : 2;
         if (rn === connectName) {
-          return <BarIcon36 color={iconColor} strokeWidth={strokeWidth}/>
+          return <BarIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === linkedAccountName) {
-          return <UserIcon36 color={iconColor} strokeWidth={strokeWidth}/>
+          return <UserIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === StatusName) {
-          return <WifiIcon36 color={iconColor} strokeWidth={strokeWidth}/>
+          return <WifiIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === ProviderName) {
-          return <CircleIcon color={iconColor} strokeWidth={strokeWidth}/>
+          return <CircleIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
         } else if (rn === cardName) {
-          return <CardIcon36 color={iconColor} strokeWidth={strokeWidth}/>;
+          return <CardIconAnimated color={iconColor} strokeWidth={strokeWidth}/>;
         }
         return null;
       },
