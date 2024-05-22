@@ -36,22 +36,37 @@ export type PageHeaderProps = BottomTabHeaderProps & {
 const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
   const userContext_array = useUserContext();
 
-  return (
-    <>
-      <View style={userContext_array[4] == "black" ? pageHeaderStyle.headerStatusPadding : {
-    height: getStatusBarHeight(),
-    backgroundColor: "white",
-  }} />
-      <View style={pageHeaderStyle.header}>
-        <View style={pageHeaderStyle.headerBtn}>{props?.leftView ?? null}</View>
-
-        <Text style={pageHeaderStyle.headerTitle}>{props.options.title}</Text>
-        <View style={pageHeaderStyle.headerBtn}>
-          {props?.rightView ?? null}
+  if(userContext_array[4] == "black"){
+    return (
+      <>
+        <View style={pageHeaderStyle.headerStatusPadding} />
+        <View style={pageHeaderStyle.header}>
+          <View style={pageHeaderStyle.headerBtn}>{props?.leftView ?? null}</View>
+  
+          <Text style={pageHeaderStyle.headerTitle}>{props.options.title}</Text>
+          <View style={pageHeaderStyle.headerBtn}>
+            {props?.rightView ?? null}
+          </View>
         </View>
-      </View>
-    </>
-  );
+      </>
+    );
+
+  }else{
+    return (
+      <>
+        <View style={pageHeaderStyleWhiteBackground.headerStatusPadding } />
+        <View style={pageHeaderStyleWhiteBackground.header}>
+          <View style={pageHeaderStyleWhiteBackground.headerBtn}>{props?.leftView ?? null}</View>
+  
+          <Text style={pageHeaderStyleWhiteBackground.headerTitle}>{props.options.title}</Text>
+          <View style={pageHeaderStyleWhiteBackground.headerBtn}>
+            {props?.rightView ?? null}
+          </View>
+        </View>
+      </>
+    );
+
+  }
 };
 export const WithBackBtnPageHeader: FunctionComponent<PageHeaderProps> = ({
   leftView,
@@ -193,6 +208,31 @@ const pageHeaderStyle = StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   headerTitle: { fontSize: 20, fontWeight: "bold", color: "#fff" },
+  headerBtn: {
+    height: 40,
+    width: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+const pageHeaderStyleWhiteBackground = StyleSheet.create({
+  headerStatusPadding: {
+    height: getStatusBarHeight(),
+    backgroundColor: "#fff",
+  },
+  header: {
+    height: 60,
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: "#000000" },
   headerBtn: {
     height: 40,
     width: 40,
