@@ -36,6 +36,18 @@ export default function LinkedAccountScreen({ navigation }) {
         textInput={"Legal"}
         onPressFunction={() => navigation.navigate("Legal")}
       />
+
+    <GreyButton
+        imageSource={UserIcon}
+        textInput={"Change Background Color"}
+        onPressFunction={() => {
+          if(userContext_array[4] == "black"){
+            userContext_array[5]("white");
+          }else{
+            userContext_array[5]("black");
+          }}}
+      />
+      
       <GreyButton
         imageSource={LogoutIcon}
         textInput={"Logout"}

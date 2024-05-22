@@ -23,6 +23,8 @@ import WifiManager from "react-native-wifi-reborn";
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
 import { read_default_config } from "../../xonefi-api-client/config";
 
+import { useUserContext } from "../context/UserContext";
+
 
 //import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
 //Use professor Nick's client status
@@ -32,9 +34,14 @@ export type PageHeaderProps = BottomTabHeaderProps & {
   rightView?: JSX.Element;
 };
 const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
+  const userContext_array = useUserContext();
+
   return (
     <>
-      <View style={pageHeaderStyle.headerStatusPadding} />
+      <View style={userContext_array[4] == "black" ? pageHeaderStyle.headerStatusPadding : {
+    height: getStatusBarHeight(),
+    backgroundColor: "white",
+  }} />
       <View style={pageHeaderStyle.header}>
         <View style={pageHeaderStyle.headerBtn}>{props?.leftView ?? null}</View>
 
