@@ -24,7 +24,7 @@ import {
   RouteConfig,
 } from "@react-navigation/core/lib/typescript/src/types";
 import ConnectStatusScreen from "./screens/ConnectStatusScreen";
-import { TabPageHeader, WithBackBtnPageHeader } from "./Components/PageHeader";
+import { TabPageHeader, WithBackBtnPageHeader } from "./Components/PageHeader/PageHeader";
 import { colors } from "./constants/colors";
 import { WifiWithSignalLevel } from "./types/global";
 import InitialLogInScreen from "./screens/InitialLogInScreen";
