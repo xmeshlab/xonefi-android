@@ -14,7 +14,7 @@ import Svg, {
   Stop,
 } from "react-native-svg";
 
-import Asset from "../Components/Asset";
+import Asset from "../Components/Asset/Asset";
 import OneFiAsset from "../Components/OneFiAsset";
 
 import { EthLogoSVG } from "../icons/crypto_icons";
