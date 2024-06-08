@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import GreyBackgroundBar from "../Components/GreyBackgroundBar";
-import GreyBackgroundBox from "../Components/GreyBackgroundBox";
+import BackgroundBar from "../Components/BackgroundBar/BackgroundBar";
+import GreyBackgroundBox from "../Components/GreyBackgroundBox/GreyBackgroundBox";
 import { useUserContext } from "../context/UserContext";
 
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -27,7 +27,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
           <>
              <View className="flex flex-row justify-center items-center">
                 <TouchableOpacity onPress={copyToClipboard}>
-                  <Text className="text-white text-xs">
+                  <Text className="text-xs">
                     {web3.eth.accounts.privateKeyToAccount(userContext_array[0]).address}
                   </Text>
                 </TouchableOpacity>
@@ -39,7 +39,7 @@ export function AccountInformationScreen({ navigation, userContext_array }) {
     <GreyBackgroundBox
           titleText={"App Information"}
           children={
-              <GreyBackgroundBar
+              <BackgroundBar
                 LeftText={"Current Version"}
                 RightSideComponent={
                   <View className="rounded-md border-slate-600 bg-slate-600 pl-3 pr-3 py-1">
