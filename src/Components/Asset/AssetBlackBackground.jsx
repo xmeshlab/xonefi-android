@@ -14,7 +14,7 @@ export default function AssetBlackBackground({
     const icon = AssetLogo();
   
     return (
-      <View className="flex flex-row bg-gray-800 m-2 rounded-2xl p-2">
+      <View className="flex flex-row bg-gray-800 m-2 rounded-2xl p-2 w-max">
         {icon}
         <View className="flex flex-col flex-grow">
           <View className="flex flex-row justify-between pb-1">

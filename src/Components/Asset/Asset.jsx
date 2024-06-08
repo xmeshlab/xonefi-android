@@ -14,18 +14,19 @@ export default function Asset({
   AssetPrice,
   AssetChange,
 }) {
-  const icon = AssetLogo();
   const userContext_array = useUserContext();
 
   //check background color variable in the userContext to determine which background to render
   if(userContext_array[4] == "black"){
   return (
-    <AssetBlackBackground {...props}/>
+    <AssetBlackBackground AssetAmount={AssetAmount} AssetChange={AssetChange} AssetLogo={AssetLogo}
+    AssetPrice={AssetPrice} AssetName={AssetName}/>
   );
   }else{
     //white background
     return (
-      <AssetWhiteBackground {...props}/>
+      <AssetWhiteBackground AssetAmount={AssetAmount} AssetChange={AssetChange} AssetLogo={AssetLogo}
+      AssetPrice={AssetPrice} AssetName={AssetName}/>
     );
 
   }
