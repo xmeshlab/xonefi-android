@@ -6,6 +6,8 @@ import { useUserContext } from "../context/UserContext";
 
 import AssetGain from "../../assets/AssetGainLogo.png";
 import Web3 from "web3";
+
+
 //@TODO check what the local host param is doing
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
@@ -36,21 +38,28 @@ export default function OneFiAsset({AssetPrice, AssetChange }) {
 
   }, []);
 
-  return (
-    <View className="flex flex-col bg-gray-600 m-2 rounded-lg p-2">
-      <Text className="text-white">XOneFi</Text>
-      <Text className="text-white">OFI</Text>
-      <View className="flex flex-row justify-center">
-        <Text className="text-white text-4xl mb-2 mt-2">{Number(userBalance).toFixed(3)}</Text>
-      </View>
+  const userContext_array = useUserContext();
 
-      <View className="flex flex-row justify-around">
-        <Text className="text-white">{AssetPrice}</Text>
-        <View className="flex flex-row">
-          <Image className="mr-1" source={AssetGain} />
-          <Text className="text-green-400 mr-3 pt-1">{AssetChange}</Text>
+  //check background color variable in the userContext to determine which background to render
+  if(userContext_array[4] == "black"){
+    return (
+      <View className="flex flex-col bg-gray-600 m-2 rounded-lg p-2">
+        <Text className="text-white">XOneFi</Text>
+        <Text className="text-white">OFI</Text>
+        <View className="flex flex-row justify-center">
+          <Text className="text-white text-4xl mb-2 mt-2">{Number(userBalance).toFixed(3)}</Text>
+        </View>
+
+        <View className="flex flex-row justify-around">
+          <Text className="text-white">{AssetPrice}</Text>
+          <View className="flex flex-row">
+            <Image className="mr-1" source={AssetGain} />
+            <Text className="text-green-400 mr-3 pt-1">{AssetChange}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }else{
+    //white background
+  }
 }

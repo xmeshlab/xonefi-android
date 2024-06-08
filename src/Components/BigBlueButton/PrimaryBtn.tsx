@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as React from "react";
 import { ComponentProps, useCallback, useState } from "react";
-import { useUserContext } from "../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 
 export type PrimaryBtnProps = ComponentProps<typeof TouchableOpacity> & {
   text?: string;
