@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
-import BigBlueButton from "../Components/BigBlueButton";
+import BigBlueButton from "../Components/BigBlueButton/BigBlueButton";
 import GreyTextInputBar from "../Components/GreyTextInputBar";
 import XOneFi_Logo_Big from "../icons/XOneFi";
 

@@ -10,7 +10,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import { PrimaryBtn } from "../Components/PrimaryBtn";
+import { PrimaryBtn } from "../Components/BigBlueButton/PrimaryBtn";
 import { colors } from "../constants/colors";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import { globalStyle } from "../constants/globalStyle";

@@ -11,7 +11,7 @@ import {
 import { SearchIcon } from "../../icons/search_icon";
 //componets
 import TextInputEntry from "../../Components/TextInputEntry";
-import BigBlueButton from "../../Components/BigBlueButton";
+import BigBlueButton from "../../Components/BigBlueButton/BigBlueButton";
 
 interface OwnProps {}
 

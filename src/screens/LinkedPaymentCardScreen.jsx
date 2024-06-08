@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import BigBlueButton from "../Components/BigBlueButton";
+import BigBlueButton from "../Components/BigBlueButton/BigBlueButton";
 import GreyTextInputBar from "../Components/GreyTextInputBar";
 
 export default function LinkedPaymentCardScreen({ navigation }) {

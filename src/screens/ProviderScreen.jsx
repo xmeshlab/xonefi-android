@@ -14,7 +14,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Provider from "../Components/Provider";
 import { getOneFiRouterList } from "../hooks/getOnefiRouters";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
-import { PrimaryBtn } from "../Components/PrimaryBtn";
+import { PrimaryBtn } from "../Components/BigBlueButton/PrimaryBtn";
 
 /**
  * This Screen shows the various Available XOneFi Providers. When a Provider is clicked, the user is navigated to the ProviderDetailScreen

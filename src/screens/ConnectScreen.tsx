@@ -19,7 +19,7 @@ import {
   WifiWithSignalLevel,
 } from "../types/global";
 import { NavigationProp } from "@react-navigation/core/src/types";
-import { PrimaryBtn } from "../Components/PrimaryBtn";
+import { PrimaryBtn } from "../Components/BigBlueButton/PrimaryBtn";
 import WifiLevelIcon from "../icons/WifiLevelIcon";
 import LockICon from "../icons/LockIcon";
 import { globalStyle } from "../constants/globalStyle";
