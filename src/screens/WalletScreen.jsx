@@ -15,7 +15,7 @@ import Svg, {
 } from "react-native-svg";
 
 import Asset from "../Components/Asset/Asset";
-import OneFiAsset from "../Components/OneFiAsset";
+import OneFiAsset from "../Components/OneFiAsset/OneFiAsset";
 
 import { EthLogoSVG } from "../icons/crypto_icons";
 import { BitcoinLogoSVG } from "../icons/crypto_icons";
