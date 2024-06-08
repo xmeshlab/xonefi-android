@@ -10,7 +10,7 @@ const GreyButtonBlack = ({ imageSource, textInput, onPressFunction }) => {
   return (
     <TouchableOpacity
       onPress={onPressFunction}
-      className="flex flex-row bg-slate-800 bg-rounded p-5 rounded-3xl justify-around mb-3"
+      className="flex flex-row bg-slate-800 bg-rounded p-5 rounded-3xl justify-around mb-3 m-2"
       testID="Grey Button"
     >
       <Image source={imageSource} className="" />
