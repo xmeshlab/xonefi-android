@@ -27,8 +27,6 @@ import Web3 from "web3";
 //@TODO check what the local host param is doing
 const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
-import { useUserContext } from "../context/UserContext";
-
 //API used to get information regarding the Provider. The information is encoded into the SSID
 import { deserialize_ssid } from "../../xonefi-api-client/ssid";
 
@@ -38,6 +36,8 @@ import { Circle } from "react-native-svg";
 import NetInfo from "@react-native-community/netinfo";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { isClientConnectedToXoneFi } from "../hooks/isClientConnectedToXOneFi";
+
+import { useUserContext } from "../context/UserContext";
 
 const { WifiModule } = NativeModules;
 //Takes a callback as a param
@@ -340,7 +340,8 @@ useEffect(() => {
       <View style={[globalStyle.row, style.statusView]}>
         <View style={globalStyle.row}>
           <WifiLevelIcon signalLevel={signalLevel ?? 0} />
-          <Text style={[globalStyle.light, { paddingRight: 40 }]}>{SSID}</Text>
+          {context_array[4] == "black" ? <Text style={[globalStyle.light, { paddingRight: 40 }]}>{SSID}</Text> : 
+          <Text style={{ paddingRight: 40, color:"#000000" }}>{SSID}</Text>}
         </View>
       </View>
       <View className="flex flex-col ml-5 mr-5 bg-slate-800 bg-rounded p-5 rounded-2xl justify-around">
