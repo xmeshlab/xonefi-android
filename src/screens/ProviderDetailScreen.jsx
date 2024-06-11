@@ -178,9 +178,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
           </>
         }
       />*/}
-      <Text className="text-white text-2xl mt-6 mb-8 mx-6">
+      {/*<Text className="text-white text-2xl mt-6 mb-8 mx-6">
         Connected Clients
-      </Text>
+    </Text>*/}
     </ScrollView>
     );
 
