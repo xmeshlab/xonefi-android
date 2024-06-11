@@ -11,7 +11,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 //import providor component
-import Provider from "../Components/Provider";
+import Provider from "../Components/Provider/Provider";
 import { getOneFiRouterList } from "../hooks/getOnefiRouters";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 import { PrimaryBtn } from "../Components/BigBlueButton/PrimaryBtn";
