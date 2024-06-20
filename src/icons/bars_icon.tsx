@@ -22,6 +22,8 @@ export const BarIcon = (props: SvgProps) => (
 
 //stpleWidth = 4
 //width height = 37
+//d="M9.579 30.5v-6M18.579 30.5v-15M27.579 30.5v-24"
+//change v value for animation
 export function BarIcon36(props: SvgProps) {
   return (
     <Svg

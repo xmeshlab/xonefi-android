@@ -20,6 +20,7 @@ import { NavigationProp } from "@react-navigation/core/src/types";
 import { useNavigation } from "@react-navigation/native";
 import WifiManager from "react-native-wifi-reborn";
 import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
+import { useUserContext } from "../context/UserContext";
 
 const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
   const [ssid, setSSID] = useState<string | number>();
@@ -93,6 +94,9 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
 
   const { BSSID, SSID } = { BSSID: "1111q", SSID: ssid };
 
+  const userContext_array = useUserContext();
+
+  if(userContext_array[4] == "black"){
   return (
     <ScrollView style={{ backgroundColor: "transparent" }}>
       <Card style={style.card}>
@@ -213,6 +217,130 @@ const ConnectStatusScreen: RouteComponent<"Status"> = (props) => {
       </View>
     </ScrollView>
   );
+  }else{
+    //white background
+    return (
+      <ScrollView style={{ backgroundColor: "transparent" }}>
+        <Card style={whiteBackgroundStyle.card}>
+          <View style={whiteBackgroundStyle.summaryGroup}>
+            <View
+              style={[whiteBackgroundStyle.summaryItem, whiteBackgroundStyle.summaryItemValueWithoutBorder]}
+            >
+              <Text style={whiteBackgroundStyle.summaryItemValue}>{Number(lastSackNum * (usageCost/60)).toFixed(2)}</Text>
+              <Text style={whiteBackgroundStyle.summaryDesc}>OFI TOKENS</Text>
+            </View>
+            <View style={whiteBackgroundStyle.summaryItem}>
+              <Text style={whiteBackgroundStyle.summaryItemValue}>{lastSackNum}</Text>
+              <Text style={whiteBackgroundStyle.summaryDesc}>MINUTES</Text>
+            </View>
+            <View style={whiteBackgroundStyle.summaryItem}>
+              <Text style={whiteBackgroundStyle.summaryItemValue}>{0}</Text>
+              <Text style={whiteBackgroundStyle.summaryDesc}>USD COST</Text>
+            </View>
+          </View>
+          {/*<View style={style.percentContainer}>
+            <View style={{ height: 8, flex: 1 }}>
+  
+              <Slider
+                style={{width: "100%", height: 80}}
+                minimumValue={0}
+                maximumValue={100}
+                minimumTrackTintColor="#2B3FF2"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#FFFFFF"
+                onSlidingComplete={(value)=>{setmaxUsageSliderValue(Math.round(value))}}
+              />
+  
+            </View>
+            <View style={style.maxUsage}>
+              <Text style={style.summaryItemValue}>
+                {//connectStatus?.maxUsage}GB}
+                {maxUsageSliderValue} GB
+              </Text>
+              <Text style={style.maxUsageDesc}>MAX USAGE</Text>
+            </View>
+          </View>*/}
+        </Card>
+        <Card style={whiteBackgroundStyle.card}>
+          <View style={whiteBackgroundStyle.routerName}>
+            <Text style={[whiteBackgroundStyle.descriptionItem, { width: "69%" }]}>
+              Router Name
+            </Text>
+            <Text style={whiteBackgroundStyle.descriptionItemConnected}>
+              {isConnected ? ssid : ""}
+            </Text>
+          </View>
+          <View style={whiteBackgroundStyle.description}>
+            <Text style={[whiteBackgroundStyle.descriptionItem, { width: "69%" }]}>
+              Router Status
+            </Text>
+            <Text
+              style={
+                isConnected
+                  ? whiteBackgroundStyle.descriptionItemConnected
+                  : whiteBackgroundStyle.descriptionItem
+              }
+            >
+              {isConnected ? "Connected" : "Not Connected"}
+            </Text>
+          </View>
+          <View style={whiteBackgroundStyle.description}>
+            <Text style={[whiteBackgroundStyle.descriptionItem, { width: "69%" }]}>
+              Usage Cost
+            </Text>
+            <Text style={whiteBackgroundStyle.descriptionItem}>{usageCost} OFI/Hour</Text>
+          </View>
+          <View style={whiteBackgroundStyle.description}>
+            <Text style={[whiteBackgroundStyle.descriptionItem, { width: "69%" }]}>
+              Usage Time
+            </Text>
+            <Text style={whiteBackgroundStyle.descriptionItem}>{lastSackNum} min</Text>
+          </View>
+        </Card>
+        <View
+          style={{
+            flexDirection: "row",
+            marginLeft: 15,
+            marginRight: 15,
+            marginBottom: 8.5,
+          }}
+        >
+          {isConnected ? (
+            <Card style={whiteBackgroundStyle.smallCard}>
+              <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
+                <View style={globalStyle.col1}>
+                  <Text style={whiteBackgroundStyle.speed}>Download (mbps)</Text>
+                  <Text style={whiteBackgroundStyle.speed}>{linkSpeeds[2]}</Text>
+                </View>
+                <ArrowUpIcon style={{ transform: [{ rotate: "180deg" }] }} />
+              </View>
+              <DownLoadLinearGradient style={whiteBackgroundStyle.smallCardChartBg} />
+            </Card>
+          ) : (
+            <></>
+          )}
+  
+          <View style={{ width: 3.48 }}></View>
+  
+          {isConnected ? (
+            <Card style={whiteBackgroundStyle.smallCard}>
+              <View style={[globalStyle.row, globalStyle.withSmallPaddingX]}>
+                <View style={globalStyle.col1}>
+                  <Text style={whiteBackgroundStyle.speed}>Upload (mbps)</Text>
+                  <Text style={whiteBackgroundStyle.speed}>{linkSpeeds[1]}</Text>
+                </View>
+                <ArrowUpIcon />
+              </View>
+              <UploadGradientBg style={whiteBackgroundStyle.smallCardChartBg} />
+            </Card>
+          ) : (
+            <></>
+          )}
+        </View>
+      </ScrollView>
+    );
+
+  }
 };
 
 export default ConnectStatusScreen;
@@ -306,6 +434,149 @@ const style = StyleSheet.create({
   },
   descriptionItem: {
     color: colors.light,
+    fontSize: 16,
+    lineHeight: 16,
+    flex: 1,
+  },
+  descriptionItemConnected: {
+    color: colors.successColor,
+    fontSize: 16,
+    lineHeight: 16,
+    flex: 1,
+  },
+  smallCard: { flex: 1, height: 104, paddingTop: 12, overflow: "hidden" },
+  speed: {
+    color: colors.light,
+  },
+  smallCardChartBg: {
+    width: 177,
+    height: 65,
+  },
+  lineChartCard: {
+    height: 133,
+    paddingTop: 0,
+    paddingBottom: 0,
+    flexDirection: "column",
+  },
+  lineChart: {
+    position: "relative",
+    marginLeft: -16,
+    marginRight: -16,
+    marginBottom: -16,
+    flex: 1,
+    overflow: "hidden",
+  },
+  lineChartInfo: {
+    height: 57,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 13,
+  },
+  lineChartSuccessText: {
+    flexDirection: "row-reverse",
+    paddingRight: 20,
+  },
+  chartTitle: {
+    color: colors.inActiveColor,
+    position: "absolute",
+    bottom: 20,
+    right: 36,
+  },
+});
+
+
+
+
+
+const whiteBackgroundStyle = StyleSheet.create({
+  card: {
+    marginLeft: 15,
+    marginRight: 15,
+    paddingBottom: 12.5,
+    paddingTop: 16,
+    marginBottom: 8.5,
+    backgroundColor: "#d3d3d3"
+  },
+  summaryItem: {
+    height: 38,
+    flex: 1,
+    borderLeftWidth: 1,
+    borderLeftColor: "rgba(63,82,109)",
+    flexDirection: "column",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  summaryGroup: {
+    flexDirection: "row", // paddingLeft:10,
+    // paddingRight:10,
+    justifyContent: "space-evenly", // backgroundColor: 'red',
+  },
+  summaryItemValue: {
+    fontSize: 18,
+    fontWeight: "400",
+    fontStyle: "normal",
+    lineHeight: 18,
+    textAlign: "center",
+    color: "#000000",
+    marginBottom: 4,
+  },
+  summaryItemValueWithoutBorder: {
+    borderLeftWidth: 0,
+  },
+  summaryDesc: {
+    fontSize: 11,
+    fontWeight: "400",
+    fontStyle: "normal",
+    lineHeight: 11,
+    letterSpacing: 2,
+    textAlign: "center",
+    color: "000000",
+  },
+  description: {
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginBottom: 15,
+    // backgroundColor: 'red',
+    flexDirection: "row",
+    height: 24,
+    justifyContent: "space-between",
+  },
+  routerName: {
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginBottom: 15,
+    // backgroundColor: 'red',
+    flexDirection: "row",
+    height: 35,
+    justifyContent: "space-between",
+  },
+  percentContainer: {
+    // backgroundColor: 'red',
+    flexDirection: "row",
+    height: 54,
+    marginTop: 32,
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  maxUsage: {
+    height: 54,
+    paddingLeft: 20,
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  maxUsageDesc: {
+    // width: 73,
+    // height: 15,
+    fontSize: 13,
+    fontWeight: "400",
+    fontStyle: "normal",
+    lineHeight: 13,
+    color: "#000000",
+    marginTop: 10,
+  },
+  descriptionItem: {
+    color: "#000000",
     fontSize: 16,
     lineHeight: 16,
     flex: 1,

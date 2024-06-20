@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import Asset from "../../src/Components/Asset.jsx";
+import Asset from "../../src/Components/Asset/Asset.jsx";
 
 import Svg, {
   G,

@@ -5,6 +5,7 @@ module.exports = {
     "./src/screens/*.{js,jsx,ts,tsx}",
     "./src/*.{js,jsx,ts,tsx}",
     "./src/Components/*.{js,jsx,ts,tsx}",
+    "./src/Components/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     // colors: {

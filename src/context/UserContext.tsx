@@ -20,9 +20,10 @@ export function useUserContext() {
 export function UserContextProvider({ children }: UserContextProviderProps) {
   const [key, setKey] = useState("");
   const [userInfo, setUserInfo] = useState({});
+  const [backgroundColor, setBackgroundColor] = useState("black");
 
   return (
-    <userContext.Provider value={[key, setKey, userInfo, setUserInfo]}>
+    <userContext.Provider value={[key, setKey, userInfo, setUserInfo, backgroundColor, setBackgroundColor]}>
       {children}
     </userContext.Provider>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import BigBlueButton from "../../src/Components/BigBlueButton";
+import BigBlueButton from "../../src/Components/BigBlueButton/BigBlueButton";
 
 it("Renders", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");

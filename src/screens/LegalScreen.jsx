@@ -4,8 +4,8 @@ import { Linking } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import ViewButton from "../Components/ViewButton";
-import GreyBackgroundBar from "../Components/GreyBackgroundBar";
-import GreyBackgroundBox from "../Components/GreyBackgroundBox";
+import GreyBackgroundBar from "../Components/BackgroundBar/BackgroundBar";
+import GreyBackgroundBox from "../Components/GreyBackgroundBox/GreyBackgroundBox";
 
 //functions for opening links
 const openPrivacyPoligy = async () => {

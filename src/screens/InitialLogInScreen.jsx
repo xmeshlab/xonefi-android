@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import BigBlueButton from "../Components/BigBlueButton";
+import BigBlueButton from "../Components/BigBlueButton/BigBlueButton";
 import XOneFi_Logo_Big from "../icons/XOneFi";
 import {
   GoogleIcon,

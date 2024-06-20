@@ -1,0 +1,350 @@
+ LOG  start shim ............
+ WARN  The provided value 'ms-stream' is not a valid 'responseType'.
+ WARN  The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.
+ WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+ WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+ LOG  XLOG: startClientDaemon 1
+ LOG  XLOG: startClientDaemon 4
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  0: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  start shim ............
+ WARN  The provided value 'ms-stream' is not a valid 'responseType'.
+ WARN  The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.
+ LOG  XLOG: App.tsx
+ LOG  start scan
+ LOG  after scan
+ LOG  XLOG: Config is successfully initialized in Bypass Login mode.
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  1: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: Got list of WiFi networks as follows...
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: HGSS
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: ATTVM8qXEa
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG Entry: HP-Print-8E-Color LaserJet Pro
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: Comcast Took My Children
+ LOG  XLOG Entry: OFAKgKCQoDjQEMRwAAABkAZNH+uNB0
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG Entry: _LinksysSetup5EC
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: Holaday-Brunner
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: Comcast Took My Children_EXT
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: Runge Home 2.4 Ghz
+ LOG  XLOG Entry: (hidden SSID)
+ LOG  XLOG Entry: Reversal_Frost_2
+ LOG  XLOG Entry: NETGEAR26
+ LOG  XLOG: >>>
+ LOG  XLOG wifilist item: OFAKgKCQoDjQEMRwAAABkAZNH+uNB0
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  2: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: Pay and Connect Component Activated
+ LOG  XLOG: Pay and Connect Component Activated
+ LOG  XLOG: CLIENT SESSION: {"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739}
+ LOG  XLOG: Pay and Connect Component Activated
+ LOG  XLOG: Pay and Connect Component Activated
+ LOG  XLOG: CLIENT SESSION: {"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739}
+ LOG  XLOG: Config update successful (1).
+ LOG  XLOG: CLIENT SESSION: {"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739}
+ LOG  XLOG: CLIENT SESSION: {"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739}
+ LOG  XLOG: Config update successful (1).
+ LOG  XLOG: Config update successful (1).
+ LOG  XLOG: Config update successful (1).
+ LOG  resJson :
+ LOG  1e+21
+ LOG  XLOG: Pay and Connect Component Activated
+ LOG  XLOG: CLIENT SESSION: {"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739}
+ LOG  XLOG: Config update successful (1).
+ LOG  onAnimationComplete
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  3: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  4: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  @DEBUG: BALANCE 1000
+ LOG  XLOG: Pay and Connect Callback Activated
+ LOG  XLOG: You can now use react-native-wifi-reborn
+ LOG  XLOG: deserialized ssid: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  Calling Native Modules
+ LOG  provided prefix for password : d1feb8d074
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  5: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  6: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  7: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  8: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  9: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  10: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  11: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  12: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  13: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  14: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  15: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  16: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  17: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  18: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2
+ LOG  XLOG: startClientDaemon 5
+ LOG  config_json1: {"version":"0.2","account_set":true,"client_on":true,"ap_on":false,"pft":true,"pfd":false,"cft":true,"cfd":false,"private_client":false,"private_provider":false,"max_ofi_mb":0,"max_ofi_hr":0,"price_ofi_mb":0,"price_ofi_hr":0,"infura_api_key":"","network":"goerli","account":{"name":"","encrypted_prk":"","address":"0xDb4e978bA08654C42f47bb3134058BE825dcf564","dpk":"079c7b1db773ea4b50b436ea50ca71e51eda6f582f6b8000c664fb0076e87d93"},"private_providers":[],"private_clients":[],"provider_ip":"192.168.0.1","port":3141,"wlan_interface":"[none]","ssids":[],"pafren_percentage":100,"min_downlink_tier":10,"min_uplink_tier":9,"client_max_pafren":200,"gas_offer":{"mainnet":"121000000000","kovan":"2000000","goerli":"100000"},"gas_price":{"mainnet":"121000000000","goerli":"50000000000","kovan":"2000000"},"call_confirmation_threshold":2,"handshake_time":300,"sack_period":70,"minimum_pafren_length":3540,"expected_sack_amount":131,"expected_pafren_amount":7900,"allow_handover":false,"e2e_mode":false,"client_session":{"status":2,"ssid":"OFAKgKCQoDjQEMRwAAABkAZNH+uNB0","ip":"10.3.141.1","port":3143,"prefix":"d1feb8d074","pfd":false,"pft":true,"free":false,"restricted":false,"sack_number":0,"expiration_timestamp":1712200438,"cost":25,"pafren_percentage":100,"sack_amount":0.4166666666666667,"pafren_amount":25,"number_of_sacks":60,"initiated_sack_number":1,"sackok":{},"provider_address":"0xd1feB8D074bD32b89D91Ff4706dF6865BBD78940","last_sack_timestamp":1712200139,"scan_counter":0,"paften_timestamp":0,"session_id":"d259bc12-ebec-4828-aefc-55609118d073","started_timestamp":1712200139,"pafren_timestamp":1712203739},"loop_started":false}
+ LOG  XLOG: startClientDaemon 7
+ LOG  XLOG: config_json.client_session.status pre: 2
+ LOG  XLOG: @DEB5 config_json.client_session.initiated_sack_number: 1
+ LOG  XLOG: @DEB5 config_json.client_session.sack_number: 0
+ LOG  DESEREALIZED: {"protocol_version":0,"hotspot_type":168,"downlink":10,"uplink":9,"ip":"10.3.141.1","port":3143,"cost":25,"pafren":100,"prefix":"d1feb8d074"}
+ LOG  ***** Time to send the next sack. Current sack: 0, Next sack: 1 *****
+ LOG  XLOG: The session is not over yet on this side.
+ LOG  XLOG: config_json.client_session.initiated_sack_number=1
+ LOG  XLOG: config_json.client_session.sack_number=0
+ LOG  Continue session
+ LOG  19: Client is on
+ LOG  XLOG: config_json.client_session.status post: 2

@@ -1,50 +1,42 @@
 import React, {
   FunctionComponent,
-  ReactComponentElement,
   useCallback,
-  useContext,
-  useMemo,
   useEffect,
   useState
 } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
-import { getStatusBarHeight } from "react-native-status-bar-height";
-import { colors } from "../constants/colors";
-import BuggerIcon from "../icons/bugger_icon";
-import {WifiIcon} from "../icons/wifi_icon";
-import ChevronRight from "../icons/chevron_right";
-import { useNavigation } from "@react-navigation/native";
-
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RouteProp } from "@react-navigation/native";
+import { colors } from "../../constants/colors";
+import {WifiIcon} from "../../icons/wifi_icon";
+import ChevronRight from "../../icons/chevron_right";
 
 import WifiManager from "react-native-wifi-reborn";
-import { is_onefi_ssid } from "../hooks/is_onefi_ssid";
-import { read_default_config } from "../../xonefi-api-client/config";
+import { is_onefi_ssid } from "../../hooks/is_onefi_ssid";
+import { read_default_config } from "../../../xonefi-api-client/config";
 
-
-//import { useClientStatus } from "../../store/clientStatus"; returns True or False. Just Set to False for now
-//Use professor Nick's client status
+import { useUserContext } from "../../context/UserContext";
+import PageHeaderWhite from "./PageHeaderWhite";
+import PageHeaderBlack from "./PageHeaderBlack";
 
 export type PageHeaderProps = BottomTabHeaderProps & {
   leftView?: JSX.Element;
   rightView?: JSX.Element;
 };
-const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
-  return (
-    <>
-      <View style={pageHeaderStyle.headerStatusPadding} />
-      <View style={pageHeaderStyle.header}>
-        <View style={pageHeaderStyle.headerBtn}>{props?.leftView ?? null}</View>
 
-        <Text style={pageHeaderStyle.headerTitle}>{props.options.title}</Text>
-        <View style={pageHeaderStyle.headerBtn}>
-          {props?.rightView ?? null}
-        </View>
-      </View>
-    </>
-  );
+const PageHeader: FunctionComponent<PageHeaderProps> = (props) => {
+  const userContext_array = useUserContext();
+
+  //Checks what the current background color is, and then instantiates the correct page header component
+  if(userContext_array[4] == "black"){
+    return (
+      <PageHeaderBlack {...props}/>
+    );
+  }else{
+    return (
+      <PageHeaderWhite {...props}/>
+    );
+
+  }
 };
 export const WithBackBtnPageHeader: FunctionComponent<PageHeaderProps> = ({
   leftView,
@@ -83,24 +75,11 @@ export const TabPageHeader: FunctionComponent<PageHeaderProps> = ({
   rightView,
   ...otherProps
 }) => {
-  //const clientStatus = useClientStatus();
   const clientStatus = false;
-  //const navigation = useNavigation()
   const buggerIconClick = useCallback(() => {}, []);
   const wifiIconClick = useCallback(() => {}, []);
 
-  /*type RootStackParamList = {
-    Connect: undefined;
-    Status: undefined;
-    Account: undefined;
-    Provider: undefined;
-    Wallet: undefined;
-    Home: undefined;
-  };
-  const navigation = useNavigation<RootStackParamList>();
-*/
-
-const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
   const [ssid, setSSID] = useState<String>();
 
   useEffect(() => {
@@ -159,7 +138,6 @@ const [isConnected, setIsConnected] = useState(false);
               ],
             }}
           >
-            {/*color={clientStatus.isActive ? colors.successColor : colors.light}*/}
             {isConnected ? <WifiIcon color={colors.successColor} /> : 
             <WifiIcon color={colors.inActiveWifiIconColor} />}
           </View>
@@ -169,27 +147,3 @@ const [isConnected, setIsConnected] = useState(false);
   );
 };
 export default PageHeader;
-const pageHeaderStyle = StyleSheet.create({
-  headerStatusPadding: {
-    height: getStatusBarHeight(),
-    backgroundColor: colors.pageHeaderBackgroundColor,
-  },
-  header: {
-    height: 60,
-    backgroundColor: colors.pageHeaderBackgroundColor,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-  headerTitle: { fontSize: 20, fontWeight: "bold", color: "#fff" },
-  headerBtn: {
-    height: 40,
-    width: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

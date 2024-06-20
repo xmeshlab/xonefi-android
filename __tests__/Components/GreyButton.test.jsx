@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import AssetGain from "../../assets/AssetGainLogo.png";
 import RightArrow from "../../assets/RightArrowIcon.png";
 
-import GreyButton from "../../src/Components/GreyButton";
+import GreyButton from "../../src/Components/GreyButton/GreyButton";
 
 it("Renders", () => {
   const mockButtonPress = jest.fn().mockReturnValue("Button Pressed");

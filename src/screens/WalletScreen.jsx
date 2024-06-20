@@ -14,8 +14,8 @@ import Svg, {
   Stop,
 } from "react-native-svg";
 
-import Asset from "../Components/Asset";
-import OneFiAsset from "../Components/OneFiAsset";
+import Asset from "../Components/Asset/Asset";
+import OneFiAsset from "../Components/OneFiAsset/OneFiAsset";
 
 import { EthLogoSVG } from "../icons/crypto_icons";
 import { BitcoinLogoSVG } from "../icons/crypto_icons";
@@ -87,13 +87,13 @@ export default function WalletScreen({ navigation }) {
   //style={backgroundFlash ? {backgroundColor: "#000000"} : {backgroundColor: "transparent" }}
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 ">
       <React.Fragment>
         <OneFiAsset
           AssetChange={"0.00%"}
           AssetPrice="$0.00 USD"
         />
-        <ScrollView style={{ backgroundColor: "transparent" }}>
+        <ScrollView className="bg-transparent w-screen pr-1">
           <Asset
             AssetName="ETH Wallet"
             AssetAmount="0 ETH"

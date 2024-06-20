@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { View, Text, Switch, Button } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ViewButton from "../Components/ViewButton";
-import GreyBackgroundBar from "../Components/GreyBackgroundBar";
+import GreyBackgroundBar from "../Components/BackgroundBar/BackgroundBar";
 import { GreyTextInputBarNoMargin } from "../Components/GreyTextInputBar";
-import GreyBackgroundBox from "../Components/GreyBackgroundBox";
+import GreyBackgroundBox from "../Components/GreyBackgroundBox/GreyBackgroundBox";
 import { useState } from "react";
 import { Calendar, CalendarList } from "react-native-calendars";
 import CalendarPicker from 'react-native-calendar-picker';
@@ -178,9 +178,9 @@ export default function ProviderDetailScreen({ route, navigation }) {
           </>
         }
       />*/}
-      <Text className="text-white text-2xl mt-6 mb-8 mx-6">
+      {/*<Text className="text-white text-2xl mt-6 mb-8 mx-6">
         Connected Clients
-      </Text>
+    </Text>*/}
     </ScrollView>
     );
 

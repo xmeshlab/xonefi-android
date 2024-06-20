@@ -2,7 +2,7 @@ import React from "react";
 import { describe, expect, test } from "@jest/globals";
 import { render, fireEvent } from "@testing-library/react-native";
 
-import Provider from "../../src/Components/Provider.jsx";
+import Provider from "../../src/Components/Provider/Provider.jsx";
 const navigationFunctionMock = jest.fn().mockReturnValueOnce("Provider Pressed");
 
 it("Rendering the Provider Component", () => {

@@ -11,7 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 import Svg, { Path, Defs, G, Pattern, Use, Image } from "react-native-svg";
-import BigBlueButton from "../../Components/BigBlueButton";
+import BigBlueButton from "../../Components/BigBlueButton/BigBlueButton";
 import { CashLogoSVG } from "../../icons/crypto_icons";
 import { OneFiLogoSVG } from "../../icons/crypto_icons";
 

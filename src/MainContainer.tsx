@@ -24,7 +24,7 @@ import {
   RouteConfig,
 } from "@react-navigation/core/lib/typescript/src/types";
 import ConnectStatusScreen from "./screens/ConnectStatusScreen";
-import { TabPageHeader, WithBackBtnPageHeader } from "./Components/PageHeader";
+import { TabPageHeader, WithBackBtnPageHeader } from "./Components/PageHeader/PageHeader";
 import { colors } from "./constants/colors";
 import { WifiWithSignalLevel } from "./types/global";
 import InitialLogInScreen from "./screens/InitialLogInScreen";
@@ -124,6 +124,10 @@ function HomeTab() {
     any,
     any
   >["screenOptions"] = useCallback(({ route }) => {
+    const userContext_array = useUserContext();
+
+    if(userContext_array[4] == "black"){
+    
     //Changing icon size in the sivg only changes the size of the background, not the image portion
     return {
       tabBarIcon: (param) => {
@@ -156,6 +160,40 @@ function HomeTab() {
         padding: 10,
       },
     };
+  }else{
+    //white background
+    return {
+      tabBarIcon: (param) => {
+        const { focused, color, size } = param;
+        let rn = route.name;
+        const iconColor = focused ? "#0E60FF" : "#000000";
+        const strokeWidth = focused ? 3 : 2;
+        if (rn === connectName) {
+          return <BarIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
+        } else if (rn === linkedAccountName) {
+          return <UserIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
+        } else if (rn === StatusName) {
+          return <WifiIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
+        } else if (rn === ProviderName) {
+          return <CircleIconAnimated color={iconColor} strokeWidth={strokeWidth}/>
+        } else if (rn === cardName) {
+          return <CardIconAnimated color={iconColor} strokeWidth={strokeWidth}/>;
+        }
+        return null;
+      },
+      //height here changes the size of the background black in the tab bar
+      tabBarStyle: {
+        borderTopWidth: 0,
+        height: 75,
+        backgroundColor: "#FFF",
+        borderTopLeftRadius: 2,
+        borderTopRightRadius: 2,
+      },
+      style: {
+        padding: 10,
+      },
+    };
+  }
   }, []);
 
   return (
@@ -192,8 +230,8 @@ function HomeTab() {
     </TabNavigator>
   );
 }
-
-const MyTheme = {
+//Theme when the background is black
+const themeBlackBackground = {
   dark: false,
   colors: {
     primary: "rgb(255, 45, 85)",
@@ -204,6 +242,20 @@ const MyTheme = {
     notification: "rgb(255, 69, 58)",
   },
 };
+
+//Theme when the background is black
+const themeWhiteBackground = {
+  dark: false,
+  colors: {
+    primary: "rgb(255, 45, 85)",
+    background: "rgba(242, 242, 242, 0)",
+    card: "rgba(255, 255, 255, 0)",
+    text: "rgb(0, 0, 0)",
+    border: "rgb(199, 199, 204)",
+    notification: "rgb(255, 69, 58)",
+  },
+};
+
 const accountOption: RouteConfig<GlobalRoute, any, any, any, any>["options"] = {
   title: "Account",
 };
@@ -315,7 +367,7 @@ export default function MainContainer() {
   } else {
     //getAccountSet() //accountset is true here
     return (
-      <NavigationContainer theme={MyTheme}>
+      <NavigationContainer theme={themeBlackBackground}>
         <Stack.Navigator initialRouteName={"HomeTab"}>
           <Stack.Screen
             options={{ header: () => null }}
