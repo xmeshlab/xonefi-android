@@ -5,8 +5,6 @@ import backgroundWhite from "../../assets/BackgroundWhite.png";
 import { WhitebackgroundSVG } from "./WhitebackgroundSVG";
 import { useUserContext } from "../context/UserContext";
 
-
-
 export const WithMainBg = ({
   children,
   ...otherProps
@@ -27,18 +25,15 @@ export const WithMainBg = ({
       </ImageBackground>
     );
   }else{
-    return(
-      <View style={{
-        position: "absolute",
-        width: "100%",
-        height: "32%",
-        bottom: 0,
-        zIndex: -1, 
-      }}>
-        <WhitebackgroundSVG />
+    /*return(
+      <View
+        {...otherProps}
+        className="bg-[url('../../assets/BackgroundWhiteSVG.svg')]"
+      >
+        {children}
       </View>
-    )
-    /*return (
+    )*/
+    return (
       <ImageBackground
         resizeMode={"cover"}
         source={backgroundWhite}
@@ -47,6 +42,6 @@ export const WithMainBg = ({
       >
         {children}
       </ImageBackground>
-    );*/
+    );
   }
 };
