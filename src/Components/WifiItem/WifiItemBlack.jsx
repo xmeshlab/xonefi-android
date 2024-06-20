@@ -51,6 +51,6 @@ export default function WifiItemWhite({
     },
     wifiItemText: {
       flex: 1,
-      color: "rgba(0, 0, 0)"
+      color: "white"
     }
   });

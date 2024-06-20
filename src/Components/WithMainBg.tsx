@@ -1,8 +1,11 @@
 import React from "react";
-import { ImageBackground, ImageBackgroundProps } from "react-native";
+import { ImageBackground, ImageBackgroundProps, View, StyleSheet } from "react-native";
 import backgroundBlack from "../../assets/backgroundSquare.png";
 import backgroundWhite from "../../assets/BackgroundWhite.png";
+import { WhitebackgroundSVG } from "./WhitebackgroundSVG";
 import { useUserContext } from "../context/UserContext";
+
+
 
 export const WithMainBg = ({
   children,
@@ -24,7 +27,18 @@ export const WithMainBg = ({
       </ImageBackground>
     );
   }else{
-    return (
+    return(
+      <View style={{
+        position: "absolute",
+        width: "100%",
+        height: "32%",
+        bottom: 0,
+        zIndex: -1, 
+      }}>
+        <WhitebackgroundSVG />
+      </View>
+    )
+    /*return (
       <ImageBackground
         resizeMode={"cover"}
         source={backgroundWhite}
@@ -33,6 +47,6 @@ export const WithMainBg = ({
       >
         {children}
       </ImageBackground>
-    );
+    );*/
   }
 };
