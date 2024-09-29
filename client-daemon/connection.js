@@ -219,6 +219,9 @@ function initiate_connection(
 
         if (ipAddress.substring(0, 10) == "192.168.1.") {
           try {
+            waitForConnection().then(() => {
+                        console.log('Connection is ready. Proceeding with calling hello.');
+
             call_hello.call_hello(
               "137.184.243.11",
               3000,
@@ -521,6 +524,8 @@ function initiate_connection(
                 }
               }
             );
+            });
+
 
             /// except
           } catch (error) {
@@ -536,6 +541,28 @@ function initiate_connection(
     console.log(`Connection to: ${JSON.stringify(deserealized_ssid)} has not been established!`);
   }
   });
+}
+
+function checkConnection() {
+    return fetch('http://137.184.243.11/')
+        .then(response => response.ok)
+        .catch(() => false);
+}
+
+function waitForConnection() {
+    return new Promise((resolve, reject) => {
+        function attempt() {
+            checkConnection().then(success => {
+                if (success) {
+                    console.log('Connected to 137.184.243.11');
+                    resolve(); // Connection is ready, resolve the Promise
+                } else {
+                    setTimeout(attempt, 1000); // Retry after 1000ms
+                }
+            });
+        }
+        attempt(); // Start the first attempt
+    });
 }
 
 module.exports = { initiate_connection };
