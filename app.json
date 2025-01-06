@@ -7,7 +7,6 @@
     "icon": "./assets/icon.png",
     "plugins": [
       "react-native-wifi-reborn",
-      "expo-community-flipper",
       "react-native-background-fetch"
     ],
     "userInterfaceStyle": "light",

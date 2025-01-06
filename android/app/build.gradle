@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
 
 import com.android.build.OutputFile
 
@@ -83,13 +84,13 @@ def reactNativeRoot = new File(["node", "--print", "require.resolve('react-nativ
 
 project.ext.react = [
     entryFile: ["node", "-e", "require('expo/scripts/resolveAppEntry')", projectRoot, "android"].execute(null, rootDir).text.trim(),
-    enableHermes: (findProperty('expo.jsEngine') ?: "jsc") == "hermes",
+    enableHermes: true,
     hermesCommand: new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile().getAbsolutePath() + "/sdks/hermesc/%OS-BIN%/hermesc",
     cliPath: "${reactNativeRoot}/cli.js",
     composeSourceMapsPath: "${reactNativeRoot}/scripts/compose-source-maps.js",
 ]
 
-apply from: new File(reactNativeRoot, "react.gradle")
+//apply from: new File(reactNativeRoot, "react.gradle")
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -139,7 +140,7 @@ def reactNativeArchitectures() {
 android {
     ndkVersion rootProject.ext.ndkVersion
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 33
 
     // midSdkVersion configured for notification api
     defaultConfig {
